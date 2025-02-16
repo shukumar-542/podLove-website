@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap'); */
+
+
+.slick-slide {
+    padding: 0 10px; 
+  }
+
+  .custom-arrow {
+    font-size: 40px; /* Default size for large screens */
+    color: #A1A1A1;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+
+/* Positioning for left and right arrows */
+.left-arrow {
+    left: -50px;
+}
+.right-arrow {
+    right: -50px;
+}
+
+/* Responsive Design: Small devices */
+@media (max-width: 768px) {
+    .custom-arrow {
+        font-size: 24px; 
+    }
+    .left-arrow {
+        left: -30px; 
+    }
+    .right-arrow {
+        right: -30px;
+    }
+}
+
+/* Extra small devices (phones) */
+@media (max-width: 480px) {
+    .custom-arrow {
+        font-size: 18px;
+    }
+    .left-arrow {
+        left: -20px;
+    }
+    .right-arrow {
+        right: -0px;
+    }
+}
+
+.ant-collapse > .ant-collapse-item {
+    border-bottom: 1px solid #ddd;
+  }
+  .ant-collapse-header {
+    padding: 16px;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  .ant-collapse-content-box {
+    padding: 12px;
+  }
+
+  :where(.css-dev-only-do-not-override-1yacf91).ant-collapse {
+    border:  none !important;
+  }
+
+  :where(.css-dev-only-do-not-override-1yacf91).ant-collapse>.ant-collapse-item >.ant-collapse-header {
+    padding: 51px 32px;
+  }
