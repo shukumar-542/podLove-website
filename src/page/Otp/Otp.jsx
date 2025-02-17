@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import bg from "../../assets/otpBg.png";
-import { Checkbox, Form, Input } from "antd";
-import { Link, NavLink } from "react-router";
-import Password from "antd/es/input/Password";
 import AuthButton from "../../component/AuthButton/AuthButton";
-import OTPInput, { ResendOTP } from "otp-input-react";
+import OTPInput from "otp-input-react";
+import { Link } from "react-router";
 const Otp = () => {
   const [OTP, setOTP] = useState("");
   return (
@@ -21,7 +19,7 @@ const Otp = () => {
       <div className="bg-black absolute opacity-50 inset-0 z-0 "></div>
       <div className="flex items-center justify-start max-w-5xl mx-auto  h-full p-2 md:p-0 z-10 relative">
         <div className="bg-white rounded-md  p-5 md:p-10 max-w-5xl">
-          <p className="text-4xl font-bold text-[#333333] text-center">
+          <p className=" text-xl md:text-4xl font-bold text-[#333333] text-center">
             Verification Code
           </p>
           <p className="mt-4 max-w-96 font-thin text-center">
@@ -40,16 +38,18 @@ const Otp = () => {
               inputStyles={{
                 border: "1px solid #FFC0A3",
                 borderRadius: "5px",
-                padding: "22px",
                 textAlign: "center",
+                width: "40px", 
+                height: "45px",
+                fontSize: "18px",
               }}
-              className="  rounded-md p-2"
+                 className="flex justify-center gap-2 sm:gap-1 md:gap-2"
               disabled={false}
               secure
             />
           </div>
 
-          <AuthButton className={"py-1"}>Verify</AuthButton>
+          <Link to={'/location'}><AuthButton className={"py-1"}>Verify</AuthButton></Link>
         </div>
       </div>
     </div>
