@@ -19,15 +19,15 @@ const HomePage = () => {
           <img src={img4} alt="" />
         </div>
         {/* Date and time schedule section */}
-        <section className="my-20 h-[50%] relative">
+        <section className="my-20  relative">
           <video
             autoPlay
             loop
             muted
             playsInline
-            className="h-[500px] mx-auto rounded-md relative "
+            className="h-[500px]  mx-auto rounded-md  "
           >
-            <source src={video} type="video/mp4" />
+            <source src={video} type="video/mp4"  />
           </video>
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 h-auto">
             <img src={mic} alt="Microphone" className="w-24 h-24 mx-auto " />
@@ -40,6 +40,8 @@ const HomePage = () => {
             </button>
           </div>
         </section>
+
+        <h1 className="text-center font-bold text-2xl">Subscription Plan</h1>
 
         {/* Subscription Plan Section */}
         <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-20 max-w-4xl mx-auto font-poppins">
