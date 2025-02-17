@@ -1,5 +1,5 @@
 import React from 'react'
-import img from "../../assets/loginBg.png";
+import img from "../../assets/signUpBg.png";
 import img1 from "../../assets/signUp.png";
 import { Checkbox, Form, Input } from 'antd';
 import Password from 'antd/es/input/Password';
@@ -14,15 +14,16 @@ const SignUp = () => {
       backgroundPosition: "center",
       imageRendering: "high-quality",
     }}
-    className="h-[100vh] "
+    className="h-[100vh]  relative"
   >
-    <div className="flex items-center justify-center h-full p-2 md:p-0">
-      <div className="bg-white rounded-md p-10">
+    <div className='bg-black absolute opacity-50 inset-0 z-0 '></div>
+    <div className="flex items-center justify-start max-w-5xl mx-auto  h-full p-2 md:p-0 z-10 relative">
+      <div className="bg-white rounded-md  p-5 md:p-10 max-w-5xl">
         <p className="text-4xl font-bold text-[#333333]">Sign Up</p>
         <p className="mt-2">Just a few quick things to get started</p>
 
         <div className="flex items-center justify-between gap-10">
-              <div className="w-full">
+              <div className="w-[250px] md:w-[450px] ">
                   <Form layout="vertical">
                       <Form.Item label={"Email"}>
                           <Input placeholder="Enter your email here"/>
@@ -46,9 +47,9 @@ const SignUp = () => {
                   </Form>
                   <p className="text-[#767676] text-center mt-2">Already  have an account? <NavLink to={'/login'}  className="text-[#F68064]">Sign Up</NavLink></p>
               </div>
-              <div className="w-full hidden md:block">
+              {/* <div className="w-full hidden md:block">
                   <img src={img1} alt="" />
-              </div>
+              </div> */}
         </div>
       </div>
     </div>
