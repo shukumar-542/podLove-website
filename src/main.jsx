@@ -9,6 +9,7 @@ import Login from "./page/Login/Login.jsx";
 import SignUp from "./page/SignUp/SignUp.jsx";
 import ContactUs from "./page/ContactUs/ContactUs.jsx";
 import HomePage from "./page/HomePage/HomePage.jsx";
+import Otp from "./page/Otp/Otp.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -22,6 +23,7 @@ createRoot(document.getElementById("root")).render(
         </Route>
         <Route path="/login" element={<Login/>} />
         <Route path="/sign-up" element={<SignUp/>}  />
+        <Route path="/verify-otp" element={<Otp/>}  />
       </Routes>
 
     </BrowserRouter>

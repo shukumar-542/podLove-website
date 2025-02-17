@@ -1,9 +1,8 @@
 import React from 'react'
 import img from "../../assets/signUpBg.png";
-import img1 from "../../assets/signUp.png";
 import { Checkbox, Form, Input } from 'antd';
 import Password from 'antd/es/input/Password';
-import { NavLink } from 'react-router';
+import { Link, NavLink } from 'react-router';
 const SignUp = () => {
   return (
     <div
@@ -43,13 +42,11 @@ const SignUp = () => {
                       <div className="flex justify-between items-center mb-3">
                           <p> <Checkbox/> I agree with the terms and condition</p>
                       </div>
-                      <button className="bg-[#F68064] text-white w-full rounded-md py-2 text-xl shadow-md">Sign in</button>
+                     <Link to={'/verify-otp'}> <button className="bg-[#F68064] text-white w-full rounded-md py-2 text-xl shadow-md">Sign Up</button></Link>
                   </Form>
                   <p className="text-[#767676] text-center mt-2">Already  have an account? <NavLink to={'/login'}  className="text-[#F68064]">Sign Up</NavLink></p>
               </div>
-              {/* <div className="w-full hidden md:block">
-                  <img src={img1} alt="" />
-              </div> */}
+             
         </div>
       </div>
     </div>
