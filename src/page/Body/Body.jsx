@@ -68,7 +68,7 @@ const Body = () => {
         />
       </div>
       </div>
-          <Link to={"/body"}>
+          <Link to={"/ethnicity"}>
             <AuthButton className={"py-1"}>Next</AuthButton>
           </Link>
         </div>

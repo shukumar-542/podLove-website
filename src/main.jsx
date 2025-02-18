@@ -14,6 +14,8 @@ import Location from "./page/Location/Location.jsx";
 import Age from "./page/Age/Age.jsx";
 import Gender from "./page/Gender/Gender.jsx";
 import Body from "./page/Body/Body.jsx";
+import Ethnicity from "./page/Ethnicity/Ethnicity.jsx";
+import Bio from "./page/Bio/Bio.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -32,6 +34,8 @@ createRoot(document.getElementById("root")).render(
         <Route path="/age" element={<Age/>} />
         <Route path="/gender"  element={<Gender/>} />
         <Route path="/body"  element={<Body/>} />
+        <Route path='/ethnicity' element={<Ethnicity/>} />
+        <Route path="/bio" element={<Bio/>} />
       </Routes>
 
     </BrowserRouter>
