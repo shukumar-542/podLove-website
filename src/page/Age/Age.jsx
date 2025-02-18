@@ -4,7 +4,6 @@ import AuthButton from "../../component/AuthButton/AuthButton";
 import { Link } from "react-router";
 import { Form, Select } from "antd";
 
-const { Options } = Select;
 const ageOptions = Array.from({ length: 16 }, (_, i) => i + 35);
 const Age = () => {
   return (
@@ -12,7 +11,7 @@ const Age = () => {
       style={{
         backgroundImage: `url(${bg})`,
         backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
+        backgroundRepeat: "no-repeat", 
         backgroundPosition: "center",
         imageRendering: "high-quality",
       }}
@@ -20,7 +19,7 @@ const Age = () => {
     >
       <div className="bg-black absolute opacity-50 inset-0 z-0 "></div>
       <div className="flex items-center justify-start max-w-5xl mx-auto  h-full p-2 md:p-0 z-10 relative">
-        <div className="bg-white rounded-md  p-5 md:p-10 max-w-5xl">
+        <div className="bg-white  rounded-md  p-5 md:p-10 max-w-5xl">
           <p className=" text-xl md:text-4xl font-bold text-[#333333] text-center">
             Age
           </p>
@@ -30,7 +29,7 @@ const Age = () => {
           <p className="mt-4 max-w-96 font-thin text-center mb-5">
             Those who love deeply never grow old; they may die of old age, but
             they die young.
-          </p>
+          </p> 
 
           <Form layout="vertical">
             <Form.Item label={<p className="font-medium">Your Age</p>}>
@@ -64,7 +63,7 @@ const Age = () => {
               </Form.Item>
             </div>
           </Form>
-          <Link to={"/age"}>
+          <Link to={"/gender"}>
             <AuthButton className={"py-1"}>Next</AuthButton>
           </Link>
         </div>

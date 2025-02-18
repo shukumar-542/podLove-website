@@ -12,6 +12,7 @@ import HomePage from "./page/HomePage/HomePage.jsx";
 import Otp from "./page/Otp/Otp.jsx";
 import Location from "./page/Location/Location.jsx";
 import Age from "./page/Age/Age.jsx";
+import Gender from "./page/Gender/Gender.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -28,6 +29,7 @@ createRoot(document.getElementById("root")).render(
         <Route path="/verify-otp" element={<Otp/>}  />
         <Route path="/location" element={<Location/>} />
         <Route path="/age" element={<Age/>} />
+        <Route path="/gender"  element={<Gender/>} />
       </Routes>
 
     </BrowserRouter>
