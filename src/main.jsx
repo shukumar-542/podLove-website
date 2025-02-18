@@ -13,6 +13,7 @@ import Otp from "./page/Otp/Otp.jsx";
 import Location from "./page/Location/Location.jsx";
 import Age from "./page/Age/Age.jsx";
 import Gender from "./page/Gender/Gender.jsx";
+import Body from "./page/Body/Body.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -30,6 +31,7 @@ createRoot(document.getElementById("root")).render(
         <Route path="/location" element={<Location/>} />
         <Route path="/age" element={<Age/>} />
         <Route path="/gender"  element={<Gender/>} />
+        <Route path="/body"  element={<Body/>} />
       </Routes>
 
     </BrowserRouter>

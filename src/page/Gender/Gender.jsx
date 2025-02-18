@@ -61,7 +61,7 @@ const Gender = () => {
               </Select>
             </Form.Item>
           </Form>
-          <Link to={"/gender"}>
+          <Link to={"/body"}>
             <AuthButton className={"py-1"}>Next</AuthButton>
           </Link>
         </div>

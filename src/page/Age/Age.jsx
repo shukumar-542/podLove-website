@@ -18,15 +18,18 @@ const Age = () => {
       className="h-[100vh]  relative"
     >
       <div className="bg-black absolute opacity-50 inset-0 z-0 "></div>
-      <div className="flex items-center justify-start max-w-5xl mx-auto  h-full p-2 md:p-0 z-10 relative">
-        <div className="bg-white  rounded-md  p-5 md:p-10 max-w-5xl">
-          <p className=" text-xl md:text-4xl font-bold text-[#333333] text-center">
+      <div className="grid grid-cols-12 items-center justify-center h-full w-full container mx-auto">
+        <div className="  md:col-span-1"></div>
+        {/* Main content */}
+        <div className="bg-white  rounded-md  p-5 md:p-10 col-span-12 md:col-span-5 z-10 mx-2 md:mx-0">
+
+        <p className=" text-xl md:text-4xl font-bold text-[#333333] text-center">
             Age
           </p>
-          <p className="mt-4 max-w-96 font-medium text-center">
+          <p className=" mt-2 font-medium text-center">
             Select your age for better matches.
           </p>
-          <p className="mt-4 max-w-96 font-thin text-center mb-5">
+          <p className="mt-4 font-thin text-center mb-5">
             Those who love deeply never grow old; they may die of old age, but
             they die young.
           </p> 
@@ -66,7 +69,12 @@ const Age = () => {
           <Link to={"/gender"}>
             <AuthButton className={"py-1"}>Next</AuthButton>
           </Link>
-        </div>
+
+
+          </div>
+
+        {/* Space after content */}
+        <div className="md:col-span-6"></div>
       </div>
     </div>
   );

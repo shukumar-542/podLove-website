@@ -94,4 +94,27 @@
 }
 
 
+/* Checkbox color */
+
+
+/* Change Checkbox border color */
+.ant-checkbox-wrapper .ant-checkbox {
+    border-color: #FFA175; /* Custom border color */
+  }
+  
+  /* Change checked box background */
+  .ant-checkbox-checked .ant-checkbox-inner {
+    background-color: #FFA175 !important; /* Custom fill color */
+    border-color: #FFA175 !important;
+  }
+  
+  /* Change checkbox hover effect */
+  .ant-checkbox:hover .ant-checkbox-inner {
+    border-color: #FFA175 !important;
+  }
+  
+  /* Change tick color inside the checkbox */
+  .ant-checkbox-checked::after {
+    border-color: white !important;
+  }
 
