@@ -38,11 +38,11 @@ const Bio = () => {
             <p>4.How do you describe your personality in three words?</p>
           </div>
           <Form layout="vertical">
-            <Form.Item label={<p className="font-medium">Write your bio(max 200 word)</p>}>
+            <Form.Item label={<p className="font-medium">Write your bio(max 200 word) </p>}>
                 <TextArea rows={10}/>
             </Form.Item>
           </Form>
-          <Link to={"/ethnicity"}>
+          <Link to={"/upload-photo"}>
             <AuthButton className={"py-1"}>Next</AuthButton>
           </Link>
         </div>
