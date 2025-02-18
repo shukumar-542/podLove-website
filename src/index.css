@@ -118,3 +118,21 @@
     border-color: white !important;
   }
 
+
+
+  /* Change radio button color */
+.custom-radio .ant-radio-checked .ant-radio-inner {
+  border-color: #FFA175 !important; /* Change border color */
+  background-color: #FFA175 !important; /* Change fill color */
+}
+
+.custom-radio .ant-radio-checked::after {
+  border-color: #FFA175 !important; /* Change outer glow color */
+}
+
+/* Optional: Change hover effect */
+.custom-radio .ant-radio:hover .ant-radio-inner {
+  border-color: #FFA175 !important;
+}
+
+

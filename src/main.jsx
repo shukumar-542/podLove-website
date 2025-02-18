@@ -17,6 +17,8 @@ import Body from "./page/Body/Body.jsx";
 import Ethnicity from "./page/Ethnicity/Ethnicity.jsx";
 import Bio from "./page/Bio/Bio.jsx";
 import UploadPhoto from "./page/UploadPhoto/UploadPhoto.jsx";
+import DiscoverCompatibility from "./page/DiscoverCompatibility/DiscoverCompatibility.jsx";
+import DiscoverCompatibilitySecond from "./page/DiscoverCompatibilitySecond/DiscoverCompatibilitySecond.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -30,14 +32,16 @@ createRoot(document.getElementById("root")).render(
         </Route>
         <Route path="/login" element={<Login/>} />
         <Route path="/sign-up" element={<SignUp/>}  />
-        <Route path="/verify-otp" element={<Otp/>}  />
-        <Route path="/location" element={<Location/>} />
+        <Route path="/verify-otp" element={<Otp/>}  /> 
+        <Route path="/location" element={<Location/>} /> 
         <Route path="/age" element={<Age/>} />
         <Route path="/gender"  element={<Gender/>} />
         <Route path="/body"  element={<Body/>} />
         <Route path='/ethnicity' element={<Ethnicity/>} />
         <Route path="/bio" element={<Bio/>} />
-        <Route path="/upload-photo" element={<UploadPhoto/>}  />
+        <Route path="/upload-photo" element={<UploadPhoto/>} />
+        <Route path="/discover-compatibility" element={<DiscoverCompatibility/>} />
+        <Route path="/discover-compatibility-part" element={<DiscoverCompatibilitySecond/>}  />
       </Routes>
 
     </BrowserRouter>

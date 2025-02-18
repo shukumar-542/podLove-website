@@ -66,7 +66,7 @@ const UploadPhoto = () => {
             </Upload>
           </div>
 
-          <Link to={"/upload-photo"}>
+          <Link to={"/discover-compatibility"}>
             <AuthButton className={"py-1"}>Next</AuthButton>
           </Link>
         </div>
