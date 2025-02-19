@@ -19,6 +19,7 @@ import Bio from "./page/Bio/Bio.jsx";
 import UploadPhoto from "./page/UploadPhoto/UploadPhoto.jsx";
 import DiscoverCompatibility from "./page/DiscoverCompatibility/DiscoverCompatibility.jsx";
 import DiscoverCompatibilitySecond from "./page/DiscoverCompatibilitySecond/DiscoverCompatibilitySecond.jsx";
+import RatingYourSelf from "./page/RatingYourSelf/RatingYourSelf.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -42,6 +43,7 @@ createRoot(document.getElementById("root")).render(
         <Route path="/upload-photo" element={<UploadPhoto/>} />
         <Route path="/discover-compatibility" element={<DiscoverCompatibility/>} />
         <Route path="/discover-compatibility-part" element={<DiscoverCompatibilitySecond/>}  />
+        <Route path="/rating-yourself" element={<RatingYourSelf/>} />
       </Routes>
 
     </BrowserRouter>
