@@ -114,7 +114,7 @@ const RatingYourSelf = () => {
             </div>
           </div>
 
-          <Link to={"/upload-photo"}>
+          <Link to={"/interest"}>
             <AuthButton className={"py-1"}>Next</AuthButton>
           </Link>
         </div>
