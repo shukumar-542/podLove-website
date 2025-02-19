@@ -23,6 +23,7 @@ import RatingYourSelf from "./page/RatingYourSelf/RatingYourSelf.jsx";
 import Interest from "./Interest/Interest.jsx";
 import ConnectionProgress from "./page/ConnectionProgress/ConnectionProgress.jsx";
 import Congratulation from "./page/Congratulation/Congratulation.jsx";
+import MatchResult from "./page/MatchResult/MatchResult.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -50,6 +51,7 @@ createRoot(document.getElementById("root")).render(
         <Route path="/interest" element={<Interest/>} />
         <Route path="/connection-progress"  element={<ConnectionProgress/>}/>
         <Route path="/congratulation" element={<Congratulation/>} />
+        <Route path="/match-result" element={<MatchResult/>} />
       </Routes>
 
     </BrowserRouter>
