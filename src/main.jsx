@@ -21,6 +21,7 @@ import DiscoverCompatibility from "./page/DiscoverCompatibility/DiscoverCompatib
 import DiscoverCompatibilitySecond from "./page/DiscoverCompatibilitySecond/DiscoverCompatibilitySecond.jsx";
 import RatingYourSelf from "./page/RatingYourSelf/RatingYourSelf.jsx";
 import Interest from "./Interest/Interest.jsx";
+import ConnectionProgress from "./page/ConnectionProgress/ConnectionProgress.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -46,6 +47,7 @@ createRoot(document.getElementById("root")).render(
         <Route path="/discover-compatibility-part" element={<DiscoverCompatibilitySecond/>}  />
         <Route path="/rating-yourself" element={<RatingYourSelf/>} />
         <Route path="/interest" element={<Interest/>} />
+        <Route path="/connection-progress"  element={<ConnectionProgress/>}/>
       </Routes>
 
     </BrowserRouter>

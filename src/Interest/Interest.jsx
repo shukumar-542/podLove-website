@@ -53,7 +53,7 @@ const Interest = () => {
                 ))
             }
         </div>
-        <Link to={"/upload-photo"}>
+        <Link to={"/connection-progress"}>
           <AuthButton className={"py-1"}>Next</AuthButton>
         </Link>
       </div>

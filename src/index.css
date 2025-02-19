@@ -138,3 +138,14 @@
 
 
 
+/* Progress bar for finding match*/
+:where(.css-dev-only-do-not-override-1yacf91).ant-progress .ant-progress-inner:not(.ant-progress-circle-gradient) .ant-progress-circle-path {
+  stroke: #FFA175;
+}
+
+:where(.css-dev-only-do-not-override-1yacf91).ant-progress .ant-progress-inner:not(.ant-progress-circle-gradient) .ant-progress-circle-path {
+  stroke: #FFA175 !important;
+}
+.anticon {
+  color: #FFA175;
+}
