@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import bg from "../../assets/connection-bg.png";
-import { Link } from "react-router";
-import AuthButton from "../../component/AuthButton/AuthButton";
+import {  useNavigate } from "react-router";
 import { Progress } from "antd";
 
 const ConnectionProgress = () => {
   const [percent, setPercent] = useState(1);
 
+const navigate = useNavigate()
+//   Percentage timer
   useEffect(() => {
     const interval = setInterval(() => {
       setPercent((prev) => {
@@ -20,6 +21,16 @@ const ConnectionProgress = () => {
 
     return () => clearInterval(interval);
   }, []);
+
+
+//   Navigate congratulation page
+useEffect(()=>{
+if(percent === 100){
+    navigate('/congratulation')
+}
+},[percent ,navigate])
+
+
   return (
     <div
       style={{
@@ -49,7 +60,7 @@ const ConnectionProgress = () => {
           <div className="flex justify-center my-10">
             <Progress type="circle" percent={percent} strokeWidth={12} size={180}  />
           </div>
-
+  
           {
             percent < 100 && <p className="text-center">Finding matches...</p>
           }
