@@ -9,16 +9,27 @@ import subscription from "../../assets/subscription-bg.png";
 import IsPodSafe from "../../component/IsPodSafe/IsPodSafe";
 import { IoCheckmarkOutline } from "react-icons/io5";
 import { Divider } from "antd";
+import { Link } from "react-router";
 const HomePage = () => {
   return (
     <div className="bg-[#F7E8E1]">
       <div className="container mx-auto">
         <p className="font-poppins font-bold text-2xl py-5">Your Matches</p>
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 justify-between items-center">
-          <img src={img1} alt="" />
-          <img src={img2} alt="" />
-          <img src={img3} alt="" />
-          <img src={img4} alt="" />
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 justify-between items-center gap-10">
+          <Link to={'/podcast-details/:id'}>
+            <div className="cursor-pointer hover:shadow-2xl rounded-br-3xl">
+              <img src={img1} className="w-full" alt="" />
+            </div>
+          </Link>
+          <div className="cursor-pointer hover:shadow-2xl rounded-br-3xl ">
+            <img src={img2} className="w-full" alt="" />
+          </div>
+          <div className="cursor-pointer hover:shadow-2xl rounded-br-3xl ">
+            <img src={img3} className="w-full" alt="" />
+          </div>
+          <div className="cursor-pointer hover:shadow-2xl rounded-br-3xl">
+            <img src={img4} className="w-full" alt="" />
+          </div>
         </div>
         {/* Date and time schedule section */}
         <section className="my-20  relative">

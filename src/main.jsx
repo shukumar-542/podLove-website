@@ -25,6 +25,7 @@ import ConnectionProgress from "./page/ConnectionProgress/ConnectionProgress.jsx
 import Congratulation from "./page/Congratulation/Congratulation.jsx";
 import MatchResult from "./page/MatchResult/MatchResult.jsx";
 import MatchBio from "./page/MatchBio/MatchBio.jsx";
+import PodcastDetails from "./page/PodcastDetails/PodcastDetails.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -34,7 +35,8 @@ createRoot(document.getElementById("root")).render(
           <Route index element={<Home/>} />
           <Route path="/home"  element={<HomePage/>}/>
           <Route path="/about-us" element={<AboutUs />} />
-          <Route path="contact-us" element={<ContactUs/>} />
+          <Route path="/contact-us" element={<ContactUs/>} />
+          <Route path="/podcast-details/:id" element={<PodcastDetails/>} />
         </Route>
         <Route path="/login" element={<Login/>} />
         <Route path="/sign-up" element={<SignUp/>}  />
