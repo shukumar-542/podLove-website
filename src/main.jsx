@@ -24,6 +24,7 @@ import Interest from "./Interest/Interest.jsx";
 import ConnectionProgress from "./page/ConnectionProgress/ConnectionProgress.jsx";
 import Congratulation from "./page/Congratulation/Congratulation.jsx";
 import MatchResult from "./page/MatchResult/MatchResult.jsx";
+import MatchBio from "./page/MatchBio/MatchBio.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -52,6 +53,7 @@ createRoot(document.getElementById("root")).render(
         <Route path="/connection-progress"  element={<ConnectionProgress/>}/>
         <Route path="/congratulation" element={<Congratulation/>} />
         <Route path="/match-result" element={<MatchResult/>} />
+        <Route path="/match-bio" element={<MatchBio/>}/>
       </Routes>
 
     </BrowserRouter>

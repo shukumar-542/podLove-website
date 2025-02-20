@@ -1,13 +1,10 @@
 import React from "react";
+import bg from "../../assets/b.png";
 import { Link } from "react-router";
 import AuthButton from "../../component/AuthButton/AuthButton";
-import bg from "../../assets/m.png";
-import match1 from "../../assets/match.png";
-import match2 from "../../assets/match2.png";
-import match3 from "../../assets/match3.png";
-import match4 from "../../assets/match4.png";
 
-const MatchResult = () => {
+const interest = ["Photography", "Traveling", "Art & Craft", "Cooking"];
+const MatchBio = () => {
   return (
     <div
       style={{
@@ -27,32 +24,22 @@ const MatchResult = () => {
         {/* Main content */}
         <div className="bg-white shadow-black shadow-2xl  rounded-md  p-5 md:p-10 col-span-12 md:col-span-5 z-10 mx-2 md:mx-0">
           <h1 className="text-center font-poppins font-semibold text-4xl">
-            Match
+            Match 1 Bio
           </h1>
-          <p className="text-center max-w-80 mx-auto mt-2">
-            We have found potential matches for you!
-          </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-10 ">
-            <div>
-              <img src={match1} alt="" />
-            </div>
-            <div>
-              <img src={match2} alt="" />
-            </div>
-            <div>
-              <img src={match3} alt="" />
-            </div>
-            <div>
-              <img src={match4} alt="" />
-            </div>
+          <p className="my-10 border border-[#FFA175] p-5 rounded-md text-[#333333] font-poppins">
+            I’m 40 years old, a proud parent of two and a grandparent of one. I
+            teach 8th grade and have a passion for reading—this year alone, I
+            finished 200 books!
+          </p>
+          <p className="font-poppins mb-5">Interest : </p>
+          <div className="grid grid-cols-2  justify-between gap-5">
+            {interest?.map((item, index) => (
+              <p key={index} className="text-center border border-[#FFA175] rounded-full py-2 text-[#FFA175]">{item}</p>
+            ))}
           </div>
-          <p className="text-center max-w-96 mx-auto mb-10">
-            The schedule for your podcast episodes will be shared with you soon.
-          </p>
-
-          <div className="mx-16">
-            <Link to={'/match-bio'}>
+          <div className="">
+            <Link to={"/match-result"}>
               <AuthButton className={"py-1  mt-5 "}>Next</AuthButton>
             </Link>
           </div>
@@ -65,4 +52,4 @@ const MatchResult = () => {
   );
 };
 
-export default MatchResult;
+export default MatchBio;
