@@ -27,6 +27,10 @@ import MatchResult from "./page/MatchResult/MatchResult.jsx";
 import MatchBio from "./page/MatchBio/MatchBio.jsx";
 import PodcastDetails from "./page/PodcastDetails/PodcastDetails.jsx";
 import AfterPodcast from "./page/AfterPodcast/AfterPodcast.jsx";
+import ChatPage from "./page/ChatPage/ChatPage.jsx";
+import FeedbackOne from "./page/FeedbackOne/FeedbackOne.jsx";
+import FeedbackSecond from "./page/FeedbackSecond/FeedbackSecond.jsx";
+import FeedbackThird from "./page/FeedbackThird/FeedbackThird.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -39,6 +43,10 @@ createRoot(document.getElementById("root")).render(
           <Route path="/contact-us" element={<ContactUs/>} />
           <Route path="/podcast-details/:id" element={<PodcastDetails/>} />
           <Route path="/after-podcast" element={<AfterPodcast/>}/>
+          <Route path="/chat" element={<ChatPage/>} />
+          <Route path="/feedback-first-step" element={<FeedbackOne/>} />
+          <Route path="/feedback-second-step" element={<FeedbackSecond/>} />
+          <Route path="/feedback-third-step" element={<FeedbackThird/>} />
         </Route>
         <Route path="/login" element={<Login/>} />
         <Route path="/sign-up" element={<SignUp/>}  />

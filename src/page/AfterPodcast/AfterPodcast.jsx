@@ -14,17 +14,17 @@ const AfterPodcast = () => {
     <div className="bg-[#f7e8e1]">
       <div className="container mx-auto py-10">
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 justify-between items-center gap-10">
-          <Link to={"/podcast-details/:id"}>
+          <div>
             <div className="cursor-pointer hover:shadow-2xl rounded-br-3xl">
               <img src={sh} className="w-full z-0 " alt="" />
               <div className="text-center bg-white py-5 border border-[#FFA175] rounded-md  -mt-2 z-5">
                 <p>Eleanor Pena</p>
               </div>
             </div>
-            <div className="text-center bg-[#FFA175] mt-5 text-white py-5 rounded-tl-3xl rounded-br-3xl">
-              <p className="text-xl">Chat</p>
-            </div>
-          </Link>
+            <Link to={'/chat'} className="">
+              <p className="text-xl text-center bg-[#FFA175] mt-5 text-white py-5 rounded-tl-3xl rounded-br-3xl">Chat</p>
+            </Link>
+          </div>
           <div>
             <div className="cursor-pointer hover:shadow-2xl rounded-br-3xl ">
               <img src={img2} className="w-full" alt="" />
