@@ -31,6 +31,7 @@ import ChatPage from "./page/ChatPage/ChatPage.jsx";
 import FeedbackOne from "./page/FeedbackOne/FeedbackOne.jsx";
 import FeedbackSecond from "./page/FeedbackSecond/FeedbackSecond.jsx";
 import FeedbackThird from "./page/FeedbackThird/FeedbackThird.jsx";
+import Profile from "./page/Profile/Profile.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -47,6 +48,7 @@ createRoot(document.getElementById("root")).render(
           <Route path="/feedback-first-step" element={<FeedbackOne/>} />
           <Route path="/feedback-second-step" element={<FeedbackSecond/>} />
           <Route path="/feedback-third-step" element={<FeedbackThird/>} />
+          <Route path="/profile" element={<Profile/>} />
         </Route>
         <Route path="/login" element={<Login/>} />
         <Route path="/sign-up" element={<SignUp/>}  />
