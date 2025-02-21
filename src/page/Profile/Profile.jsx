@@ -2,7 +2,7 @@ import React from "react";
 import bg from "../../assets/b.png";
 import profile from "../../assets/profile.png";
 import { CiLocationOn } from "react-icons/ci";
-import { IoCalendarOutline } from "react-icons/io5";
+import { IoCalendarOutline, IoSettingsOutline } from "react-icons/io5";
 import { FiEdit } from "react-icons/fi";
 import { Link } from "react-router";
 const Profile = () => {
@@ -14,10 +14,14 @@ const Profile = () => {
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
       }}
-      className="h-[100vh] px-2 md:px-0"
+      className="h-[100vh] px-2 md:px-0 relative"
     >
-      <div className=" flex justify-center items-center h-full">
-        <div className="bg-white   md:flex gap-10 p-10 rounded-tr-[90px] rounded-bl-[90px] shadow-2xl shadow-[#eb8b73] my-20">
+      <div className="absolute inset-0 bg-black bg-opacity-50 z-0"></div>
+      <div className="flex  text-red-500  z-10 cursor-pointer justify-end max-w-3xl pt-10 mx-auto">
+        <Link to={'/change-password'} className="z-10"><IoSettingsOutline className=" bg-white p-2 rounded-full shadow-2xl" size={40} /></Link>
+      </div>
+      <div className=" flex justify-center items-center h-full ">
+        <div className="bg-white   md:flex gap-10 p-10 rounded-tr-[90px] rounded-bl-[90px] shadow-2xl shadow-[#eb8b73] mb-20 z-10">
           <div>
             <img
               src={profile}
@@ -38,7 +42,7 @@ const Profile = () => {
               <p className="text-[#8C5940] font-poppins text-[36px] font-bold ">
                 Emily
               </p>
-              <Link to={'/edit-profile'}>
+              <Link to={"/edit-profile"}>
                 <div className="bg-[#FFA175] text-white p-2 rounded-md shadow-lg cursor-pointer">
                   <FiEdit />
                 </div>

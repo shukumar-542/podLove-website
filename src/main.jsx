@@ -33,6 +33,7 @@ import FeedbackSecond from "./page/FeedbackSecond/FeedbackSecond.jsx";
 import FeedbackThird from "./page/FeedbackThird/FeedbackThird.jsx";
 import Profile from "./page/Profile/Profile.jsx";
 import EditProfile from "./page/EditProfile/EditProfile.jsx";
+import ChangePassword from "./page/ChangePassword/ChangePassword.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -51,6 +52,7 @@ createRoot(document.getElementById("root")).render(
           <Route path="/feedback-third-step" element={<FeedbackThird/>} />
           <Route path="/profile" element={<Profile/>} />
           <Route path="/edit-profile"  element={<EditProfile/>} />
+          <Route path="/change-password" element={<ChangePassword/>} />
         </Route>
         <Route path="/login" element={<Login/>} />
         <Route path="/sign-up" element={<SignUp/>}  />
