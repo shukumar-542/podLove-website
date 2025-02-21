@@ -32,6 +32,7 @@ import FeedbackOne from "./page/FeedbackOne/FeedbackOne.jsx";
 import FeedbackSecond from "./page/FeedbackSecond/FeedbackSecond.jsx";
 import FeedbackThird from "./page/FeedbackThird/FeedbackThird.jsx";
 import Profile from "./page/Profile/Profile.jsx";
+import EditProfile from "./page/EditProfile/EditProfile.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -49,6 +50,7 @@ createRoot(document.getElementById("root")).render(
           <Route path="/feedback-second-step" element={<FeedbackSecond/>} />
           <Route path="/feedback-third-step" element={<FeedbackThird/>} />
           <Route path="/profile" element={<Profile/>} />
+          <Route path="/edit-profile"  element={<EditProfile/>} />
         </Route>
         <Route path="/login" element={<Login/>} />
         <Route path="/sign-up" element={<SignUp/>}  />

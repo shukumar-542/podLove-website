@@ -4,6 +4,7 @@ import profile from "../../assets/profile.png";
 import { CiLocationOn } from "react-icons/ci";
 import { IoCalendarOutline } from "react-icons/io5";
 import { FiEdit } from "react-icons/fi";
+import { Link } from "react-router";
 const Profile = () => {
   return (
     <div
@@ -37,9 +38,11 @@ const Profile = () => {
               <p className="text-[#8C5940] font-poppins text-[36px] font-bold ">
                 Emily
               </p>
-              <div className="bg-[#FFA175] text-white p-2 rounded-md shadow-lg cursor-pointer">
-                <FiEdit  />
-              </div>
+              <Link to={'/edit-profile'}>
+                <div className="bg-[#FFA175] text-white p-2 rounded-md shadow-lg cursor-pointer">
+                  <FiEdit />
+                </div>
+              </Link>
             </div>
             <p>Emily34@gmail.com</p>
             <div className="mt-5 space-y-3 ">
