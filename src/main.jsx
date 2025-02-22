@@ -34,6 +34,7 @@ import FeedbackThird from "./page/FeedbackThird/FeedbackThird.jsx";
 import Profile from "./page/Profile/Profile.jsx";
 import EditProfile from "./page/EditProfile/EditProfile.jsx";
 import ChangePassword from "./page/ChangePassword/ChangePassword.jsx";
+import PrivacyPolicy from "./page/PrivacyPolicy/PrivacyPolicy.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -53,6 +54,7 @@ createRoot(document.getElementById("root")).render(
           <Route path="/profile" element={<Profile/>} />
           <Route path="/edit-profile"  element={<EditProfile/>} />
           <Route path="/change-password" element={<ChangePassword/>} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy/>} />
         </Route>
         <Route path="/login" element={<Login/>} />
         <Route path="/sign-up" element={<SignUp/>}  />

@@ -3,6 +3,7 @@ import img from "../../../assets/footer.png";
 import logo from "../../../assets/podLogo.png";
 import app from "../../../assets/appStore.png";
 import google from "../../../assets/googleStore.png";
+import { Link } from "react-router";
 
 const Footer = () => {
   return (
@@ -23,7 +24,7 @@ const Footer = () => {
             <h1 className="text-2xl font-bold mb-10">Company Links</h1>
             <p className="mb-2">About Us</p>
             <p className="mb-2">Contact Us</p>
-            <p className="mb-2">Privacy Policy</p>
+            <Link to={'/privacy-policy'} className="mb-2">Privacy Policy</Link>
             <p>Terms And Condition</p>
           </div>
         </div>

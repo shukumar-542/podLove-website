@@ -1,5 +1,5 @@
 import React from "react";
-import about from "../../assets/about.jpg";
+import about from "../../assets/about2.png";
 import bg from "../../assets/about-bg.png";
 const AboutUs = () => {
   return (
@@ -15,7 +15,7 @@ const AboutUs = () => {
         </div>
 
         {/* about Image  */}
-        <img src={about} className="w-full h-[600px] object-cover" alt="" />
+        <img src={about} className="w-full h-[700px] object-center" alt="" />
         <div className="py-10 space-y-3">
           <p className="text-4xl font-bold">Get to Know Us: Our <span className="text-[#E8936A]"> Journey</span></p>
           <p className="text-4xl font-bold">And <span className="text-[#E8936A]">Vision</span> </p>
