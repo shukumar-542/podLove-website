@@ -1,4 +1,5 @@
 import React from "react";
+import IsPodSafe from "../../component/IsPodSafe/IsPodSafe";
 
 const PrivacyPolicy = () => {
   return (
@@ -117,7 +118,9 @@ const PrivacyPolicy = () => {
           purposes outlined in this Privacy Policy or as required by applicable
           law.
         </p>
+
       </div>
+        <IsPodSafe/>
     </div>
   );
 };

@@ -24,16 +24,20 @@ const Footer = () => {
             <h1 className="text-2xl font-bold mb-10">Company Links</h1>
             <p className="mb-2">About Us</p>
             <p className="mb-2">Contact Us</p>
-            <Link to={'/privacy-policy'} className="mb-2">Privacy Policy</Link>
-            <p>Terms And Condition</p>
+            <p className="mb-2">
+              <Link to={"/privacy-policy"}>Privacy Policy</Link>
+            </p>
+            <p>
+              <Link to={"/terms-condition"}>Terms And Condition</Link>
+            </p>
           </div>
         </div>
         <div className="my-10 md:flex  justify-between items-center">
-            <p>All Rights Reserved. Copyright © 2025 podLove </p>
-            <div className="flex ">
-                <img src={app} className="h-[44px] w-[150px]" alt="" />
-                <img src={google} className="h-[44px] w-[150px]" alt="" />
-            </div>
+          <p>All Rights Reserved. Copyright © 2025 podLove </p>
+          <div className="flex ">
+            <img src={app} className="h-[44px] w-[150px]" alt="" />
+            <img src={google} className="h-[44px] w-[150px]" alt="" />
+          </div>
         </div>
       </div>
     </div>

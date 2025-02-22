@@ -35,6 +35,7 @@ import Profile from "./page/Profile/Profile.jsx";
 import EditProfile from "./page/EditProfile/EditProfile.jsx";
 import ChangePassword from "./page/ChangePassword/ChangePassword.jsx";
 import PrivacyPolicy from "./page/PrivacyPolicy/PrivacyPolicy.jsx";
+import TermsAndCondition from "./page/TermsAndCondition/TermsAndCondition.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -55,6 +56,7 @@ createRoot(document.getElementById("root")).render(
           <Route path="/edit-profile"  element={<EditProfile/>} />
           <Route path="/change-password" element={<ChangePassword/>} />
           <Route path="/privacy-policy" element={<PrivacyPolicy/>} />
+          <Route path="/terms-condition" element={<TermsAndCondition/>} />
         </Route>
         <Route path="/login" element={<Login/>} />
         <Route path="/sign-up" element={<SignUp/>}  />
