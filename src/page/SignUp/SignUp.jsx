@@ -44,7 +44,7 @@ const SignUp = () => {
                       </div>
                      <Link to={'/verify-otp'}> <button className="bg-[#F68064] text-white w-full rounded-md py-2 text-xl shadow-md">Sign Up</button></Link>
                   </Form>
-                  <p className="text-[#767676] text-center mt-2">Already  have an account? <NavLink to={'/login'}  className="text-[#F68064]">Sign Up</NavLink></p>
+                  <p className="text-[#767676] text-center mt-2">Already  have an account? <NavLink to={'/login'}  className="text-[#F68064]">Sign In</NavLink></p>
               </div>
              
         </div>

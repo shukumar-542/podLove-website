@@ -1,9 +1,11 @@
 import React from "react";
 import img from "../../assets/loginBg.png";
-import { Checkbox, Form, Input } from "antd";
+import { Checkbox, Divider, Form, Input } from "antd";
 import Password from "antd/es/input/Password";
 import { FcGoogle } from "react-icons/fc";
 import { NavLink } from "react-router";
+import { FaApple } from "react-icons/fa";
+import AuthButton from "../../component/AuthButton/AuthButton";
 
 const Login = () => {
   return (
@@ -39,13 +41,24 @@ const Login = () => {
                 </p>
                 <p className="text-[#F68064] cursor-pointer">Forget password</p>
               </div>
-              <button className="bg-[#F68064] text-white w-full rounded-md py-2 text-xl shadow-md">
+              <AuthButton className="bg-[#F68064] text-white w-full rounded-md py-2 text-xl shadow-md">
                 Sign in
-              </button>
+              </AuthButton>
             </Form>
+            <Divider
+              style={{
+                borderColor: "#F68064",
+              }}
+            >
+              Or
+            </Divider>
             <button className="border w-full mt-5 border-[#F68064] py-2 rounded-md text-[#767676] flex items-center justify-center gap-2">
               <FcGoogle size={25} />
               Continue with Google
+            </button>
+            <button className="border w-full mt-5 border-[#F68064] py-2 rounded-md text-[#767676] flex items-center justify-center gap-2">
+              <FaApple size={25} />
+              Continue with apple
             </button>
             <p className="text-[#767676] text-center mt-2">
               Don't have an account?{" "}

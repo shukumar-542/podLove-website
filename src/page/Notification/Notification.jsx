@@ -1,4 +1,5 @@
 import React from 'react'
+import IsPodSafe from '../../component/IsPodSafe/IsPodSafe'
 
 const Notification = () => {
   return (
@@ -16,6 +17,7 @@ const Notification = () => {
 
 
         </div>
+        <IsPodSafe/>
     </div>
   )
 }

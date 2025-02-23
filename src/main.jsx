@@ -47,7 +47,6 @@ createRoot(document.getElementById("root")).render(
           <Route path="/home"  element={<HomePage/>}/>
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/contact-us" element={<ContactUs/>} />
-          <Route path="/podcast-details/:id" element={<PodcastDetails/>} />
           <Route path="/after-podcast" element={<AfterPodcast/>}/>
           <Route path="/chat" element={<ChatPage/>} />
           <Route path="/feedback-first-step" element={<FeedbackOne/>} />
