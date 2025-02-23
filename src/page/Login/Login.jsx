@@ -3,7 +3,7 @@ import img from "../../assets/loginBg.png";
 import { Checkbox, Divider, Form, Input } from "antd";
 import Password from "antd/es/input/Password";
 import { FcGoogle } from "react-icons/fc";
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 import { FaApple } from "react-icons/fa";
 import AuthButton from "../../component/AuthButton/AuthButton";
 
@@ -39,7 +39,7 @@ const Login = () => {
                 <p>
                   <Checkbox /> Remember me
                 </p>
-                <p className="text-[#F68064] cursor-pointer">Forget password</p>
+                <Link to={'/forget-password'}><p className="text-[#F68064] cursor-pointer">Forget password</p></Link>
               </div>
               <AuthButton className="bg-[#F68064] text-white w-full rounded-md py-2 text-xl shadow-md">
                 Sign in
