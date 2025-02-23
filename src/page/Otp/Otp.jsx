@@ -14,7 +14,7 @@ const Otp = () => {
     >
       <div className="bg-black absolute opacity-50 inset-0 z-0"></div>
       <div className="flex items-center justify-center max-w-5xl mx-auto h-full p-2 md:p-0 z-10 relative">
-        <div className="bg-white rounded-md p-5 md:p-10 max-w-5xl w-full sm:w-auto">
+        <div className="bg-white shadow-2xl shadow-[#F26828] rounded-md p-5 md:p-10 max-w-5xl w-full sm:w-auto">
           <p className="text-xl md:text-4xl font-bold text-[#333333] text-center">
             Verification Code
           </p>

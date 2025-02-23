@@ -33,13 +33,12 @@ const Ethnicity = () => {
     <div className="grid grid-cols-12 items-center justify-center h-full w-full container mx-auto">
       <div className="  md:col-span-1"></div>
       {/* Main content */}
-      <div className="bg-white  rounded-md  p-5 md:p-10 col-span-12 md:col-span-5 z-10 mx-2 md:mx-0">
+      <div className="bg-white shadow-2xl shadow-[#F26828] rounded-md  p-5 md:p-10 col-span-12 md:col-span-5 z-10 mx-2 md:mx-0">
         <h1 className="text-center font-poppins font-semibold text-4xl">
           Ethnicity
         </h1>
-        <p className="text-center font-poppins text-[14px]  my-10">
-        cultural expression and identification of people of different geographic regions,
- including their customs, history, language, and religion.
+        <p className="text-center font-poppins text-[14px]  my-8">
+        Cultural expression and identity are deeply tied to the customs, history, language, and religion of people from different geographic regions. At PodLove, we believe love can flourish across all backgrounds. Are there any cultural or ethnic preferences that are important for you in a partner?
         </p>
       
         {/* <p className='text-md text-center'>Please select one</p> */}
@@ -67,7 +66,7 @@ const Ethnicity = () => {
     </div>
     </div>
         <Link to={"/bio"}>
-          <AuthButton className={"py-1"}>Next</AuthButton>
+          <AuthButton className={"py-2"}>Next</AuthButton>
         </Link>
       </div>
 

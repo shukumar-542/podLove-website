@@ -36,12 +36,12 @@ const Body = () => {
         {/* Main content */}
         <div className="bg-white  rounded-md  p-5 md:p-10 col-span-12 md:col-span-5 z-10 mx-2 md:mx-0">
           <h1 className="text-center font-poppins font-semibold text-4xl">
-            Gender
+            Body Type
           </h1>
           <p className="text-center font-poppins font-medium my-2">
           How would you describe your body type?
           </p>
-          <p className="text-center font-poppins mt-3 font-normal mb-10">
+          <p className="text-center font-poppins mt-3 font-normal text-sm mb-10">
           Choose the option that best represents you
           </p>
           {/* <p className='text-md text-center'>Please select one</p> */}
@@ -69,7 +69,7 @@ const Body = () => {
       </div>
       </div>
           <Link to={"/ethnicity"}>
-            <AuthButton className={"py-1"}>Next</AuthButton>
+            <AuthButton className={"py-2"}>Next</AuthButton>
           </Link>
         </div>
 

@@ -23,7 +23,7 @@ const Login = () => {
 
       {/* 🔹 Content (above the overlay) */}
       <div className="flex items-center justify-start max-w-5xl mx-auto h-full p-2 md:p-0 relative z-10">
-        <div className="bg-white rounded-md p-5 md:p-10 max-w-5xl">
+        <div className="bg-white shadow-2xl shadow-[#F26828] rounded-md p-5 md:p-10 max-w-5xl">
           <p className="text-4xl font-bold text-[#333333]">Welcome Back!</p>
           <p className="mt-2">Please log in to continue access</p>
 

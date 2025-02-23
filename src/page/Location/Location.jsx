@@ -26,7 +26,7 @@ const Location = () => {
     >
       <div className="bg-black absolute opacity-50 inset-0 z-0 "></div>
       <div className="flex items-center justify-start max-w-5xl mx-auto  h-full p-2 md:p-0 z-10 relative">
-        <div className="bg-white rounded-md  p-5 md:p-10 max-w-5xl">
+        <div className="bg-white shadow-2xl shadow-[#F26828] rounded-md  p-5 md:p-10 max-w-5xl">
           <p className=" text-xl md:text-4xl font-bold text-[#333333] text-center">
             Location
           </p>
@@ -49,7 +49,7 @@ const Location = () => {
           <Slider defaultValue={30} disabled={disabled} onChange={onChangeSlider} className="mb-10" />
           {/* Disabled: <Switch size="small" checked={disabled} onChange={onChange} /> */}
           <Link to={"/age"}>
-            <AuthButton className={"py-1"}>Next</AuthButton>
+            <AuthButton className={"py-2"}>Next</AuthButton>
           </Link>
         </div>
       </div>
