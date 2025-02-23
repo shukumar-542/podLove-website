@@ -24,7 +24,7 @@ const HowItWork = () => {
               <img
                 src={step1}
                 alt=""
-                className="bg-[#FFC0A3] p-2 rounded-full absolute top-[-25px]"
+                className="bg-[#FFE2D4] shadow-xl p-2 rounded-full absolute top-[-25px]"
               />
               <p className="text-[#E84B3C] font-bold text-2xl flex justify-end">
                 01
@@ -41,7 +41,7 @@ const HowItWork = () => {
               <img
                 src={step2}
                 alt=""
-                className="bg-[#FFC0A3] p-2 rounded-full absolute top-[-25px]"
+                className="bg-[#FFE2D4] shadow-xl p-2 rounded-full absolute top-[-25px]"
               />
               <p className="text-[#8D44AB] font-bold text-2xl flex justify-end">
                 02
@@ -58,7 +58,7 @@ const HowItWork = () => {
               <img
                 src={step3}
                 alt=""
-                className="bg-[#FFC0A3] p-2 rounded-full absolute top-[-25px]"
+                className="bg-[#FFE2D4] shadow-xl p-2 rounded-full absolute top-[-25px]"
               />
               <p className="text-[#FF853D] font-bold text-2xl flex justify-end">
                 03
@@ -75,7 +75,7 @@ const HowItWork = () => {
               <img
                 src={step4}
                 alt=""
-                className="bg-[#FFC0A3] p-2 rounded-full absolute top-[-25px]"
+                className="bg-[#FFE2D4] shadow-xl p-2 rounded-full absolute top-[-25px]"
               />
               <p className="text-[#18BB9B] font-bold text-2xl flex justify-end">
                 04
