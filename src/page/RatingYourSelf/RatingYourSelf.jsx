@@ -44,7 +44,7 @@ const RatingYourSelf = () => {
       <div className="grid grid-cols-12 items-center justify-center h-full w-full container mx-auto">
         <div className="  md:col-span-1"></div>
         {/* Main content */}
-        <div className="bg-white  rounded-md  p-5 md:p-10 col-span-12 md:col-span-5 z-10 mx-2 md:mx-0">
+        <div className="bg-white shadow-2xl shadow-[#F26828]  rounded-md  p-5 md:p-10 col-span-12 md:col-span-5 z-10 mx-2 md:mx-0">
           <h1 className="text-center font-poppins font-semibold text-4xl">
           Personality Traits
           </h1>
@@ -115,7 +115,7 @@ const RatingYourSelf = () => {
           </div>
 
           <Link to={"/interest"}>
-            <AuthButton className={"py-1"}>Next</AuthButton>
+            <AuthButton className={"py-2"}>Next</AuthButton>
           </Link>
         </div>
 

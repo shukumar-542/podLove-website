@@ -38,11 +38,11 @@ const MatchBio = () => {
               <p key={index} className="text-center border border-[#FFA175] rounded-full py-2 text-[#FFA175]">{item}</p>
             ))}
           </div>
-          <div className="">
+          {/* <div className="">
             <Link to={"/match-result"}>
               <AuthButton className={"py-1  mt-5 "}>Next</AuthButton>
             </Link>
-          </div>
+          </div> */}
         </div>
 
         {/* Space after content */}

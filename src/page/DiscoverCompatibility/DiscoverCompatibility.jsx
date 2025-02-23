@@ -11,7 +11,7 @@ const DiscoverCompatibility = () => {
   };
   return (
     <div className="bg-[#FBECE5] min-h-screen">
-      <div className="container mx-auto py-10">
+      <div className="container max-w-5xl mx-auto py-10">
         <div className="flex flex-col justify-center items-center ">
           <img className="w-[267px] " src={logo} alt="" />
           <p className="text-[40px] font-medium font-poppins mt-5 text-[#242424]">
@@ -132,9 +132,11 @@ const DiscoverCompatibility = () => {
               </Radio>
             </Radio.Group>
           </div>
-          <Link to={"/discover-compatibility-part"}>
-            <AuthButton className={"max-w-80 py-1"}>Next</AuthButton>
-          </Link>
+          <div className="text-center">
+            <Link to={"/discover-compatibility-part"}>
+              <AuthButton className={"max-w-80  py-2"}>Next</AuthButton>
+            </Link>
+          </div>
         </div>
       </div>
     </div>
