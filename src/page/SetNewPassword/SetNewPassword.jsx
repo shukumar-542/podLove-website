@@ -1,9 +1,9 @@
-import React from "react";
-import img from "../../assets/ForgotPassword.png"
-import { Form, Input } from "antd";
-import AuthButton from "../../component/AuthButton/AuthButton";
-import { Link } from "react-router";
-const ForgetPassword = () => {
+import React from 'react'
+import img from '../../assets/setPassword.png'
+import { Form, Input } from 'antd'
+import { Link } from 'react-router'
+import AuthButton from '../../component/AuthButton/AuthButton'
+const SetNewPassword = () => {
   return (
     <div
       style={{
@@ -25,11 +25,14 @@ const ForgetPassword = () => {
           new password</p>
 
           <Form layout="vertical mt-10">
-            <Form.Item label="Email">
-              <Input placeholder="Enter your email here" className="border-[#FFA175]" />
+            <Form.Item label="New Password">
+              <Input.Password placeholder="New password" className="border-[#FFA175]" />
             </Form.Item>
-            <Link to={'/verify-forget-otp'}>
-              <AuthButton className={"py-2"}>Send</AuthButton>
+            <Form.Item label="Confirm Password">
+              <Input.Password placeholder="Confirm Password" className="border-[#FFA175]" />
+            </Form.Item>
+            <Link to={'/login'}>
+              <AuthButton className={"py-2"}>Update Password</AuthButton>
             </Link>
           </Form>
 
@@ -38,7 +41,7 @@ const ForgetPassword = () => {
         </div> 
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ForgetPassword;
+export default SetNewPassword

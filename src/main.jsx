@@ -38,6 +38,8 @@ import PrivacyPolicy from "./page/PrivacyPolicy/PrivacyPolicy.jsx";
 import TermsAndCondition from "./page/TermsAndCondition/TermsAndCondition.jsx";
 import Notification from "./page/Notification/Notification.jsx";
 import ForgetPassword from "./page/ForgetPassword/ForgetPassword.jsx";
+import VerifyEmail from "./page/VerifyEmail/VerifyEmail.jsx";
+import SetNewPassword from "./page/SetNewPassword/SetNewPassword.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -79,6 +81,8 @@ createRoot(document.getElementById("root")).render(
         <Route path="/match-result" element={<MatchResult/>} />
         <Route path="/match-bio" element={<MatchBio/>}/>
         <Route path="/forget-password"  element={<ForgetPassword/>} />
+        <Route path="/verify-forget-otp" element={<VerifyEmail/>} />
+        <Route path="/set-new-password" element={<SetNewPassword/>} />
       </Routes>
 
     </BrowserRouter>
