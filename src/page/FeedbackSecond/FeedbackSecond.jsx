@@ -11,7 +11,7 @@ const FeedbackSecond = () => {
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-[#FDEEE8] p-4">
-      <div className="w-full max-w-3xl bg-white p-6 rounded-lg shadow-lg">
+      <div className="w-full max-w-3xl  p-6">
         <h2 className="text-lg font-bold text-center mb-6">
           Thank you for joining our Pod Love! Your feedback is crucial in
           helping us improve the PodLove experience for you and others. Please

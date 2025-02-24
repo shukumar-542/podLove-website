@@ -11,8 +11,8 @@ const FeedbackOne = () => {
   
   return (
     <div className="p-6 bg-[#FCE7D3] min-h-screen flex justify-center">
-      <div className="max-w-2xl w-full bg-white p-8 rounded-lg shadow-lg font-poppins">
-        <h2 className="text-xl font-bold text-center mb-4">
+      <div className="max-w-2xl w-full  p-8  font-poppins">
+        <h2 className="text-xl font-semibold text-center mb-4 leading-9">
           Thank you for joining our Pod Love! Your feedback is crucial in helping
           us improve the PodLove experience for you and others. Please take a
           few moments to share your thoughts.
@@ -47,7 +47,7 @@ const FeedbackOne = () => {
           </Form.Item>
 
           <Form.Item label="Please describe what stood out to you about your match (positive or negative)." name="matchFeedback">
-            <Input.TextArea rows={4} placeholder="Write here"  className='border-[#FFA175]' />
+            <Input.TextArea rows={4} placeholder="Write here"  className='border-[#FFA175] bg-[#FCE7D3] ' />
           </Form.Item>
 
           {/* Chemistry and Compatibility */}
@@ -78,7 +78,7 @@ const FeedbackOne = () => {
           </Form.Item>
 
           <Form.Item>
-            <Link to={'/feedback-second-step'}><AuthButton type="primary" htmlType="submit" className="w-full py-1">
+            <Link to={'/feedback-second-step'}><AuthButton type="primary" htmlType="submit" className="w-full py-2">
               Next
             </AuthButton></Link>
           </Form.Item>

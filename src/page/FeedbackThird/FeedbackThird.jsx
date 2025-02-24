@@ -5,7 +5,7 @@ const FeedbackThird = () => {
   return (
     <div className="flex justify-center bg-[#FFECE2] p-8 min-h-screen">
       <div className="w-full max-w-3xl bg-[#FFECE2] p-6 rounded-md">
-        <h2 className="text-center font-bold text-lg">
+        <h2 className="text-center font-semibold leading-9 text-lg">
           Thank you for joining our Pod Love! Your feedback is crucial in helping
           us improve the PodLove experience for you and others. Please take a few
           moments to share your thoughts.
@@ -29,7 +29,7 @@ const FeedbackThird = () => {
             </Radio.Group>
           </Form.Item>
           <Form.Item label="Please describe what stood out to you about your match (positive or negative).">
-            <Input.TextArea placeholder="Write here" />
+            <Input.TextArea placeholder="Write here" className='bg-[#FFECE2] border-orange-400' />
           </Form.Item>
 
           {/* Chemistry and Compatibility */}
@@ -66,12 +66,12 @@ const FeedbackThird = () => {
             </Radio.Group>
           </Form.Item>
           <Form.Item label="Were there any awkward or uncomfortable moments? If so, please describe.">
-            <Input.TextArea placeholder="Write here" />
+            <Input.TextArea placeholder="Write here" className='bg-[#FFECE2] border-orange-400' />
           </Form.Item>
           
           {/* Next Button */}
           <Form.Item>
-            <AuthButton type="primary" htmlType="submit" className="w-full py-1 bg-[#F48C72]">
+            <AuthButton type="primary" htmlType="submit" className="w-full py-2 bg-[#F48C72]">
               Submit
             </AuthButton>
           </Form.Item>

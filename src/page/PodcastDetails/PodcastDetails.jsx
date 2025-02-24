@@ -7,7 +7,7 @@ const PodcastDetails = () => {
         
         <div className="flex flex-col justify-center items-center py-10 ">
            <div className="rounded-md overflow-hidden font-poppins shadow-2xl">
-                <div className="bg-red-500 text-white flex items-center justify-between p-4">
+                <div className="bg-[#DC4600] text-white flex items-center justify-between p-4">
                     <p className="text-7xl  font-bold mr-10">JUL</p>
                     <div>
                         <p>Sunday</p>
@@ -19,6 +19,7 @@ const PodcastDetails = () => {
                 </div>
            </div>
         </div>
+        <p className="text-center text-xl font-poppins">Format: Audio & Video</p>
 
 
         <p className="text-[#67362A] text-2xl font-poppins font-bold">REMEMBER</p>

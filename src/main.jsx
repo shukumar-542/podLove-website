@@ -61,6 +61,7 @@ createRoot(document.getElementById("root")).render(
           <Route path="/privacy-policy" element={<PrivacyPolicy/>} />
           <Route path="/terms-condition" element={<TermsAndCondition/>} />
           <Route path="/notification" element={<Notification/>} />
+          <Route path="/podcast-details/:id" element={<PodcastDetails/>}  />
         </Route>
         <Route path="/login" element={<Login/>} />
         <Route path="/sign-up" element={<SignUp/>}  />
@@ -80,6 +81,7 @@ createRoot(document.getElementById("root")).render(
         <Route path="/congratulation" element={<Congratulation/>} />
         <Route path="/match-result" element={<MatchResult/>} />
         <Route path="/match-bio" element={<MatchBio/>}/>
+        
         <Route path="/forget-password"  element={<ForgetPassword/>} />
         <Route path="/verify-forget-otp" element={<VerifyEmail/>} />
         <Route path="/set-new-password" element={<SetNewPassword/>} />
