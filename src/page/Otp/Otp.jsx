@@ -2,11 +2,28 @@ import React, { useState } from "react";
 import bg from "../../assets/otpBg.png";
 import AuthButton from "../../component/AuthButton/AuthButton";
 import OTPInput from "otp-input-react";
-import { Link } from "react-router";
-
+import { useNavigate } from "react-router";
+import { useVerifySingUpOtpMutation } from "../../redux/Api/AuthApi";
+import { toast } from "sonner";
+import { Spin } from 'antd';
 const Otp = () => {
+  const [verifyOtp, {isLoading}]  = useVerifySingUpOtpMutation();
   const [OTP, setOTP] = useState("");
-
+  const navigate = useNavigate()
+  const handleOtp = () => {
+    console.log(OTP);
+    const data = {
+      email : localStorage.getItem('email'),
+      otp : OTP
+    }
+    verifyOtp(data)
+      .unwrap()
+      .then((payload) => {
+        toast.success(payload?.message)
+        navigate('/location')
+      })
+      .catch((error) => toast.error(error?.data?.message));
+  };
   return (
     <div
       className="h-[100vh] min-h-screen bg-cover bg-center bg-no-repeat"
@@ -19,7 +36,8 @@ const Otp = () => {
             Verification Code
           </p>
           <p className="mt-4 max-w-96 font-thin text-center">
-            Please enter the six-digit code we sent you to your number 878 7764 2922
+            Please enter the six-digit code we sent you to your number 878 7764
+            2922
           </p>
 
           <div className="my-10">
@@ -28,18 +46,20 @@ const Otp = () => {
               value={OTP}
               onChange={setOTP}
               autoFocus
-              OTPLength={5}
+              OTPLength={6}
               otpType="number"
               inputClassName="w-8 h-10 md:w-10 md:h-12 text-lg md:text-xl text-center border border-[#FFC0A3] rounded-md"
-              className="flex justify-center gap-2 sm:gap-3 md:gap-4"
+              className="flex justify-center gap-1 sm:gap-1 md:gap-1"
               disabled={false}
               secure
             />
           </div>
 
-          <Link to={"/location"}>
-            <AuthButton className={"py-1"}>Verify</AuthButton>
-          </Link>
+          {/* <Link to={"/location"}> */}
+          <AuthButton disabled={isLoading} handleOnClick={() => handleOtp()} className={"py-1"}>
+            {isLoading ? <Spin  /> : "Verify"}
+          </AuthButton>
+          {/* </Link> */}
         </div>
       </div>
     </div>

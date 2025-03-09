@@ -40,53 +40,64 @@ import Notification from "./page/Notification/Notification.jsx";
 import ForgetPassword from "./page/ForgetPassword/ForgetPassword.jsx";
 import VerifyEmail from "./page/VerifyEmail/VerifyEmail.jsx";
 import SetNewPassword from "./page/SetNewPassword/SetNewPassword.jsx";
+import { Provider } from "react-redux";
+import { store } from "./redux/store.js";
+import { Toaster } from "sonner";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />}>
-          <Route index element={<Home/>} />
-          <Route path="/home"  element={<HomePage/>}/>
-          <Route path="/about-us" element={<AboutUs />} />
-          <Route path="/contact-us" element={<ContactUs/>} />
-          <Route path="/after-podcast" element={<AfterPodcast/>}/>
-          <Route path="/chat" element={<ChatPage/>} />
-          <Route path="/feedback-first-step" element={<FeedbackOne/>} />
-          <Route path="/feedback-second-step" element={<FeedbackSecond/>} />
-          <Route path="/feedback-third-step" element={<FeedbackThird/>} />
-          <Route path="/profile" element={<Profile/>} />
-          <Route path="/edit-profile"  element={<EditProfile/>} />
-          <Route path="/change-password" element={<ChangePassword/>} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy/>} />
-          <Route path="/terms-condition" element={<TermsAndCondition/>} />
-          <Route path="/notification" element={<Notification/>} />
-          <Route path="/podcast-details/:id" element={<PodcastDetails/>}  />
-        </Route>
-        <Route path="/login" element={<Login/>} />
-        <Route path="/sign-up" element={<SignUp/>}  />
-        <Route path="/verify-otp" element={<Otp/>}  /> 
-        <Route path="/location" element={<Location/>} /> 
-        <Route path="/age" element={<Age/>} />
-        <Route path="/gender"  element={<Gender/>} />
-        <Route path="/body"  element={<Body/>} />
-        <Route path='/ethnicity' element={<Ethnicity/>} />
-        <Route path="/bio" element={<Bio/>} />
-        <Route path="/upload-photo" element={<UploadPhoto/>} />
-        <Route path="/discover-compatibility" element={<DiscoverCompatibility/>} />
-        <Route path="/discover-compatibility-part" element={<DiscoverCompatibilitySecond/>}  />
-        <Route path="/rating-yourself" element={<RatingYourSelf/>} />
-        <Route path="/interest" element={<Interest/>} />
-        <Route path="/connection-progress"  element={<ConnectionProgress/>}/>
-        <Route path="/congratulation" element={<Congratulation/>} />
-        <Route path="/match-result" element={<MatchResult/>} />
-        <Route path="/match-bio" element={<MatchBio/>}/>
-        
-        <Route path="/forget-password"  element={<ForgetPassword/>} />
-        <Route path="/verify-forget-otp" element={<VerifyEmail/>} />
-        <Route path="/set-new-password" element={<SetNewPassword/>} />
-      </Routes>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<App />}>
+            <Route index element={<Home />} />
+            <Route path="/home" element={<HomePage />} />
+            <Route path="/about-us" element={<AboutUs />} />
+            <Route path="/contact-us" element={<ContactUs />} />
+            <Route path="/after-podcast" element={<AfterPodcast />} />
+            <Route path="/chat" element={<ChatPage />} />
+            <Route path="/feedback-first-step" element={<FeedbackOne />} />
+            <Route path="/feedback-second-step" element={<FeedbackSecond />} />
+            <Route path="/feedback-third-step" element={<FeedbackThird />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/edit-profile" element={<EditProfile />} />
+            <Route path="/change-password" element={<ChangePassword />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms-condition" element={<TermsAndCondition />} />
+            <Route path="/notification" element={<Notification />} />
+            <Route path="/podcast-details/:id" element={<PodcastDetails />} />
+          </Route>
+          <Route path="/login" element={<Login />} />
+          <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/verify-otp" element={<Otp />} />
+          <Route path="/location" element={<Location />} />
+          <Route path="/age" element={<Age />} />
+          <Route path="/gender" element={<Gender />} />
+          <Route path="/body" element={<Body />} />
+          <Route path="/ethnicity" element={<Ethnicity />} />
+          <Route path="/bio" element={<Bio />} />
+          <Route path="/upload-photo" element={<UploadPhoto />} />
+          <Route
+            path="/discover-compatibility"
+            element={<DiscoverCompatibility />}
+          />
+          <Route
+            path="/discover-compatibility-part"
+            element={<DiscoverCompatibilitySecond />}
+          />
+          <Route path="/rating-yourself" element={<RatingYourSelf />} />
+          <Route path="/interest" element={<Interest />} />
+          <Route path="/connection-progress" element={<ConnectionProgress />} />
+          <Route path="/congratulation" element={<Congratulation />} />
+          <Route path="/match-result" element={<MatchResult />} />
+          <Route path="/match-bio" element={<MatchBio />} />
 
-    </BrowserRouter>
+          <Route path="/forget-password" element={<ForgetPassword />} />
+          <Route path="/verify-forget-otp" element={<VerifyEmail />} />
+          <Route path="/set-new-password" element={<SetNewPassword />} />
+        </Routes>
+      </BrowserRouter>
+      <Toaster position="top-right" richColors />
+    </Provider>
   </StrictMode>
 );

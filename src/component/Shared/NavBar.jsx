@@ -3,8 +3,7 @@ import img from "../../assets/footLove.png";
 import img1 from "../../assets/podLogo.png";
 import { NavLink } from "react-router";
 import { IoMdNotifications } from "react-icons/io";
-import { HiMenu, HiX } from "react-icons/hi"; // Mobile Menu Icons
-
+import { HiMenu, HiX } from "react-icons/hi"; 
 const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 

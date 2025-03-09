@@ -18,11 +18,13 @@ const HeroSection = () => {
     <div className="absolute inset-0 bg-black opacity-30 z-0 pointer-events-none"></div>
 
     {/* Hero Content */}
-    <div className="relative z-10 text-white text-center">
-      <h1 className="md:text-[128px] font-poppins font-semibold">Match your partners</h1>
-      <p className="mt-4 md:text-[32px] font-poppins mb-10 max-w-[550px] text-[#FEFEFE] mx-auto">Join a space where love is honest and meaningful. 
-      Ready for love?</p>
-      <Button className={'text-[30px] py-4 px-6'}>Find your Match</Button>
+    <div className="relative z-10 text-white text-center space-y-5">
+      <h1 className="md:text-4xl leading-10 font-poppins font-semibold max-w-6xl">Join a space where love is honest and meaningful. 
+      </h1>
+      <p className='text-2xl md:text-4xl pb-10'>Ready for love?</p>
+      {/* <p className="mt-4 md:text-[32px] font-poppins mb-10 max-w-[550px] text-[#FEFEFE] mx-auto">Join a space where love is honest and meaningful. 
+      Ready for love?</p> */}
+      <Button className={'text-[30px] py-3 px-6'}>Find your Match</Button>
     </div>
 
     {/* Overlay (Optional for readability) */}

@@ -5,7 +5,7 @@ const Notification = () => {
   return (
     <div className='bg-[#FAF2EF] min-h-screen'>
         <div className='container mx-auto'>
-              <p className='text-2xl font-semibold font-poppins text-center py-10'>Notification</p>  
+              <p className='text-2xl font-semibold font-poppins text-center py-10'>Notifications</p>  
                 <p className='text-xl font-semibold'>Total 128 Notifications</p>
 
                 <div className='space-y-4 mt-10 pb-10'>

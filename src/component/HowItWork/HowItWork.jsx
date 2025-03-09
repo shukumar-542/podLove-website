@@ -3,6 +3,7 @@ import step1 from "../../assets/step1.png";
 import step2 from "../../assets/step2.png";
 import step3 from "../../assets/step3.png";
 import step4 from "../../assets/step4.png";
+import step5 from "../../assets/t.png";
 import { Button } from "../Shared/Button/Button";
 const HowItWork = () => {
   return (
@@ -73,9 +74,9 @@ const HowItWork = () => {
           <div className="bg-[#FFE2D4] hover:bg-[#FFC0A3] transition-all duration-200 border border-dashed p-4 relative">
             <div className="">
               <img
-                src={step4}
+                src={step5}
                 alt=""
-                className="bg-[#FFE2D4] shadow-xl p-2 rounded-full absolute top-[-25px]"
+                className="bg-[#FFE2D4]  shadow-xl p-2 rounded-full absolute top-[-25px]"
               />
               <p className="text-[#18BB9B] font-bold text-2xl flex justify-end">
                 04

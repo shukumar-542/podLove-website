@@ -3,7 +3,8 @@ import { Link } from 'react-router';
 import AuthButton from '../../component/AuthButton/AuthButton';
 import { Checkbox } from 'antd';
 import bg from '../../assets/ethnicity.png'
-const options = ["African American / Black", "Asian", "Caucasian/White", "Hispanic/Latino", "Middle Eastern", "Native American" ,  "Pacific Islander" ,"Other"];
+const options = ["African American / Black", "Asian", "Caucasian/White", "Hispanic/Latino", "Middle Eastern", "Native American" ,  "Pacific Islander" ,"Other" ,"No preference"];
+const option = ["African American / Black", "Asian", "Caucasian/White", "Hispanic/Latino", "Middle Eastern", "Native American" ,  "Pacific Islander" ,"Other" ,"No preference"];
 
 const Ethnicity = () => {
     const [selectedBodyType, setSelectedBodyType] = useState([]);
@@ -37,13 +38,14 @@ const Ethnicity = () => {
         <h1 className="text-center font-poppins font-semibold text-4xl">
           Ethnicity
         </h1>
-        <p className="text-center font-poppins text-[14px]  my-8">
-        Cultural expression and identity are deeply tied to the customs, history, language, and religion of people from different geographic regions. At PodLove, we believe love can flourish across all backgrounds. Are there any cultural or ethnic preferences that are important for you in a partner?
+        <p className="text-center font-poppins text-[14px] ">
+        Cultural expression and identity are deeply tied to the customs, history, language, and religion of people from different geographic regions. 
         </p>
+        <p className="text-center font-poppins text-[14px] mt-2">At PodLove, we believe love can flourish across all backgrounds. Are there any cultural or ethnic preferences that are important for you in a partner?</p>
       
         {/* <p className='text-md text-center'>Please select one</p> */}
         <div className="mb-4">
-      <p className="font-semibold">What your body type?</p>
+      <p className="font-semibold">What is your Ethnicity?</p>
       <p className="text-sm text-gray-500">Please select one</p>
       <Checkbox.Group 
         options={options} 
@@ -55,10 +57,10 @@ const Ethnicity = () => {
 
     {/* Preferred Body Type Selection */}
     <div className='my-10'>
-      <p className="font-semibold">Preferred Body Type</p>
+      <p className="font-semibold">Preferred Ethnicity </p>
       <p className="text-sm text-gray-500">Please select one</p>
       <Checkbox.Group 
-        options={options} 
+        options={option} 
         value={preferredBodyType} 
         onChange={handlePreferredBodyTypeChange} 
         className="flex flex-wrap gap-3 mt-2"
