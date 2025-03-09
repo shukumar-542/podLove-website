@@ -43,6 +43,7 @@ import SetNewPassword from "./page/SetNewPassword/SetNewPassword.jsx";
 import { Provider } from "react-redux";
 import { store } from "./redux/store.js";
 import { Toaster } from "sonner";
+import OptInPolicy from "./page/OptInPolicy/OptInPolicy.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -66,6 +67,7 @@ createRoot(document.getElementById("root")).render(
             <Route path="/terms-condition" element={<TermsAndCondition />} />
             <Route path="/notification" element={<Notification />} />
             <Route path="/podcast-details/:id" element={<PodcastDetails />} />
+            <Route path="/opy-in-policy" element={<OptInPolicy/>} />
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/sign-up" element={<SignUp />} />

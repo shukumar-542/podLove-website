@@ -3,15 +3,20 @@ import bg from "../../assets/location-bg.png";
 import AuthButton from "../../component/AuthButton/AuthButton";
 import { Link } from "react-router";
 import { Input, Slider, Switch } from "antd";
+import { useGetPlaceSuggestionsQuery } from "../../redux/Api/AuthApi";
 const Location = () => {
+  const [searchTerm, setSearchTerm] = useState("");
     const [disabled, setDisabled] = useState(false);
     const [value, setValue] = useState(30); 
-  
+  const {data } = useGetPlaceSuggestionsQuery( searchTerm , { skip: !searchTerm })
+  console.log(data);
     const onChangeSlider = (val) => {
       setValue(val); 
       console.log("Slider Value:", val);
     };
   
+
+    console.log(searchTerm);
   
   return (
     <div
@@ -36,7 +41,7 @@ const Location = () => {
           </p>
           <div className="py-5">
             <p className="mb-2 font-poppins">Your Location</p>
-            <Input className="border border-[#FFA175]"/>
+            <Input onChange={(e) => setSearchTerm(e.target.value)}  value={searchTerm}  className="border border-[#FFA175]"/>
           </div>
         <div>
             <p>Preferred Distance</p>

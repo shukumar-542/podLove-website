@@ -19,8 +19,17 @@ const authApi = baseApi.injectEndpoints({
                     body :  data
                 }
             }
-        })
+        }),
+        // getPlaceSuggestions :  builder.query({
+        //     query : (input)=>{
+        //         return {
+        //             url : `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${input}&key=AIzaSyBzv577Bx_ETVI7T1Fnf8kfRuZkMzfNZVE`,
+        //             method : "GET"
+        //         }
+        //     }
+        // })
+
     })
 })
 
-export const { useSignUpMutation  , useVerifySingUpOtpMutation} = authApi
+export const { useSignUpMutation  , useVerifySingUpOtpMutation , useGetPlaceSuggestionsQuery} = authApi

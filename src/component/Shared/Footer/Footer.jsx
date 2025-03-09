@@ -27,8 +27,11 @@ const Footer = () => {
             <p className="mb-2">
               <Link to={"/privacy-policy"}>Privacy Policy</Link>
             </p>
-            <p>
+            <p className="mb-2">
               <Link to={"/terms-condition"}>Terms And Condition</Link>
+            </p>
+            <p>
+              <Link to={"/opy-in-policy"}>SMS Consent & Opt-In-Policy</Link>
             </p>
           </div>
         </div>
@@ -38,6 +41,7 @@ const Footer = () => {
             <img src={app} className="h-[44px] w-[150px]" alt="" />
             <img src={google} className="h-[44px] w-[150px]" alt="" />
           </div>
+          
         </div>
       </div>
     </div>
