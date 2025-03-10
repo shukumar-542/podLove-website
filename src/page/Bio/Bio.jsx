@@ -1,11 +1,27 @@
 import React from "react";
 import bg from "../../assets/bio-bg.png";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import AuthButton from "../../component/AuthButton/AuthButton";
 import { Form } from "antd";
 import TextArea from "antd/es/input/TextArea";
+import { useUpdateUserInfoMutation } from "../../redux/Api/AuthApi";
+import { toast } from "sonner";
 
 const Bio = () => {
+  const navigate = useNavigate();
+  const [updateBio] = useUpdateUserInfoMutation();
+  const handleAddBio = (value) => {
+    const data = {
+      bio: value?.bio,
+    };
+    updateBio(data)
+      .unwrap()
+      .then((payload) =>{
+        toast.success(payload?.message)
+        navigate('/upload-photo')
+      })
+      .catch((error) => toast.error(error?.data?.message));
+  };
   return (
     <div
       style={{
@@ -37,14 +53,19 @@ const Bio = () => {
             <p>3.What values matter most to you in relationships?</p>
             <p>4.How do you describe your personality in three words?</p>
           </div>
-          <Form layout="vertical">
-            <Form.Item label={<p className="font-medium">Write your bio(max 200 word) </p>}>
-                <TextArea rows={10}/>
+          <Form onFinish={handleAddBio} layout="vertical">
+            <Form.Item
+              name={"bio"}
+              label={
+                <p className="font-medium">Write your bio(max 200 word) </p>
+              }
+            >
+              <TextArea rows={10} />
             </Form.Item>
-          </Form>
-          <Link to={"/upload-photo"}>
             <AuthButton className={"py-2"}>Next</AuthButton>
-          </Link>
+          </Form>
+          {/* <Link to={"/upload-photo"}> */}
+          {/* </Link> */}
         </div>
 
         {/* Space after content */}

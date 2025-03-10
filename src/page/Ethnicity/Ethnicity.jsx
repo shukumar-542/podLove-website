@@ -58,7 +58,7 @@ const Ethnicity = () => {
       .catch((error) => toast.error(error?.data?.message));
   };
   return (
-    <div
+  <div
       style={{
         backgroundImage: `url(${bg})`,
         backgroundSize: "cover",
