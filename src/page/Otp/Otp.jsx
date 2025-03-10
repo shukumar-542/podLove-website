@@ -11,7 +11,6 @@ const Otp = () => {
   const [OTP, setOTP] = useState("");
   const navigate = useNavigate()
   const handleOtp = () => {
-    console.log(OTP);
     const data = {
       email : localStorage.getItem('email'),
       otp : OTP
@@ -20,7 +19,10 @@ const Otp = () => {
       .unwrap()
       .then((payload) => {
         toast.success(payload?.message)
-        navigate('/location')
+        if(payload?.data){
+          localStorage.setItem("token",payload?.data?.accessToken)
+          navigate('/location')
+        }
       })
       .catch((error) => toast.error(error?.data?.message));
   };

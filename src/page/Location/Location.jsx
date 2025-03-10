@@ -1,23 +1,44 @@
 import React, { useState } from "react";
 import bg from "../../assets/location-bg.png";
 import AuthButton from "../../component/AuthButton/AuthButton";
-import { Link } from "react-router";
-import { Input, Slider, Switch } from "antd";
-import { useGetPlaceSuggestionsQuery } from "../../redux/Api/AuthApi";
+import { Slider } from "antd";
+import LocationSearch from "../../component/LocationSearch/LocationSearch";
+import { useUpdateUserInfoMutation } from "../../redux/Api/AuthApi";
+import { toast } from "sonner";
+import { useNavigate } from "react-router";
 const Location = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-    const [disabled, setDisabled] = useState(false);
-    const [value, setValue] = useState(30); 
-  const {data } = useGetPlaceSuggestionsQuery( searchTerm , { skip: !searchTerm })
-  console.log(data);
-    const onChangeSlider = (val) => {
-      setValue(val); 
-      console.log("Slider Value:", val);
-    };
-  
+  const navigate =  useNavigate()
+  const [updateUserInfo] = useUpdateUserInfoMutation();
 
-    console.log(searchTerm);
-  
+  const [selectedLocation, setSelectedLocation] = useState(null);
+  const [disabled, setDisabled] = useState(false);
+  const [value, setValue] = useState(30);
+
+  const onChangeSlider = (val) => {
+    setValue(val);
+  };
+
+ 
+
+  const handleUpdateLocation = () => {
+    const data = {
+      location: {
+        place: selectedLocation?.address,
+        longitude: selectedLocation?.lng,
+        latitude: selectedLocation?.lat,
+      },
+      preferences: {
+        distance: value,
+      },
+    };
+    updateUserInfo(data)
+      .unwrap()
+      .then((payload) => {
+        toast.success(payload?.message)
+        navigate('/age')
+      })
+      .catch((error) => toast.error(error?.data?.message));
+  };
   return (
     <div
       style={{
@@ -41,21 +62,29 @@ const Location = () => {
           </p>
           <div className="py-5">
             <p className="mb-2 font-poppins">Your Location</p>
-            <Input onChange={(e) => setSearchTerm(e.target.value)}  value={searchTerm}  className="border border-[#FFA175]"/>
+            {/* <Input onChange={(e) => setSearchTerm(e.target.value)}  value={searchTerm}  className="border border-[#FFA175]"/> */}
+            <LocationSearch onSelectLocation={setSelectedLocation} />
           </div>
-        <div>
+          <div>
             <p>Preferred Distance</p>
 
             <div className="flex justify-between items-center mt-5 text-xl">
-                <p>0 Miles</p>
-                <p>100 Miles</p>
+              <p>0 Miles</p>
+              <p>{value} Miles</p>
             </div>
-        </div>
-          <Slider defaultValue={30} disabled={disabled} onChange={onChangeSlider} className="mb-10" />
-          {/* Disabled: <Switch size="small" checked={disabled} onChange={onChange} /> */}
-          <Link to={"/age"}>
-            <AuthButton className={"py-2"}>Next</AuthButton>
-          </Link>
+          </div>
+          <Slider
+            defaultValue={30}
+            disabled={disabled}
+            onChange={onChangeSlider}
+            className="mb-10"
+          />
+          <AuthButton
+            handleOnClick={() => handleUpdateLocation()}
+            className={"py-2"}
+          >
+            Next
+          </AuthButton>
         </div>
       </div>
     </div>

@@ -4,7 +4,7 @@ const baseQuery = fetchBaseQuery({
 
     baseUrl: 'http://142.93.217.28:7000',
     prepareHeaders: (headers) => {
-        const token = JSON.parse(localStorage.getItem('token'));
+        const token = localStorage.getItem('token');
         if (token) {
             headers.set('Authorization', `Bearer ${token}`);
         }
