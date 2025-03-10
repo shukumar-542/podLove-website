@@ -1,10 +1,31 @@
 import React from "react";
 import bg from "../../assets/gender-bg.png";
 import { Form, Select } from "antd";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import AuthButton from "../../component/AuthButton/AuthButton";
+import { useUpdateUserInfoMutation } from "../../redux/Api/AuthApi";
+import { toast } from "sonner";
 
 const Gender = () => {
+  const navigate = useNavigate();
+  const [updateGender] = useUpdateUserInfoMutation();
+
+  const handleGender = (values) => {
+    const data = {
+      preferences: {
+        gender: values?.gender,
+      },
+      gender: values?.myGender,
+    };
+    updateGender(data)
+      .unwrap()
+      .then((payload) =>{
+        toast.success(payload?.message)
+        navigate('/body')
+      })
+      .catch((error) => toast.error(error?.data?.message));
+  };
+
   return (
     <div
       style={{
@@ -32,8 +53,9 @@ const Gender = () => {
           <p className="text-center font-poppins mt-3 font-normal mb-10">
             Life is the flower for which love is the honey.
           </p>
-          <Form layout="vertical">
+          <Form onFinish={handleGender} layout="vertical">
             <Form.Item
+              name={"myGender"}
               label={<p className="font-medium w-full">Select your gender</p>}
             >
               <Select placeholder="Select your gender">
@@ -45,6 +67,7 @@ const Gender = () => {
               </Select>
             </Form.Item>
             <Form.Item
+              name={"gender"}
               label={
                 <p className="font-medium w-full ">
                   Select your preferred gender
@@ -60,10 +83,10 @@ const Gender = () => {
                 <Option value={"all"}>Open to All</Option>
               </Select>
             </Form.Item>
-          </Form>
-          <Link to={"/body"}>
             <AuthButton className={"py-2"}>Next</AuthButton>
-          </Link>
+          </Form>
+          {/* <Link to={"/body"}> */}
+          {/* </Link> */}
         </div>
 
         {/* Space after content */}
