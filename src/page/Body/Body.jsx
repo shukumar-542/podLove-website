@@ -1,22 +1,49 @@
-import React, { useState } from 'react'
-import bg from '../../assets/body-bg.png'
-import { Form } from 'antd'
-import { Link } from 'react-router'
-import AuthButton from '../../component/AuthButton/AuthButton'
+import React, { useState } from "react";
+import bg from "../../assets/body-bg.png";
+import { useNavigate } from "react-router";
+import AuthButton from "../../component/AuthButton/AuthButton";
 import { Checkbox } from "antd";
-const options = ["Athletic", "Curvy", "Slim", "Average", "Plus-size", "Muscular"];
+import { useUpdateUserInfoMutation } from "../../redux/Api/AuthApi";
+import { toast } from "sonner";
+const options = [
+  "Athletic",
+  "Curvy",
+  "Slim",
+  "Average",
+  "Plus-size",
+  "Muscular",
+];
 
 const Body = () => {
-    const [selectedBodyType, setSelectedBodyType] = useState([]);
-    const [preferredBodyType, setPreferredBodyType] = useState([]);
+  const navigate = useNavigate();
+  const [updateBodyType] = useUpdateUserInfoMutation();
+  const [selectedBodyType, setSelectedBodyType] = useState([]);
+  const [preferredBodyType, setPreferredBodyType] = useState([]);
 
-    const handleBodyTypeChange = (checkedValues) => {
-        setSelectedBodyType(checkedValues);
-      };
-    
-      const handlePreferredBodyTypeChange = (checkedValues) => {
-        setPreferredBodyType(checkedValues);
-      };
+  const handleBodyTypeChange = (checkedValues) => {
+    setSelectedBodyType(checkedValues.length > 0 ? checkedValues[0] : null);
+  };
+
+  const handlePreferredBodyTypeChange = (checkedValues) => {
+    setPreferredBodyType(checkedValues);
+  };
+
+  const handleUpdateBodyType = () => {
+    const data = {
+      preferences: {
+        bodyType: preferredBodyType,
+      },
+      bodyType: selectedBodyType,
+    };
+    updateBodyType(data)
+      .unwrap()
+      .then((payload) => {
+        toast.success(payload?.message)
+        navigate("/ethnicity")
+      })
+      .catch((error) => toast.error(error?.data?.message));
+  };
+
   return (
     <div
       style={{
@@ -39,45 +66,49 @@ const Body = () => {
             Body Type
           </h1>
           <p className="text-center font-poppins font-medium my-2">
-          How would you describe your body type?
+            How would you describe your body type?
           </p>
           <p className="text-center font-poppins mt-3 font-normal text-sm mb-10">
-          Choose the option that best represents you
+            Choose the option that best represents you
           </p>
           {/* <p className='text-md text-center'>Please select one</p> */}
           <div className="mb-4">
-        <p className="font-semibold">What your body type?</p>
-        <p className="text-sm text-gray-500">Please select one</p>
-        <Checkbox.Group 
-          options={options} 
-          value={selectedBodyType} 
-          onChange={handleBodyTypeChange} 
-          className="flex flex-wrap gap-3 mt-2"
-        />
+            <p className="font-semibold">What your body type?</p>
+            <p className="text-sm text-gray-500">Please select one</p>
+            <Checkbox.Group
+              options={options}
+              value={selectedBodyType ? [selectedBodyType] : []}
+              onChange={handleBodyTypeChange}
+              className="flex flex-wrap gap-3 mt-2"
+            />
 
-
-      {/* Preferred Body Type Selection */}
-      <div className='my-10'>
-        <p className="font-semibold">Preferred Body Type</p>
-        <p className="text-sm text-gray-500">Please select one</p>
-        <Checkbox.Group 
-          options={options} 
-          value={preferredBodyType} 
-          onChange={handlePreferredBodyTypeChange} 
-          className="flex flex-wrap gap-3 mt-2"
-        />
-      </div>
-      </div>
-          <Link to={"/ethnicity"}>
-            <AuthButton className={"py-2"}>Next</AuthButton>
-          </Link>
+            {/* Preferred Body Type Selection */}
+            <div className="my-10">
+              <p className="font-semibold">Preferred Body Type</p>
+              <p className="text-sm text-gray-500">Please select one</p>
+              <Checkbox.Group
+                options={options}
+                value={preferredBodyType}
+                onChange={handlePreferredBodyTypeChange}
+                className="flex flex-wrap gap-3 mt-2"
+              />
+            </div>
+          </div>
+          {/* <Link to={"/ethnicity"}> */}
+          <AuthButton
+            handleOnClick={() => handleUpdateBodyType()}
+            className={"py-2"}
+          >
+            Next
+          </AuthButton>
+          {/* </Link> */}
         </div>
 
         {/* Space after content */}
         <div className="md:col-span-6"></div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Body
+export default Body;
