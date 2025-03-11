@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import bg from "../../assets/personality.png";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import AuthButton from "../../component/AuthButton/AuthButton";
+import { useUpdateUserInfoMutation } from "../../redux/Api/AuthApi";
+import { toast } from "sonner";
 const color = [
   "#FFE2D4",
   "#FFD4C0",
@@ -12,6 +14,9 @@ const color = [
   "#B57253",
 ];
 const RatingYourSelf = () => {
+  const navigate = useNavigate()
+  const [updateRating] = useUpdateUserInfoMutation();
+
   const [selectedRating, setSelectedRating] = useState(1);
   const [selectedHomeBody, setSelectHomeBody] = useState(3);
   const [selectedOptimist, setSelectOptimist] = useState(2);
@@ -19,14 +24,34 @@ const RatingYourSelf = () => {
     setSelectedRating(rating);
   };
 
+  const handleSelectHomeBody = (rating) => {
+    setSelectHomeBody(rating);
+  };
 
-  const handleSelectHomeBody = (rating)=>{
-    setSelectHomeBody(rating)
-  }
+  const handleOptimist = (rating) => {
+    setSelectOptimist(rating);
+  };
 
-  const handleOptimist  = (rating)=>{
-    setSelectOptimist(rating)
-  }
+  const handleUpdateRating = () => {
+    const data = {
+      personality: {
+        spectrum: selectedRating,
+        balance: selectedHomeBody,
+        focus: selectedOptimist,
+      },
+    };
+
+    updateRating(data)
+    .unwrap()
+    .then((payload) => {
+      toast.success(payload?.message)
+      navigate('/interest')
+    })
+    .catch((error) => {
+      toast.error(error?.data?.message)
+    });
+  };
+
   return (
     <div
       style={{
@@ -46,11 +71,12 @@ const RatingYourSelf = () => {
         {/* Main content */}
         <div className="bg-white shadow-2xl shadow-[#F26828]  rounded-md  p-5 md:p-10 col-span-12 md:col-span-5 z-10 mx-2 md:mx-0">
           <h1 className="text-center font-poppins font-semibold text-4xl">
-          Personality Traits
+            Personality Traits
           </h1>
-          <p className="text-center">Rate yourself on the following personality traits</p>
-         
-         
+          <p className="text-center">
+            Rate yourself on the following personality traits
+          </p>
+
           <div className="max-w-5xl mx-auto">
             <div>
               <p className="flex items-center justify-between mb-5 mt-10">
@@ -84,7 +110,7 @@ const RatingYourSelf = () => {
                     className={` h-4 w-16 rounded-full cursor-pointer `}
                     style={{
                       backgroundColor:
-                      selectedHomeBody !== null && index <= selectedHomeBody
+                        selectedHomeBody !== null && index <= selectedHomeBody
                           ? color[index]
                           : "#D1D5DB",
                     }}
@@ -104,7 +130,7 @@ const RatingYourSelf = () => {
                     className={` h-4 w-16 rounded-full cursor-pointer `}
                     style={{
                       backgroundColor:
-                      selectedOptimist !== null && index <= selectedOptimist
+                        selectedOptimist !== null && index <= selectedOptimist
                           ? color[index]
                           : "#D1D5DB",
                     }}
@@ -114,9 +140,14 @@ const RatingYourSelf = () => {
             </div>
           </div>
 
-          <Link to={"/interest"}>
-            <AuthButton className={"py-2"}>Next</AuthButton>
-          </Link>
+          {/* <Link to={"/interest"}> */}
+          <AuthButton
+            handleOnClick={() => handleUpdateRating()}
+            className={"py-2"}
+          >
+            Next
+          </AuthButton>
+          {/* </Link> */}
         </div>
 
         {/* Space after content */}
