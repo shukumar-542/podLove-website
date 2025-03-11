@@ -1,26 +1,41 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router'
+import { Link, useNavigate } from 'react-router'
 import AuthButton from '../component/AuthButton/AuthButton'
 import bg from "../assets/interest.png";
+import { useUpdateUserInfoMutation } from '../redux/Api/AuthApi';
+import { toast } from 'sonner';
 
 
 const interest = [
     "Cooking", "Travel", "Gym",
     "Books", "Photo", "Yoga",
     "Films", "Tennis", "Games",
-    "Cooking", "Travel", "Gym",
-    "Books", "Photo", "Yoga",
-    "Films", "Tennis", "Games"
   ];
 
 const Interest = () => {
+  const navigate = useNavigate()
+    const [updateInterest] = useUpdateUserInfoMutation();
     const [selected, setSelected] = useState([]);
     // Select item
     const toggleSelect =(field)=>{
         setSelected((prev)=> prev.includes(field) ? prev.filter((item)=> item !== field) :  [...prev , field])
     }
 
-    console.log(selected);
+    const handleInterest = ()=>{
+      const data = {
+        interests: selected,
+      };
+  
+      updateInterest(data)
+      .unwrap()
+      .then((payload) => {
+        toast.success(payload?.message)
+        navigate('/subscription-plan')
+      })
+      .catch((error) => {
+        toast.error(error?.data?.message)
+      });
+    }
 
 
   return (
@@ -36,7 +51,7 @@ const Interest = () => {
   >
     {/* Opacity section */}
     <div className="bg-black absolute opacity-50 inset-0 z-0 "></div>
-    {/* Grid divide by 12 column */}
+    {/* Grid divide by 12 column */} 
     <div className="grid grid-cols-12 items-center justify-center h-full w-full container mx-auto">
       <div className="  md:col-span-1"></div>
       {/* Main content */}
@@ -53,9 +68,9 @@ const Interest = () => {
                 ))
             }
         </div>
-        <Link to={"/connection-progress"}>
-          <AuthButton className={"py-2"}>Next</AuthButton>
-        </Link>
+        {/* <Link to={"/connection-progress"}> */}
+          <AuthButton handleOnClick={()=> handleInterest()} className={"py-2"}>Next</AuthButton>
+        {/* </Link> */}
       </div>
 
       {/* Space after content */}

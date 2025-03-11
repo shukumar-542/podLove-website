@@ -44,6 +44,7 @@ import { Provider } from "react-redux";
 import { store } from "./redux/store.js";
 import { Toaster } from "sonner";
 import OptInPolicy from "./page/OptInPolicy/OptInPolicy.jsx";
+import SubscriptionPlan from "./page/SubscriptionPlan/SubscriptionPlan.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -56,6 +57,7 @@ createRoot(document.getElementById("root")).render(
             <Route path="/about-us" element={<AboutUs />} />
             <Route path="/contact-us" element={<ContactUs />} />
             <Route path="/after-podcast" element={<AfterPodcast />} />
+            <Route path="/subscription-plan" element={<SubscriptionPlan/>} />
             <Route path="/chat" element={<ChatPage />} />
             <Route path="/feedback-first-step" element={<FeedbackOne />} />
             <Route path="/feedback-second-step" element={<FeedbackSecond />} />
