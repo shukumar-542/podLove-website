@@ -2,12 +2,31 @@ import React, { useState } from "react";
 import logo from "../../assets/podLogo.png";
 import { Radio } from "antd";
 import AuthButton from "../../component/AuthButton/AuthButton";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import { useUpdateUserInfoMutation } from "../../redux/Api/AuthApi";
+import { toast } from "sonner";
 const DiscoverCompatibility = () => {
-  const [answers, setAnswers] = useState({});
+  const navigate = useNavigate();
+  const [updateCompatibility] = useUpdateUserInfoMutation();
+  const [answers, setAnswers] = useState([]);
 
-  const handleChange = (question, value) => {
-    setAnswers({ ...answers, [question]: value });
+  const handleChange = (index, value) => {
+    const newAnswers = [...answers];
+    newAnswers[index] = value;
+    setAnswers(newAnswers);
+  };
+
+  const handleDiscoverCompatibility = () => {
+    const data = {
+      compatibility: answers,
+    };
+    updateCompatibility(data)
+      .unwrap()
+      .then((payload) => {
+        toast.success(payload?.message)
+        navigate('/discover-compatibility-part')
+      })
+      .catch((error) => toast.error(error?.data?.message));
   };
   return (
     <div className="bg-[#FBECE5] min-h-screen">
@@ -31,11 +50,13 @@ const DiscoverCompatibility = () => {
               gatherings or relaxing at home with a few close friends?
             </p>
             <Radio.Group
-              onChange={(e) => handleChange("socializing", e.target.value)}
+              onChange={(e) => handleChange(0, e.target.value)}
               className="flex flex-col mt-2 custom-radio"
             >
-              <Radio value="larger_gatherings">Larger gatherings</Radio>
-              <Radio value="close_friends">Relaxing with close friends</Radio>
+              <Radio value="Larger gatherings">Larger gatherings</Radio>
+              <Radio value="Relaxing with close friends">
+                Relaxing with close friends
+              </Radio>
             </Radio.Group>
           </div>
 
@@ -46,11 +67,11 @@ const DiscoverCompatibility = () => {
               head (logic) or your heart (feelings)?
             </p>
             <Radio.Group
-              onChange={(e) => handleChange("decision_making", e.target.value)}
+              onChange={(e) => handleChange(1, e.target.value)}
               className="flex flex-col mt-2 custom-radio"
             >
-              <Radio value="logic">Head (logic)</Radio>
-              <Radio value="feelings">Heart (feelings)</Radio>
+              <Radio value="Head (logic)">Head (logic)</Radio>
+              <Radio value="Heart (feelings)">Heart (feelings)</Radio>
             </Radio.Group>
           </div>
 
@@ -60,13 +81,21 @@ const DiscoverCompatibility = () => {
               Which of these activities sounds most appealing to you?
             </p>
             <Radio.Group
-              onChange={(e) => handleChange("activities", e.target.value)}
+              onChange={(e) => handleChange(2, e.target.value)}
               className="flex flex-col mt-2 custom-radio"
             >
-              <Radio value="hiking">A weekend hiking trip in nature</Radio>
-              <Radio value="museum">A museum or art gallery visit</Radio>
-              <Radio value="cozy_movie">A cozy movie night at home</Radio>
-              <Radio value="concert">A concert or live music event</Radio>
+              <Radio value="A weekend hiking trip in nature">
+                A weekend hiking trip in nature
+              </Radio>
+              <Radio value="A museum or art gallery visit">
+                A museum or art gallery visit
+              </Radio>
+              <Radio value="A cozy movie night at home">
+                A cozy movie night at home
+              </Radio>
+              <Radio value="A concert or live music event">
+                A concert or live music event
+              </Radio>
             </Radio.Group>
           </div>
 
@@ -76,16 +105,16 @@ const DiscoverCompatibility = () => {
               How important is personal growth in your life?
             </p>
             <Radio.Group
-              onChange={(e) => handleChange("personal_growth", e.target.value)}
+              onChange={(e) => handleChange(3, e.target.value)}
               className="flex flex-col mt-2 custom-radio"
             >
-              <Radio value="extremely_important">
+              <Radio value="Extremely important – I am always working on bettering myself">
                 Extremely important – I am always working on bettering myself
               </Radio>
-              <Radio value="moderately_important">
+              <Radio value="Moderately important – I like to grow but not obsessively">
                 Moderately important – I like to grow but not obsessively
               </Radio>
-              <Radio value="not_important">
+              <Radio value="Not very important – I prefer stability and consistency">
                 Not very important – I prefer stability and consistency
               </Radio>
             </Radio.Group>
@@ -95,17 +124,19 @@ const DiscoverCompatibility = () => {
           <div className="mb-6">
             <p className="font-semibold">How do you like to show affection?</p>
             <Radio.Group
-              onChange={(e) => handleChange("affection", e.target.value)}
+              onChange={(e) => handleChange(4, e.target.value)}
               className="flex flex-col mt-2 custom-radio"
             >
-              <Radio value="touch">Physical touch (hugs, kisses, etc.)</Radio>
+              <Radio value="Physical touch (hugs, kisses, etc.)">
+                Physical touch (hugs, kisses, etc.)
+              </Radio>
               <Radio value="words">
                 Words of affirmation (compliments, verbal expressions of love)
               </Radio>
-              <Radio value="service">
+              <Radio value="Acts of service (doing things to help my partner)">
                 Acts of service (doing things to help my partner)
               </Radio>
-              <Radio value="quality_time">
+              <Radio value="Quality time (spending focused time together)">
                 Quality time (spending focused time together)
               </Radio>
             </Radio.Group>
@@ -117,25 +148,32 @@ const DiscoverCompatibility = () => {
               How do you envision your ideal future?
             </p>
             <Radio.Group
-              onChange={(e) => handleChange("future", e.target.value)}
+              onChange={(e) => handleChange(5, e.target.value)}
               className="flex flex-col mt-2 custom-radio"
             >
-              <Radio value="family">Building a family with a partner</Radio>
-              <Radio value="travel">
+              <Radio value="Building a family with a partner<">
+                Building a family with a partner
+              </Radio>
+              <Radio value="Traveling the world and having enriching experiences">
                 Traveling the world and having enriching experiences
               </Radio>
-              <Radio value="career">
+              <Radio value="Focusing on my career and personal goals">
                 Focusing on my career and personal goals
               </Radio>
-              <Radio value="peaceful_life">
+              <Radio value="Living a simple, peaceful life surrounded by loved ones">
                 Living a simple, peaceful life surrounded by loved ones
               </Radio>
             </Radio.Group>
           </div>
           <div className="text-center">
-            <Link to={"/discover-compatibility-part"}>
-              <AuthButton className={"max-w-80  py-2"}>Next</AuthButton>
-            </Link>
+            {/* <Link to={"/discover-compatibility-part"}> */}
+              <AuthButton
+                handleOnClick={() => handleDiscoverCompatibility()}
+                className={"max-w-80  py-2"}
+              >
+                Next
+              </AuthButton>
+            {/* </Link> */}
           </div>
         </div>
       </div>
