@@ -12,6 +12,7 @@
   "dependencies": {
     "@react-google-maps/api": "^2.20.6",
     "@reduxjs/toolkit": "^2.6.1",
+    "@zegocloud/zego-uikit-prebuilt": "^2.14.1-beta",
     "antd": "^5.24.0",
     "otp-input-react": "^0.3.0",
     "react": "^18.3.1",

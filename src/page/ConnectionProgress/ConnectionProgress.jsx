@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import bg from "../../assets/connection-bg.png";
-import {  useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { Progress } from "antd";
+import { usePodcastCreateMutation } from "../../redux/Api/AuthApi";
+import { toast } from "sonner";
 
 const ConnectionProgress = () => {
   const [percent, setPercent] = useState(1);
+  const [createPodcast] = usePodcastCreateMutation();
 
-const navigate = useNavigate()
-//   Percentage timer
+  const navigate = useNavigate();
+  //   Percentage timer
   useEffect(() => {
     const interval = setInterval(() => {
       setPercent((prev) => {
@@ -17,19 +20,23 @@ const navigate = useNavigate()
         }
         return prev + 1;
       });
-    }, 50); 
+    }, 50);
 
     return () => clearInterval(interval);
   }, []);
 
-
-//   Navigate congratulation page
-useEffect(()=>{
-if(percent === 100){
-    navigate('/congratulation')
-}
-},[percent ,navigate])
-
+  //   Navigate congratulation page
+  useEffect(() => {
+    if (percent === 100) {
+      createPodcast()
+        .unwrap()
+        .then((payload) => {
+          toast.success(payload?.message);
+          navigate("/congratulation");
+        })
+        .catch((error) => toast.error(error?.data?.message));
+    }
+  }, [percent, navigate]);
 
   return (
     <div
@@ -50,21 +57,23 @@ if(percent === 100){
         {/* Main content */}
         <div className="bg-white shadow-5xl  rounded-md  p-5 md:p-10 col-span-12 md:col-span-5 z-10 mx-2 md:mx-0">
           <h1 className="text-center font-poppins font-semibold text-4xl">
-          Your Connection Begins Here
+            Your Connection Begins Here
           </h1>
           <p className="text-center max-w-80 mx-auto mt-2">
-          Our smart AI connector is working hard to find the best 
-          matches for you.
+            Our smart AI connector is working hard to find the best matches for
+            you.
           </p>
 
           <div className="flex justify-center my-10">
-            <Progress type="circle" percent={percent} strokeWidth={12} size={180}  />
+            <Progress
+              type="circle"
+              percent={percent}
+              strokeWidth={12}
+              size={180}
+            />
           </div>
-  
-          {
-            percent < 100 && <p className="text-center">Finding matches...</p>
-          }
 
+          {percent < 100 && <p className="text-center">Finding matches...</p>}
         </div>
 
         {/* Space after content */}

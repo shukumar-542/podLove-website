@@ -30,6 +30,7 @@ const Interest = () => {
       .unwrap()
       .then((payload) => {
         toast.success(payload?.message)
+        
         navigate('/subscription-plan')
       })
       .catch((error) => {

@@ -29,6 +29,14 @@ const authApi = baseApi.injectEndpoints({
         };
       },
     }),
+    podcastCreate :  builder.mutation({
+        query : ()=>{
+            return {
+                url : '/podcast/create',
+                method : 'POST'
+            }
+        }
+    })
   }),
 });
 
@@ -36,4 +44,5 @@ export const {
   useSignUpMutation,
   useVerifySingUpOtpMutation,
   useUpdateUserInfoMutation,
+  usePodcastCreateMutation
 } = authApi;

@@ -52,7 +52,7 @@ const MatchResult = () => {
           </p>
 
           <div className="mx-16">
-            <Link to={'/match-bio'}>
+            <Link to={'/home'}>
               <AuthButton className={"py-2  mt-5 "}>Next</AuthButton> 
             </Link>
           </div>
