@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import img from "../../assets/footLove.png";
 import img1 from "../../assets/podLogo.png";
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 import { IoMdNotifications } from "react-icons/io";
 import { HiMenu, HiX } from "react-icons/hi"; 
+import { useGetUserQuery } from "../../redux/Api/AuthApi";
+
 const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { data :  getUser} = useGetUserQuery()
+  console.log(getUser?.data);
 
   return (
     <div className="h-28 bg-cover bg-center" style={{ backgroundImage: `url(${img})` }}>
@@ -34,8 +38,14 @@ const NavBar = () => {
           <NavLink to="/notification" className="bg-[#FFA175] rounded-full p-1">
             <IoMdNotifications size={20} color="white" />
           </NavLink>
-          <NavLink to="/login" className="hover:text-[#FFA175]">Login</NavLink>
-          <button className="bg-[#FFA175] text-white px-4 py-1 rounded">Sign Up Here</button>
+          {
+            getUser?.data ? <Link to={"/profile"}><img src={getUser?.data?.avatar} className="h-10 shadow-2xl w-10 rounded-full border border-[#FFA175] cursor-pointer" alt="" /></Link> : <NavLink to="/login" className="hover:text-[#FFA175]">Login</NavLink>
+          }
+          {
+            !getUser?.data && <button className="bg-[#FFA175] text-white px-4 py-1 rounded">Sign Up Here</button>
+          } 
+          
+          
         </div>
       </div>
 
