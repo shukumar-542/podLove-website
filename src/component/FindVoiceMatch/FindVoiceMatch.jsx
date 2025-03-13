@@ -1,8 +1,8 @@
 import React from "react";
 import img from "../../assets/bg.png";
 import client1 from "../../assets/find1.png";
-import client2 from "../../assets/find2.jpg";
-import client3 from "../../assets/find3.jpg";
+import client2 from "../../assets/find2.png";
+import client3 from "../../assets/find3.png";
 
 const FindVoiceMatch = () => {
   const data = [
@@ -39,7 +39,7 @@ const FindVoiceMatch = () => {
                 <div className="py-10 ">
                   <img
                     src={user?.img}
-                    className="max-h-[374px] w-[374px] rounded-2xl object-cover mx-auto "
+                    className="max-h-[374px] w-[374px] rounded-2xl  mx-auto "
                 
                     alt=""
                   />

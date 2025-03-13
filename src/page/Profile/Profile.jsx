@@ -5,7 +5,11 @@ import { CiLocationOn } from "react-icons/ci";
 import { IoCalendarOutline, IoSettingsOutline } from "react-icons/io5";
 import { FiEdit } from "react-icons/fi";
 import { Link } from "react-router";
+import { useGetUserQuery } from "../../redux/Api/AuthApi";
 const Profile = () => {
+    const { data :  getUser} = useGetUserQuery()
+    console.log(getUser?.data);
+  
   return (
     <div
       style={{
@@ -24,8 +28,8 @@ const Profile = () => {
         <div className="bg-white   md:flex gap-10 p-10 rounded-tr-[90px] rounded-bl-[90px] shadow-2xl shadow-[#eb8b73] mb-20 z-10">
           <div>
             <img
-              src={profile}
-              className="h-[200px] md:h-[300px] w-[200px] md:w-[284px] md:relative md:-mt-24 rounded-md"
+              src={getUser?.data?.avatar}
+              className="h-[200px] md:h-[300px] w-[200px] md:w-[284px] md:relative md:-mt-24 rounded-md object-cover"
               alt=""
             />
             <p className="mt-3 flex  items-center gap-1 text-[#6B4431]">
@@ -40,7 +44,7 @@ const Profile = () => {
           <div>
             <div className="flex justify-between items-center">
               <p className="text-[#8C5940] font-poppins text-[36px] font-bold ">
-                Emily
+              {getUser?.data?.name}
               </p>
               <Link to={"/edit-profile"}>
                 <div className="bg-[#FFA175] text-white p-2 rounded-md shadow-lg cursor-pointer">
@@ -48,7 +52,7 @@ const Profile = () => {
                 </div>
               </Link>
             </div>
-            <p>Emily34@gmail.com</p>
+            <p>{getUser?.data?.email}</p>
             <div className="mt-5 space-y-3 ">
               <p className="flex justify-between">
                 <span>Gender</span>{" "}

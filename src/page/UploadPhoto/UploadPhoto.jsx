@@ -23,7 +23,6 @@ const UploadPhoto = () => {
     setImageUrl(URL.createObjectURL(file)); 
   };
 
-  console.log(imageUrl);
 
   // Upload image on Next button click
   const handleNextClick = async () => {

@@ -9,7 +9,6 @@ import { useGetUserQuery } from "../../redux/Api/AuthApi";
 const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const { data :  getUser} = useGetUserQuery()
-  console.log(getUser?.data);
 
   return (
     <div className="h-28 bg-cover bg-center" style={{ backgroundImage: `url(${img})` }}>
