@@ -7,11 +7,10 @@ import {
   useGetUserQuery,
   useUpdateUserInfoMutation,
 } from "../../redux/Api/AuthApi";
-
+import { toast } from "sonner";
 
 const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/dvjbfwhxe/image/upload";
 const UPLOAD_PRESET = "podlove_upload";
-
 
 const EditProfile = () => {
   const [loading, setLoading] = useState(false);
@@ -21,8 +20,7 @@ const EditProfile = () => {
   const [imageUrl, setImageUrl] = useState(null);
   const { data: getUser } = useGetUserQuery();
 
-  console.log(getUser?.data);
-
+ console.log(getUser);
   useEffect(() => {
     if (getUser) {
       form.setFieldsValue({
@@ -33,12 +31,11 @@ const EditProfile = () => {
     }
   }, [form, getUser]);
 
-   // Store file locally
-   const handleFileSelect = ({ file }) => {
+  // Store file locally
+  const handleFileSelect = ({ file }) => {
     setFile(file);
-    setImageUrl(URL.createObjectURL(file)); 
+    setImageUrl(URL.createObjectURL(file));
   };
-
 
   const handleImageChange = (info) => {
     if (info.file.status === "done" || info.file.status === "uploading") {
@@ -56,7 +53,50 @@ const EditProfile = () => {
     return isImage;
   };
 
-  const handleUpdateProfile = (values) => {
+  const handleUpdateProfile = async (values) => {
+
+   
+    // if (!file) {
+    //   message.error("Please select an image first.");
+    //   return;
+    // }
+
+    setLoading(true);
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", UPLOAD_PRESET);
+    try {
+      const response = await fetch(CLOUDINARY_URL, {
+        method: "POST",
+        body: formData,
+      });
+      const data = await response.json();
+      const uploadedImageUrl = data.secure_url;
+      setImageUrl(uploadedImageUrl);
+      toast.success("Profile Update successfully!");
+
+
+     
+      const updateData = {
+        name : values?.name,
+        phoneNumber : values?.contact,
+        gender :  values?.gender,
+        address :  values?.address,
+        bio : values?.bio,
+        ...(uploadedImageUrl && { avatar: uploadedImageUrl })
+      }
+      const result = await editProfile(updateData);
+      console.log(result);
+      
+    } catch (error) {
+      console.error("Upload failed:", error);
+      message.error("Failed to upload image.");
+    } finally {
+      setLoading(false);
+    }
+
+    
+
     console.log(values);
   };
 
@@ -70,7 +110,7 @@ const EditProfile = () => {
             showUploadList={false}
             beforeUpload={(file) => {
               handleFileSelect({ file });
-              return false; 
+              return false;
             }}
             onChange={handleImageChange}
           >
@@ -81,7 +121,6 @@ const EditProfile = () => {
               icon={<CameraOutlined />}
             />
           </Upload>
-
 
           {/* <Upload
                         showUploadList={false}
@@ -107,9 +146,6 @@ const EditProfile = () => {
                           )}
                         </div>
                       </Upload> */}
-
-
-
         </div>
         <Form form={form} layout="vertical" onFinish={handleUpdateProfile}>
           <div className="md:flex  gap-5 w-full ">
@@ -132,13 +168,13 @@ const EditProfile = () => {
               <Input placeholder="Enter Your gender" />
             </Form.Item>
           </div>
-          <Form.Item label="Location" name="address">
+          <Form.Item label="Address" name="address">
             <Input placeholder="Ontario, USA" />
           </Form.Item>
           <Form.Item label="Bio" name="bio">
             <TextArea placeholder="Type your bio" />
           </Form.Item>
-          <AuthButton className={"py-2"}>Update</AuthButton>
+          <AuthButton className={"py-2"}>{loading ? "Updating..." : "Update"}</AuthButton>
         </Form>
       </div>
     </div>

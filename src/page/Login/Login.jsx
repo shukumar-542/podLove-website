@@ -6,8 +6,19 @@ import { FcGoogle } from "react-icons/fc";
 import { Link, NavLink } from "react-router";
 import { FaApple } from "react-icons/fa";
 import AuthButton from "../../component/AuthButton/AuthButton";
+import { useLoginUserMutation } from "../../redux/Api/AuthApi";
 
 const Login = () => {
+  const [loginUser] = useLoginUserMutation();
+
+  const handleUserLogin = (values) => {
+    console.log(values);
+    loginUser(values)
+      .unwrap()
+      .then((payload) => console.log("fulfilled", payload))
+      .catch((error) => console.error("rejected", error));
+  };
+
   return (
     <div
       style={{
@@ -28,18 +39,22 @@ const Login = () => {
           <p className="mt-2">Please log in to continue access</p>
 
           <div className=" w-[250px] md:w-[450px] ">
-            <Form layout="vertical">
-              <Form.Item label="Email">
+            <Form onFinish={handleUserLogin} layout="vertical">
+              <Form.Item label="Email" name={"email"}>
                 <Input placeholder="Enter your email here" />
               </Form.Item>
-              <Form.Item label="Password">
+              <Form.Item label="Password" name={"password"}>
                 <Password placeholder="******" />
               </Form.Item>
               <div className="flex justify-between items-center mb-3">
                 <p>
                   <Checkbox /> Remember me
                 </p>
-                <Link to={'/forget-password'}><p className="text-[#F68064] cursor-pointer">Forget password</p></Link>
+                <Link to={"/forget-password"}>
+                  <p className="text-[#F68064] cursor-pointer">
+                    Forget password
+                  </p>
+                </Link>
               </div>
               <AuthButton className="bg-[#F68064] text-white w-full rounded-md py-2 text-xl shadow-md">
                 Sign in

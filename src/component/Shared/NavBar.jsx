@@ -10,6 +10,8 @@ const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const { data :  getUser} = useGetUserQuery()
 
+  console.log(getUser);
+
   return (
     <div className="h-28 bg-cover bg-center" style={{ backgroundImage: `url(${img})` }}>
       <div className="container mx-auto h-full flex items-center justify-between px-4 md:px-8">

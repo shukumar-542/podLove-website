@@ -10,11 +10,12 @@ const FindVoiceMatch = () => {
       img: client1,
       title: "Fastest  Match",
       des: "Get your podlove in less than an hour! That’s as fast as it can get.",
+      
     },
     {
       img: client2,
       title: "So Much to Choose From",
-      des: "Find your favourite among the thousands ofpeople in our Web.",
+      des: "Find your favorite among the thousands of people in our Web.",
     },
     {
       img: client3,

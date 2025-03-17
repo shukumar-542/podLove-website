@@ -44,6 +44,15 @@ const authApi = baseApi.injectEndpoints({
                 method : "GET"
             }
         }
+    }),
+    loginUser :  builder.mutation({
+      query  : (data)=>{
+        return{
+          url : '/auth/login',
+          method  : 'POST',
+          body : data
+        }
+      }
     })
   }),
 });
@@ -53,5 +62,6 @@ export const {
   useVerifySingUpOtpMutation,
   useUpdateUserInfoMutation,
   usePodcastCreateMutation,
-  useGetUserQuery
+  useGetUserQuery,
+  useLoginUserMutation
 } = authApi;

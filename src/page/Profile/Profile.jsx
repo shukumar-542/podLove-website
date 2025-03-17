@@ -34,11 +34,11 @@ const Profile = () => {
             />
             <p className="mt-3 flex  items-center gap-1 text-[#6B4431]">
               <IoCalendarOutline />
-              Joined December,2025
+              {getUser?.data?.joind?.split("T")[0]}
             </p>
             <p className="flex mt-1 items-center gap-1 text-[#6B4431]">
               <CiLocationOn color="#6B4431" />
-              Ontario, USA
+              {getUser?.data?.address || "N/A"}
             </p>
           </div>
           <div>
