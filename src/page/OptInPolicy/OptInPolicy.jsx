@@ -31,6 +31,36 @@ const OptInPolicy = () => {
         <p className="flex items-center mt-5 gap-2"><IoCheckmarkOutline size={20} className="bg-[#FFA175] text-white rounded-sm" /><span className="text-xl"> Podcast Participation Details – Get information about upcoming podcast sessions.</span></p>
         <p className="flex items-center mt-5 gap-2"><IoCheckmarkOutline size={20} className="bg-[#FFA175] text-white rounded-sm" /><span className="text-xl"> PodLove Updates – Receive important news about the platform.</span></p>
 
+        <p className="text-[#6B4431] mt-10 text-3xl font-bold">Steps to Resolve the Issue</p>
+        <p className="mt-5 text-xl">Add a step-by-step explanation of how users opt-in.  
+        </p>
+        <p className=" text-xl pb-10">Include screenshots or examples of checkboxes/buttons where they agreereceive messages.</p>
+        
+        <p className="text-[#6B4431] mt-10 text-3xl font-bold">Ensure Clear Consent Collection</p>
+        <p className="mt-5 text-xl">Twilio prefers explicit consent (e.g., users checking a box that says “I agree to receive SMS notifications from PodLove”).    
+        </p>
+        <p className=" text-xl pb-10"> If opt-in happens during app signup, show a screenshot or describe how they give consent.  
+        </p>
+        
+        <p className="text-[#6B4431] mt-5 text-3xl font-bold">Resubmit with a Better Link</p>
+        <p className="mt-5 text-xl">Instead of just linking to a general privacy page, create a dedicated page like: </p>
+        <p className=" text-xl"> https://podlove.co/sms-opt-in</p>
+        <p className=" text-xl">Make sure it *visibly demonstrates* the opt-in process.</p>
+
+
+
+        <p className="text-[#6B4431] mt-5 text-3xl font-bold">Example of What Twilio Wants to See on Your Page</p>
+        <p className="mt-5 text-xl">- A heading like *"How We Collect SMS Opt-In"*  </p>
+        <p className=" text-xl"> - A step-by-step explanation: </p>
+        <p className=" text-xl">  1. Users sign up via the PodLove app or website.</p>
+        <p className=" text-xl">  2. They check a box that says *"I agree to receive SMS updates about my matches and podcast invites."* </p>
+        <p className=" text-xl">  3. They receive an initial confirmation SMS to verify their consent.</p>
+        <p className=" text-xl"> - Screenshots of the app signup page with the checkbox for SMS consent.  </p>
+        
+
+
+
+
         <p className="text-[#6B4431] mt-10 text-3xl font-bold">How to Opt-Out</p>
         <p className="mt-5 text-xl pb-10">Users can opt out of SMS communications at any time by replying "STOP" to any message. For any questions or concerns, please contact us at support@podlove.co.</p>
       </div>

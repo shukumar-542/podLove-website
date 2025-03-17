@@ -10,15 +10,14 @@ const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const { data :  getUser} = useGetUserQuery()
 
-  console.log(getUser);
 
   return (
-    <div className="h-28 bg-cover bg-center" style={{ backgroundImage: `url(${img})` }}>
+    <div className="h-28 bg-cover  bg-center" style={{ backgroundImage: `url(${img})` }}>
       <div className="container mx-auto h-full flex items-center justify-between px-4 md:px-8">
         
         {/* Logo */}
         <div>
-          <img className="h-16" src={img1} alt="Logo" />
+          <img className="h-16 " src={img1} alt="Logo" />
         </div>
 
         {/* Mobile Menu Button */}
@@ -40,7 +39,7 @@ const NavBar = () => {
             <IoMdNotifications size={20} color="white" />
           </NavLink>
           {
-            getUser?.data ? <Link to={"/profile"}><img src={getUser?.data?.avatar} className="h-10 shadow-2xl w-10 rounded-full border border-[#FFA175] cursor-pointer" alt="" /></Link> : <NavLink to="/login" className="hover:text-[#FFA175]">Login</NavLink>
+            getUser?.data ? <Link to={"/profile"}><img src={getUser?.data?.avatar} className="h-10 shadow-2xl object-cover w-10 rounded-full border border-[#FFA175] cursor-pointer" alt="" /></Link> : <NavLink to="/login" className="hover:text-[#FFA175]">Login</NavLink>
           }
           {
             !getUser?.data && <button className="bg-[#FFA175] text-white px-4 py-1 rounded">Sign Up Here</button>
