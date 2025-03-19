@@ -53,6 +53,14 @@ const authApi = baseApi.injectEndpoints({
           body : data
         }
       }
+    }),
+    getPodCastDetails :  builder.query({
+      query : ()=>{
+        return {
+          url : '/home',
+          method : 'GET'
+        }
+      }
     })
   }),
 });
@@ -63,5 +71,6 @@ export const {
   useUpdateUserInfoMutation,
   usePodcastCreateMutation,
   useGetUserQuery,
-  useLoginUserMutation
+  useLoginUserMutation,
+  useGetPodCastDetailsQuery
 } = authApi;

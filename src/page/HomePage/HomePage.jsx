@@ -6,20 +6,38 @@ import img4 from "../../assets/match4.png";
 import video from "../../assets/schedule.mp4";
 import mic from "../../assets/mic.png";
 import IsPodSafe from "../../component/IsPodSafe/IsPodSafe";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import Pricing from "../../component/Pricing/Pricing";
+import { useGetPodCastDetailsQuery } from "../../redux/Api/AuthApi";
+import { toast } from "sonner";
 const HomePage = () => {
+  const navigate = useNavigate()
+  const { data: getPodcastDetails } = useGetPodCastDetailsQuery();
+  // console.log(getPodcastDetails?.data?.podcast?._id);
+const handleVideoCall = ()=>{
+  if(!getPodcastDetails?.data?.podcast?._id){
+    toast.error("Podcast not available!")
+  }
+  navigate(`/room/${getPodcastDetails?.data?.podcast?._id}`)
+}
   return (
-    <div className="bg-[#F7E8E1]">  
+    <div className="bg-[#F7E8E1]">
       <div className="container mx-auto">
         <p className="font-poppins font-bold text-2xl py-5">Your Matches</p>
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 justify-between items-center gap-10">
-          <Link to={'/podcast-details/:id'}>
-            <div className="cursor-pointer hover:shadow-2xl rounded-br-3xl">
-              <img src={img1} className="w-full" alt="" />
-            </div>
-          </Link>
-          <div className="cursor-pointer hover:shadow-2xl rounded-br-3xl ">
+          {getPodcastDetails?.data?.podcast?.participants?.map(
+            (participant) => {
+              return (
+                <Link key={participant?._id} to={"/podcast-details/:id"}>
+                  <div className="cursor-pointer hover:shadow-2xl rounded-br-3xl">
+                    <img src={img1} className="w-full" alt="" />
+                  </div>
+                </Link>
+              );
+            }
+          )}
+
+          {/* <div className="cursor-pointer hover:shadow-2xl rounded-br-3xl ">
             <img src={img2} className="w-full" alt="" />
           </div>
           <div className="cursor-pointer hover:shadow-2xl rounded-br-3xl ">
@@ -27,7 +45,7 @@ const HomePage = () => {
           </div>
           <div className="cursor-pointer hover:shadow-2xl rounded-br-3xl">
             <img src={img4} className="w-full" alt="" />
-          </div>
+          </div> */}
         </div>
         {/* Date and time schedule section */}
         <section className="my-20  relative">
@@ -46,7 +64,7 @@ const HomePage = () => {
             <p className="text-white text-center text-xl mt-2">
               12/07/24 (Monday) at 4 PM
             </p>
-            <button className="bg-[#F68064] w-full mt-2 py-2 rounded-md">
+            <button onClick={()=> handleVideoCall()} className="bg-[#F68064] w-full mt-2 py-2 rounded-md">
               Join
             </button>
           </div>
@@ -55,7 +73,7 @@ const HomePage = () => {
         <h1 className="text-center font-bold text-2xl">Subscription Plan</h1>
 
         {/* Subscription Plan Section */}
-       <Pricing/>
+        <Pricing />
       </div>
       <IsPodSafe />
     </div>

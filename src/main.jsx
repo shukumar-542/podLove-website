@@ -45,6 +45,7 @@ import { store } from "./redux/store.js";
 import { Toaster } from "sonner";
 import OptInPolicy from "./page/OptInPolicy/OptInPolicy.jsx";
 import SubscriptionPlan from "./page/SubscriptionPlan/SubscriptionPlan.jsx";
+import RoomPage from "./page/RoomPage/RoomPage.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -70,6 +71,7 @@ createRoot(document.getElementById("root")).render(
             <Route path="/notification" element={<Notification />} />
             <Route path="/podcast-details/:id" element={<PodcastDetails />} />
             <Route path="/opy-in-policy" element={<OptInPolicy/>} />
+            <Route path="/room/:roomId" element={<RoomPage/>} />
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/sign-up" element={<SignUp />} />
