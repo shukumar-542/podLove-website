@@ -54,6 +54,15 @@ const authApi = baseApi.injectEndpoints({
         }
       }
     }),
+    changePassword : builder.mutation({
+      query : (data)=>{
+        return {
+          url : '/auth/change-password',
+          method : 'POST',
+          body : data
+        }
+      }
+    }),
     getPodCastDetails :  builder.query({
       query : ()=>{
         return {
@@ -72,5 +81,6 @@ export const {
   usePodcastCreateMutation,
   useGetUserQuery,
   useLoginUserMutation,
-  useGetPodCastDetailsQuery
+  useGetPodCastDetailsQuery,
+  useChangePasswordMutation
 } = authApi;

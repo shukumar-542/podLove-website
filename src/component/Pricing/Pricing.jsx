@@ -11,6 +11,7 @@ const Pricing = () => {
   const { data: getPlan } = useGetAllPlanQuery();
   const [upgradeSubscription] = useUpgradeSubscriptionPlanMutation();
 
+
   // Handle upgrade plan function
   const handleUpdatePlan = (id) => {
     const data = {
@@ -20,7 +21,7 @@ const Pricing = () => {
       .unwrap()
       .then((payload) =>{
         if(payload?.data){
-          window.open(payload?.data , "_blank")
+          window.open(payload?.data)
         }
       })
       .catch((error) => toast.error(error?.data?.message));

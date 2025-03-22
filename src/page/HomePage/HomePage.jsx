@@ -13,7 +13,8 @@ import { toast } from "sonner";
 const HomePage = () => {
   const navigate = useNavigate()
   const { data: getPodcastDetails } = useGetPodCastDetailsQuery();
-  // console.log(getPodcastDetails?.data?.podcast?._id);
+  console.log(getPodcastDetails);
+
 const handleVideoCall = ()=>{
   if(!getPodcastDetails?.data?.podcast?._id){
     toast.error("Podcast not available!")
