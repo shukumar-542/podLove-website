@@ -3,20 +3,27 @@ import img from "../../assets/loginBg.png";
 import { Checkbox, Divider, Form, Input } from "antd";
 import Password from "antd/es/input/Password";
 import { FcGoogle } from "react-icons/fc";
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useNavigate } from "react-router";
 import { FaApple } from "react-icons/fa";
 import AuthButton from "../../component/AuthButton/AuthButton";
 import { useLoginUserMutation } from "../../redux/Api/AuthApi";
+import { toast } from "sonner";
 
 const Login = () => {
   const [loginUser] = useLoginUserMutation();
-
+const navigate = useNavigate()
   const handleUserLogin = (values) => {
     console.log(values);
     loginUser(values)
       .unwrap()
-      .then((payload) => console.log("fulfilled", payload))
-      .catch((error) => console.error("rejected", error));
+      .then((payload) =>{
+        console.log(payload?.data?.accessToken)
+        if(payload?.data?.accessToken){
+          localStorage.setItem("token" , payload?.data?.accessToken)
+          navigate('/home')
+        }
+      })
+      .catch((error) => toast.error(error?.data?.message));
   };
 
   return (

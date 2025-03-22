@@ -2,9 +2,30 @@ import React from "react";
 import subscription from "../../assets/subscription-bg.png";
 import { IoCheckmarkOutline } from "react-icons/io5";
 import { Divider } from "antd";
-import { useGetAllPlanQuery } from "../../redux/Api/SubscriptionPlan";
+import {
+  useGetAllPlanQuery,
+  useUpgradeSubscriptionPlanMutation,
+} from "../../redux/Api/SubscriptionPlan";
+import { toast } from "sonner";
 const Pricing = () => {
   const { data: getPlan } = useGetAllPlanQuery();
+  const [upgradeSubscription] = useUpgradeSubscriptionPlanMutation();
+
+  // Handle upgrade plan function
+  const handleUpdatePlan = (id) => {
+    const data = {
+      planId: id,
+    };
+    upgradeSubscription(data)
+      .unwrap()
+      .then((payload) =>{
+        if(payload?.data){
+          window.open(payload?.data , "_blank")
+        }
+      })
+      .catch((error) => toast.error(error?.data?.message));
+  };
+
   return (
     <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 my-10  mx-auto font-poppins mr-2 md:mr-0 ml-2 md:ml-0 ">
       {getPlan?.data?.map((plan) => {
@@ -50,7 +71,10 @@ const Pricing = () => {
                 </button>
               ) : (
                 <div className=" text-center">
-                  <button className=" bg-gradient-to-r from-[#F36E2F] to-[#FEB491]  shadow-white shadow-inner rounded-full w-full mt-5 py-2 max-w-xs  mb-5">
+                  <button
+                    onClick={() => handleUpdatePlan(plan?._id)}
+                    className=" bg-gradient-to-r from-[#F36E2F] to-[#FEB491]  shadow-white shadow-inner rounded-full w-full mt-5 py-2 max-w-xs  mb-5"
+                  >
                     Choose this plan
                   </button>
                 </div>
@@ -80,7 +104,6 @@ const Pricing = () => {
           </div>
         );
       })}
- 
     </section>
   );
 };

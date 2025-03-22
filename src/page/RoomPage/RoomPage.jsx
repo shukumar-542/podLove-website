@@ -5,7 +5,7 @@ import { useParams } from 'react-router';
 const RoomPage = () => {
     const { roomId } = useParams();
     const videoContainerRef = useRef(null);
-    const zpRef = useRef(null); // Store instance to prevent reinitialization
+    const zpRef = useRef(null); 
 
     const myMeeting = async () => {
         const appID = 1059905830;

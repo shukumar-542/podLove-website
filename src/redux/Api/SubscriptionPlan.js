@@ -9,8 +9,17 @@ const subscriptionPlan = baseApi.injectEndpoints({
                     method : 'GET'
                 }
             }
+        }),
+        upgradeSubscriptionPlan :  builder.mutation({
+            query : (planId)=>{
+                return {
+                    url  : '/subscription/upgrade',
+                    method : 'POST',
+                    body : planId
+                }
+            }
         })
     })
 })
 
-export const { useGetAllPlanQuery } = subscriptionPlan;
+export const { useGetAllPlanQuery , useUpgradeSubscriptionPlanMutation } = subscriptionPlan;
