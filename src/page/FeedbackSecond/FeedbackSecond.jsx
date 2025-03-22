@@ -19,7 +19,7 @@ const FeedbackSecond = () => {
         </h2>
         <Form layout="vertical" form={form} onFinish={onFinish}>
           <Form.Item
-            label="Did you and your match share similar values, interests, or relationship goals?"
+            label="Did you and your match share similar values, interests, or relationship goals? *"
             name="sharedValues"
             rules={[{ required: true, message: "Please select an option!" }]}
           >
@@ -37,6 +37,9 @@ const FeedbackSecond = () => {
           >
             <Input.TextArea placeholder="Write here" rows={3} />
           </Form.Item>
+
+
+
 
           <h3 className="font-semibold">3. Communication and Comfort</h3>
           <Form.Item
@@ -77,68 +80,6 @@ const FeedbackSecond = () => {
           </Form.Item>
 
 
-          <Form.Item
-            label="How would you rate your overall connection with your date?"
-            name="overallConnection"
-            rules={[{ required: true, message: "Please select a rating!" }]}
-          >
-            <Radio.Group className="flex flex-col space-y-2 custom-radio">
-              <Radio value={1}>01 (No connection at all)</Radio>
-              <Radio value={2}>2</Radio>
-              <Radio value={3}>3</Radio>
-              <Radio value={4}>4</Radio>
-              <Radio value={5}>5 (Strong connection)</Radio>
-            </Radio.Group>
-          </Form.Item>
-          <Form.Item
-            label="Did you feel comfortable with your match during the date?"
-            name="comfortableWithMatch"
-            rules={[{ required: true, message: "Please select an option!" }]}
-          >
-            <Radio.Group className="flex flex-col space-y-2 custom-radio">
-              <Radio value="yes">Yes</Radio>
-              <Radio value="somewhat">Somewhat</Radio>
-              <Radio value="no">No</Radio>
-            </Radio.Group>
-          </Form.Item>
-          <Form.Item
-            label="Please describe what stood out to you about your match (positive or negative)."
-            name="matchFeedback"
-          >
-            <Input.TextArea placeholder="Write here" rows={3} />
-          </Form.Item>
-
-          {/* <h3 className="font-semibold">2. Chemistry and Compatibility</h3>
-          <Form.Item
-            label="How would you rate the chemistry you felt with your match?"
-            name="chemistryRating"
-            rules={[{ required: true, message: "Please select a rating!" }]}
-          >
-            <Radio.Group className="flex flex-col space-y-2 custom-radio">
-              <Radio value={1}>01 (No chemistry)</Radio>
-              <Radio value={2}>2</Radio>
-              <Radio value={3}>3</Radio>
-              <Radio value={4}>4</Radio>
-              <Radio value={5}>5 (Strong chemistry)</Radio>
-            </Radio.Group>
-          </Form.Item> */}
-          {/* <Form.Item
-            label="Do you feel that the AI matchmaking captured your preferences accurately?"
-            name="aiMatchAccuracy"
-            rules={[{ required: true, message: "Please select an option!" }]}
-          >
-            <Radio.Group className="flex flex-col space-y-2 custom-radio">
-              <Radio value="yes">Yes</Radio>
-              <Radio value="somewhat">Somewhat</Radio>
-              <Radio value="no">No</Radio>
-            </Radio.Group>
-          </Form.Item>
-          <Form.Item
-            label="Do you have any suggestions for improving the matching process or date experience?"
-            name="suggestions"
-          >
-            <Input.TextArea placeholder="Write here" rows={3} />
-          </Form.Item> */}
          
          
 
