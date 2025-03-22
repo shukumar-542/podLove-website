@@ -13,59 +13,58 @@ const FeedbackThird = () => {
 
         <Form layout="vertical">
           {/* Overall Connection */}
-          <h3 className="mt-6 font-semibold">1. Overall Connection</h3>
-          <Form.Item label="How would you rate your overall connection with your date? *" name="overallConnection">
+          <h3 className="mt-6  text-xl font-semibold">4. Date Satisfaction</h3>
+          <Form.Item label="How satisfied were you with the overall experience?*" name="overallConnection">
             <Radio.Group className='flex flex-col space-y-2 custom-radio'>
-              {["01 (No connection at all)", "2", "3", "4", "5 (Strong connection)"].map((option, index) => (
+              {["01 (Not Satisfied)", "2", "3", "4", "5 (Very satisfied)"].map((option, index) => (
                 <Radio key={index} value={option}>{option}</Radio>
               ))}
             </Radio.Group>
           </Form.Item>
-          <Form.Item label="Did you feel comfortable with your match during the date? *" name="comfortable">
+          <Form.Item label="Would you be interested in seeing your match again? *" name="comfortable">
             <Radio.Group className='flex flex-col space-y-2 custom-radio'>
               {["Yes", "Somewhat", "No"].map((option, index) => (
                 <Radio key={index} value={option}>{option}</Radio>
               ))}
             </Radio.Group>
           </Form.Item>
-          <Form.Item label="Please describe what stood out to you about your match (positive or negative).">
+          <Form.Item label="If not, can you share what led to this decision?">
             <Input.TextArea placeholder="Write here" className='bg-[#FFECE2] border-orange-400' />
           </Form.Item>
 
           {/* Chemistry and Compatibility */}
-          <h3 className="mt-6 font-semibold">2. Chemistry and Compatibility</h3>
-          <Form.Item label="How would you rate the chemistry you felt with your match? *" name="chemistry">
+          <h3 className="mt-6 font-semibold">5. App Experience</h3>
+          <Form.Item label="How would you rate the ease of use of the PodLove app in coordinating this date? *" name="chemistry">
             <Radio.Group className='flex flex-col space-y-2 custom-radio'>
-              {["01 (No chemistry)", "2", "3", "4", "5 (Strong chemistry)"].map((option, index) => (
+              {["01 (Very difficult)", "2", "3", "4", "5 (Very easy)"].map((option, index) => (
                 <Radio key={index} value={option}>{option}</Radio>
               ))}
             </Radio.Group>
           </Form.Item>
-          <Form.Item label="Do you feel that the AI matchmaking captured your preferences accurately? *" name="aiMatchmaking">
+          <Form.Item label="Did you encounter any issues with scheduling or communicating through the app?*" name="aiMatchmaking">
             <Radio.Group className='flex flex-col space-y-2 custom-radio'>
-              {["Yes", "Somewhat", "No"].map((option, index) => (
+              {["Yes", "No"].map((option, index) => (
                 <Radio key={index} value={option}>{option}</Radio>
               ))}
             </Radio.Group>
           </Form.Item>
-          
-          {/* Communication and Comfort */}
-          <h3 className="mt-6 font-semibold">3. Communication and Comfort</h3>
-          <Form.Item label="How would you rate the quality of communication during the date? *" name="communicationQuality">
-            <Radio.Group className='flex flex-col space-y-2 custom-radio'>
-              {["01 (Poor communication)", "2", "3", "4", "5 (Excellent communication)"].map((option, index) => (
-                <Radio key={index} value={option}>{option}</Radio>
-              ))}
-            </Radio.Group>
+      
+
+          <Form.Item label="If yes, please describe the issue you experienced.*">
+            <Input.TextArea placeholder="Write here" className='bg-[#FFECE2] border-orange-400' />
           </Form.Item>
-          <Form.Item label="Did you feel comfortable being yourself during the date? *" name="comfortableBeingYourself">
-            <Radio.Group className='flex flex-col space-y-2 custom-radio'>
-              {["Yes", "Somewhat", "No"].map((option, index) => (
-                <Radio key={index} value={option}>{option}</Radio>
-              ))}
-            </Radio.Group>
+
+
+          <h1 className='text-xl mb-2'>6. Future Improvements</h1>
+
+          <Form.Item label="Do you have any suggestions for improving the matching process or date experience? *">
+            <Input.TextArea placeholder="Write here" className='bg-[#FFECE2] border-orange-400' />
           </Form.Item>
-          <Form.Item label="Were there any awkward or uncomfortable moments? If so, please describe.">
+          <Form.Item label="How can we make future dates more comfortable and enjoyable for you?">
+            <Input.TextArea placeholder="Write here" className='bg-[#FFECE2] border-orange-400' />
+          </Form.Item>
+          <h1 className='text-xl mb-2'>7. Optional Additional Feedback</h1>
+          <Form.Item label="How can we make future dates more comfortable and enjoyable for you?">
             <Input.TextArea placeholder="Write here" className='bg-[#FFECE2] border-orange-400' />
           </Form.Item>
           

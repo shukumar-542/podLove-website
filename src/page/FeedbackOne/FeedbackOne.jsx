@@ -20,6 +20,7 @@ const FeedbackOne = () => {
 
         <Form form={form} onFinish={onFinish} layout="vertical" >
           {/* Overall Connection */}
+          <h1 className='text-xl'>1. Overall Connection</h1>
           <Form.Item
             label="How would you rate your overall connection with your date?"
             name="overallConnection"
@@ -78,9 +79,11 @@ const FeedbackOne = () => {
           </Form.Item>
 
           <Form.Item>
-            <Link to={'/feedback-second-step'}><AuthButton type="primary" htmlType="submit" className="w-full py-2">
+            <Link to={'/feedback-second-step'}>
+            <AuthButton type="primary" htmlType="submit" className="w-full py-2">
               Next
-            </AuthButton></Link>
+            </AuthButton>
+            </Link>
           </Form.Item>
         </Form>
       </div>
