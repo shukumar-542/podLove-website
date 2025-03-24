@@ -14,7 +14,7 @@ const HomePage = () => {
   const navigate = useNavigate();
   const [createPodCast] = usePodcastCreateMutation();
   const { data: getPodcastDetails } = useGetPodCastDetailsQuery();
-  // console.log(getPodcastDetails?.data?.podcast);
+  // console.log(getPodcastDetails?.data?.user?.subscription?.plan);
 
   const handleVideoCall = () => {
     if (!getPodcastDetails?.data?.podcast?._id) {
@@ -93,7 +93,7 @@ const HomePage = () => {
         <h1 className="text-center font-bold text-2xl">Subscription Plan</h1>
 
         {/* Subscription Plan Section */}
-        <Pricing subscriptions={getPodcastDetails?.data?.subscriptionPlans} />
+        <Pricing subscriptions={getPodcastDetails?.data} />
       </div>
       <IsPodSafe />
     </div>

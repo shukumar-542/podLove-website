@@ -10,7 +10,9 @@ const Pricing = ({subscriptions}) => {
   const [upgradeSubscription] = useUpgradeSubscriptionPlanMutation();
 
 
-  // console.log(subscriptions);
+  
+
+  console.log(subscriptions?.user?.subscription?.fee);
   // Handle upgrade plan function
   const handleUpdatePlan = (id) => {
     const data = {
@@ -28,7 +30,7 @@ const Pricing = ({subscriptions}) => {
 
   return (
     <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 my-10  mx-auto font-poppins mr-2 md:mr-0 ml-2 md:ml-0 ">
-      {subscriptions?.map((plan) => {
+      {subscriptions?.subscriptionPlans?.map((plan) => {
         // console.log(plan);
         return (
           <div
@@ -66,7 +68,7 @@ const Pricing = ({subscriptions}) => {
                 : `${plan.unitAmount} / ${plan?.interval}`}
             </h1>
             <div className="text-center">
-              {plan?.unitAmount == 0 ? (
+              {subscriptions?.user?.subscription?.fee === plan?.unitAmount ? (
                 <button className="border text-[#FFA175]  max-w-xs rounded-full w-full mt-5 py-2 border-[#FFA175] mb-5">
                   Current Plan
                 </button>
