@@ -56,14 +56,14 @@ const Profile = () => {
             <div className="mt-5 space-y-3 ">
               <p className="flex justify-between">
                 <span>Gender</span>{" "}
-                <span className="text-[#767676]">Female</span>
+                <span className="text-[#767676]">{getUser?.data?.gender}</span>
               </p>
               <p className="flex justify-between">
-                <span>Age</span> <span className="text-[#767676]">35</span>
+                {/* <span>Age</span> <span className="text-[#767676]">35</span> */}
               </p>
               <p className="flex justify-between gap-20">
                 <span>Phone</span>{" "}
-                <span className="text-[#767676]">+1152654433</span>
+                <span className="text-[#767676]">{getUser?.data?.contact}</span>
               </p>
             </div>
             <p
@@ -73,9 +73,7 @@ const Profile = () => {
               Bio:
             </p>
             <p className="bg-[#FFE2D4] max-w-md p-2 mt-2 rounded-md shadow-lg">
-              Write a few lines about yourself and your character. Tell us about
-              your achievements, priorities and life experience. This way your
-              profile will become more interesting and attract more attention.
+            {getUser?.data?.bio}
             </p>
           </div>
         </div>
