@@ -46,6 +46,7 @@ import { Toaster } from "sonner";
 import OptInPolicy from "./page/OptInPolicy/OptInPolicy.jsx";
 import SubscriptionPlan from "./page/SubscriptionPlan/SubscriptionPlan.jsx";
 import RoomPage from "./page/RoomPage/RoomPage.jsx";
+import ParticipantDetails from "./page/ParticipantDetails/ParticipantDetails.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -69,7 +70,7 @@ createRoot(document.getElementById("root")).render(
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-condition" element={<TermsAndCondition />} />
             <Route path="/notification" element={<Notification />} />
-            <Route path="/podcast-details/:id" element={<PodcastDetails />} />
+            <Route path="/podcast-details/:id" element={<ParticipantDetails/>}/>
             <Route path="/opy-in-policy" element={<OptInPolicy/>} />
             <Route path="/room/:roomId" element={<RoomPage/>} />
           </Route>

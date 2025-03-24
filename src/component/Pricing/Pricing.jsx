@@ -3,15 +3,14 @@ import subscription from "../../assets/subscription-bg.png";
 import { IoCheckmarkOutline } from "react-icons/io5";
 import { Divider } from "antd";
 import {
-  useGetAllPlanQuery,
   useUpgradeSubscriptionPlanMutation,
 } from "../../redux/Api/SubscriptionPlan";
 import { toast } from "sonner";
-const Pricing = () => {
-  const { data: getPlan } = useGetAllPlanQuery();
+const Pricing = ({subscriptions}) => {
   const [upgradeSubscription] = useUpgradeSubscriptionPlanMutation();
 
 
+  // console.log(subscriptions);
   // Handle upgrade plan function
   const handleUpdatePlan = (id) => {
     const data = {
@@ -29,7 +28,8 @@ const Pricing = () => {
 
   return (
     <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 my-10  mx-auto font-poppins mr-2 md:mr-0 ml-2 md:ml-0 ">
-      {getPlan?.data?.map((plan) => {
+      {subscriptions?.map((plan) => {
+        // console.log(plan);
         return (
           <div
             key={plan?._id}
@@ -42,7 +42,7 @@ const Pricing = () => {
             className="rounded-3xl  text-white p-4 py-8 shadow-2xl shadow-black"
           >
             <p className="text-center bg-[#231A19] text-[20px] py-2  rounded-full max-w-[120px]  mx-auto">
-              Listener
+              {plan?.name?.split(":")[0]}
             </p>
 
             <p className=" my-2 mt-10 ">{plan?.name}</p>

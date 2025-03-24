@@ -1,52 +1,66 @@
 import React from "react";
-import img1 from "../../assets/match.png";
-import img2 from "../../assets/match2.png";
-import img3 from "../../assets/match3.png";
-import img4 from "../../assets/match4.png";
+import img1 from "../../assets/tes.png";
 import video from "../../assets/schedule.mp4";
 import mic from "../../assets/mic.png";
 import IsPodSafe from "../../component/IsPodSafe/IsPodSafe";
 import { Link, useNavigate } from "react-router";
 import Pricing from "../../component/Pricing/Pricing";
-import { useGetPodCastDetailsQuery } from "../../redux/Api/AuthApi";
+import {
+  useGetPodCastDetailsQuery,
+  usePodcastCreateMutation,
+} from "../../redux/Api/AuthApi";
 import { toast } from "sonner";
 const HomePage = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [createPodCast] = usePodcastCreateMutation();
   const { data: getPodcastDetails } = useGetPodCastDetailsQuery();
-  console.log(getPodcastDetails);
+  // console.log(getPodcastDetails?.data?.podcast);
 
-const handleVideoCall = ()=>{
-  if(!getPodcastDetails?.data?.podcast?._id){
-    toast.error("Podcast not available!")
-  }
-  navigate(`/room/${getPodcastDetails?.data?.podcast?._id}`)
-}
+  const handleVideoCall = () => {
+    if (!getPodcastDetails?.data?.podcast?._id) {
+      toast.error("Podcast not available!");
+    }
+    navigate(`/room/${getPodcastDetails?.data?.podcast?._id}`);
+  };
+
+  // Create New Podcast
+  const handleCreatePodcast = () => {
+    createPodCast()
+      .unwrap()
+      .then((payload) => console.log("fulfilled", payload))
+      .catch((error) => console.error("rejected", error));
+  };
+
   return (
     <div className="bg-[#F7E8E1]">
       <div className="container mx-auto">
         <p className="font-poppins font-bold text-2xl py-5">Your Matches</p>
+        <div className="flex justify-center">
+          {(!getPodcastDetails?.data?.podcast ||
+            Object.keys(getPodcastDetails?.data?.podcast).length === 0) && (
+            <button
+              onClick={() => handleCreatePodcast()}
+              className="bg-[#F68064] w-full max-w-[200px]  mt-2 py-2 rounded-md  text-white text-xl"
+            >
+              Create New Match
+            </button>
+          )}
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 justify-between items-center gap-10">
           {getPodcastDetails?.data?.podcast?.participants?.map(
-            (participant) => {
+            (participant , i) => {
               return (
-                <Link key={participant?._id} to={"/podcast-details/:id"}>
-                  <div className="cursor-pointer hover:shadow-2xl rounded-br-3xl">
+                <Link key={participant?._id} to={`/podcast-details/${participant?._id}`}>
+                  <div className="cursor-pointer hover:shadow-2xl rounded-br-3xl relative">
                     <img src={img1} className="w-full" alt="" />
+                    <p className="absolute bottom-10 right-[45%] text-xl font-semibold">Match-{i + 1}</p>
                   </div>
                 </Link>
               );
             }
           )}
 
-          {/* <div className="cursor-pointer hover:shadow-2xl rounded-br-3xl ">
-            <img src={img2} className="w-full" alt="" />
-          </div>
-          <div className="cursor-pointer hover:shadow-2xl rounded-br-3xl ">
-            <img src={img3} className="w-full" alt="" />
-          </div>
-          <div className="cursor-pointer hover:shadow-2xl rounded-br-3xl">
-            <img src={img4} className="w-full" alt="" />
-          </div> */}
+         
         </div>
         {/* Date and time schedule section */}
         <section className="my-20  relative">
@@ -63,9 +77,14 @@ const handleVideoCall = ()=>{
             <img src={mic} alt="Microphone" className="w-24 h-24 mx-auto " />
             <h1 className="text-4xl font-poppins text-white">Date & Time : </h1>
             <p className="text-white text-center text-xl mt-2">
-              12/07/24 (Monday) at 4 PM
+              {getPodcastDetails?.data?.podcast?._id &&
+                "12/07/24 (Monday) at 4 PM"}
             </p>
-            <button onClick={()=> handleVideoCall()} className="bg-[#F68064] w-full mt-2 py-2 rounded-md">
+            <button
+              disabled={!getPodcastDetails?.data?.podcast?._id}
+              onClick={() => handleVideoCall()}
+              className="bg-[#F68064] w-full mt-2 py-2 rounded-md disabled:bg-gray-200"
+            >
               Join
             </button>
           </div>
@@ -74,7 +93,7 @@ const handleVideoCall = ()=>{
         <h1 className="text-center font-bold text-2xl">Subscription Plan</h1>
 
         {/* Subscription Plan Section */}
-        <Pricing />
+        <Pricing subscriptions={getPodcastDetails?.data?.subscriptionPlans} />
       </div>
       <IsPodSafe />
     </div>

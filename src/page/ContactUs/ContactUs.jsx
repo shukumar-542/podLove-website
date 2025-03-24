@@ -1,15 +1,13 @@
-import { Form, Input, Select } from 'antd'
+import { Form,  Select } from 'antd'
 import TextArea from 'antd/es/input/TextArea'
 import React from 'react'
 import about from '../../assets/about.png'
 import AuthButton from '../../component/AuthButton/AuthButton'
 import { useCreateContactUsMutation } from '../../redux/Api/SubscriptionPlan'
-import { useGetUserQuery } from '../../redux/Api/AuthApi'
+import { toast } from 'sonner'
 
 const ContactUs = () => {
   const [createContactUs] = useCreateContactUsMutation()
-  const {data :  getProfile} = useGetUserQuery()
-  console.log(getProfile?.data);
 
 
   const handleContactUs = (values)=>{
@@ -18,8 +16,8 @@ const ContactUs = () => {
       ...values
     }
     createContactUs(data).unwrap()
-    .then((payload) => console.log('fulfilled', payload))
-    .catch((error) => console.error('rejected', error));
+    .then((payload) => toast.success(payload?.message))
+    .catch((error) => toast.error(error?.data?.message));
 
     
   }
@@ -27,7 +25,7 @@ const ContactUs = () => {
     <div
     className='bg-[#FAF2EF]'
     >
-      <div className='container mx-auto grid  grid-cols-1 md:grid-cols-2 gap-5 py-10'>
+      <div className='container mx-auto grid  grid-cols-1 md:grid-cols-2 items-center gap-5 py-10'>
         <div>
           <p className='text-center text-2xl font-poppins text-[#1C1C1C] font-semibold mb-5'>Contact Us</p>
           <Form layout='vertical' onFinish={handleContactUs} className='px-5'>
