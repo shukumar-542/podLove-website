@@ -35,8 +35,17 @@ const subscriptionPlan = baseApi.injectEndpoints({
                     method : 'GET'
                 }
             }
+        }),
+        createContactUs : builder.mutation({
+            query : (data)=>{
+                return {
+                    url : '/support/create',
+                    method : "POST",
+                    body : data
+                }
+            }
         })
     })
 })
 
-export const { useGetAllPlanQuery , useUpgradeSubscriptionPlanMutation , useCreateSurveyMutation  , useGetNotificationQuery} = subscriptionPlan;
+export const { useGetAllPlanQuery , useUpgradeSubscriptionPlanMutation , useCreateSurveyMutation  , useGetNotificationQuery , useCreateContactUsMutation} = subscriptionPlan;

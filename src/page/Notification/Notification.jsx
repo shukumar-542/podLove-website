@@ -18,12 +18,19 @@ const Notification = () => {
             return (
               <p className="flex justify-between items-center bg-white p-3 text-[#333333]">
                 <span>
-                  {notification}
+                  {notification?.message}
                 </span>
-                {/* <span>Just Now</span> */}
+                <span>Just Now</span>
               </p>
             );
           })}
+          {/* <p className="flex justify-between items-center bg-white p-3 text-[#333333]">
+                <span>
+                  A new user has completed the vetting process and registered on
+                  PodLove.
+                </span>
+                <span>Just Now</span>
+              </p> */}
          
         </div>
       </div>

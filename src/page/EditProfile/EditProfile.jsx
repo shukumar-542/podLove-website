@@ -20,13 +20,14 @@ const EditProfile = () => {
   const [imageUrl, setImageUrl] = useState(null);
   const { data: getUser } = useGetUserQuery();
 
- console.log(getUser);
   useEffect(() => {
     if (getUser) {
       form.setFieldsValue({
         name: getUser?.data?.name,
         contact: getUser?.data?.contact,
         address: getUser?.data?.address || "",
+        gender : getUser?.data?.gender || "",
+        bio : getUser?.data?.bio || ""
       });
     }
   }, [form, getUser]);

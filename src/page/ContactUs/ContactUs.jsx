@@ -3,8 +3,26 @@ import TextArea from 'antd/es/input/TextArea'
 import React from 'react'
 import about from '../../assets/about.png'
 import AuthButton from '../../component/AuthButton/AuthButton'
+import { useCreateContactUsMutation } from '../../redux/Api/SubscriptionPlan'
+import { useGetUserQuery } from '../../redux/Api/AuthApi'
 
 const ContactUs = () => {
+  const [createContactUs] = useCreateContactUsMutation()
+  const {data :  getProfile} = useGetUserQuery()
+  console.log(getProfile?.data);
+
+
+  const handleContactUs = (values)=>{
+    console.log(values);
+    const data =  {
+      ...values
+    }
+    createContactUs(data).unwrap()
+    .then((payload) => console.log('fulfilled', payload))
+    .catch((error) => console.error('rejected', error));
+
+    
+  }
   return (
     <div
     className='bg-[#FAF2EF]'
@@ -12,14 +30,14 @@ const ContactUs = () => {
       <div className='container mx-auto grid  grid-cols-1 md:grid-cols-2 gap-5 py-10'>
         <div>
           <p className='text-center text-2xl font-poppins text-[#1C1C1C] font-semibold mb-5'>Contact Us</p>
-          <Form layout='vertical' className='px-5'>
-            <Form.Item label="Full Name">
+          <Form layout='vertical' onFinish={handleContactUs} className='px-5'>
+            {/* <Form.Item label="Full Name">
               <Input className='border border-[#F68064] bg-[#FAF2EF]' placeholder='Name'/>
             </Form.Item>
             <Form.Item label="Email">
               <Input className='border border-[#F68064] bg-[#FAF2EF]' placeholder='Email'/>
-            </Form.Item>
-            <Form.Item label="Category">
+            </Form.Item> */}
+            <Form.Item name={"category"} label="Category">
               <Select options={[
                 {
                   value : 'Technical',
@@ -32,7 +50,7 @@ const ContactUs = () => {
               ]}
               ></Select>
             </Form.Item>
-            <Form.Item>
+            <Form.Item name={"description"}>
               <TextArea className='border border-[#F68064] bg-[#FAF2EF]' rows={4}/>
             </Form.Item>
 
