@@ -60,7 +60,7 @@ createRoot(document.getElementById("root")).render(
             <Route path="/contact-us" element={<ContactUs />} />
             <Route path="/after-podcast" element={<AfterPodcast />} />
             <Route path="/subscription-plan" element={<SubscriptionPlan/>} />
-            <Route path="/chat" element={<ChatPage />} />
+            <Route path="/chat/:id" element={<ChatPage />} />
             <Route path="/feedback-first-step" element={<FeedbackOne />} />
             <Route path="/feedback-second-step" element={<FeedbackSecond />} />
             <Route path="/feedback-third-step" element={<FeedbackThird />} />

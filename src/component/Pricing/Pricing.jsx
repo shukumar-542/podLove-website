@@ -12,7 +12,7 @@ const Pricing = ({subscriptions}) => {
 
   
 
-  console.log(subscriptions?.user?.subscription?.fee);
+  // console.log(subscriptions?.user?.subscription?.fee);
   // Handle upgrade plan function
   const handleUpdatePlan = (id) => {
     const data = {

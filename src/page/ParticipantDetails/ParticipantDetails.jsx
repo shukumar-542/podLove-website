@@ -13,7 +13,7 @@ const ParticipantDetails = () => {
 
 
       const handleChat = ()=>{
-        navigate('/chat')
+        navigate(`/chat/${id}`)
       }
 
     
