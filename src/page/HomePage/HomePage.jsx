@@ -14,7 +14,7 @@ const HomePage = () => {
   const navigate = useNavigate();
   const [createPodCast] = usePodcastCreateMutation();
   const { data: getPodcastDetails } = useGetPodCastDetailsQuery();
-  // console.log(getPodcastDetails?.data?.user?.subscription?.plan);
+  console.log(getPodcastDetails?.data?.podcast?.selectedUser);
 
   const handleVideoCall = () => {
     if (!getPodcastDetails?.data?.podcast?._id) {
@@ -48,19 +48,32 @@ const HomePage = () => {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 justify-between items-center gap-10">
           {getPodcastDetails?.data?.podcast?.participants?.map(
-            (participant , i) => {
+            
+            (participant, i) => {
+              console.log(participant?._id);
               return (
-                <Link key={participant?._id} to={`/podcast-details/${participant?._id}`}>
-                  <div className="cursor-pointer hover:shadow-2xl rounded-br-3xl relative">
-                    <img src={img1} className="w-full" alt="" />
-                    <p className="absolute bottom-10 right-[45%] text-xl font-semibold">Match-{i + 1}</p>
-                  </div>
-                </Link>
+                <div>
+                  <Link
+                    key={participant?._id}
+                    to={`/podcast-details/${participant?._id}`}
+                  >
+                    <div className="cursor-pointer hover:shadow-2xl rounded-br-3xl relative">
+                      <img src={img1} className="w-full" alt="" />
+                      <p className="absolute bottom-10 right-[45%] text-xl font-semibold">
+                        Match-{i + 1}
+                      </p>
+                    </div>
+                  </Link>
+                  {
+                    getPodcastDetails?.data?.podcast?.selectedUser && <Link to={`/chat/${getPodcastDetails?.data?.podcast?.selectedUser}`}>
+                    <button disabled={participant?._id !== getPodcastDetails?.data?.podcast?.selectedUser}  className={`bg-[#FFA175] mt-5 w-full text-white rounded-tl-lg rounded-br-lg py-2 text-xl ${participant?._id !== getPodcastDetails?.data?.podcast?.selectedUser ? "bg-gray-400"  : "bg-[#FFA175] "}`}>Chat</button>
+                    </Link>
+                  }
+                  
+                </div>
               );
             }
           )}
-
-         
         </div>
         {/* Date and time schedule section */}
         <section className="my-20  relative">

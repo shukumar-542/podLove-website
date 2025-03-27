@@ -18,8 +18,7 @@ const ChatPage = () => {
   const {id} = useParams();
   const senderId = userId?.data?._id;      
   const receiverId = id; 
-  const chatId = [senderId, receiverId].sort().join("_");
-
+ 
 
 
   const [messages, setMessages] = useState([]);
