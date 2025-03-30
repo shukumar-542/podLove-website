@@ -47,6 +47,7 @@ import OptInPolicy from "./page/OptInPolicy/OptInPolicy.jsx";
 import SubscriptionPlan from "./page/SubscriptionPlan/SubscriptionPlan.jsx";
 import RoomPage from "./page/RoomPage/RoomPage.jsx";
 import ParticipantDetails from "./page/ParticipantDetails/ParticipantDetails.jsx";
+import PrivateRoute from "./component/PrivateRoute/PrivateRoute.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -55,11 +56,13 @@ createRoot(document.getElementById("root")).render(
         <Routes>
           <Route path="/" element={<App />}>
             <Route index element={<Home />} />
-            <Route path="/home" element={<HomePage />} />
+            <Route element={<PrivateRoute />}>
+              <Route path="/home" element={<HomePage />} />
+            </Route>
             <Route path="/about-us" element={<AboutUs />} />
             <Route path="/contact-us" element={<ContactUs />} />
             <Route path="/after-podcast" element={<AfterPodcast />} />
-            <Route path="/subscription-plan" element={<SubscriptionPlan/>} />
+            <Route path="/subscription-plan" element={<SubscriptionPlan />} />
             <Route path="/chat/:id" element={<ChatPage />} />
             <Route path="/feedback-first-step" element={<FeedbackOne />} />
             <Route path="/feedback-second-step" element={<FeedbackSecond />} />
@@ -70,9 +73,12 @@ createRoot(document.getElementById("root")).render(
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-condition" element={<TermsAndCondition />} />
             <Route path="/notification" element={<Notification />} />
-            <Route path="/podcast-details/:id" element={<ParticipantDetails/>}/>
-            <Route path="/opy-in-policy" element={<OptInPolicy/>} />
-            <Route path="/room/:roomId" element={<RoomPage/>} />
+            <Route
+              path="/podcast-details/:id"
+              element={<ParticipantDetails />}
+            />
+            <Route path="/opy-in-policy" element={<OptInPolicy />} />
+            <Route path="/room/:roomId" element={<RoomPage />} />
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/sign-up" element={<SignUp />} />

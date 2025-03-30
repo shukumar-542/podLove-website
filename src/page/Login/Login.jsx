@@ -12,19 +12,22 @@ import { toast } from "sonner";
 const Login = () => {
   const [loginUser] = useLoginUserMutation();
 const navigate = useNavigate()
-  const handleUserLogin = (values) => {
-    console.log(values);
-    loginUser(values)
-      .unwrap()
-      .then((payload) =>{
-        console.log(payload?.data?.accessToken)
-        if(payload?.data?.accessToken){
-          localStorage.setItem("token" , payload?.data?.accessToken)
-          navigate('/home')
-        }
-      })
-      .catch((error) => toast.error(error?.data?.message));
-  };
+const handleUserLogin = async (values) => {
+  console.log(values);
+  
+  try {
+    const payload = await loginUser(values).unwrap();
+    
+    if (payload?.data?.accessToken) {
+      localStorage.setItem("token", payload?.data?.accessToken);
+
+      // Force a re-render
+      window.location.href = "/home"; 
+    }
+  } catch (error) {
+    toast.error(error?.data?.message);
+  }
+};
 
   return (
     <div

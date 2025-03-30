@@ -27,7 +27,10 @@ const NavBar = () => {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex space-x-5">
-          <NavLink to="/home" className="hover:text-[#FFA175]">Home</NavLink>
+          {
+            getUser?.data  && <NavLink to="/home" className="hover:text-[#FFA175]">Home</NavLink>
+          }
+          
           <NavLink to="/about-us" className="hover:text-[#FFA175]">About us</NavLink>
           <NavLink to="/contact-us" className="hover:text-[#FFA175]">Contact us</NavLink>
           <NavLink to="/feedback-first-step" className="hover:text-[#FFA175]">Feedback</NavLink>

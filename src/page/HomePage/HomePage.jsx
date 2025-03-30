@@ -14,7 +14,6 @@ const HomePage = () => {
   const navigate = useNavigate();
   const [createPodCast] = usePodcastCreateMutation();
   const { data: getPodcastDetails } = useGetPodCastDetailsQuery();
-  // console.log(getPodcastDetails?.data?.podcast?.selectedUser);
 
   const handleVideoCall = () => {
     if (!getPodcastDetails?.data?.podcast?._id) {
@@ -27,8 +26,8 @@ const HomePage = () => {
   const handleCreatePodcast = () => {
     createPodCast()
       .unwrap()
-      .then((payload) => console.log("fulfilled", payload))
-      .catch((error) => console.error("rejected", error));
+      .then((payload) => toast.success(payload?.message))
+      .catch((error) => toast.error(error?.data?.message));
   };
 
   return (
@@ -128,10 +127,10 @@ const HomePage = () => {
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 h-auto">
             <img src={mic} alt="Microphone" className="w-24 h-24 mx-auto " />
             <h1 className="text-4xl font-poppins text-white">Date & Time : </h1>
-            <p className="text-white text-center text-xl mt-2">
+            {/* <p className="text-white text-center text-xl mt-2">
               {getPodcastDetails?.data?.podcast?._id &&
                 "12/07/24 (Monday) at 4 PM"}
-            </p>
+            </p> */}
             <button
               disabled={!getPodcastDetails?.data?.podcast?._id}
               onClick={() => handleVideoCall()}
