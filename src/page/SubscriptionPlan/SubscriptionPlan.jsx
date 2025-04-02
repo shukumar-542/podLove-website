@@ -1,8 +1,11 @@
 import React from "react";
 import Pricing from "../../component/Pricing/Pricing";
 import { Link } from "react-router";
+import { useGetPodCastDetailsQuery } from "../../redux/Api/AuthApi";
 
 const SubscriptionPlan = () => {
+    const { data: getPodcastDetails } = useGetPodCastDetailsQuery();
+  
   return (
     <div className="bg-[#F7E8E1]">
       <p className="text-4xl font-bold text-center pt-10">Subscription Plans</p>
@@ -14,7 +17,8 @@ const SubscriptionPlan = () => {
         </Link>
       </div>
       <div className="container mx-auto pb-20">
-        <Pricing />
+
+        <Pricing subscriptions={getPodcastDetails?.data} />
       </div>
     </div>
   );

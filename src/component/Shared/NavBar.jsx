@@ -45,7 +45,7 @@ const NavBar = () => {
             getUser?.data ? <Link to={"/profile"}><img src={getUser?.data?.avatar} className="h-10 shadow-2xl object-cover w-10 rounded-full border border-[#FFA175] cursor-pointer" alt="" /></Link> : <NavLink to="/login" className="hover:text-[#FFA175]">Login</NavLink>
           }
           {
-            !getUser?.data && <button className="bg-[#FFA175] text-white px-4 py-1 rounded">Sign Up Here</button>
+            !getUser?.data && <Link to={"/sign-up"} className="bg-[#FFA175] text-white px-4 py-1 rounded">Sign Up Here</Link>
           } 
           
           
@@ -65,7 +65,7 @@ const NavBar = () => {
           <IoMdNotifications size={24} color="white" />
         </NavLink>
         <NavLink to="/login" onClick={() => setMenuOpen(false)} className="text-xl py-2 mt-2">Login</NavLink>
-        <button className="bg-[#FFA175] text-white px-6 py-2 rounded mt-4" onClick={() => setMenuOpen(false)}>Sign Up Here</button>
+        <NavLink to={"/signup"} className="bg-[#FFA175] text-white px-6 py-2 rounded mt-4" onClick={() => setMenuOpen(false)}>Sign Up Here</NavLink>
       </div>
     </div>
   );
