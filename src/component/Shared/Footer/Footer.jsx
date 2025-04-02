@@ -22,8 +22,16 @@ const Footer = () => {
           </div>
           <div className=" md:mx-auto">
             <h1 className="text-2xl font-bold mb-10">Company Links</h1>
-            <p className="mb-2">About Us</p>
-            <p className="mb-2">Contact Us</p>
+            <p className="mb-1">
+              <Link to={"/about-us"} className="mb-2">
+                About Us
+              </Link>
+            </p>
+            <p className="mb-1">
+              <Link to={"/contact-us"} className="mb-2">
+                Contact Us
+              </Link>
+            </p>
             <p className="mb-2">
               <Link to={"/privacy-policy"}>Privacy Policy</Link>
             </p>
@@ -41,7 +49,6 @@ const Footer = () => {
             <img src={app} className="h-[44px] w-[150px]" alt="" />
             <img src={google} className="h-[44px] w-[150px]" alt="" />
           </div>
-          
         </div>
       </div>
     </div>

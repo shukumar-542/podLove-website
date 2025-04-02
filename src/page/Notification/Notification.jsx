@@ -11,7 +11,7 @@ const Notification = () => {
         <p className="text-2xl font-semibold font-poppins text-center py-10">
           Notifications
         </p>
-        <p className="text-xl font-semibold">Total 128 Notifications</p>
+        <p className="text-xl font-semibold">Total 0 Notifications</p>
 
         <div className="space-y-4 mt-10 pb-10">
           {getNotification?.data?.notifications?.map((notification) => {
