@@ -58,7 +58,7 @@ createRoot(document.getElementById("root")).render(
             <Route index element={<Home />} />
             <Route element={<PrivateRoute />}>
               <Route path="/home" element={<HomePage />} />
-              
+
             </Route>
             <Route path="/about-us" element={<AboutUs />} />
             <Route path="/contact-us" element={<ContactUs />} />
@@ -83,6 +83,7 @@ createRoot(document.getElementById("root")).render(
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/sign-up" element={<SignUp />} />
+          
           <Route path="/verify-otp" element={<Otp />} />
           <Route path="/location" element={<Location />} />
           <Route path="/age" element={<Age />} />

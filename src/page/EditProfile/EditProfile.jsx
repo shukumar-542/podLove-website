@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Form, Input, Upload, Avatar, message } from "antd";
+import { Form, Input, Upload, Avatar, message, Select } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import AuthButton from "../../component/AuthButton/AuthButton";
 import { CameraOutlined } from "@ant-design/icons";
@@ -8,7 +8,7 @@ import {
   useUpdateUserInfoMutation,
 } from "../../redux/Api/AuthApi";
 import { toast } from "sonner";
-
+const { Option } = Select;
 const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/dvjbfwhxe/image/upload";
 const UPLOAD_PRESET = "podlove_upload";
 
@@ -26,8 +26,8 @@ const EditProfile = () => {
         name: getUser?.data?.name,
         contact: getUser?.data?.contact,
         address: getUser?.data?.address || "",
-        gender : getUser?.data?.gender || "",
-        bio : getUser?.data?.bio || ""
+        gender: getUser?.data?.gender || "",
+        bio: getUser?.data?.bio || "",
       });
     }
   }, [form, getUser]);
@@ -54,14 +54,9 @@ const EditProfile = () => {
     return isImage;
   };
 
+  // ======= handle update profile information ===========//
+
   const handleUpdateProfile = async (values) => {
-
-   
-    // if (!file) {
-    //   message.error("Please select an image first.");
-    //   return;
-    // }
-
     setLoading(true);
     const formData = new FormData();
     formData.append("file", file);
@@ -76,29 +71,22 @@ const EditProfile = () => {
       setImageUrl(uploadedImageUrl);
       toast.success("Profile Update successfully!");
 
-
-     
       const updateData = {
-        name : values?.name,
-        phoneNumber : values?.contact,
-        gender :  values?.gender,
-        address :  values?.address,
-        bio : values?.bio,
-        ...(uploadedImageUrl && { avatar: uploadedImageUrl })
-      }
+        name: values?.name,
+        phoneNumber: values?.contact,
+        gender: values?.gender,
+        address: values?.address,
+        bio: values?.bio,
+        ...(uploadedImageUrl && { avatar: uploadedImageUrl }),
+      };
       const result = await editProfile(updateData);
       console.log(result);
-      
     } catch (error) {
       console.error("Upload failed:", error);
       message.error("Failed to upload image.");
     } finally {
       setLoading(false);
     }
-
-    
-
-    console.log(values);
   };
 
   return (
@@ -151,31 +139,43 @@ const EditProfile = () => {
         <Form form={form} layout="vertical" onFinish={handleUpdateProfile}>
           <div className="md:flex  gap-5 w-full ">
             <Form.Item label={"First Name"} name={"name"} className="w-full">
-              <Input placeholder="Enter Your Name" />
+              <Input className="border-[#eb8b73]" placeholder="Enter Your Name" />
             </Form.Item>
             <Form.Item
               name={"contact"}
               label={"Phone Number"}
               className="w-full"
             >
-              <Input placeholder="Enter Your Phone Number" />
+              <Input className="border-[#eb8b73]" placeholder="Enter Your Phone Number" />
             </Form.Item>
           </div>
           <div className="md:flex   gap-5">
             {/* <Form.Item name={'birth'} label={"Date of Birth(MM/DD/YYYY)"} className="w-full">
               <Input placeholder="02/24/2025" />
             </Form.Item> */}
-            <Form.Item label={"Gender"} name={"gender"} className="w-full">
+            {/* <Form.Item label={"Gender"} name={"gender"} className="w-full">
               <Input placeholder="Enter Your gender" />
+            </Form.Item> */}
+
+            <Form.Item label={"Gender"} name={"gender"} className="w-full">
+              <Select placeholder="Select your gender" allowClear>
+                <Option value="female">Female</Option>
+                <Option value="male">Male</Option>
+                <Option value="non-binary">Non-binary</Option>
+                <Option value="transgender">Transgender</Option>
+                <Option value="gender-fluid">Gender Fluid</Option>
+              </Select>
             </Form.Item>
           </div>
           <Form.Item label="Address" name="address">
-            <Input placeholder="Ontario, USA" />
+            <Input className="border-[#eb8b73]" placeholder="Ontario, USA" />
           </Form.Item>
           <Form.Item label="Bio" name="bio">
-            <TextArea placeholder="Type your bio" />
+            <TextArea className="border-[#eb8b73]" placeholder="Type your bio" />
           </Form.Item>
-          <AuthButton className={"py-2"}>{loading ? "Updating..." : "Update"}</AuthButton>
+          <AuthButton className={"py-2"}>
+            {loading ? "Updating..." : "Update"}
+          </AuthButton>
         </Form>
       </div>
     </div>
