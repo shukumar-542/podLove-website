@@ -5,6 +5,7 @@ import img3 from "../../assets/client2.png";
 import img4 from "../../assets/client3.png";
 import { AiFillDislike, AiFillLike } from "react-icons/ai";
 import { Button } from "../Shared/Button/Button";
+import { Link } from "react-router";
 
 const images = [img1, img2, img3, img4];
 
@@ -80,7 +81,7 @@ const SuccessStory = () => {
               </div>
             </div>
             <div className="flex justify-center mt-10">
-              <Button className={'py-1 md:text-[20px]'}>Find your Match</Button>
+              <Button className={'py-1 md:text-[20px]'}><Link to={"/sign-up"}>Find your Match</Link></Button>
             </div>
           </div>
         </div>

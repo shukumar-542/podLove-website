@@ -17,7 +17,7 @@ const NavBar = () => {
         
         {/* Logo */}
         <div>
-          <img className="h-16 " src={img1} alt="Logo" />
+          <NavLink to={"/"}><img className="h-16 " src={img1} alt="Logo" /></NavLink>
         </div>
 
         {/* Mobile Menu Button */}

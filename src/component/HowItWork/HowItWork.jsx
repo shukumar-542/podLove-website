@@ -5,6 +5,7 @@ import step3 from "../../assets/step3.png";
 import step4 from "../../assets/step4.png";
 import step5 from "../../assets/t.png";
 import { Button } from "../Shared/Button/Button";
+import { Link } from "react-router";
 const HowItWork = () => {
   return (
     <div className="p-4 md:px-0">
@@ -90,7 +91,7 @@ const HowItWork = () => {
           </div>
         </section>
         <div className="mt-10 flex justify-center">
-            <Button className={'py-2'}>Find Your Match</Button>
+            <Button className={'py-2'}><Link to={"/sign-up"}>Find your Match</Link></Button>
         </div>
       </div>
     </div>

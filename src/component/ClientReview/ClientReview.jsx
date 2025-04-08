@@ -5,6 +5,7 @@ import img from "../../assets/quote.png";
 import img1 from "../../assets/quote1.png";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import { IoStar } from "react-icons/io5";
+import { Link } from "react-router";
 
 const CustomArrow = ({ type, onClick }) => {
   return (
@@ -30,7 +31,7 @@ const ClientReview = () => {
           one place."
         </p>
         <div className="flex justify-center my-10">
-          <Button className={"py-2"}>Find Your Match</Button>
+          <Button className={"py-2"}>F<Link to={"/sign-up"}>Find your Match</Link></Button>
         </div>
 
         <div>

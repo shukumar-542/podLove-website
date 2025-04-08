@@ -21,6 +21,7 @@ const SubscriptionPlan = () => {
         <Pricing subscriptions={getPodcastDetails?.data} />
       </div>
     </div>
+    
   );
 };
 

@@ -1,6 +1,7 @@
 import React from 'react'
 import video from '../../assets/videoPlayback.mp4'
 import { Button } from '../Shared/Button/Button'
+import { Link } from 'react-router'
 const HeroSection = () => {
   return (
     <section className="relative w-full md:h-[80vh] flex items-center justify-center">
@@ -24,7 +25,7 @@ const HeroSection = () => {
       <p className='text-2xl md:text-4xl pb-10'>Ready for love?</p>
       {/* <p className="mt-4 md:text-[32px] font-poppins mb-10 max-w-[550px] text-[#FEFEFE] mx-auto">Join a space where love is honest and meaningful. 
       Ready for love?</p> */}
-      <Button className={'text-[30px] py-3 px-6'}>Find your Match</Button>
+      <Button className={'text-[30px] py-3 px-6'}><Link to={"/sign-up"}>Find your Match</Link></Button>
     </div>
 
     {/* Overlay (Optional for readability) */}
