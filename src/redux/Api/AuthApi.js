@@ -28,6 +28,7 @@ const authApi = baseApi.injectEndpoints({
           body: data,
         };
       },
+      invalidatesTags : ['profile']
     }),
     podcastCreate :  builder.mutation({
         query : ()=>{
@@ -43,7 +44,8 @@ const authApi = baseApi.injectEndpoints({
                 url : '/user',
                 method : "GET"
             }
-        }
+        },
+        providesTags : ['profile']
     }),
     loginUser :  builder.mutation({
       query  : (data)=>{

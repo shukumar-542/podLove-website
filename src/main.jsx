@@ -58,6 +58,7 @@ createRoot(document.getElementById("root")).render(
             <Route index element={<Home />} />
             <Route element={<PrivateRoute />}>
               <Route path="/home" element={<HomePage />} />
+              
             </Route>
             <Route path="/about-us" element={<AboutUs />} />
             <Route path="/contact-us" element={<ContactUs />} />
