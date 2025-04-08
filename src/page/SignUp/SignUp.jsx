@@ -7,20 +7,20 @@ import AuthButton from "../../component/AuthButton/AuthButton";
 import { useSignUpMutation } from "../../redux/Api/AuthApi";
 import { toast } from "sonner";
 const SignUp = () => {
-  const [singUp , {isLoading}] = useSignUpMutation();
-const navigate = useNavigate()
+  const [singUp, { isLoading }] = useSignUpMutation();
+  const navigate = useNavigate();
   // ----Handle signup function------//
   const handleSignUp = (values) => {
-    if(values?.password !== values?.confirmPassword){
-      return toast.error("Password does not match!")
+    if (values?.password !== values?.confirmPassword) {
+      return toast.error("Password does not match!");
     }
 
     singUp(values)
       .unwrap()
       .then((payload) => {
-        localStorage.setItem("email" , values.email)
-        toast.success(payload.message)
-        navigate("/verify-otp")
+        localStorage.setItem("email", values.email);
+        toast.success(payload.message);
+        navigate("/verify-otp");
       })
       .catch((error) => toast.error(error?.data?.message));
   };
@@ -45,34 +45,113 @@ const navigate = useNavigate()
           <div className="flex items-center justify-between gap-10">
             <div className="w-[250px] md:w-[450px] ">
               <Form layout="vertical" onFinish={handleSignUp}>
-                <Form.Item label={"Name"} name={"name"}>
+                {/* Name */}
+                <Form.Item
+                  label="Name"
+                  name="name"
+                  rules={[
+                    { required: true, message: "Please enter your name" },
+                  ]}
+                >
                   <Input placeholder="Enter your name here" />
                 </Form.Item>
-                <Form.Item label={"Email"} name={"email"}>
+
+                {/* Email */}
+                <Form.Item
+                  label="Email"
+                  name="email"
+                  rules={[
+                    { required: true, message: "Please enter your email" },
+                    {
+                      type: "email",
+                      message: "Please enter a valid email address",
+                    },
+                  ]}
+                >
                   <Input placeholder="Enter your email here" />
                 </Form.Item>
-                <Form.Item label={"Phone Number"} name="phoneNumber">
+
+                {/* Phone Number */}
+                <Form.Item
+                  label="Phone Number"
+                  name="phoneNumber"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please enter your phone number",
+                    },
+                  ]}
+                >
                   <Input placeholder="Enter your number here" />
                 </Form.Item>
-                {/* <Form.Item label={"Address (optional)"}>
-                          <Input placeholder="Enter your address here"/>
-                      </Form.Item> */}
-                <Form.Item label={"Password"} name={"password"}>
+
+                {/* Password */}
+                <Form.Item
+                  label="Password"
+                  name="password"
+                  rules={[
+                    { required: true, message: "Please enter a password" },
+                    {
+                      pattern: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+                      message:
+                        "Password must be at least 8 characters and contain both letters and numbers",
+                    },
+                  ]}
+                >
                   <Password placeholder="******" />
                 </Form.Item>
-                <Form.Item label={"Confirm Password"} name="confirmPassword">
+
+                {/* Confirm Password */}
+                <Form.Item
+                  label="Confirm Password"
+                  name="confirmPassword"
+                  dependencies={["password"]}
+                  rules={[
+                    { required: true, message: "Please confirm your password" },
+                    ({ getFieldValue }) => ({
+                      validator(_, value) {
+                        if (!value || getFieldValue("password") === value) {
+                          return Promise.resolve();
+                        }
+                        return Promise.reject(
+                          new Error("Passwords do not match")
+                        );
+                      },
+                    }),
+                  ]}
+                >
                   <Password placeholder="******" />
                 </Form.Item>
+
+                {/* Terms and Conditions */}
                 <div className="flex justify-between items-center mb-3">
-                  <p>
-                    {" "}
-                    <Checkbox /> I agree with the terms and condition
-                  </p>
+                  <Form.Item
+                    name="agreement"
+                    valuePropName="checked"
+                    rules={[
+                      {
+                        validator: (_, value) =>
+                          value
+                            ? Promise.resolve()
+                            : Promise.reject(
+                                new Error("You must agree to the terms")
+                              ),
+                      },
+                    ]}
+                  >
+                    <Checkbox>I agree with the terms and condition</Checkbox>
+                  </Form.Item>
                 </div>
-                <AuthButton disabled={isLoading} className="bg-[#F68064] text-white w-full rounded-md py-2 text-xl shadow-md">
-                  {isLoading ?  <Spin/> :  "Sign Up"}
+
+                {/* Submit Button */}
+                <AuthButton
+                  disabled={isLoading}
+                  className="bg-[#F68064] text-white w-full rounded-md py-2 text-xl shadow-md"
+                >
+                  {isLoading ? <Spin /> : "Sign Up"}
                 </AuthButton>
               </Form>
+
               <p className="text-[#767676] text-center mt-2">
                 Already have an account?{" "}
                 <NavLink to={"/login"} className="text-[#F68064]">
