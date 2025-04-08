@@ -171,7 +171,7 @@ const EditProfile = () => {
             <Input className="border-[#eb8b73]" placeholder="Ontario, USA" />
           </Form.Item>
           <Form.Item label="Bio" name="bio">
-            <TextArea className="border-[#eb8b73]" placeholder="Type your bio" />
+            <TextArea className="border-[#eb8b73]" rows={7} placeholder="Type your bio" />
           </Form.Item>
           <AuthButton className={"py-2"}>
             {loading ? "Updating..." : "Update"}

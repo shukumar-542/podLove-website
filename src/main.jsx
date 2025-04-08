@@ -48,71 +48,78 @@ import SubscriptionPlan from "./page/SubscriptionPlan/SubscriptionPlan.jsx";
 import RoomPage from "./page/RoomPage/RoomPage.jsx";
 import ParticipantDetails from "./page/ParticipantDetails/ParticipantDetails.jsx";
 import PrivateRoute from "./component/PrivateRoute/PrivateRoute.jsx";
-
+import { GoogleOAuthProvider } from "@react-oauth/google";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Provider store={store}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<App />}>
-            <Route index element={<Home />} />
-            <Route element={<PrivateRoute />}>
-              <Route path="/home" element={<HomePage />} />
-
+      <GoogleOAuthProvider clientId="428822266422-tmspu533cnr7q6pgs3cljo01pmfjvrdq.apps.googleusercontent.com">
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<App />}>
+              <Route index element={<Home />} />
+              <Route element={<PrivateRoute />}>
+                <Route path="/home" element={<HomePage />} />
+              </Route>
+              <Route path="/about-us" element={<AboutUs />} />
+              <Route path="/contact-us" element={<ContactUs />} />
+              <Route path="/after-podcast" element={<AfterPodcast />} />
+              <Route path="/subscription-plan" element={<SubscriptionPlan />} />
+              <Route path="/chat/:id" element={<ChatPage />} />
+              <Route path="/feedback-first-step" element={<FeedbackOne />} />
+              <Route
+                path="/feedback-second-step"
+                element={<FeedbackSecond />}
+              />
+              <Route path="/feedback-third-step" element={<FeedbackThird />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/edit-profile" element={<EditProfile />} />
+              <Route path="/change-password" element={<ChangePassword />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/terms-condition" element={<TermsAndCondition />} />
+              <Route path="/notification" element={<Notification />} />
+              <Route
+                path="/podcast-details/:id"
+                element={<ParticipantDetails />}
+              />
+              <Route path="/opy-in-policy" element={<OptInPolicy />} />
+              <Route path="/room/:roomId" element={<RoomPage />} />
             </Route>
-            <Route path="/about-us" element={<AboutUs />} />
-            <Route path="/contact-us" element={<ContactUs />} />
-            <Route path="/after-podcast" element={<AfterPodcast />} />
-            <Route path="/subscription-plan" element={<SubscriptionPlan />} />
-            <Route path="/chat/:id" element={<ChatPage />} />
-            <Route path="/feedback-first-step" element={<FeedbackOne />} />
-            <Route path="/feedback-second-step" element={<FeedbackSecond />} />
-            <Route path="/feedback-third-step" element={<FeedbackThird />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/edit-profile" element={<EditProfile />} />
-            <Route path="/change-password" element={<ChangePassword />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-            <Route path="/terms-condition" element={<TermsAndCondition />} />
-            <Route path="/notification" element={<Notification />} />
-            <Route
-              path="/podcast-details/:id"
-              element={<ParticipantDetails />}
-            />
-            <Route path="/opy-in-policy" element={<OptInPolicy />} />
-            <Route path="/room/:roomId" element={<RoomPage />} />
-          </Route>
-          <Route path="/login" element={<Login />} />
-          <Route path="/sign-up" element={<SignUp />} />
-          
-          <Route path="/verify-otp" element={<Otp />} />
-          <Route path="/location" element={<Location />} />
-          <Route path="/age" element={<Age />} />
-          <Route path="/gender" element={<Gender />} />
-          <Route path="/body" element={<Body />} />
-          <Route path="/ethnicity" element={<Ethnicity />} />
-          <Route path="/bio" element={<Bio />} />
-          <Route path="/upload-photo" element={<UploadPhoto />} />
-          <Route
-            path="/discover-compatibility"
-            element={<DiscoverCompatibility />}
-          />
-          <Route
-            path="/discover-compatibility-part"
-            element={<DiscoverCompatibilitySecond />}
-          />
-          <Route path="/rating-yourself" element={<RatingYourSelf />} />
-          <Route path="/interest" element={<Interest />} />
-          <Route path="/connection-progress" element={<ConnectionProgress />} />
-          <Route path="/congratulation" element={<Congratulation />} />
-          <Route path="/match-result" element={<MatchResult />} />
-          <Route path="/match-bio" element={<MatchBio />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/sign-up" element={<SignUp />} />
 
-          <Route path="/forget-password" element={<ForgetPassword />} />
-          <Route path="/verify-forget-otp" element={<VerifyEmail />} />
-          <Route path="/set-new-password" element={<SetNewPassword />} />
-        </Routes>
-      </BrowserRouter>
-      <Toaster position="top-right" richColors />
+            <Route path="/verify-otp" element={<Otp />} />
+            <Route path="/location" element={<Location />} />
+            <Route path="/age" element={<Age />} />
+            <Route path="/gender" element={<Gender />} />
+            <Route path="/body" element={<Body />} />
+            <Route path="/ethnicity" element={<Ethnicity />} />
+            <Route path="/bio" element={<Bio />} />
+            <Route path="/upload-photo" element={<UploadPhoto />} />
+            <Route
+              path="/discover-compatibility"
+              element={<DiscoverCompatibility />}
+            />
+            <Route
+              path="/discover-compatibility-part"
+              element={<DiscoverCompatibilitySecond />}
+            />
+            <Route path="/rating-yourself" element={<RatingYourSelf />} />
+            <Route path="/interest" element={<Interest />} />
+            <Route
+              path="/connection-progress"
+              element={<ConnectionProgress />}
+            />
+            <Route path="/congratulation" element={<Congratulation />} />
+            <Route path="/match-result" element={<MatchResult />} />
+            <Route path="/match-bio" element={<MatchBio />} />
+
+            <Route path="/forget-password" element={<ForgetPassword />} />
+            <Route path="/verify-forget-otp" element={<VerifyEmail />} />
+            <Route path="/set-new-password" element={<SetNewPassword />} />
+          </Routes>
+        </BrowserRouter>
+        <Toaster position="top-right" richColors />
+      </GoogleOAuthProvider>
     </Provider>
   </StrictMode>
 );

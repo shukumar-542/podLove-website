@@ -72,7 +72,7 @@ const Profile = () => {
             >
               Bio:
             </p>
-            <p className="bg-[#FFE2D4] max-w-md p-2 mt-2 rounded-md shadow-lg">
+            <p className="bg-[#FFE2D4] max-w-md p-2 mt-2 rounded-md shadow-lg h-32 overflow-y-auto">
             {getUser?.data?.bio}
             </p>
           </div>

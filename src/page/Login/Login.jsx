@@ -8,26 +8,34 @@ import { FaApple } from "react-icons/fa";
 import AuthButton from "../../component/AuthButton/AuthButton";
 import { useLoginUserMutation } from "../../redux/Api/AuthApi";
 import { toast } from "sonner";
-
+import { GoogleLogin } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
 const Login = () => {
   const [loginUser] = useLoginUserMutation();
-const navigate = useNavigate()
-const handleUserLogin = async (values) => {
-  console.log(values);
-  
-  try {
-    const payload = await loginUser(values).unwrap();
-    
-    if (payload?.data?.accessToken) {
-      localStorage.setItem("token", payload?.data?.accessToken);
+  const navigate = useNavigate();
+  const handleUserLogin = async (values) => {
+    try {
+      const payload = await loginUser(values).unwrap();
 
-      // Force a re-render
-      window.location.href = "/home"; 
+      if (payload?.data?.accessToken) {
+        localStorage.setItem("token", payload?.data?.accessToken);
+
+        // Force a re-render
+        window.location.href = "/home";
+      }
+    } catch (error) {
+      toast.error(error?.data?.message);
     }
-  } catch (error) {
-    toast.error(error?.data?.message);
-  }
-};
+  };
+
+
+  const handleLoginSuccess = (credentialResponse) => {
+    const decoded = jwtDecode(credentialResponse.credential);
+    console.log(decoded);
+    // console.log("Decoded Google User Info:", decoded);
+    // Store in localStorage or dispatch to Redux
+
+  };
 
   return (
     <div
@@ -77,10 +85,16 @@ const handleUserLogin = async (values) => {
             >
               Or
             </Divider>
-            <button className="border w-full mt-5 border-[#F68064] py-2 rounded-md text-[#767676] flex items-center justify-center gap-2">
+            {/* <button className="border w-full mt-5 border-[#F68064] py-2 rounded-md text-[#767676] flex items-center justify-center gap-2">
               <FcGoogle size={25} />
               Continue with Google
-            </button>
+            </button> */}
+            <GoogleLogin
+              onSuccess={handleLoginSuccess}
+              onError={() => {
+                console.log("Login Failed");
+              }}
+            />
             <button className="border w-full mt-5 border-[#F68064] py-2 rounded-md text-[#767676] flex items-center justify-center gap-2">
               <FaApple size={25} />
               Continue with apple
