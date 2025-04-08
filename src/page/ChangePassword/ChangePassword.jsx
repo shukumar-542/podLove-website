@@ -10,8 +10,8 @@ const ChangePassword = () => {
   const handleChangePassword = (values) => {
     console.log(values);
     const data = {
-      ...values
-    }
+      ...values,
+    };
 
     changePassword(data)
       .unwrap()
@@ -36,15 +36,55 @@ const ChangePassword = () => {
           layout="vertical"
           className="mt-10 px-20"
         >
-          <Form.Item label="Current Password" name={"password"}>
+          {/* Current Password */}
+          <Form.Item
+            label="Current Password"
+            name="password"
+            rules={[
+              { required: true, message: "Please enter your current password" },
+            ]}
+          >
             <Password placeholder="*********" className="bg-[#FAF2EF]" />
           </Form.Item>
-          <Form.Item label="New Password" name={"newPassword"}>
+
+          {/* New Password */}
+          <Form.Item
+            label="New Password"
+            name="newPassword"
+            rules={[
+              { required: true, message: "Please enter a new password" },
+              {
+                pattern: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+                message:
+                  "Password must be at least 8 characters and contain both letters and numbers",
+              },
+            ]}
+          >
             <Password placeholder="*********" className="bg-[#FAF2EF]" />
           </Form.Item>
-          <Form.Item label="New Password" name={"confirmPassword"}>
+
+          {/* Confirm Password */}
+          <Form.Item
+            label="Confirm Password"
+            name="confirmPassword"
+            dependencies={["newPassword"]}
+            rules={[
+              { required: true, message: "Please confirm your new password" },
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  if (!value || getFieldValue("newPassword") === value) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject(
+                    new Error("The two passwords do not match")
+                  );
+                },
+              }),
+            ]}
+          >
             <Password placeholder="*********" className="bg-[#FAF2EF]" />
           </Form.Item>
+
           <div className="max-w-md text-center mx-auto">
             <AuthButton className={"py-2"}>Update</AuthButton>
           </div>
