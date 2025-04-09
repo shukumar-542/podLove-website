@@ -4,7 +4,7 @@ import { useGetNotificationQuery } from "../../redux/Api/SubscriptionPlan";
 
 const Notification = () => {
   const { data: getNotification } = useGetNotificationQuery();
-  console.log(getNotification?.data?.notifications);
+  // console.log(getNotification?.data?.notifications);
   return (
     <div className="bg-[#FAF2EF] min-h-screen">
       <div className="container mx-auto">

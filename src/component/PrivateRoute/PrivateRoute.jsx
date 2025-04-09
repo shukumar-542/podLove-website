@@ -3,8 +3,10 @@ import { useGetUserQuery } from "../../redux/Api/AuthApi";
 
 const PrivateRoute = () => {
     const { data: user, isLoading } = useGetUserQuery();
-    const isAuthenticated = user?.data?.email;
+    const isAuthenticated = user?.data;
 
+
+    // console.log(user?.data);
     if (isLoading) return null; 
 
     return isAuthenticated ? <Outlet /> : <Navigate to="/login" replace />;

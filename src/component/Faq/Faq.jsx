@@ -7,23 +7,7 @@ import { useGetFaqQuery } from "../../redux/Api/SubscriptionPlan";
 
 const { Panel } = Collapse;
 
-const items = [
-  {
-    key: "1",
-    label: "What Is Included In Your Break/Fix Services?",
-    content: "Details about Break/Fix Services...",
-  },
-  {
-    key: "2",
-    label: "Do You Offer Remote IT Support?",
-    content: "Details about Remote IT Support...",
-  },
-  {
-    key: "3",
-    label: "How Soon Can You Deliver Network Migration Services?",
-    content: "Details about Network Migration Services...",
-  },
-];
+
 
 const Faq = () => {
 

@@ -52,7 +52,7 @@ const ChatPage = () => {
         message: input,
         senderId,
         receiverId,
-        participants: [senderId, receiverId], // ✅ so we can filter with array-contains
+        participants: [senderId, receiverId], 
         timestamp: serverTimestamp(),
       });
       setInput("");

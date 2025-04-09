@@ -1,11 +1,14 @@
 import { ZegoUIKitPrebuilt } from '@zegocloud/zego-uikit-prebuilt';
 import React, { useEffect, useRef } from 'react';
 import { useParams } from 'react-router';
+import { useGetUserQuery } from '../../redux/Api/AuthApi';
 
 const RoomPage = () => {
+    const {data :  getProfile} =  useGetUserQuery();
     const { roomId } = useParams();
     const videoContainerRef = useRef(null);
     const zpRef = useRef(null); 
+
 
     const myMeeting = async () => {
         const appID = 1059905830;
@@ -30,8 +33,8 @@ const RoomPage = () => {
                 appID,
                 serverSecret,
                 roomId,
-                Date.now().toString(), // Unique user ID
-                "Guest" // Default username, update as needed
+                Date.now().toString(), 
+                `${getProfile?.data?.name}`
             );
 
             // Prevent duplicate room joins
@@ -70,7 +73,7 @@ const RoomPage = () => {
                 zpRef.current = null;
             }
         };
-    }, [roomId]); // Reacts to room ID changes
+    }, [roomId]); 
 
     return <div ref={videoContainerRef} style={{ width: '100%', height: '100vh' }}></div>;
 };
