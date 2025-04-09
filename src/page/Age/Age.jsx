@@ -1,15 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import bg from "../../assets/age-bg.png";
 import AuthButton from "../../component/AuthButton/AuthButton";
 import { Link, useNavigate } from "react-router";
-import { Form, Select } from "antd";
+import { DatePicker, Form, Select } from "antd";
 import { useUpdateUserInfoMutation } from "../../redux/Api/AuthApi";
 import { toast } from "sonner";
-
+import dayjs from 'dayjs'
 const ageOptions = Array.from({ length: 21 }, (_, i) => i + 35);
 const Age = () => {
   const navigate = useNavigate();
   const [updateAge] = useUpdateUserInfoMutation();
+  const [date , setDate] = useState("")
+
+  const onChange = (dateString) => {
+    const [year, month, day] = dateString.split("-");
+    const formattedDate = `${day}/${month}/${year}`;
+    setDate(formattedDate);
+  };
+
 
   // handle update age function
   const handleAge = (values) => {
@@ -20,7 +28,7 @@ const Age = () => {
           max: values?.max,
         },
       },
-      age: values?.age,
+      dateOfBirth: date,
     };
     updateAge(data)
       .unwrap()
@@ -62,13 +70,14 @@ const Age = () => {
               name={"age"}
               label={<p className="font-medium">Your Age</p>}
             >
-              <Select placeholder="Select your age">
+              <DatePicker className="w-full border-red-300" format="DD/MM/YYYY" onChange={onChange}  />
+              {/* <Select placeholder="Select your age">
                 {ageOptions.map((age) => (
                   <Option key={age} value={age}>
                     {age}
                   </Option>
                 ))}
-              </Select>
+              </Select> */}
             </Form.Item>
             <p className="font-medium">Preferred Age</p>
             <div className="flex justify-between items-center gap-5 mt-2">
