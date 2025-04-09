@@ -8,7 +8,7 @@ import { Link } from "react-router";
 import { useGetUserQuery } from "../../redux/Api/AuthApi";
 const Profile = () => {
     const { data :  getUser} = useGetUserQuery()
-    console.log(getUser?.data);
+    console.log(getUser?.data?.phoneNumber);
   
   return (
     <div
@@ -34,11 +34,11 @@ const Profile = () => {
             />
             <p className="mt-3 flex  items-center gap-1 text-[#6B4431]">
               <IoCalendarOutline />
-              {getUser?.data?.joind?.split("T")[0]}
+              {getUser?.data?.createdAt?.split("T")[0]?.split("-")?.reverse()?.join("-")}
             </p>
             <p className="flex mt-1 items-center gap-1 text-[#6B4431]">
               <CiLocationOn color="#6B4431" />
-              {getUser?.data?.address || "N/A"}
+              {getUser?.data?.location?.place || "N/A"}
             </p>
           </div>
           <div>
@@ -63,7 +63,7 @@ const Profile = () => {
               </p>
               <p className="flex justify-between gap-20">
                 <span>Phone</span>{" "}
-                <span className="text-[#767676]">{getUser?.data?.contact}</span>
+                <span className="text-[#767676]">{getUser?.data?.phoneNumber}</span>
               </p>
             </div>
             <p

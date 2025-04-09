@@ -8,6 +8,7 @@ import {
   useUpdateUserInfoMutation,
 } from "../../redux/Api/AuthApi";
 import { toast } from "sonner";
+import LocationSearch from "../../component/LocationSearch/LocationSearch";
 const { Option } = Select;
 const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/dvjbfwhxe/image/upload";
 const UPLOAD_PRESET = "podlove_upload";
@@ -19,13 +20,16 @@ const EditProfile = () => {
   const [form] = Form.useForm();
   const [imageUrl, setImageUrl] = useState(null);
   const { data: getUser } = useGetUserQuery();
+  const [selectedLocation, setSelectedLocation] = useState(null);
 
+
+  console.log(selectedLocation);
   useEffect(() => {
     if (getUser) {
       form.setFieldsValue({
         name: getUser?.data?.name,
-        contact: getUser?.data?.contact,
-        address: getUser?.data?.address || "",
+        contact: getUser?.data?.phoneNumber,
+        address: getUser?.data?.location?.place || "",
         gender: getUser?.data?.gender || "",
         bio: getUser?.data?.bio || "",
       });
@@ -75,7 +79,11 @@ const EditProfile = () => {
         name: values?.name,
         phoneNumber: values?.contact,
         gender: values?.gender,
-        address: values?.address,
+        location: {
+          place: selectedLocation?.address,
+          longitude: selectedLocation?.lng,
+          latitude: selectedLocation?.lat,
+        },
         bio: values?.bio,
         ...(uploadedImageUrl && { avatar: uploadedImageUrl }),
       };
@@ -111,51 +119,28 @@ const EditProfile = () => {
             />
           </Upload>
 
-          {/* <Upload
-                        showUploadList={false}
-                        beforeUpload={(file) => {
-                          handleFileSelect({ file });
-                          return false; 
-                        }}
-                        className="w-full"
-                      >
-                        <div className="border-2 border-dashed border-red-300 mb-10 rounded-md p-6 flex justify-center items-center md:w-[560px] h-56 cursor-pointer">
-                          {loading ? (
-                            <p className="text-red-400">Uploading...</p>
-                          ) : imageUrl ? (
-                            <img
-                              src={imageUrl}
-                              alt="Uploaded"
-                              className="w-full h-full object-contain rounded-md"
-                            />
-                          ) : (
-                            <div className="text-red-400 flex items-center">
-                              <CameraOutlined className="text-4xl" />
-                            </div>
-                          )}
-                        </div>
-                      </Upload> */}
         </div>
         <Form form={form} layout="vertical" onFinish={handleUpdateProfile}>
           <div className="md:flex  gap-5 w-full ">
             <Form.Item label={"First Name"} name={"name"} className="w-full">
-              <Input className="border-[#eb8b73]" placeholder="Enter Your Name" />
+              <Input
+                className="border-[#eb8b73]"
+                placeholder="Enter Your Name"
+              />
             </Form.Item>
             <Form.Item
               name={"contact"}
               label={"Phone Number"}
               className="w-full"
             >
-              <Input className="border-[#eb8b73]" placeholder="Enter Your Phone Number" />
+              <Input
+                className="border-[#eb8b73]"
+                placeholder="Enter Your Phone Number"
+              />
             </Form.Item>
           </div>
           <div className="md:flex   gap-5">
-            {/* <Form.Item name={'birth'} label={"Date of Birth(MM/DD/YYYY)"} className="w-full">
-              <Input placeholder="02/24/2025" />
-            </Form.Item> */}
-            {/* <Form.Item label={"Gender"} name={"gender"} className="w-full">
-              <Input placeholder="Enter Your gender" />
-            </Form.Item> */}
+           
 
             <Form.Item label={"Gender"} name={"gender"} className="w-full">
               <Select placeholder="Select your gender" allowClear>
@@ -168,10 +153,14 @@ const EditProfile = () => {
             </Form.Item>
           </div>
           <Form.Item label="Address" name="address">
-            <Input className="border-[#eb8b73]" placeholder="Ontario, USA" />
+            <LocationSearch onSelectLocation={setSelectedLocation}  defaultAddress={getUser?.data?.location?.place || ""} />
           </Form.Item>
           <Form.Item label="Bio" name="bio">
-            <TextArea className="border-[#eb8b73]" rows={7} placeholder="Type your bio" />
+            <TextArea
+              className="border-[#eb8b73]"
+              rows={7}
+              placeholder="Type your bio"
+            />
           </Form.Item>
           <AuthButton className={"py-2"}>
             {loading ? "Updating..." : "Update"}
