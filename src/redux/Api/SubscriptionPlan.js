@@ -44,8 +44,16 @@ const subscriptionPlan = baseApi.injectEndpoints({
                     body : data
                 }
             }
+        }),
+        getFaq :  builder.query({
+            query : ()=>{
+                return{
+                    url : '/faq',
+                    method : 'GET'
+                }
+            }
         })
     })
 })
 
-export const { useGetAllPlanQuery , useUpgradeSubscriptionPlanMutation , useCreateSurveyMutation  , useGetNotificationQuery , useCreateContactUsMutation} = subscriptionPlan;
+export const { useGetAllPlanQuery , useUpgradeSubscriptionPlanMutation , useCreateSurveyMutation  , useGetNotificationQuery , useCreateContactUsMutation , useGetFaqQuery} = subscriptionPlan;

@@ -3,6 +3,7 @@ import img from "../../assets/bg.png";
 import { Collapse } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import { IoArrowDownOutline } from "react-icons/io5";
+import { useGetFaqQuery } from "../../redux/Api/SubscriptionPlan";
 
 const { Panel } = Collapse;
 
@@ -25,6 +26,8 @@ const items = [
 ];
 
 const Faq = () => {
+
+  const {data : getFaq} = useGetFaqQuery()
   return (
     <div style={{ backgroundImage: `url(${img})` }} className="py-10">
       <div className="text-center">
@@ -44,15 +47,15 @@ const Faq = () => {
               />
             )}
           >
-            {items.map((item) => (
+            {getFaq?.data.map((item) => (
               <Panel
                 header={
-                  <span className="text-lg font-medium">{item.label}</span>
+                  <span className="text-lg font-medium">{item.question}</span>
                 }
                 key={item.key}
                 className="" 
               >
-                <p className="my-2 text-gray-600">{item.content}</p>{" "}
+                <p className="my-2 text-gray-600">{item.answer}</p>{" "}
                 
               </Panel>
             ))}
