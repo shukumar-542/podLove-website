@@ -3,22 +3,25 @@ import img from "../../assets/bg.png";
 import client1 from "../../assets/find1.png";
 import client2 from "../../assets/find2.png";
 import client3 from "../../assets/find3.png";
+import client4 from "../../assets/x.png";
+import client5 from "../../assets/y.png";
+import client6 from "../../assets/z.png";
 
 const FindVoiceMatch = () => {
   const data = [
     {
-      img: client1,
+      img: client4,
       title: "Fastest  Match",
       des: "Get your podlove in less than an hour! That’s as fast as it can get.",
       
     },
     {
-      img: client2,
+      img: client5,
       title: "So Much to Choose From",
       des: "Find your favorite among the thousands of people in our Web.",
     },
     {
-      img: client3,
+      img: client6,
       title: "Best Choose In Word!",
       des: "Get the choose and comobs at the best match anly at Podlove!",
     },
@@ -37,10 +40,10 @@ const FindVoiceMatch = () => {
           {data?.map((user, i) => {
             return (
               <div className=" mx-auto">
-                <div className="py-10 ">
+                <div className="py-10 rounded-md">
                   <img
                     src={user?.img}
-                    className="max-h-[374px] w-[374px] rounded-2xl  mx-auto "
+                    className="max-h-[374px]  rounded-2xl  mx-auto "
                 
                     alt=""
                   />

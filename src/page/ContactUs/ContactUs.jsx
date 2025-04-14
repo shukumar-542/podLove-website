@@ -56,7 +56,7 @@ const ContactUs = () => {
           </Form>
         </div>
         <div>
-              <img src={about} alt="" />
+              <img src={about} className='rounded-md' alt="" />
         </div>
       </div>
     </div>

@@ -1,9 +1,9 @@
 import React from "react";
-import step1 from "../../assets/step1.png";
+import step1 from "../../assets/step11.png";
 import step2 from "../../assets/step2.png";
 import step3 from "../../assets/step3.png";
 import step4 from "../../assets/step4.png";
-import step5 from "../../assets/t.png";
+import step5 from "../../assets/tt.png";
 import { Button } from "../Shared/Button/Button";
 import { Link } from "react-router";
 const HowItWork = () => {
@@ -26,7 +26,7 @@ const HowItWork = () => {
               <img
                 src={step1}
                 alt=""
-                className="bg-[#FFE2D4] shadow-xl p-2 rounded-full absolute top-[-25px]"
+                className="bg-[#FFE2D4] shadow-xl p-1 rounded-full absolute top-[-25px]"
               />
               <p className="text-[#E84B3C] font-bold text-2xl flex justify-end">
                 01
@@ -77,7 +77,7 @@ const HowItWork = () => {
               <img
                 src={step5}
                 alt=""
-                className="bg-[#FFE2D4]  shadow-xl p-2 rounded-full absolute top-[-25px]"
+                className="bg-[#FFE2D4]  shadow-xl p-1 px-2 rounded-full absolute top-[-25px]"
               />
               <p className="text-[#18BB9B] font-bold text-2xl flex justify-end">
                 04
