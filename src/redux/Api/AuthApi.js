@@ -72,6 +72,15 @@ const authApi = baseApi.injectEndpoints({
           method : 'GET'
         }
       }
+    }),
+    googleLogin :  builder.mutation({
+      query : (data)=>{
+        return {
+          url : '/auth/sign-in-with-google',
+          method : 'POST',
+          body : data
+        }
+      }
     })
   }),
 });
@@ -84,5 +93,6 @@ export const {
   useGetUserQuery,
   useLoginUserMutation,
   useGetPodCastDetailsQuery,
-  useChangePasswordMutation
+  useChangePasswordMutation,
+  useGoogleLoginMutation
 } = authApi;

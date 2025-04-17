@@ -24,6 +24,7 @@ const Interest = () => {
     const handleInterest = ()=>{
       const data = {
         interests: selected,
+        isProfileComplete : true
       };
   
       updateInterest(data)

@@ -6,12 +6,16 @@ import { FcGoogle } from "react-icons/fc";
 import { Link, NavLink, useNavigate } from "react-router";
 import { FaApple } from "react-icons/fa";
 import AuthButton from "../../component/AuthButton/AuthButton";
-import { useLoginUserMutation } from "../../redux/Api/AuthApi";
+import {
+  useGoogleLoginMutation,
+  useLoginUserMutation,
+} from "../../redux/Api/AuthApi";
 import { toast } from "sonner";
 import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
 const Login = () => {
   const [loginUser] = useLoginUserMutation();
+  const [googleLogin] = useGoogleLoginMutation();
   const navigate = useNavigate();
   const handleUserLogin = async (values) => {
     try {
@@ -28,13 +32,28 @@ const Login = () => {
     }
   };
 
-
   const handleLoginSuccess = (credentialResponse) => {
     const decoded = jwtDecode(credentialResponse.credential);
-    console.log(decoded);
-    // console.log("Decoded Google User Info:", decoded);
-    // Store in localStorage or dispatch to Redux
-
+    const data = {
+      googleId: decoded?.sub,
+      name: decoded?.name,
+      email: decoded?.email,
+      avatar: decoded?.picture,
+    };
+    // console.log(data);
+    googleLogin(data)
+      .unwrap()
+      .then((payload) => {
+        localStorage.setItem("token", payload?.data?.accessToken);
+        toast.success(payload?.message)
+        console.log(payload);
+        if(payload?.data?.user?.isProfileComplete){
+          navigate('/home')
+        }else{
+          navigate('/location')
+        }
+      })
+      .catch((error) => toast.error(error?.data?.message));
   };
 
   return (
