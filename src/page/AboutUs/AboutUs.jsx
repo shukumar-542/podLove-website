@@ -1,5 +1,5 @@
 import React from "react";
-import about from "../../assets/about1.png";
+import about from "../../assets/about3.png";
 import bg from "../../assets/about-bg.png";
 const AboutUs = () => {
   return (
@@ -18,11 +18,11 @@ const AboutUs = () => {
         <div className="bg-red-500 w-full">
           <img
             src={about}
-            className="w-full object-center h-[380px] object-cover "
+            className="w-full  object-cover h-[500px] "
             alt=""
           />
         </div>
-        <div className="py-10 space-y-3">
+        <div className="py-10 space-y-3 px-2 md:px-0">
           <p className="text-4xl font-bold">
             Get to Know Us: Our <span className="text-[#E8936A]"> Journey</span>
           </p>
@@ -31,19 +31,19 @@ const AboutUs = () => {
           </p>
         </div>
         {/* About description */}
-        <p className=" font-poppins mb-5">
+        <p className=" font-poppins mb-5 px-2 md:px-0">
           Could you clarify what you mean by "podlove Journey and Vision"? Are
           you asking about a personal journey related to foot care or something
           else like a business vision for a product or service? I'd be happy to
           help!
         </p>
-        <p className=" font-poppins mb-5">
+        <p className=" font-poppins mb-5 px-2 md:px-0">
           It is a long established fact that a reader will be distracted by the
           readable content of a page when looking at its layout. The point of
           using Lorem Ipsum is that it has a more-or-less normal distribution of
           letters, as opposed to using.
         </p>
-        <p className=" font-poppins mb-5">
+        <p className=" font-poppins mb-5 px-2 md:px-0">
           It is a long established fact that a reader will be distracted by the
           readable content of a page when looking at its layout. The point of
           using Lorem Ipsum is that it has a more-or-less normal distribution of
@@ -54,13 +54,13 @@ const AboutUs = () => {
           infancy. Various versions have evolved over the years, sometimes by
           accident, sometimes on purpose (injected humour and the like).
         </p>
-        <p className=" font-poppins mb-5">
+        <p className=" font-poppins mb-5 px-2 md:px-0">
           It is a long established fact that a reader will be distracted by the
           readable content of a page when looking at its layout. The point of
           using Lorem Ipsum is that it has a more-or-less normal distribution of
           letters, as opposed to using.
         </p>
-        <p className="pb-10 font-poppins">
+        <p className="pb-10 font-poppins px-2 md:px-0">
           It is a long established fact that a reader will be distracted by the
           readable content of a page when looking at its layout. The point of
           using Lorem Ipsum is that it has a more-or-less normal distribution of

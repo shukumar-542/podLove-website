@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import img1 from "../../assets//clinet.png";
-import img2 from "../../assets/client1.png";
-import img3 from "../../assets/client2.png";
-import img4 from "../../assets/client3.png";
+import img1 from "../../assets/loop1.png";
+import img2 from "../../assets/loop2.png";
+import img3 from "../../assets/loop3.png";
+// import img4 from "../../assets/client3.png";
 import { AiFillDislike, AiFillLike } from "react-icons/ai";
 import { Button } from "../Shared/Button/Button";
 import { Link } from "react-router";
 
-const images = [img1, img2, img3, img4];
+const images = [img1, img2, img3];
 
 const SuccessStory = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -30,11 +30,11 @@ const SuccessStory = () => {
           Let’s guide you to meaningful!{" "}
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-center mt-20">
-          <div className="col-span-1">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-0 md:gap-10 items-center justify-center mt-20 mx-2 m">
+          <div className="col-span-1 ">
             <img
               src={images[currentIndex]}
-              className="transition-all duration-700"
+              className="transition-all duration-700 rounded-2xl"
               alt=""
             />
           </div>
