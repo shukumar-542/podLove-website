@@ -7,9 +7,7 @@ import { toast } from 'sonner';
 
 
 const interest = [
-    "Cooking", "Travel", "Gym",
-    "Books", "Photo", "Yoga",
-    "Films", "Tennis", "Games",
+    "Photography","Cooking","Fitness","Music","Shopping","Traveling","Drinking","Video Games","Art & Crafts","Swimming","Extreme Sports","Speeches",
   ];
 
 const Interest = () => {

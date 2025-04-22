@@ -8,7 +8,6 @@ import { Link } from "react-router";
 import { useGetUserQuery } from "../../redux/Api/AuthApi";
 const Profile = () => {
     const { data :  getUser} = useGetUserQuery()
-    console.log(getUser?.data?.phoneNumber);
   
   return (
     <div

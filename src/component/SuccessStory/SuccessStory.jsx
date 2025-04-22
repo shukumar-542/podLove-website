@@ -34,7 +34,7 @@ const SuccessStory = () => {
           <div className="col-span-1 ">
             <img
               src={images[currentIndex]}
-              className="transition-all duration-700 rounded-2xl"
+              className="transition-all duration-700 rounded-tl-[40px] w-[400px] rounded-br-[40px] border  "
               alt=""
             />
           </div>

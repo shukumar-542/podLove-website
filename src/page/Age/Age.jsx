@@ -1,25 +1,27 @@
 import React, { useState } from "react";
 import bg from "../../assets/age-bg.png";
 import AuthButton from "../../component/AuthButton/AuthButton";
-import { Link, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { DatePicker, Form, Select } from "antd";
 import { useUpdateUserInfoMutation } from "../../redux/Api/AuthApi";
 import { toast } from "sonner";
-import dayjs from 'dayjs'
+import dayjs from "dayjs";
+
+const { Option } = Select;
+
 const ageOptions = Array.from({ length: 21 }, (_, i) => i + 35);
+
 const Age = () => {
   const navigate = useNavigate();
   const [updateAge] = useUpdateUserInfoMutation();
-  const [date , setDate] = useState("")
+  const [date, setDate] = useState(null); 
 
-  const onChange = (dateString) => {
-    const [year, month, day] = dateString.split("-");
-    const formattedDate = `${day}/${month}/${year}`;
-    setDate(formattedDate);
+  const onChange = (date) => {
+    if (date) {
+      setDate(date);
+    }
   };
 
-
-  // handle update age function
   const handleAge = (values) => {
     const data = {
       preferences: {
@@ -28,16 +30,29 @@ const Age = () => {
           max: values?.max,
         },
       },
-      dateOfBirth: date,
+      dateOfBirth: dayjs(date).format("DD/MM/YYYY"), 
     };
+
+    const birthDate = date;
+    const today = dayjs();
+    const age = today.diff(birthDate, "year");
+
+
+   if(age < 35){
+    return toast.error("You must be 35 years old or younger to continue")
+   }
+    console.log("Calculated Age:", age);
+
+    // update
     updateAge(data)
       .unwrap()
-      .then((payload) =>{
-        toast.success(payload?.message)
-        navigate('/gender')
+      .then((payload) => {
+        toast.success(payload?.message);
+        navigate("/gender");
       })
       .catch((error) => toast.error(error?.data?.message));
   };
+
   return (
     <div
       style={{
@@ -47,17 +62,17 @@ const Age = () => {
         backgroundPosition: "center",
         imageRendering: "high-quality",
       }}
-      className="h-[100vh]  relative"
+      className="h-[100vh] relative"
     >
-      <div className="bg-black absolute opacity-50 inset-0 z-0 "></div>
+      <div className="bg-black absolute opacity-50 inset-0 z-0"></div>
       <div className="grid grid-cols-12 items-center justify-center h-full w-full container mx-auto">
-        <div className="  md:col-span-1"></div>
-        {/* Main content */}
-        <div className="bg-white  shadow-2xl shadow-[#F26828] rounded-md  p-5 md:p-10 col-span-12 md:col-span-5 z-10 mx-2 md:mx-0">
-          <p className=" text-xl md:text-4xl font-bold text-[#333333] text-center">
+        <div className="md:col-span-1"></div>
+
+        <div className="bg-white shadow-2xl shadow-[#F26828] rounded-md p-5 md:p-10 col-span-12 md:col-span-5 z-10 mx-2 md:mx-0">
+          <p className="text-xl md:text-4xl font-bold text-[#333333] text-center">
             Age
           </p>
-          <p className=" mt-2 font-medium text-center">
+          <p className="mt-2 font-medium text-center">
             Select your age for better matches.
           </p>
           <p className="mt-4 font-thin text-center mb-5">
@@ -70,15 +85,13 @@ const Age = () => {
               name={"age"}
               label={<p className="font-medium">Your Age</p>}
             >
-              <DatePicker className="w-full border-red-300" format="DD/MM/YYYY" onChange={onChange}  />
-              {/* <Select placeholder="Select your age">
-                {ageOptions.map((age) => (
-                  <Option key={age} value={age}>
-                    {age}
-                  </Option>
-                ))}
-              </Select> */}
+              <DatePicker
+                className="w-full border-red-300"
+                format="DD/MM/YYYY"
+                onChange={onChange}
+              />
             </Form.Item>
+
             <p className="font-medium">Preferred Age</p>
             <div className="flex justify-between items-center gap-5 mt-2">
               <Form.Item name={"min"} className="w-full" label="Minimum Age">
@@ -100,13 +113,11 @@ const Age = () => {
                 </Select>
               </Form.Item>
             </div>
+
             <AuthButton className={"py-2"}>Next</AuthButton>
           </Form>
-          {/* <Link to={"/gender"}> */}
-          {/* </Link> */}
         </div>
 
-        {/* Space after content */}
         <div className="md:col-span-6"></div>
       </div>
     </div>
