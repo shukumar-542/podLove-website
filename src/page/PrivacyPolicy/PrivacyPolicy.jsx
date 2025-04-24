@@ -1,7 +1,10 @@
 import React from "react";
 import IsPodSafe from "../../component/IsPodSafe/IsPodSafe";
+import { useGetPrivacyQuery } from "../../redux/Api/AuthApi";
 
 const PrivacyPolicy = () => {
+  const { data :  getPrivacy} = useGetPrivacyQuery()
+  // console.log(getPrivacy?.data?.text);
   return (
     <div className="bg-[#FAF2EF]">
       <div className="container mx-auto">
@@ -9,7 +12,15 @@ const PrivacyPolicy = () => {
           Privacy Policy
         </h1>
 
-        <p className="text-xl mb-5 font-bold font-poppins">
+        <div
+          className="text-base text-black font-poppins"
+          style={{ backgroundColor: "#FAF2EF" }}
+          dangerouslySetInnerHTML={{
+            __html: getPrivacy?.data?.text || "",
+          }}
+        />
+
+        {/* <p className="text-xl mb-5 font-bold font-poppins">
           Last Updated: December 3, 2024
         </p>
         <p className="font-poppins mb-5">
@@ -117,7 +128,7 @@ const PrivacyPolicy = () => {
           app and for a reasonable period thereafter as needed to fulfill the
           purposes outlined in this Privacy Policy or as required by applicable
           law.
-        </p>
+        </p> */}
 
       </div>
         <IsPodSafe/>

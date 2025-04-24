@@ -22,6 +22,7 @@ const TermsAndCondition = () => {
 
         {/* <p className="mb-5 font-semibold font-poppins">Welcome To PodLove!</p>
         <p className="font-poppins mb-5">
+        
           By using the PodLove application and services or accessing any of the
           content provided on the PodLove platform, you agree to the following
           Terms of Use ("Terms"). Please read these Terms carefully before using
