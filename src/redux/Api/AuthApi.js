@@ -90,16 +90,22 @@ const authApi = baseApi.injectEndpoints({
         };
       },
     }),
-    getPrivacy :  builder.query({
+    getPrivacy: builder.query({
+      query: () => {
+        return {
+          url: "/privacy",
+          method: "GET",
+        };
+      },
+    }),
+    getConsumerPolicy :  builder.query({
       query : ()=>{
           return {
-              url : '/privacy',
+              url : '/consumer',
               method : 'GET'
           }
       }
   }),
-
-
   }),
 });
 
@@ -113,5 +119,7 @@ export const {
   useGetPodCastDetailsQuery,
   useChangePasswordMutation,
   useGoogleLoginMutation,
-  useGetTermsConditionQuery, useGetPrivacyQuery
+  useGetTermsConditionQuery,
+  useGetPrivacyQuery,
+  useGetConsumerPolicyQuery
 } = authApi;

@@ -92,9 +92,10 @@ const SignUp = () => {
                   rules={[
                     { required: true, message: "Please enter a password" },
                     {
-                      pattern:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/,
+                      pattern:
+                        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/,
                       message:
-                       "Password must be at least 8 characters, contain both letters (uppercase and lowercase), a number, and a special character.",
+                        "Password must be at least 8 characters, contain both letters (uppercase and lowercase), a number, and a special character.",
                     },
                   ]}
                 >
@@ -139,7 +140,20 @@ const SignUp = () => {
                       },
                     ]}
                   >
-                    <Checkbox>I agree with the terms and condition</Checkbox>
+                    <Checkbox className="text-xs">
+                      I agree with the{" "}
+                      <span className="text-[#F68064] font-semibold">
+                        <NavLink to="/terms-condition">terms and conditions</NavLink>
+                      </span>
+                      ,{" "}
+                      <span className="text-[#F68064] font-semibold">
+                        <NavLink to="/consumer-policy">Consumer Policy</NavLink>
+                      </span>
+                      , and{" "}
+                      <span className="text-[#F68064] font-semibold">
+                        <NavLink to="/media-policy">Media Policy</NavLink>
+                      </span>
+                    </Checkbox>
                   </Form.Item>
                 </div>
 
