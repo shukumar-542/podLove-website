@@ -49,6 +49,8 @@ import RoomPage from "./page/RoomPage/RoomPage.jsx";
 import ParticipantDetails from "./page/ParticipantDetails/ParticipantDetails.jsx";
 import PrivateRoute from "./component/PrivateRoute/PrivateRoute.jsx";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import ConsumerPolicy from "./page/ConsumerPolicy/ConsumerPolicy.jsx";
+import MediaPlicy from "./page/MediaPlicy/MediaPlicy.jsx";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Provider store={store}>
@@ -76,7 +78,9 @@ createRoot(document.getElementById("root")).render(
               <Route path="/change-password" element={<ChangePassword />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/terms-condition" element={<TermsAndCondition />} />
-              <Route path="/notification" element={<Notification />} />
+              <Route path="/notification" element={<Notification />} />,
+              <Route path="/consumer-policy" element={<ConsumerPolicy/>} />,
+              <Route path="/media-policy" element={<MediaPlicy/>} />
               <Route
                 path="/podcast-details/:id"
                 element={<ParticipantDetails />}

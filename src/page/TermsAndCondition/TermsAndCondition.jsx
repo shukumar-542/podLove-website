@@ -1,7 +1,10 @@
 import React from "react";
 import IsPodSafe from "../../component/IsPodSafe/IsPodSafe";
+import { useGetTermsConditionQuery } from "../../redux/Api/AuthApi";
 
 const TermsAndCondition = () => {
+  const { data: getTermsCondition } = useGetTermsConditionQuery();
+  console.log(getTermsCondition?.data?.text);
   return (
     <div className="bg-[#FAF2EF]">
       <div className="container mx-auto">
@@ -9,7 +12,15 @@ const TermsAndCondition = () => {
           Terms Of Use & Conditions
         </h1>
 
-        <p className="mb-5 font-semibold font-poppins">Welcome To PodLove!</p>
+        <div
+          className="text-base text-black font-poppins"
+          style={{ backgroundColor: "#FAF2EF" }}
+          dangerouslySetInnerHTML={{
+            __html: getTermsCondition?.data?.text || "",
+          }}
+        />
+
+        {/* <p className="mb-5 font-semibold font-poppins">Welcome To PodLove!</p>
         <p className="font-poppins mb-5">
           By using the PodLove application and services or accessing any of the
           content provided on the PodLove platform, you agree to the following
@@ -44,8 +55,7 @@ const TermsAndCondition = () => {
         </p>
         <p className="mb-10">
         To use PodLove, you will need to create an account by providing certain personal information, such as your name, age, location, and other demographic data. You agree to provide accurate and truthful information during registration. You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account.
-        </p>
-       
+        </p> */}
       </div>
       <IsPodSafe />
     </div>

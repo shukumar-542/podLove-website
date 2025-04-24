@@ -28,60 +28,68 @@ const authApi = baseApi.injectEndpoints({
           body: data,
         };
       },
-      invalidatesTags : ['profile']
+      invalidatesTags: ["profile"],
     }),
-    podcastCreate :  builder.mutation({
-        query : ()=>{
-            return {
-                url : '/podcast/create',
-                method : 'POST'
-            }
-        }
-    }),
-    getUser :  builder.query({
-        query : ()=>{
-            return{
-                url : '/user',
-                method : "GET"
-            }
-        },
-        providesTags : ['profile']
-    }),
-    loginUser :  builder.mutation({
-      query  : (data)=>{
-        return{
-          url : '/auth/login',
-          method  : 'POST',
-          body : data
-        }
-      }
-    }),
-    changePassword : builder.mutation({
-      query : (data)=>{
+    podcastCreate: builder.mutation({
+      query: () => {
         return {
-          url : '/auth/change-password',
-          method : 'POST',
-          body : data
-        }
-      }
+          url: "/podcast/create",
+          method: "POST",
+        };
+      },
     }),
-    getPodCastDetails :  builder.query({
-      query : ()=>{
+    getUser: builder.query({
+      query: () => {
         return {
-          url : '/home',
-          method : 'GET'
-        }
-      }
+          url: "/user",
+          method: "GET",
+        };
+      },
+      providesTags: ["profile"],
     }),
-    googleLogin :  builder.mutation({
-      query : (data)=>{
+    loginUser: builder.mutation({
+      query: (data) => {
         return {
-          url : '/auth/sign-in-with-google',
-          method : 'POST',
-          body : data
-        }
-      }
-    })
+          url: "/auth/login",
+          method: "POST",
+          body: data,
+        };
+      },
+    }),
+    changePassword: builder.mutation({
+      query: (data) => {
+        return {
+          url: "/auth/change-password",
+          method: "POST",
+          body: data,
+        };
+      },
+    }),
+    getPodCastDetails: builder.query({
+      query: () => {
+        return {
+          url: "/home",
+          method: "GET",
+        };
+      },
+    }),
+    googleLogin: builder.mutation({
+      query: (data) => {
+        return {
+          url: "/auth/sign-in-with-google",
+          method: "POST",
+          body: data,
+        };
+      },
+    }),
+    getTermsCondition: builder.query({
+      query: () => {
+        return {
+          url: "/tac",
+          method: "GET",
+        };
+      },
+    }),
   }),
 });
 
@@ -94,5 +102,6 @@ export const {
   useLoginUserMutation,
   useGetPodCastDetailsQuery,
   useChangePasswordMutation,
-  useGoogleLoginMutation
+  useGoogleLoginMutation,
+  useGetTermsConditionQuery
 } = authApi;

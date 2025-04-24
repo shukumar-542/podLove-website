@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import logo from "../../assets/podLogo.png";
-import {   Input, Radio, Space } from "antd";
+import { Input, Radio, Space } from "antd";
 import AuthButton from "../../component/AuthButton/AuthButton";
 import { useUpdateUserInfoMutation } from "../../redux/Api/AuthApi";
 import { toast } from "sonner";
 import { useNavigate } from "react-router";
 
 const DiscoverCompatibilitySecond = () => {
-  const navigate = useNavigate()
+  const [kids, setKids] = useState("No");
+  const navigate = useNavigate();
   const [answers, setAnswers] = useState([]);
-    const [updateCompatibility] = useUpdateUserInfoMutation();
-  
+  const [updateCompatibility] = useUpdateUserInfoMutation();
+
   const handleChange = (index, value) => {
     const newAnswers = [...answers];
     newAnswers[index] = value;
@@ -18,20 +19,20 @@ const DiscoverCompatibilitySecond = () => {
   };
 
 
-  const handleUpdateCompatibility =  ()=>{
+  const handleUpdateCompatibility = () => {
     const data = {
       compatibility: answers,
     };
     updateCompatibility(data)
-    .unwrap()
-    .then((payload) => {
-      toast.success(payload?.message)
-      navigate('/rating-yourself')
-    })
-    .catch((error) => {
-      toast.error(error?.data?.message)
-    });
-  }
+      .unwrap()
+      .then((payload) => {
+        toast.success(payload?.message);
+        navigate("/rating-yourself");
+      })
+      .catch((error) => {
+        toast.error(error?.data?.message);
+      });
+  };
 
   return (
     <div className="bg-[#FBECE5] min-h-screen">
@@ -46,7 +47,10 @@ const DiscoverCompatibilitySecond = () => {
         <div className="mb-6">
           <p className="font-semibold">Do you have kids?*</p>
           <Radio.Group
-            onChange={(e) => handleChange(0, e.target.value)}
+            onChange={(e) => {
+              setKids(e.target.value);
+              handleChange(0, e.target.value);
+            }}
             className="flex flex-col mt-2 custom-radio"
           >
             <Radio value="Yes">Yes</Radio>
@@ -54,16 +58,18 @@ const DiscoverCompatibilitySecond = () => {
           </Radio.Group>
         </div>
 
-        <div className="mb-6">
-          <p className="font-medium font-poppins text-xl">
-            If yes, how many kids do you have?
-          </p>
-          <Input
-          onChange={(e) => handleChange(1, e.target.value)}
-            placeholder="Enter number of kids"
-            className="max-w-52 bg-[#FBECE5] mt-3 hover:bg-[#FBECE5]"
-          />
-        </div>
+        {kids == "Yes" && (
+          <div className="mb-6">
+            <p className="font-medium font-poppins text-xl">
+              If yes, how many kids do you have?
+            </p>
+            <Input
+              onChange={(e) => handleChange(1, e.target.value)}
+              placeholder="Enter number of kids"
+              className="max-w-52 bg-[#FBECE5] mt-3 hover:bg-[#FBECE5]"
+            />
+          </div>
+        )}
 
         {/* Do you want kids in the future? */}
         <div className="mb-6">
@@ -82,7 +88,10 @@ const DiscoverCompatibilitySecond = () => {
           <p className="font-semibold">
             Will you date a person who has kids? *
           </p>
-          <Radio.Group onChange={(e) => handleChange(3, e.target.value)} className="flex flex-col gap-3 custom-radio">
+          <Radio.Group
+            onChange={(e) => handleChange(3, e.target.value)}
+            className="flex flex-col gap-3 custom-radio"
+          >
             <Radio value="yes">Yes</Radio>
             <Radio value="maybe">Maybe</Radio>
             <Radio value="no">No</Radio>
@@ -92,7 +101,10 @@ const DiscoverCompatibilitySecond = () => {
         {/* Do you smoke? */}
         <div className="mb-6">
           <p className="font-semibold">Do you smoke?</p>
-          <Radio.Group onChange={(e) => handleChange(4, e.target.value)} className="flex flex-col gap-3 custom-radio">
+          <Radio.Group
+            onChange={(e) => handleChange(4, e.target.value)}
+            className="flex flex-col gap-3 custom-radio"
+          >
             <Radio value="yes">Yes</Radio>
             <Radio value="no">No</Radio>
           </Radio.Group>
@@ -103,7 +115,10 @@ const DiscoverCompatibilitySecond = () => {
           <p className="font-semibold">
             How would you describe your drinking habits?
           </p>
-          <Radio.Group onChange={(e) => handleChange(5, e.target.value)} className="flex flex-col gap-3 custom-radio mt-2">
+          <Radio.Group
+            onChange={(e) => handleChange(5, e.target.value)}
+            className="flex flex-col gap-3 custom-radio mt-2"
+          >
             <Radio value="Never">Never- don't drink alcohol at all</Radio>
             <Radio value="Rarely – I drink only on special occasions (e.g., holidays, celebrations)">
               Rarely – I drink only on special occasions (e.g., holidays,
@@ -128,7 +143,10 @@ const DiscoverCompatibilitySecond = () => {
           <p className="font-semibold">
             If "Never", Would you be comfortable dating someone who drinks?
           </p>
-          <Radio.Group onChange={(e) => handleChange(6, e.target.value)} className="flex flex-col gap-3 custom-radio mt-2">
+          <Radio.Group
+            onChange={(e) => handleChange(6, e.target.value)}
+            className="flex flex-col gap-3 custom-radio mt-2"
+          >
             <Radio value="Yes">Yes</Radio>
             <Radio value="No">No</Radio>
             <Radio value="Depends">Depends</Radio>
@@ -139,7 +157,10 @@ const DiscoverCompatibilitySecond = () => {
         <p className="font-medium font-poppins text-xl">
           Do you consider yourself religious or spiritual?
         </p>
-        <Radio.Group onChange={(e) => handleChange(7, e.target.value)} className="flex flex-col gap-3 custom-radio mt-2">
+        <Radio.Group
+          onChange={(e) => handleChange(7, e.target.value)}
+          className="flex flex-col gap-3 custom-radio mt-2"
+        >
           <Radio value="Yes, I’m religious">Yes, I’m religious</Radio>
           <Radio value="Yes, I’m spiritual but not religious">
             Yes, I’m spiritual but not religious
@@ -154,7 +175,10 @@ const DiscoverCompatibilitySecond = () => {
         <p className="font-medium font-poppins text-xl mt-4">
           If religious, what is your religion?
         </p>
-        <Radio.Group onChange={(e) => handleChange(8, e.target.value)} className="mt-4">
+        <Radio.Group
+          onChange={(e) => handleChange(8, e.target.value)}
+          className="mt-4"
+        >
           <Space direction="vertical">
             <Radio value="christian">Christian</Radio>
             <Radio value="muslim">Muslim</Radio>
@@ -171,7 +195,7 @@ const DiscoverCompatibilitySecond = () => {
         </p>
 
         <Input.TextArea
-        onChange={(e) => handleChange(9, e.target.value)}
+          onChange={(e) => handleChange(9, e.target.value)}
           className="w-96 bg-[#FBECE5] hover:bg-[#FBECE5]"
           placeholder="Write here..."
         />
@@ -181,7 +205,10 @@ const DiscoverCompatibilitySecond = () => {
         <p className="font-medium font-poppins text-xl mt-5">
           How important is religion/spirituality in your life?
         </p>
-        <Radio.Group onChange={(e) => handleChange(10, e.target.value)} className="flex flex-col gap-3 custom-radio mt-5">
+        <Radio.Group
+          onChange={(e) => handleChange(10, e.target.value)}
+          className="flex flex-col gap-3 custom-radio mt-5"
+        >
           <Radio value="Not important at all.">Not important at all.</Radio>
           <Radio value="Somewhat important">Somewhat important</Radio>
           <Radio value="Not very important">Moderately important.</Radio>
@@ -195,7 +222,10 @@ const DiscoverCompatibilitySecond = () => {
           Would you date someone with different religious or spiritual beliefs?
         </p>
 
-        <Radio.Group onChange={(e) => handleChange(11, e.target.value)} className="flex flex-col gap-3 custom-radio mt-5">
+        <Radio.Group
+          onChange={(e) => handleChange(11, e.target.value)}
+          className="flex flex-col gap-3 custom-radio mt-5"
+        >
           <Radio value="Yes, I’m open to dating someone with different beliefs">
             Yes, I’m open to dating someone with different beliefs
           </Radio>
@@ -215,7 +245,10 @@ const DiscoverCompatibilitySecond = () => {
           option that best describes you.)
         </p>
 
-        <Radio.Group onChange={(e) => handleChange(12, e.target.value)}  className="flex flex-col gap-3 custom-radio mt-5">
+        <Radio.Group
+          onChange={(e) => handleChange(12, e.target.value)}
+          className="flex flex-col gap-3 custom-radio mt-5"
+        >
           <Radio value="Not at all political – I don’t follow politics and prefer to avoid political discussions">
             Not at all political – I don’t follow politics and prefer to avoid
             political discussions
@@ -245,7 +278,10 @@ const DiscoverCompatibilitySecond = () => {
           option.)
         </p>
 
-        <Radio.Group onChange={(e) => handleChange(13, e.target.value)}  className="flex flex-col gap-3 custom-radio mt-5">
+        <Radio.Group
+          onChange={(e) => handleChange(13, e.target.value)}
+          className="flex flex-col gap-3 custom-radio mt-5"
+        >
           <Radio value="Yes, I’m open to dating someone with different political views">
             Yes, I’m open to dating someone with different political views
           </Radio>
@@ -263,7 +299,10 @@ const DiscoverCompatibilitySecond = () => {
           Do you have a pet?
         </p>
 
-        <Radio.Group onChange={(e) => handleChange(14, e.target.value)} className="flex flex-col gap-3 custom-radio">
+        <Radio.Group
+          onChange={(e) => handleChange(14, e.target.value)}
+          className="flex flex-col gap-3 custom-radio"
+        >
           <Radio value="Yes">Yes</Radio>
           <Radio value="No">No</Radio>
         </Radio.Group>
@@ -274,7 +313,10 @@ const DiscoverCompatibilitySecond = () => {
           If yes, which pet do you have? *
         </p>
 
-        <Radio.Group onChange={(e) => handleChange(15, e.target.value)} className="flex flex-col gap-3 custom-radio">
+        <Radio.Group
+          onChange={(e) => handleChange(15, e.target.value)}
+          className="flex flex-col gap-3 custom-radio"
+        >
           <Radio value="Dog">Dog</Radio>
           <Radio value="Cat">Cat</Radio>
           <Radio value="Bird">Bird</Radio>
@@ -282,7 +324,12 @@ const DiscoverCompatibilitySecond = () => {
         </Radio.Group>
         <div className="text-center">
           {/* <Link to={"/rating-yourself"}> */}
-          <AuthButton handleOnClick={()=>handleUpdateCompatibility()} className={"max-w-80 py-2"}>Submit</AuthButton>
+          <AuthButton
+            handleOnClick={() => handleUpdateCompatibility()}
+            className={"max-w-80 py-2"}
+          >
+            Submit
+          </AuthButton>
           {/* </Link> */}
         </div>
       </div>

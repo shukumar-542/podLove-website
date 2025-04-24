@@ -6,8 +6,9 @@ import { useUpdateUserInfoMutation } from '../redux/Api/AuthApi';
 import { toast } from 'sonner';
 
 
+
 const interest = [
-    "Photography","Cooking","Fitness","Music","Shopping","Traveling","Drinking","Video Games","Art & Crafts","Swimming","Extreme Sports","Speeches",
+    "Reading","Cooking","Fitness","Music","Traveling","Hiking","Gardening","Photography","Board Games","Yoga & Meditation","Writing","Bird Watching","Volunteering","DIY & Crafts", "Podcasts", "Painting/ Drawing"
   ];
 
 const Interest = () => {
