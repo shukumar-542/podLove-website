@@ -17,8 +17,8 @@ const Footer = () => {
               We’re not just an app. We’re a platform for genuine human
               connection.
             </p>
-            <p className="text-xl font-bold my-5">E-mail</p>
-            <p>Email: mstkhushiakter333@gmail.com</p>
+            {/* <p className="text-xl font-bold my-5">E-mail</p>
+            <p>Email: mstkhushiakter333@gmail.com</p> */}
           </div>
           <div className=" md:mx-auto">
             {/* <h1 className="text-2xl font-bold mb-10">Company Links</h1> */}

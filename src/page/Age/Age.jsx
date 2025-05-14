@@ -39,7 +39,7 @@ const Age = () => {
 
 
    if(age < 35){
-    return toast.error("You must be 35 years old or younger to continue")
+    return toast.error("You must be 35 years or older to continue")
    }
     console.log("Calculated Age:", age);
 

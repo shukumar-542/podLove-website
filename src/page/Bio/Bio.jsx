@@ -11,6 +11,9 @@ const Bio = () => {
   const navigate = useNavigate();
   const [updateBio] = useUpdateUserInfoMutation();
   const handleAddBio = (value) => {
+    if(!value.bio){
+      return toast.error("Please add your bio")
+    }
     const data = {
       bio: value?.bio,
     };

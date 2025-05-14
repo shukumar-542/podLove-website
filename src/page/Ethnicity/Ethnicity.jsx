@@ -43,12 +43,16 @@ const Ethnicity = () => {
   };
 
   const handleEthnicity = () => {
+    if(preferredBodyType?.length === 0 || selectedBodyType.length === 0){
+      return  toast.error("Please select both your preferred body type and selected body type.")
+    }
     const data = {
       preferences: {
         ethnicity: preferredBodyType,
       },
       ethnicity: selectedBodyType,
     };
+
     updateEthnicity(data)
       .unwrap()
       .then((payload) => {

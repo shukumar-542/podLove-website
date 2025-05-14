@@ -57,6 +57,7 @@ const Gender = () => {
             <Form.Item
               name={"myGender"}
               label={<p className="font-medium w-full">Select your gender</p>}
+               rules={[{ required: true, message: "Please select your gender" }]}
             >
               <Select placeholder="Select your gender">
                 <Option value={"female"}>Female</Option>
@@ -73,6 +74,7 @@ const Gender = () => {
                   Select your preferred gender
                 </p>
               }
+              rules={[{ required: true, message: "Please select your preferred gender" }]}
             >
               <Select placeholder="Select your preferred gender">
                 <Option value={"female"}>Female</Option>

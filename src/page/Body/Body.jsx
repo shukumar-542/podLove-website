@@ -29,12 +29,17 @@ const Body = () => {
   };
 
   const handleUpdateBodyType = () => {
+     if(preferredBodyType.length === 0 || !selectedBodyType){
+      return toast.error("Please select both your body type and preferred body type.")
+    }
     const data = {
       preferences: {
         bodyType: preferredBodyType,
       },
       bodyType: selectedBodyType,
     };
+
+   
     updateBodyType(data)
       .unwrap()
       .then((payload) => {
