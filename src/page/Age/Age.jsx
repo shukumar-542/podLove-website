@@ -87,7 +87,7 @@ const Age = () => {
             >
               <DatePicker
                 className="w-full border-red-300"
-                format="DD/MM/YYYY"
+                format="MM/DD/YYYY"
                 onChange={onChange}
               />
             </Form.Item>

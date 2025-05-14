@@ -7,7 +7,7 @@ import { useCreateContactUsMutation } from '../../redux/Api/SubscriptionPlan'
 import { toast } from 'sonner'
 
 const ContactUs = () => {
-  const [createContactUs] = useCreateContactUsMutation()
+  const [createContactUs , {isLoading}] = useCreateContactUsMutation()
 
 
   const handleContactUs = (values)=>{
@@ -29,12 +29,7 @@ const ContactUs = () => {
         <div>
           <p className='text-center text-2xl font-poppins text-[#1C1C1C] font-semibold mb-5'>Contact Us</p>
           <Form layout='vertical' onFinish={handleContactUs} className='px-5'>
-            {/* <Form.Item label="Full Name">
-              <Input className='border border-[#F68064] bg-[#FAF2EF]' placeholder='Name'/>
-            </Form.Item>
-            <Form.Item label="Email">
-              <Input className='border border-[#F68064] bg-[#FAF2EF]' placeholder='Email'/>
-            </Form.Item> */}
+            
             <Form.Item name={"category"} label="Category">
               <Select options={[
                 {
@@ -52,7 +47,7 @@ const ContactUs = () => {
               <TextArea className='border border-[#F68064] bg-[#FAF2EF]' rows={4}/>
             </Form.Item>
 
-            <AuthButton className={"py-1"}>Send</AuthButton>
+            <AuthButton disabled={isLoading} className={`py-2 ${isLoading && "bg-gray-300"}`}>Sends</AuthButton>
           </Form>
         </div>
         <div>
