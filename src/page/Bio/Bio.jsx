@@ -2,20 +2,21 @@ import React from "react";
 import bg from "../../assets/bio-bg.png";
 import { Link, useNavigate } from "react-router";
 import AuthButton from "../../component/AuthButton/AuthButton";
-import { Form } from "antd";
+import { Form, Input } from "antd";
 import TextArea from "antd/es/input/TextArea";
-import { useUpdateUserInfoMutation } from "../../redux/Api/AuthApi";
+import { useUpdateUserBioMutation, useUpdateUserInfoMutation } from "../../redux/Api/AuthApi";
 import { toast } from "sonner";
-
+import { UserOutlined } from '@ant-design/icons';
 const Bio = () => {
   const navigate = useNavigate();
   const [updateBio] = useUpdateUserInfoMutation();
+  const [updateUserBio] = useUpdateUserBioMutation()
   const handleAddBio = (value) => {
     if(!value.bio){
       return toast.error("Please add your bio")
     }
     const data = {
-      bio: value?.bio,
+      text: value?.bio,
     };
     updateBio(data)
       .unwrap()
@@ -23,7 +24,10 @@ const Bio = () => {
         toast.success(payload?.message)
         navigate('/upload-photo')
       })
-      .catch((error) => toast.error(error?.data?.message));
+      .catch((error) =>{
+        console.log(error);
+         toast.error(error?.data?.message)
+      });
   };
   return (
     <div
@@ -73,6 +77,8 @@ const Bio = () => {
 
         {/* Space after content */}
         <div className="md:col-span-6"></div>
+
+       
       </div>
     </div>
   );

@@ -98,14 +98,23 @@ const authApi = baseApi.injectEndpoints({
         };
       },
     }),
-    getConsumerPolicy :  builder.query({
-      query : ()=>{
-          return {
-              url : '/consumer',
-              method : 'GET'
-          }
+    getConsumerPolicy: builder.query({
+      query: () => {
+        return {
+          url: "/consumer",
+          method: "GET",
+        };
+      },
+    }),
+    UpdateUserBio : builder.mutation({
+      query : (data)=>{
+        return {
+          url : "live/validate-bio",
+          method : 'POST',
+          body :  data
+        }
       }
-  }),
+    })
   }),
 });
 
@@ -121,5 +130,6 @@ export const {
   useGoogleLoginMutation,
   useGetTermsConditionQuery,
   useGetPrivacyQuery,
-  useGetConsumerPolicyQuery
+  useGetConsumerPolicyQuery,
+  useUpdateUserBioMutation
 } = authApi;

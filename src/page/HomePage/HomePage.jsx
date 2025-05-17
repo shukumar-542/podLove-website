@@ -30,6 +30,8 @@ const HomePage = () => {
       .catch((error) => toast.error(error?.data?.message));
   };
 
+
+  // console.log(getPodcastDetails?.data?.podcast);
   return (
     <div className="bg-[#F7E8E1]">
       <div className="container mx-auto">
