@@ -45,7 +45,7 @@ const ForgetPassword = () => {
           </p>
 
           <Form layout="vertical mt-10" onFinish={onFinish}>
-            <Form.Item label="Email">
+            <Form.Item label="Email" name={"email"}>
               <Input
                 placeholder="Enter your email here"
                 className="border-[#FFA175]"

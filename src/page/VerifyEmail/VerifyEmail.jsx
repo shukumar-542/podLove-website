@@ -1,12 +1,38 @@
-import React, { useState } from 'react'
-import bg from '../../assets/Verification.png'
+import React, { useState } from "react";
+import bg from "../../assets/Verification.png";
 import OTPInput from "otp-input-react";
-import { Link } from 'react-router';
-import AuthButton from '../../component/AuthButton/AuthButton';
+import { Link } from "react-router";
+import AuthButton from "../../component/AuthButton/AuthButton";
+import { useVerifyEmailMutation } from "../../redux/Api/AuthApi";
+import { Spin } from "antd";
+import { toast } from "sonner";
 
 const VerifyEmail = () => {
-      const [OTP, setOTP] = useState("");
-    
+  const [otp, setOTP] = useState("");
+
+  const [verifyEmail, { isLoading }] = useVerifyEmailMutation();
+
+  const handleVerifyOtp = () => {
+
+    console.log("click");
+    if (!otp) {
+      return toast.error("Please enter your otp!");
+    }
+    const data = {
+      email: localStorage.getItem("email"),
+      recoveryOTP: otp,
+    };
+    verifyEmail(data)
+      .unwrap()
+      .then((payload) => {
+        toast.success(payload?.message);
+        navigate("/set-new-password");
+      })
+      .catch((error) => {
+        toast.error(error?.data?.message);
+      });
+  };
+
   return (
     <div
       className="h-[100vh] min-h-screen bg-cover bg-center bg-no-repeat"
@@ -19,13 +45,14 @@ const VerifyEmail = () => {
             Verification Code
           </p>
           <p className="mt-4 max-w-96 font-thin text-center">
-            Please enter the six-digit code we sent you to your number 878 7764 2922
+            Please enter the six-digit code we sent you to your number 878 7764
+            2922
           </p>
 
           <div className="my-10">
             <p className="text-[#2E2E2E] mb-2">Enter your code here</p>
             <OTPInput
-              value={OTP}
+              value={otp}
               onChange={setOTP}
               autoFocus
               OTPLength={5}
@@ -35,18 +62,16 @@ const VerifyEmail = () => {
               disabled={false}
               secure
             />
-            <div className='flex items-end justify-end mt-3'>
-                <p className=' border-b'>Resend OTP</p>
+            <div className="flex items-end justify-end mt-3">
+              <p className=" border-b">Resend OTP</p>
             </div>
           </div>
 
-          <Link to={"/set-new-password"}>
-            <AuthButton className={"py-2"}>Verify</AuthButton>
-          </Link>
+            <AuthButton handleOnClick={()=>handleVerifyOtp()} className={"py-2"}>{isLoading ? <Spin/> : "Verify"}</AuthButton>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default VerifyEmail
+export default VerifyEmail;
