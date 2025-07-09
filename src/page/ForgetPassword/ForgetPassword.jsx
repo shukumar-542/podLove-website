@@ -4,6 +4,7 @@ import { Form, Input } from "antd";
 import AuthButton from "../../component/AuthButton/AuthButton";
 import { Link } from "react-router";
 const ForgetPassword = () => {
+  
   return (
     <div
       style={{

@@ -106,15 +106,42 @@ const authApi = baseApi.injectEndpoints({
         };
       },
     }),
-    UpdateUserBio : builder.mutation({
-      query : (data)=>{
+    UpdateUserBio: builder.mutation({
+      query: (data) => {
         return {
-          url : "live/validate-bio",
-          method : 'POST',
-          body :  data
-        }
-      }
-    })
+          url: "live/validate-bio",
+          method: "POST",
+          body: data,
+        };
+      },
+    }),
+    forgetPassword: builder.mutation({
+      query: (data) => {
+        return {
+          url: "/admin/recovery",
+          method: "POST",
+          body: data,
+        };
+      },
+    }),
+    verifyEmail: builder.mutation({
+      query: (data) => {
+        return {
+          url: "/admin/recovery-verification",
+          method: "POST",
+          body: data,
+        };
+      },
+    }),
+    resetPassword: builder.mutation({
+      query: (data) => {
+        return {
+          url: "/admin/reset-password",
+          method: "POST",
+          body: data,
+        };
+      },
+    }),
   }),
 });
 
@@ -131,5 +158,8 @@ export const {
   useGetTermsConditionQuery,
   useGetPrivacyQuery,
   useGetConsumerPolicyQuery,
-  useUpdateUserBioMutation
+  useUpdateUserBioMutation,
+  useForgetPasswordMutation,
+  useVerifyEmailMutation,
+  useResetPasswordMutation
 } = authApi;
