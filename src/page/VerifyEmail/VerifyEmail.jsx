@@ -60,7 +60,7 @@ const VerifyEmail = () => {
               inputClassName="w-8 h-10 md:w-10 md:h-12 text-lg md:text-xl text-center border border-[#FFC0A3] rounded-md"
               className="flex justify-center gap-2 sm:gap-3 md:gap-4"
               disabled={false}
-              secure
+              
             />
             <div className="flex items-end justify-end mt-3">
               <p className=" border-b">Resend OTP</p>
