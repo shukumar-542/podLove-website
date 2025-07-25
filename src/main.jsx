@@ -52,6 +52,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import ConsumerPolicy from "./page/ConsumerPolicy/ConsumerPolicy.jsx";
 import MediaPlicy from "./page/MediaPlicy/MediaPlicy.jsx";
 import OurApproach from "./page/OurApproach/OurApproach.jsx";
+import TermsOfUse from "./page/TermsOfUse/TermsOfUse.jsx";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Provider store={store}>
@@ -104,18 +105,15 @@ createRoot(document.getElementById("root")).render(
             />
             <Route path="/rating-yourself" element={<RatingYourSelf />} />
             <Route path="/interest" element={<Interest />} />
-            <Route
-              path="/connection-progress"
-              element={<ConnectionProgress />}
-            />
+            <Route path="/connection-progress" element={<ConnectionProgress />} />
             <Route path="/congratulation" element={<Congratulation />} />
             <Route path="/match-result" element={<MatchResult />} />
             <Route path="/match-bio" element={<MatchBio />} />
-
             <Route path="/forget-password" element={<ForgetPassword />} />
             <Route path="/verify-forget-otp" element={<VerifyEmail />} />
             <Route path="/set-new-password" element={<SetNewPassword />} />
             <Route path="/our-approch" element={<OurApproach />} />
+            <Route path="/terms-of-use" element={<TermsOfUse/>} />
 
           </Routes>
         </BrowserRouter>

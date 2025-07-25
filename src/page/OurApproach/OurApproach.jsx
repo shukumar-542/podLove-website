@@ -72,7 +72,7 @@ const OurApproach = () => {
                 </p>
 
 
-                <Link to="/match-result">
+                <Link to="/terms-of-use">
                     <AuthButton className={"py-2"}>
                         Next
                     </AuthButton>
