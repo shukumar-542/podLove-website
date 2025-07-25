@@ -58,7 +58,7 @@ const TermsOfUse = () => {
 
         <h2 className="text-[#4B4B4B] font-semibold text-sm mb-2">Contact Us</h2>
         <p className="text-sm mb-6">
-          If you have questions or concerns about these Terms of Use, please contact us at <span className="text-blue-600 underline">support@podlove.co</span>
+          If you have questions or concerns about these Terms of Use, please contact us at <span className="underline">support@podlove.co</span>
         </p>
 
         <p className="text-sm mb-6">
