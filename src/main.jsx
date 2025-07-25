@@ -51,6 +51,7 @@ import PrivateRoute from "./component/PrivateRoute/PrivateRoute.jsx";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import ConsumerPolicy from "./page/ConsumerPolicy/ConsumerPolicy.jsx";
 import MediaPlicy from "./page/MediaPlicy/MediaPlicy.jsx";
+import OurApproach from "./page/OurApproach/OurApproach.jsx";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Provider store={store}>
@@ -68,10 +69,7 @@ createRoot(document.getElementById("root")).render(
               <Route path="/subscription-plan" element={<SubscriptionPlan />} />
               <Route path="/chat/:id" element={<ChatPage />} />
               <Route path="/feedback-first-step" element={<FeedbackOne />} />
-              <Route
-                path="/feedback-second-step"
-                element={<FeedbackSecond />}
-              />
+              <Route path="/feedback-second-step" element={<FeedbackSecond />} />
               <Route path="/feedback-third-step" element={<FeedbackThird />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/edit-profile" element={<EditProfile />} />
@@ -79,12 +77,9 @@ createRoot(document.getElementById("root")).render(
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/terms-condition" element={<TermsAndCondition />} />
               <Route path="/notification" element={<Notification />} />,
-              <Route path="/consumer-policy" element={<ConsumerPolicy/>} />,
-              <Route path="/media-policy" element={<MediaPlicy/>} />
-              <Route
-                path="/podcast-details/:id"
-                element={<ParticipantDetails />}
-              />
+              <Route path="/consumer-policy" element={<ConsumerPolicy />} />,
+              <Route path="/media-policy" element={<MediaPlicy />} />
+              <Route path="/podcast-details/:id" element={<ParticipantDetails />} />
               <Route path="/opy-in-policy" element={<OptInPolicy />} />
               <Route path="/room/:roomId" element={<RoomPage />} />
             </Route>
@@ -120,6 +115,8 @@ createRoot(document.getElementById("root")).render(
             <Route path="/forget-password" element={<ForgetPassword />} />
             <Route path="/verify-forget-otp" element={<VerifyEmail />} />
             <Route path="/set-new-password" element={<SetNewPassword />} />
+            <Route path="/our-approch" element={<OurApproach />} />
+
           </Routes>
         </BrowserRouter>
         <Toaster position="top-right" richColors />
