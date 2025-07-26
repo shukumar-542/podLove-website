@@ -18,7 +18,7 @@ const RelationShipReadinessTwo = () => {
 
                 <p className="font-medium mt-20">Connection Pathway</p>
                 <p className="font-medium mb-5 mt-2">Please Fill out this form</p>
-
+ 
                 <Form
                     form={form}
                     onFinish={onFinish}
@@ -75,7 +75,7 @@ const RelationShipReadinessTwo = () => {
 
                     <Form.Item className="text-center">
                         <div className="flex justify-center">
-                            <Link to={"/relationship-first"}>
+                            <Link to={"/attention-error"}>
                                 <AuthButton className={"py-2"}>
                                     Next
                                 </AuthButton>

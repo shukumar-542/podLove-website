@@ -55,6 +55,7 @@ import OurApproach from "./page/OurApproach/OurApproach.jsx";
 import TermsOfUse from "./page/TermsOfUse/TermsOfUse.jsx";
 import RelationShipReadinessOne from "./page/RelationShipReadinessOne/RelationShipReadinessOne.jsx";
 import RelationShipReadinessTwo from "./page/RelationShipReadinessTwo/RelationShipReadinessTwo.jsx";
+import AttentionError from "./page/AttentionError/AttentionError.jsx";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Provider store={store}>
@@ -118,6 +119,7 @@ createRoot(document.getElementById("root")).render(
             <Route path="/terms-of-use" element={<TermsOfUse/>} />
             <Route path="/relationship-first" element={<RelationShipReadinessOne/>} />
             <Route path="/relationship-second" element={<RelationShipReadinessTwo/>} />
+            <Route path="/attention-error" element={<AttentionError/>} />
 
           </Routes>
         </BrowserRouter>
