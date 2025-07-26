@@ -72,11 +72,14 @@ const OurApproach = () => {
                 </p>
 
 
-                <Link to="/terms-of-use">
-                    <AuthButton className={"py-2"}>
-                        Next
-                    </AuthButton>
-                </Link>
+                
+                <div className="flex justify-center">
+                    <Link to={"/terms-of-use"}>
+                        <AuthButton className={"py-2"}>
+                            Next
+                        </AuthButton>
+                    </Link>
+                </div>
 
             </div>
         </div>
