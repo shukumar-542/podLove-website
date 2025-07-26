@@ -1,4 +1,4 @@
-import React from "react";
+/* eslint-disable react/prop-types */
 import subscription from "../../assets/subscription-bg.png";
 import { IoCheckmarkOutline } from "react-icons/io5";
 import { Divider } from "antd";
@@ -6,13 +6,10 @@ import {
   useUpgradeSubscriptionPlanMutation,
 } from "../../redux/Api/SubscriptionPlan";
 import { toast } from "sonner";
-const Pricing = ({subscriptions}) => {
-  const [upgradeSubscription] = useUpgradeSubscriptionPlanMutation();
+const Pricing = ({ subscriptions }) => {
+  const [upgradeSubscription, { isLoading }] = useUpgradeSubscriptionPlanMutation();
 
-
-  
-
-  console.log(subscriptions?.user?.subscription);
+  console.log(subscriptions);
   // Handle upgrade plan function
   const handleUpdatePlan = (id) => {
     const data = {
@@ -20,9 +17,12 @@ const Pricing = ({subscriptions}) => {
     };
     upgradeSubscription(data)
       .unwrap()
-      .then((payload) =>{
-        if(payload?.data){
-          window.open(payload?.data)
+      .then((payload) => {
+        if (payload?.data) {
+          console.log(payload);
+          // window.open(payload?.data)
+          const newWindow = window.open('', '_blank');
+          newWindow.location.href = payload.data;
         }
       })
       .catch((error) => toast.error(error?.data?.message));
@@ -30,7 +30,7 @@ const Pricing = ({subscriptions}) => {
 
   return (
     <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 my-10  mx-auto font-poppins mr-2 md:mr-0 ml-2 md:ml-0 ">
-      {subscriptions?.subscriptionPlans?.map((plan) => {
+      {subscriptions?.map((plan) => {
         // console.log(plan);
         return (
           <div
@@ -76,6 +76,7 @@ const Pricing = ({subscriptions}) => {
                 <div className=" text-center">
                   <button
                     onClick={() => handleUpdatePlan(plan?._id)}
+                    disabled={isLoading}
                     className=" bg-gradient-to-r from-[#F36E2F] to-[#FEB491]  shadow-white shadow-inner rounded-full w-full mt-5 py-2 max-w-xs  mb-5"
                   >
                     Choose this plan
@@ -88,7 +89,7 @@ const Pricing = ({subscriptions}) => {
                 borderColor: "#2D2D30",
               }}
             >
-              Details
+              <p className=" text-[#d1d1d1]">Details</p>
             </Divider>
 
             <div className="space-y-3 ">
