@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import logo from "../../assets/podLogo.png";
 import { Input, Radio, Space } from "antd";
 import AuthButton from "../../component/AuthButton/AuthButton";
@@ -11,6 +11,7 @@ const DiscoverCompatibilitySecond = () => {
   const navigate = useNavigate();
   const [answers, setAnswers] = useState([]);
   const [updateCompatibility] = useUpdateUserInfoMutation();
+  const previousAnswers = JSON.parse(localStorage.getItem("compatibility")) || [];
 
   const handleChange = (index, value) => {
     const newAnswers = [...answers];
@@ -18,11 +19,11 @@ const DiscoverCompatibilitySecond = () => {
     setAnswers(newAnswers);
   };
 
-
   const handleUpdateCompatibility = () => {
     const data = {
-      compatibility: answers,
+      compatibility: [...previousAnswers, ...answers],
     };
+
     updateCompatibility(data)
       .unwrap()
       .then((payload) => {
@@ -119,7 +120,7 @@ const DiscoverCompatibilitySecond = () => {
             onChange={(e) => handleChange(5, e.target.value)}
             className="flex flex-col gap-3 custom-radio mt-2"
           >
-            <Radio value="Never">Never- don't drink alcohol at all</Radio>
+            <Radio value="Never">Never- don&apos;t drink alcohol at all</Radio>
             <Radio value="Rarely – I drink only on special occasions (e.g., holidays, celebrations)">
               Rarely – I drink only on special occasions (e.g., holidays,
               celebrations)
@@ -141,7 +142,7 @@ const DiscoverCompatibilitySecond = () => {
         {/* Never drinks date */}
         <div className="mb-6">
           <p className="font-semibold">
-            If "Never", Would you be comfortable dating someone who drinks?
+            If &quot;Never&quot;, Would you be comfortable dating someone who drinks?
           </p>
           <Radio.Group
             onChange={(e) => handleChange(6, e.target.value)}
