@@ -1,4 +1,3 @@
-
 import img1 from "../../assets/tes.png";
 import video from "../../assets/schedule.mp4";
 import mic from "../../assets/mic.png";
@@ -33,22 +32,20 @@ const HomePage = () => {
       .catch((error) => toast.error(error?.data?.message));
   };
 
-
-  // console.log(getPodcastDetails?.data?.podcast);
   return (
     <div className="bg-[#F7E8E1]">
-      <div className="container mx-auto  pb-10">
-        <p className="font-poppins font-bold text-2xl py-5">Your Matches</p>
+      <div className="container mx-auto  py-14">
+        {/* <p className="font-poppins font-bold text-2xl py-5">Your Matches</p> */}
         <div className="flex justify-center">
-          {(!getPodcastDetails?.data?.podcast ||
-            Object.keys(getPodcastDetails?.data?.podcast).length === 0) && (
-              <button
-                onClick={() => handleCreatePodcast()}
-                className="bg-[#F68064] w-full max-w-[200px]  mt-2 py-2 rounded-md  text-white text-xl"
-              >
-                Create New Match
-              </button>
-            )}
+          {(getPodcastDetails?.data?.podcast?.participants?.length === 0 &&
+            // Object.keys(getPodcastDetails?.data?.podcast).length === 0) && (
+            <button
+              onClick={() => handleCreatePodcast()}
+              className="bg-[#F68064] w-full max-w-[200px]  mt-2 py-2 mb-8 rounded-md  text-white text-xl"
+            >
+              Create New Match
+            </button>
+          )}
         </div>
 
 
@@ -141,7 +138,7 @@ const HomePage = () => {
             <button
               disabled={!getPodcastDetails?.data?.podcast?._id}
               onClick={() => handleVideoCall()}
-              className="bg-[#F68064] w-full mt-2 py-2 rounded-md disabled:bg-gray-200"
+              className="bg-[#F68064] w-full mt-2 py-2 rounded-md disabled:bg-gray-200 cursor-pointer"
             >
               Join
             </button>

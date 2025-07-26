@@ -57,7 +57,7 @@ const Pricing = ({ subscriptions }) => {
 
             <p className=" my-2 mt-10 ">{plan?.name}</p>
 
-            <div className="space-y-2 pb-5 mt-5 min-h-[200px]">
+            <div className="space-y-2 pb-5 mt-5 min-auto">
               {plan?.description?.map((det) => {
                 return (
                   <p
