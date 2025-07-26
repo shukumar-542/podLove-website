@@ -1,4 +1,4 @@
-import { Form, Radio, Button } from "antd";
+import { Form, Radio } from "antd";
 import AuthButton from "../../component/AuthButton/AuthButton";
 import { Link } from "react-router";
 
@@ -110,7 +110,7 @@ const RelationshipReadinessOneForm = () => {
 
                     <Form.Item className="text-center">
                         <div className="flex justify-center">
-                            <Link to={"/relationship-first"}>
+                            <Link to={"/relationship-second"}>
                                 <AuthButton className={"py-2"}>
                                     Next
                                 </AuthButton>
