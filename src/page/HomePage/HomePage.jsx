@@ -1,8 +1,7 @@
-import React from "react";
 import img1 from "../../assets/tes.png";
 import video from "../../assets/schedule.mp4";
 import mic from "../../assets/mic.png";
-import IsPodSafe from "../../component/IsPodSafe/IsPodSafe";
+// import IsPodSafe from "../../component/IsPodSafe/IsPodSafe";
 import { Link, useNavigate } from "react-router";
 import Pricing from "../../component/Pricing/Pricing";
 import {
@@ -10,10 +9,13 @@ import {
   usePodcastCreateMutation,
 } from "../../redux/Api/AuthApi";
 import { toast } from "sonner";
+import { useGetAllPlanQuery } from "../../redux/Api/SubscriptionPlan";
 const HomePage = () => {
   const navigate = useNavigate();
   const [createPodCast] = usePodcastCreateMutation();
   const { data: getPodcastDetails } = useGetPodCastDetailsQuery();
+  console.log("getPodcastDetails", getPodcastDetails);
+  const { data: getAllPlans } = useGetAllPlanQuery();
 
   const handleVideoCall = () => {
     if (!getPodcastDetails?.data?.podcast?._id) {
@@ -30,31 +32,30 @@ const HomePage = () => {
       .catch((error) => toast.error(error?.data?.message));
   };
 
-
-  // console.log(getPodcastDetails?.data?.podcast);
   return (
     <div className="bg-[#F7E8E1]">
-      <div className="container mx-auto">
-        <p className="font-poppins font-bold text-2xl py-5">Your Matches</p>
+      <div className="container mx-auto  py-14">
+        {/* <p className="font-poppins font-bold text-2xl py-5">Your Matches</p> */}
         <div className="flex justify-center">
-          {(!getPodcastDetails?.data?.podcast ||
-            Object.keys(getPodcastDetails?.data?.podcast).length === 0) && (
+          {(getPodcastDetails?.data?.podcast?.participants?.length === 0 &&
+            // Object.keys(getPodcastDetails?.data?.podcast).length === 0) && (
             <button
               onClick={() => handleCreatePodcast()}
-              className="bg-[#F68064] w-full max-w-[200px]  mt-2 py-2 rounded-md  text-white text-xl"
+              className="bg-[#F68064] w-full max-w-[200px]  mt-2 py-2 mb-8 rounded-md  text-white text-xl"
             >
               Create New Match
             </button>
           )}
         </div>
+
+
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 justify-between items-center gap-10">
           {getPodcastDetails?.data?.isPrimaryUser ? (
             getPodcastDetails?.data?.podcast?.participants?.map(
               (participant, i) => {
                 return (
-                  <div>
+                  <div key={participant?._id}>
                     <Link
-                      key={participant?._id}
                       to={`/podcast-details/${participant?._id}`}
                     >
                       <div className="cursor-pointer hover:shadow-2xl rounded-br-3xl relative">
@@ -73,12 +74,11 @@ const HomePage = () => {
                             participant?._id !==
                             getPodcastDetails?.data?.podcast?.selectedUser
                           }
-                          className={`bg-[#FFA175] mt-5 w-full text-white rounded-tl-lg rounded-br-lg py-2 text-xl ${
-                            participant?._id !==
+                          className={`bg-[#FFA175] mt-5 w-full text-white rounded-tl-lg rounded-br-lg py-2 text-xl ${participant?._id !==
                             getPodcastDetails?.data?.podcast?.selectedUser
-                              ? "bg-gray-400"
-                              : "bg-[#FFA175] "
-                          }`}
+                            ? "bg-gray-400"
+                            : "bg-[#FFA175] "
+                            }`}
                         >
                           Chat
                         </button>
@@ -105,7 +105,7 @@ const HomePage = () => {
                   to={`/chat/${getPodcastDetails?.data?.podcast?.selectedUser}`}
                 >
                   <button
-                   
+
                     className={`bg-[#FFA175] mt-5 w-full text-white rounded-tl-lg rounded-br-lg py-2 text-xl}`}
                   >
                     Chat
@@ -115,6 +115,8 @@ const HomePage = () => {
             </div>
           )}
         </div>
+
+
         {/* Date and time schedule section */}
         <section className="my-20  relative">
           <video
@@ -136,19 +138,20 @@ const HomePage = () => {
             <button
               disabled={!getPodcastDetails?.data?.podcast?._id}
               onClick={() => handleVideoCall()}
-              className="bg-[#F68064] w-full mt-2 py-2 rounded-md disabled:bg-gray-200"
+              className="bg-[#F68064] w-full mt-2 py-2 rounded-md disabled:bg-gray-200 cursor-pointer"
             >
               Join
             </button>
           </div>
         </section>
 
-        <h1 className="text-center font-bold text-2xl">Subscription Plan</h1>
+        <h1 className="text-center font-bold text-2xl md:text-4xl">Subscription Plan</h1>
 
         {/* Subscription Plan Section */}
-        <Pricing subscriptions={getPodcastDetails?.data} />
+        <Pricing subscriptions={getAllPlans?.data} />
       </div>
-      <IsPodSafe />
+
+      {/* <IsPodSafe /> */}
     </div>
   );
 };

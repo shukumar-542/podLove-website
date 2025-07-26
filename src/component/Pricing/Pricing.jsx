@@ -6,26 +6,34 @@ import {
   useUpgradeSubscriptionPlanMutation,
 } from "../../redux/Api/SubscriptionPlan";
 import { toast } from "sonner";
+import { useNavigate } from "react-router";
 const Pricing = ({ subscriptions }) => {
   const [upgradeSubscription, { isLoading }] = useUpgradeSubscriptionPlanMutation();
-
+  const navigate = useNavigate();
   console.log(subscriptions);
   // Handle upgrade plan function
-  const handleUpdatePlan = (id) => {
+  const handleUpdatePlan = (plan) => {
     const data = {
-      planId: id,
+      planId: plan?._id,
     };
-    upgradeSubscription(data)
-      .unwrap()
-      .then((payload) => {
-        if (payload?.data) {
-          console.log(payload);
-          // window.open(payload?.data)
-          const newWindow = window.open('', '_blank');
-          newWindow.location.href = payload.data;
-        }
-      })
-      .catch((error) => toast.error(error?.data?.message));
+    console.log("data", plan);
+    if (plan?.unitAmount === "0") {
+      navigate('/home')
+    }
+    else {
+      upgradeSubscription(data)
+        .unwrap()
+        .then((payload) => {
+          if (payload?.data) {
+            console.log(payload);
+            // window.open(payload?.data)
+            const newWindow = window.open('', '_blank');
+            newWindow.location.href = payload.data;
+          }
+        })
+        .catch((error) => toast.error(error?.data?.message));
+    }
+
   };
 
   return (
@@ -49,7 +57,7 @@ const Pricing = ({ subscriptions }) => {
 
             <p className=" my-2 mt-10 ">{plan?.name}</p>
 
-            <div className="space-y-2 pb-5 mt-5 min-h-[200px]">
+            <div className="space-y-2 pb-5 mt-5 min-auto">
               {plan?.description?.map((det) => {
                 return (
                   <p
@@ -63,7 +71,7 @@ const Pricing = ({ subscriptions }) => {
               })}
             </div>
             <h1 className=" text-3xl font-bold my-5">
-              {plan?.unitAmount == 0
+              {plan?.unitAmount == "0"
                 ? "Free"
                 : `${plan.unitAmount} / ${plan?.interval}`}
             </h1>
@@ -75,7 +83,7 @@ const Pricing = ({ subscriptions }) => {
               ) : (
                 <div className=" text-center">
                   <button
-                    onClick={() => handleUpdatePlan(plan?._id)}
+                    onClick={() => handleUpdatePlan(plan)}
                     disabled={isLoading}
                     className=" bg-gradient-to-r from-[#F36E2F] to-[#FEB491]  shadow-white shadow-inner rounded-full w-full mt-5 py-2 max-w-xs  mb-5"
                   >
