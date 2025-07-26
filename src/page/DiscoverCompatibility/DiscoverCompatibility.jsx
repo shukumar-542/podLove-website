@@ -1,33 +1,58 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import logo from "../../assets/podLogo.png";
 import { Radio } from "antd";
 import AuthButton from "../../component/AuthButton/AuthButton";
-import { Link, useNavigate } from "react-router";
-import { useUpdateUserInfoMutation } from "../../redux/Api/AuthApi";
+import { useNavigate } from "react-router";
 import { toast } from "sonner";
+// import { useUpdateUserInfoMutation } from "../../redux/Api/AuthApi";
+// import { toast } from "sonner";
 const DiscoverCompatibility = () => {
   const navigate = useNavigate();
-  const [updateCompatibility] = useUpdateUserInfoMutation();
+  // const [updateCompatibility] = useUpdateUserInfoMutation();
   const [answers, setAnswers] = useState([]);
+  const [errors, setErrors] = useState([]);
 
   const handleChange = (index, value) => {
     const newAnswers = [...answers];
     newAnswers[index] = value;
     setAnswers(newAnswers);
+
+    const newErrors = [...errors];
+    newErrors[index] = false; // Clear the error for this question
+    setErrors(newErrors);
   };
 
+  // const handleDiscoverCompatibility = () => {
+  //   const data = {
+  //     compatibility: answers,
+  //   };
+  //   console.log(data);
+  //   localStorage.setItem("compatibility", JSON.stringify(data));
+  //   navigate('/discover-compatibility-part')
+
+  //   // updateCompatibility(data)
+  //   //   .unwrap()
+  //   //   .then((payload) => {
+  //   //     toast.success(payload?.message)
+  //   //     navigate('/discover-compatibility-part')
+  //   //   })
+  //   //   .catch((error) => toast.error(error?.data?.message));
+  // };
+
   const handleDiscoverCompatibility = () => {
-    const data = {
-      compatibility: answers,
-    };
-    updateCompatibility(data)
-      .unwrap()
-      .then((payload) => {
-        toast.success(payload?.message)
-        navigate('/discover-compatibility-part')
-      })
-      .catch((error) => toast.error(error?.data?.message));
+    const newErrors = answers.map((answer) => !answer);
+    setErrors(newErrors);
+
+    if (newErrors.includes(true)) {
+      toast.error("Please answer all the questions before proceeding!");
+      return;
+    }
+
+    localStorage.setItem("compatibility", JSON.stringify(answers));
+    navigate("/discover-compatibility-part");
   };
+
+
   return (
     <div className="bg-[#FBECE5] min-h-screen">
       <div className="container max-w-5xl mx-auto py-10">
@@ -40,7 +65,7 @@ const DiscoverCompatibility = () => {
 
         <div className=" p-6">
           <h2 className="text-lg font-bold mb-4">
-            Let's Discover Your Compatibility!
+            Let&apos;s Discover Your Compatibility!
           </h2>
 
           {/* Question 1 */}
@@ -167,12 +192,12 @@ const DiscoverCompatibility = () => {
           </div>
           <div className="text-center">
             {/* <Link to={"/discover-compatibility-part"}> */}
-              <AuthButton
-                handleOnClick={() => handleDiscoverCompatibility()}
-                className={"max-w-80  py-2"}
-              >
-                Next
-              </AuthButton>
+            <AuthButton
+              handleOnClick={() => handleDiscoverCompatibility()}
+              className={"max-w-80  py-2"}
+            >
+              Next
+            </AuthButton>
             {/* </Link> */}
           </div>
         </div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import bg from "../../assets/age-bg.png";
 import AuthButton from "../../component/AuthButton/AuthButton";
 import { useNavigate } from "react-router";
@@ -14,7 +14,7 @@ const ageOptions = Array.from({ length: 21 }, (_, i) => i + 35);
 const Age = () => {
   const navigate = useNavigate();
   const [updateAge] = useUpdateUserInfoMutation();
-  const [date, setDate] = useState(null); 
+  const [date, setDate] = useState(null);
 
   const onChange = (date) => {
     if (date) {
@@ -30,7 +30,7 @@ const Age = () => {
           max: values?.max,
         },
       },
-      dateOfBirth: dayjs(date).format("DD/MM/YYYY"), 
+      dateOfBirth: dayjs(date).format("DD/MM/YYYY"),
     };
 
     const birthDate = date;
@@ -38,9 +38,9 @@ const Age = () => {
     const age = today.diff(birthDate, "year");
 
 
-   if(age < 35){
-    return toast.error("You must be 35 years or older to continue")
-   }
+    if (age < 35) {
+      return toast.error("You must be 35 years or older to continue")
+    }
     console.log("Calculated Age:", age);
 
     // update
@@ -83,7 +83,7 @@ const Age = () => {
           <Form onFinish={handleAge} layout="vertical">
             <Form.Item
               name={"age"}
-              label={<p className="font-medium">Your Age</p>}
+              label={<p className="font-medium">Your Birthday</p>}
             >
               <DatePicker
                 className="w-full border-red-300"

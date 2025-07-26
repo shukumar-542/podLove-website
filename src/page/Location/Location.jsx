@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+/* eslint-disable no-unused-vars */
+import { useState } from "react";
 import bg from "../../assets/location-bg.png";
 import AuthButton from "../../component/AuthButton/AuthButton";
 import { Slider } from "antd";
@@ -7,7 +8,7 @@ import { useUpdateUserInfoMutation } from "../../redux/Api/AuthApi";
 import { toast } from "sonner";
 import { useNavigate } from "react-router";
 const Location = () => {
-  const navigate =  useNavigate()
+  const navigate = useNavigate()
   const [updateUserInfo] = useUpdateUserInfoMutation();
 
   const [selectedLocation, setSelectedLocation] = useState(null);
@@ -18,7 +19,7 @@ const Location = () => {
     setValue(val);
   };
 
- 
+
 
   const handleUpdateLocation = () => {
     const data = {
