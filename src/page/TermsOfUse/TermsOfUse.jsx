@@ -1,5 +1,6 @@
 import React from 'react';
 import AuthButton from '../../component/AuthButton/AuthButton';
+import { Link } from 'react-router';
 
 const TermsOfUse = () => {
   return (
@@ -70,9 +71,11 @@ const TermsOfUse = () => {
         </p>
 
         <div className="flex justify-center">
-          <AuthButton className={"py-2"}>
-            Next
-          </AuthButton>
+          <Link to={"/relationship-first"}>
+            <AuthButton className={"py-2"}>
+              Next
+            </AuthButton>
+          </Link>
         </div>
       </div>
     </div>
