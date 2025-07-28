@@ -1,13 +1,26 @@
-import React from "react";
+// import { Link } from "react-router";
 import { Link } from "react-router";
-import AuthButton from "../../component/AuthButton/AuthButton";
 import bg from "../../assets/m.png";
 import match1 from "../../assets/match.png";
-import match2 from "../../assets/match2.png";
-import match3 from "../../assets/match3.png";
-import match4 from "../../assets/match4.png";
+import { useGetMatchsQuery } from "../../redux/Api/AuthApi";
+import { useState } from "react";
+// import { toast } from "sonner";
 
 const MatchResult = () => {
+  const [selected, setSelected] = useState(null);
+  const { data, isLoading } = useGetMatchsQuery();
+  console.log(data?.data?.users);
+  // const navigate = useNavigate();
+
+  // const navigateToDetails = () => {
+  //   console.log('Selected match:', selected);
+  //   if (!selected) {
+  //     toast.error("Please select a match to proceed!");
+  //     return
+  //   }
+  //   navigate('/home')
+  // }
+
   return (
     <div
       style={{
@@ -32,28 +45,31 @@ const MatchResult = () => {
           <p className="text-center max-w-80 mx-auto mt-2">
             We have found potential matches for you!
           </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-10 ">
-            <div>
-              <img src={match1} alt="" />
-            </div>
-            <div>
-              <img src={match2} alt="" />
-            </div>
-            <div>
-              <img src={match3} alt="" />
-            </div>
-            <div>
-              <img src={match4} alt="" />
-            </div>
-          </div>
+          {
+            isLoading ? (
+              <p className="text-center my-16">Loading...</p>
+            ) : data?.data?.users?.length === 0 ? (
+              <p className="text-center my-16">No matches found.</p>
+            ) :
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-10 ">
+                {
+                  data?.data?.users?.map((user, index) => (
+                    <Link to={`/match-bio?bio=${encodeURIComponent(user?.bio || "")}&interests=${encodeURIComponent(user?.interests || "")}`} className="cursor-pointer" key={index}>
+                      <div onClick={() => setSelected(user)} key={index} className={` cursor-pointer ${selected?._id === user?._id ? "border-2 border-[#F26828]" : "border-2 border-white"} rounded-tl-xl  rounded-br-xl`}>
+                        <img src={match1} alt="" />
+                      </div>
+                    </Link>
+                  ))
+                }
+              </div>
+          }
           <p className="text-center max-w-96 mx-auto mb-10">
             The schedule for your podcast episodes will be shared with you soon.
           </p>
 
           <div className="mx-16">
             <Link to={'/home'}>
-              <AuthButton className={"py-2  mt-5 "}>Next</AuthButton> 
+              <button className={"bg-gradient-to-t from-[#3E0A0A] via-[#EF8559] to-[#FFA175] border-[#EF8559] shadow-inner shadow-white py-2 w-full"}>Next</button>
             </Link>
           </div>
         </div>
@@ -61,7 +77,7 @@ const MatchResult = () => {
         {/* Space after content */}
         <div className="md:col-span-6"></div>
       </div>
-    </div>
+    </div >
   );
 };
 

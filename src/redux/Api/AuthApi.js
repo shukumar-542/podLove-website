@@ -152,6 +152,15 @@ const authApi = baseApi.injectEndpoints({
       },
     }),
 
+    getMatchs: builder.query({
+      query: () => {
+        return {
+          url: "/user/match/getAll",
+          method: "GET",
+        };
+      },
+    }),
+
   }),
 });
 
@@ -173,4 +182,5 @@ export const {
   useVerifyEmailMutation,
   useResetPasswordMutation,
   useConnectBeginsMutation,
+  useGetMatchsQuery,
 } = authApi;
