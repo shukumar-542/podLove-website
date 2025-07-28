@@ -142,6 +142,16 @@ const authApi = baseApi.injectEndpoints({
         };
       },
     }),
+
+    connectBegins: builder.mutation({
+      query: (id) => {
+        return {
+          url: `/user/match/${id}`,
+          method: "POST",
+        };
+      },
+    }),
+
   }),
 });
 
@@ -161,5 +171,6 @@ export const {
   useUpdateUserBioMutation,
   useForgetPasswordMutation,
   useVerifyEmailMutation,
-  useResetPasswordMutation
+  useResetPasswordMutation,
+  useConnectBeginsMutation,
 } = authApi;
