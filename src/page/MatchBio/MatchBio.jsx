@@ -1,10 +1,20 @@
-import React from "react";
+import { useLocation } from "react-router";
 import bg from "../../assets/b.png";
-import { Link } from "react-router";
-import AuthButton from "../../component/AuthButton/AuthButton";
 
-const interest = ["Photography", "Traveling", "Art & Craft", "Cooking"];
+
+// const interest = ["Photography", "Traveling", "Art & Craft", "Cooking"];
 const MatchBio = () => {
+  const location = useLocation();
+  console.log("Location search:", location.search);
+
+  const params = new URLSearchParams(location.search);
+  const bio = params.get("bio") || "No bio found";
+  const interests = params.get("interests")
+    ? params.get("interests").split(",")
+    : [];
+
+  console.log("bio:", bio);
+  console.log("interests:", interests);
   return (
     <div
       style={{
@@ -28,13 +38,11 @@ const MatchBio = () => {
           </h1>
 
           <p className="my-10 border border-[#FFA175] p-5 rounded-md text-[#333333] font-poppins">
-            I’m 40 years old, a proud parent of two and a grandparent of one. I
-            teach 8th grade and have a passion for reading—this year alone, I
-            finished 200 books!
+            {bio}
           </p>
           <p className="font-poppins mb-5">Interest : </p>
           <div className="grid grid-cols-2  justify-between gap-5">
-            {interest?.map((item, index) => (
+            {interests?.map((item, index) => (
               <p key={index} className="text-center border border-[#FFA175] rounded-full py-2 text-[#FFA175]">{item}</p>
             ))}
           </div>

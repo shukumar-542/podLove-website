@@ -1,7 +1,6 @@
-import React from "react";
 import bg from "../../assets/gender-bg.png";
 import { Form, Select } from "antd";
-import { Link, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import AuthButton from "../../component/AuthButton/AuthButton";
 import { useUpdateUserInfoMutation } from "../../redux/Api/AuthApi";
 import { toast } from "sonner";
@@ -19,7 +18,8 @@ const Gender = () => {
     };
     updateGender(data)
       .unwrap()
-      .then((payload) =>{
+      .then((payload) => {
+        localStorage.setItem("userId", payload?.data?._id);
         toast.success(payload?.message)
         navigate('/body')
       })
@@ -57,7 +57,7 @@ const Gender = () => {
             <Form.Item
               name={"myGender"}
               label={<p className="font-medium w-full">Select your gender</p>}
-               rules={[{ required: true, message: "Please select your gender" }]}
+              rules={[{ required: true, message: "Please select your gender" }]}
             >
               <Select placeholder="Select your gender">
                 <Option value={"female"}>Female</Option>

@@ -25,7 +25,7 @@ import ConnectionProgress from "./page/ConnectionProgress/ConnectionProgress.jsx
 import Congratulation from "./page/Congratulation/Congratulation.jsx";
 import MatchResult from "./page/MatchResult/MatchResult.jsx";
 import MatchBio from "./page/MatchBio/MatchBio.jsx";
-import PodcastDetails from "./page/PodcastDetails/PodcastDetails.jsx";
+// import PodcastDetails from "./page/PodcastDetails/PodcastDetails.jsx";
 import AfterPodcast from "./page/AfterPodcast/AfterPodcast.jsx";
 import ChatPage from "./page/ChatPage/ChatPage.jsx";
 import FeedbackOne from "./page/FeedbackOne/FeedbackOne.jsx";

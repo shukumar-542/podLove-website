@@ -1,14 +1,19 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import bg from "../../assets/connection-bg.png";
 import { useNavigate } from "react-router";
 import { Progress } from "antd";
-import { usePodcastCreateMutation } from "../../redux/Api/AuthApi";
+import { useConnectBeginsMutation } from "../../redux/Api/AuthApi";
 import { toast } from "sonner";
+// import { jwtDecode } from "jwt-decode";
 
 const ConnectionProgress = () => {
   const [percent, setPercent] = useState(1);
-  const [createPodcast] = usePodcastCreateMutation();
-
+  const [connectBegins] = useConnectBeginsMutation();
+  // const token = localStorage.getItem("token");
+  // console.log(token);
+  // const decoded = jwtDecode(token);
+  // console.log(decoded?.id);
+  const userId = localStorage.getItem("userId");
   const navigate = useNavigate();
   //   Percentage timer
   useEffect(() => {
@@ -28,7 +33,7 @@ const ConnectionProgress = () => {
   //   Navigate congratulation page
   useEffect(() => {
     if (percent === 100) {
-      createPodcast()
+      connectBegins(userId)
         .unwrap()
         .then((payload) => {
           toast.success(payload?.message);
