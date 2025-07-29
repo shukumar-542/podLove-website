@@ -1,4 +1,3 @@
-import React from "react";
 import IsPodSafe from "../../component/IsPodSafe/IsPodSafe";
 import DownloadGuide from "../../component/DownloadGuide/DownloadGuide";
 import ClientReview from "../../component/ClientReview/ClientReview";

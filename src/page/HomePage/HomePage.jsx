@@ -13,7 +13,7 @@ import { useGetAllPlanQuery } from "../../redux/Api/SubscriptionPlan";
 const HomePage = () => {
   const navigate = useNavigate();
   const [createPodCast] = usePodcastCreateMutation();
-  const { data: getPodcastDetails } = useGetPodCastDetailsQuery();
+  const { data: getPodcastDetails, isLoading } = useGetPodCastDetailsQuery();
   console.log("getPodcastDetails", getPodcastDetails);
   const { data: getAllPlans } = useGetAllPlanQuery();
 
@@ -31,6 +31,7 @@ const HomePage = () => {
       .then((payload) => toast.success(payload?.message))
       .catch((error) => toast.error(error?.data?.message));
   };
+  console.log('sesfdksadhfklshdafhasdhfjsdalf', getPodcastDetails?.data?.podcast?.participants);
 
   return (
     <div className="bg-[#F7E8E1]">
@@ -47,75 +48,89 @@ const HomePage = () => {
             </button>
           )}
         </div>
+        {
+          isLoading ?
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 justify-between items-center gap-10">
+              {
+                [...Array(4)].map((_, i) => (
+                  <div className="animate-pulse" key={`skeleton-${i}`}>
+                    <div className=" relative">
+                      <div className="w-full h-[390px] bg-[#fcf7f5] rounded rounded-tl-3xl rounded-br-3xl"></div>
 
-
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 justify-between items-center gap-10">
-          {getPodcastDetails?.data?.isPrimaryUser ? (
-            getPodcastDetails?.data?.podcast?.participants?.map(
-              (participant, i) => {
-                return (
-                  <div key={participant?._id}>
-                    <Link
-                      to={`/podcast-details/${participant?._id}`}
-                    >
-                      <div className="cursor-pointer hover:shadow-2xl rounded-br-3xl relative">
-                        <img src={img1} className="w-full" alt="" />
-                        <p className="absolute bottom-10 right-[45%] text-xl font-semibold">
-                          Match-{i + 1}
-                        </p>
-                      </div>
-                    </Link>
-                    {getPodcastDetails?.data?.podcast?.selectedUser && (
-                      <Link
-                        to={`/chat/${getPodcastDetails?.data?.podcast?.selectedUser}`}
-                      >
-                        <button
-                          disabled={
-                            participant?._id !==
-                            getPodcastDetails?.data?.podcast?.selectedUser
-                          }
-                          className={`bg-[#FFA175] mt-5 w-full text-white rounded-tl-lg rounded-br-lg py-2 text-xl ${participant?._id !==
-                            getPodcastDetails?.data?.podcast?.selectedUser
-                            ? "bg-gray-400"
-                            : "bg-[#FFA175] "
-                            }`}
-                        >
-                          Chat
-                        </button>
-                      </Link>
-                    )}
+                    </div>
+                    <div className="mt-5 w-full h-10 bg-[#fcf7f5] rounded-tl-lg rounded-br-lg"></div>
                   </div>
-                );
+                ))
               }
-            )
-          ) : (
-            <div>
-              <Link
-                to={`/podcast-details/${getPodcastDetails?.data?.podcast?.primaryUser?._id}`}
-              >
-                <div className="cursor-pointer hover:shadow-2xl rounded-br-3xl relative">
-                  <img src={img1} className="w-full" alt="" />
-                  <p className="absolute bottom-10 right-[45%] text-xl font-semibold">
-                    Match-1
-                  </p>
-                </div>
-              </Link>
-              {getPodcastDetails?.data?.podcast?.selectedUser && (
-                <Link
-                  to={`/chat/${getPodcastDetails?.data?.podcast?.selectedUser}`}
-                >
-                  <button
-
-                    className={`bg-[#FFA175] mt-5 w-full text-white rounded-tl-lg rounded-br-lg py-2 text-xl}`}
+            </div>
+            :
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 justify-between items-center gap-10">
+              {getPodcastDetails?.data?.isPrimaryUser ? (
+                getPodcastDetails?.data?.podcast?.participants?.map(
+                  (participant, i) => {
+                    return (
+                      <div key={participant?._id}>
+                        <Link
+                          to={`/podcast-details/${participant?._id}`}
+                        >
+                          <div className="cursor-pointer hover:shadow-2xl rounded-br-3xl relative">
+                            <img src={img1} className="w-full" alt="" />
+                            <p className="absolute bottom-10 right-[45%] text-xl font-semibold">
+                              Match-{i + 1}
+                            </p>
+                          </div>
+                        </Link>
+                        {getPodcastDetails?.data?.podcast?.selectedUser && (
+                          <Link
+                            to={`/chat/${getPodcastDetails?.data?.podcast?.selectedUser}`}
+                          >
+                            <button
+                              disabled={
+                                participant?._id !==
+                                getPodcastDetails?.data?.podcast?.selectedUser
+                              }
+                              className={`bg-[#FFA175] mt-5 w-full text-white rounded-tl-lg rounded-br-lg py-2 text-xl ${participant?._id !==
+                                getPodcastDetails?.data?.podcast?.selectedUser
+                                ? "bg-gray-400"
+                                : "bg-[#FFA175] "
+                                }`}
+                            >
+                              Chat
+                            </button>
+                          </Link>
+                        )}
+                      </div>
+                    );
+                  }
+                )
+              ) : (
+                <div>
+                  <Link
+                    to={`/podcast-details/${getPodcastDetails?.data?.podcast?.primaryUser?._id}`}
                   >
-                    Chat
-                  </button>
-                </Link>
+                    <div className="cursor-pointer hover:shadow-2xl rounded-br-3xl relative">
+                      <img src={img1} className="w-full" alt="" />
+                      <p className="absolute bottom-10 right-[45%] text-xl font-semibold">
+                        Match-1
+                      </p>
+                    </div>
+                  </Link>
+                  {getPodcastDetails?.data?.podcast?.selectedUser && (
+                    <Link
+                      to={`/chat/${getPodcastDetails?.data?.podcast?.selectedUser}`}
+                    >
+                      <button
+
+                        className={`bg-[#FFA175] mt-5 w-full text-white rounded-tl-lg rounded-br-lg py-2 text-xl}`}
+                      >
+                        Chat
+                      </button>
+                    </Link>
+                  )}
+                </div>
               )}
             </div>
-          )}
-        </div>
-
+        }
 
         {/* Date and time schedule section */}
         <section className="my-20  relative">

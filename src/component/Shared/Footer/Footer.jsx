@@ -1,4 +1,3 @@
-import React from "react";
 import img from "../../../assets/footer.png";
 import logo from "../../../assets/podLogo.png";
 import app from "../../../assets/appStore.png";
@@ -20,7 +19,7 @@ const Footer = () => {
             {/* <p className="text-xl font-bold my-5">E-mail</p>
             <p>Email: mstkhushiakter333@gmail.com</p> */}
           </div>
-          <div className=" md:mx-auto">
+          <div className=" md:mx-auto space-y-4">
             {/* <h1 className="text-2xl font-bold mb-10">Company Links</h1> */}
             <p className="mb-1">
               <Link to={"/about-us"} className="mb-2">
@@ -45,7 +44,7 @@ const Footer = () => {
         </div>
         <div className="my-10 md:flex  justify-between items-center">
           <p>All Rights Reserved. Copyright © 2025 podLove </p>
-          <div className="flex ">
+          <div className="flex gap-4 ">
             <img src={app} className="h-[44px] w-[150px]" alt="" />
             <img src={google} className="h-[44px] w-[150px]" alt="" />
           </div>
