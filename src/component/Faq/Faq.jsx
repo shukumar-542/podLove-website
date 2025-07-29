@@ -1,17 +1,14 @@
-import React from "react";
 import img from "../../assets/bg.png";
 import { Collapse } from "antd";
-import { DownOutlined } from "@ant-design/icons";
 import { IoArrowDownOutline } from "react-icons/io5";
 import { useGetFaqQuery } from "../../redux/Api/SubscriptionPlan";
 
 const { Panel } = Collapse;
 
-
-
 const Faq = () => {
 
-  const {data : getFaq} = useGetFaqQuery()
+  const { data: getFaq } = useGetFaqQuery(undefined)
+
   return (
     <div style={{ backgroundImage: `url(${img})` }} className="py-10">
       <div className="text-center">
@@ -19,32 +16,35 @@ const Faq = () => {
       </div>
 
       <div className="container mx-auto mt-10">
-          <Collapse
-            accordion
-            expandIconPosition="end" 
-            expandIcon={({ isActive }) => (
-              <IoArrowDownOutline
+        <Collapse
+          accordion
+          expandIconPosition="end"
+          expandIcon={({ isActive }) => (
+            <IoArrowDownOutline
               size={40}
-                style={{ color: "white", fontSize: "16px" , backgroundColor : "#E8936A"}}
-                className="p-2  rounded-full"
-                rotate={isActive ? 180 : 0}
-              />
-            )}
-          >
-            {getFaq?.data.map((item) => (
+              style={{
+                transform: isActive ? "rotate(180deg)" : "rotate(0deg)",
+                transition: "transform 0.3s ease",
+                color: "white",
+                fontSize: "16px",
+                backgroundColor: "#E8936A"
+              }}
+              className="p-2 rounded-full"
+            />
+          )}
+        >
+          {
+            getFaq?.data?.faqs?.map((item, index) => (
               <Panel
-                header={
-                  <span className="text-lg font-medium">{item.question}</span>
-                }
-                key={item.key}
-                className="" 
+                key={item?.id || index}
+                header={<span className="text-lg font-medium">{item?.question}</span>}
               >
-                <p className="my-2 text-gray-600">{item.answer}</p>{" "}
-                
+                <p className="my-2 text-gray-600">{item?.answer}</p>
               </Panel>
             ))}
-          </Collapse>
-        </div>
+        </Collapse>
+
+      </div>
     </div>
   );
 };

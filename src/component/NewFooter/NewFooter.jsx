@@ -1,4 +1,3 @@
-import React from "react";
 import { FaLocationDot } from "react-icons/fa6";
 import { HiOutlineMail } from "react-icons/hi";
 import { LuDot, LuPhone } from "react-icons/lu";
