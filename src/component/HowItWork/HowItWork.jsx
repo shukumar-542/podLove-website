@@ -1,12 +1,13 @@
-import React from "react";
 import step1 from "../../assets/step11.png";
 import step2 from "../../assets/step2.png";
 import step3 from "../../assets/step3.png";
-import step4 from "../../assets/step4.png";
+// import step4 from "../../assets/step4.png";
 import step5 from "../../assets/tt.png";
 import { Button } from "../Shared/Button/Button";
 import { Link } from "react-router";
 const HowItWork = () => {
+  const token = localStorage.getItem("token");
+
   return (
     <div className="p-4 md:px-0">
       <div className="container mx-auto my-20">
@@ -91,7 +92,12 @@ const HowItWork = () => {
           </div>
         </section>
         <div className="mt-10 flex justify-center">
+          {token ? (
+            <Button className={'py-2'}><Link to={"/home"}>Find your Match</Link></Button>
+          ) : (
             <Button className={'py-2'}><Link to={"/sign-up"}>Find your Match</Link></Button>
+          )}
+          {/* <Button className={'py-2'}><Link to={"/sign-up"}>Find your Match</Link></Button> */}
         </div>
       </div>
     </div>

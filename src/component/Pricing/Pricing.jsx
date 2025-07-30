@@ -18,7 +18,7 @@ const Pricing = ({ subscriptions }) => {
     };
     console.log("data", plan);
     if (plan?.unitAmount === "0") {
-      navigate('/home')
+      navigate('/connection-progress')
     }
     else {
       upgradeSubscription(data)

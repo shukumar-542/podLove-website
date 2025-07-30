@@ -1,23 +1,23 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import img from "../../assets/footLove.png";
 import img1 from "../../assets/podLogo.png";
 import { Link, NavLink } from "react-router";
 import { IoMdNotifications } from "react-icons/io";
-import { HiMenu, HiX } from "react-icons/hi"; 
+import { HiMenu, HiX } from "react-icons/hi";
 import { useGetUserQuery } from "../../redux/Api/AuthApi";
 
 const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const { data :  getUser} = useGetUserQuery()
+  const { data: getUser } = useGetUserQuery()
 
 
   return (
-    <div className="h-28 bg-cover  bg-center" style={{ backgroundImage: `url(${img})` }}>
+    <div className="h-20 bg-cover  bg-center" style={{ backgroundImage: `url(${img})` }}>
       <div className="container mx-auto h-full flex items-center justify-between px-4 md:px-8">
-        
+
         {/* Logo */}
         <div>
-          <NavLink to={"/"}><img className="h-16 " src={img1} alt="Logo" /></NavLink>
+          <NavLink to={"/"}><img className="h-10 " src={img1} alt="Logo" /></NavLink>
         </div>
 
         {/* Mobile Menu Button */}
@@ -28,9 +28,9 @@ const NavBar = () => {
         {/* Desktop Navigation */}
         <div className="hidden md:flex space-x-5">
           {
-            getUser?.data  && <NavLink to="/home" className="hover:text-[#FFA175]">Home</NavLink>
+            getUser?.data && <NavLink to="/home" className="hover:text-[#FFA175]">Home</NavLink>
           }
-          
+
           <NavLink to="/about-us" className="hover:text-[#FFA175]">About us</NavLink>
           <NavLink to="/contact-us" className="hover:text-[#FFA175]">Contact us</NavLink>
           <NavLink to="/feedback-first-step" className="hover:text-[#FFA175]">Feedback</NavLink>
@@ -46,9 +46,9 @@ const NavBar = () => {
           }
           {
             !getUser?.data && <Link to={"/sign-up"} className="bg-[#FFA175] text-white px-4 py-1 rounded">Sign Up Here</Link>
-          } 
-          
-          
+          }
+
+
         </div>
       </div>
 

@@ -65,7 +65,7 @@ const HomePage = () => {
             </div>
             :
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 justify-between items-center gap-10">
-              {getPodcastDetails?.data?.isPrimaryUser ? (
+              {!getPodcastDetails?.data?.isPrimaryUser ? (
                 getPodcastDetails?.data?.podcast?.participants?.map(
                   (participant, i) => {
                     return (
