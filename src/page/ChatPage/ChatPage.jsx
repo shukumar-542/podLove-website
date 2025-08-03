@@ -11,14 +11,19 @@ import {
   where,
 } from "firebase/firestore";
 import { useParams } from "react-router";
-import { useGetUserQuery } from "../../redux/Api/AuthApi";
+import { useGetPodCastDetailsQuery, useGetUserQuery } from "../../redux/Api/AuthApi";
 
 const ChatPage = () => {
   const [selectedMessageIndex, setSelectedMessageIndex] = useState(null);
   const { data: userId } = useGetUserQuery();
+  console.log('user info', userId);
   const { id } = useParams();
   const senderId = userId?.data?._id;
   const receiverId = id;
+  const { data: getPodcastDetails } = useGetPodCastDetailsQuery();
+  const participants = getPodcastDetails?.data?.podcast?.participants || [];
+
+  const participant = participants.find(p => p._id === id);
 
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
@@ -62,7 +67,7 @@ const ChatPage = () => {
     <div className="bg-[#fef7f5] min-h-[80vh] flex flex-col">
       {/* Header */}
       <div className="bg-[#FF805D] text-white p-4 text-lg font-semibold shadow-md text-center">
-        Chat with User
+        Chat With {participant?.name}
       </div>
 
       {/* Date Separator */}
