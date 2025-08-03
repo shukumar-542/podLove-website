@@ -1,10 +1,9 @@
-import React from "react";
 import IsPodSafe from "../../component/IsPodSafe/IsPodSafe";
 import { useGetNotificationQuery } from "../../redux/Api/SubscriptionPlan";
 
 const Notification = () => {
   const { data: getNotification } = useGetNotificationQuery();
-  // console.log(getNotification?.data?.notifications);
+  console.log(getNotification?.data?.notifications);
   return (
     <div className="bg-[#FAF2EF] min-h-screen">
       <div className="container mx-auto">
@@ -14,13 +13,13 @@ const Notification = () => {
         <p className="text-xl font-semibold">Total 0 Notifications</p>
 
         <div className="space-y-4 mt-10 pb-10">
-          {getNotification?.data?.notifications?.map((notification) => {
+          {getNotification?.data?.notifications?.map((notification, i) => {
             return (
-              <p className="flex justify-between items-center bg-white p-3 text-[#333333]">
+              <p key={i} className="flex justify-between items-center bg-white p-3 text-[#333333]">
                 <span>
-                  {notification?.message}
+                  {notification?.message[0]?.description}
                 </span>
-                <span>Just Now</span>
+                <span>{notification?.message[0]?.title}</span>
               </p>
             );
           })}
@@ -31,7 +30,7 @@ const Notification = () => {
                 </span>
                 <span>Just Now</span>
               </p> */}
-         
+
         </div>
       </div>
       <IsPodSafe />

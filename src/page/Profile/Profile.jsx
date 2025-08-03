@@ -1,16 +1,16 @@
-import React from "react";
 import bg from "../../assets/102.png";
-import profile from "../../assets/profile.png";
+// import profile from "../../assets/profile.png";
 import { CiLocationOn } from "react-icons/ci";
 import { IoCalendarOutline, IoSettingsOutline } from "react-icons/io5";
 import { FiEdit } from "react-icons/fi";
 import { Link } from "react-router";
 import { useGetUserQuery } from "../../redux/Api/AuthApi";
+import { baseUrl } from "../../baseUrl";
 const Profile = () => {
-    const { data :  getUser} = useGetUserQuery()
+  const { data: getUser } = useGetUserQuery()
 
-    console.log(getUser?.data);
-  
+  console.log(getUser?.data);
+
   return (
     <div
       style={{
@@ -29,7 +29,7 @@ const Profile = () => {
         <div className="bg-white   md:flex gap-10 p-10 rounded-tr-[90px] rounded-bl-[90px] shadow-2xl shadow-[#eb8b73] mb-20 z-10">
           <div>
             <img
-              src={getUser?.data?.avatar}
+              src={`${baseUrl}${getUser?.data?.avatar}`}
               className="h-[200px] md:h-[300px] w-[200px] md:w-[284px] md:relative md:-mt-24 rounded-md object-cover"
               alt=""
             />
@@ -45,7 +45,7 @@ const Profile = () => {
           <div>
             <div className="flex justify-between items-center">
               <p className="text-[#8C5940] font-poppins text-[36px] font-bold ">
-              {getUser?.data?.name}
+                {getUser?.data?.name}
               </p>
               <Link to={"/edit-profile"}>
                 <div className="bg-[#FFA175] text-white p-2 rounded-md shadow-lg cursor-pointer">
@@ -74,7 +74,7 @@ const Profile = () => {
               Bio:
             </p>
             <p className="bg-[#FFE2D4] max-w-md p-2 mt-2 rounded-md shadow-lg h-32 overflow-y-auto">
-            {getUser?.data?.bio}
+              {getUser?.data?.bio}
             </p>
           </div>
         </div>

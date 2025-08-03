@@ -5,10 +5,12 @@ import { Link, NavLink } from "react-router";
 import { IoMdNotifications } from "react-icons/io";
 import { HiMenu, HiX } from "react-icons/hi";
 import { useGetUserQuery } from "../../redux/Api/AuthApi";
+import { baseUrl } from "../../baseUrl";
 
 const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const { data: getUser } = useGetUserQuery()
+  console.log('from header', getUser);
 
 
   return (
@@ -42,7 +44,7 @@ const NavBar = () => {
             <IoMdNotifications size={20} color="white" />
           </NavLink>
           {
-            getUser?.data ? <Link to={"/profile"}><img src={getUser?.data?.avatar} className="h-10 shadow-2xl object-cover w-10 rounded-full border border-[#FFA175] cursor-pointer" alt="" /></Link> : <NavLink to="/login" className="hover:text-[#FFA175]">Login</NavLink>
+            getUser?.data ? <Link to={"/profile"}><img src={`${baseUrl}${getUser?.data?.avatar}`} className="h-10 shadow-2xl object-cover w-10 rounded-full border border-[#FFA175] cursor-pointer" alt="" /></Link> : <NavLink to="/login" className="hover:text-[#FFA175]">Login</NavLink>
           }
           {
             !getUser?.data && <Link to={"/sign-up"} className="bg-[#FFA175] text-white px-4 py-1 rounded">Sign Up Here</Link>
