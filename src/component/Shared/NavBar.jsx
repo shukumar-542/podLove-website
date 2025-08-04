@@ -11,7 +11,7 @@ const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const { data: getUser } = useGetUserQuery()
   console.log('from header', getUser);
-
+  const logInUser = localStorage.getItem("podlove-token")
 
   return (
     <div className="h-20 bg-cover  bg-center" style={{ backgroundImage: `url(${img})` }}>
@@ -30,7 +30,7 @@ const NavBar = () => {
         {/* Desktop Navigation */}
         <div className="hidden md:flex space-x-5">
           {
-            getUser?.data && <NavLink to="/home" className="hover:text-[#FFA175]">Home</NavLink>
+            logInUser && <NavLink to="/home" className="hover:text-[#FFA175]">Home</NavLink>
           }
 
           <NavLink to="/about-us" className="hover:text-[#FFA175]">About us</NavLink>
@@ -40,14 +40,18 @@ const NavBar = () => {
 
         {/* Right Section */}
         <div className="hidden md:flex space-x-5 items-center">
-          <NavLink to="/notification" className="bg-[#FFA175] rounded-full p-2">
-            <IoMdNotifications size={25} color="white" />
-          </NavLink>
           {
-            getUser?.data ? <Link to={"/profile"}><img src={`${baseUrl}${getUser?.data?.avatar}`} className="h-10 shadow-2xl object-cover w-10 rounded-full border border-[#FFA175] cursor-pointer" alt="" /></Link> : <NavLink to="/login" className="hover:text-[#FFA175]">Login</NavLink>
+            logInUser &&
+            <NavLink to="/notification" className="bg-[#FFA175] rounded-full p-2">
+              <IoMdNotifications size={25} color="white" />
+            </NavLink>
+          }
+
+          {
+            logInUser ? <Link to={"/profile"}><img src={`${baseUrl}${getUser?.data?.avatar}`} className="h-10 shadow-2xl object-cover w-10 rounded-full border border-[#FFA175] cursor-pointer" alt="" /></Link> : <NavLink to="/login" className="hover:text-[#FFA175]">Login</NavLink>
           }
           {
-            !getUser?.data && <Link to={"/sign-up"} className="bg-[#FFA175] text-white px-4 py-1 rounded">Sign Up Here</Link>
+            !logInUser && <Link to={"/sign-up"} className="bg-[#FFA175] text-white px-4 py-1 rounded">Sign Up Here</Link>
           }
 
 

@@ -1,12 +1,13 @@
-import React from "react";
 import AuthButton from "../../component/AuthButton/AuthButton";
 import { Form } from "antd";
 import Password from "antd/es/input/Password";
 import { useChangePasswordMutation } from "../../redux/Api/AuthApi";
 import { toast } from "sonner";
+import { useNavigate } from "react-router";
 
 const ChangePassword = () => {
-  const [changePassword] = useChangePasswordMutation();
+  const [changePassword, { isLoading }] = useChangePasswordMutation();
+  const navigate = useNavigate();
   const handleChangePassword = (values) => {
     console.log(values);
     const data = {
@@ -15,7 +16,11 @@ const ChangePassword = () => {
 
     changePassword(data)
       .unwrap()
-      .then((payload) => toast.success(payload?.message))
+      .then((payload) => {
+        toast.success(payload?.message)
+        navigate('/profile')
+      }
+      )
       .catch((error) => toast.error(error?.data?.message));
   };
   return (
@@ -54,7 +59,7 @@ const ChangePassword = () => {
             rules={[
               { required: true, message: "Please enter a new password" },
               {
-                pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/,
+                pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/,
                 message:
                   "Password must be at least 8 characters, contain both letters (uppercase and lowercase), a number, and a special character.",
               },
@@ -86,7 +91,7 @@ const ChangePassword = () => {
           </Form.Item>
 
           <div className="max-w-md text-center mx-auto">
-            <AuthButton className={"py-2"}>Update</AuthButton>
+            <AuthButton disabled={isLoading} className={"py-2"}>{isLoading ? "Loading..." : "Update"}</AuthButton>
           </div>
         </Form>
       </div>
