@@ -1,8 +1,7 @@
-import React from "react";
 import img from "../../assets/signUpBg.png";
 import { Checkbox, Form, Input, Spin } from "antd";
 import Password from "antd/es/input/Password";
-import { Link, NavLink, useNavigate } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import AuthButton from "../../component/AuthButton/AuthButton";
 import { useSignUpMutation } from "../../redux/Api/AuthApi";
 import { toast } from "sonner";

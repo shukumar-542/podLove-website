@@ -9,7 +9,7 @@ import { toast } from "sonner";
 const ConnectionProgress = () => {
   const [percent, setPercent] = useState(1);
   const [connectBegins] = useConnectBeginsMutation();
-  // const token = localStorage.getItem("token");
+  // const token = localStorage.getItem("podlove-token");
   // console.log(token);
   // const decoded = jwtDecode(token);
   // console.log(decoded?.id);

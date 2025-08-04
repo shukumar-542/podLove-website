@@ -40,8 +40,8 @@ const NavBar = () => {
 
         {/* Right Section */}
         <div className="hidden md:flex space-x-5 items-center">
-          <NavLink to="/notification" className="bg-[#FFA175] rounded-full p-1">
-            <IoMdNotifications size={20} color="white" />
+          <NavLink to="/notification" className="bg-[#FFA175] rounded-full p-2">
+            <IoMdNotifications size={25} color="white" />
           </NavLink>
           {
             getUser?.data ? <Link to={"/profile"}><img src={`${baseUrl}${getUser?.data?.avatar}`} className="h-10 shadow-2xl object-cover w-10 rounded-full border border-[#FFA175] cursor-pointer" alt="" /></Link> : <NavLink to="/login" className="hover:text-[#FFA175]">Login</NavLink>

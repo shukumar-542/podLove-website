@@ -6,7 +6,7 @@ import step5 from "../../assets/tt.png";
 import { Button } from "../Shared/Button/Button";
 import { Link } from "react-router";
 const HowItWork = () => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("podlove-token");
 
   return (
     <div className="p-4 md:px-0">

@@ -11,7 +11,7 @@ const images = [img1, img2, img3];
 
 const SuccessStory = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("podlove-token");
   const nagivate = useNavigate();
   const handleClick = () => {
     if (!token) {

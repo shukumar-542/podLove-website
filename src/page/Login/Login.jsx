@@ -22,7 +22,7 @@ const Login = () => {
       const payload = await loginUser(values).unwrap();
 
       if (payload?.data?.accessToken) {
-        localStorage.setItem("token", payload?.data?.accessToken);
+        localStorage.setItem("podlove-token", payload?.data?.accessToken);
 
         // Force a re-render
         window.location.href = "/home";
@@ -44,7 +44,7 @@ const Login = () => {
     googleLogin(data)
       .unwrap()
       .then((payload) => {
-        localStorage.setItem("token", payload?.data?.accessToken);
+        localStorage.setItem("podlove-token", payload?.data?.accessToken);
         toast.success(payload?.message)
         console.log(payload);
         if (payload?.data?.user?.isProfileComplete) {

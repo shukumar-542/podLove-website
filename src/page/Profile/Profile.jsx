@@ -6,10 +6,15 @@ import { FiEdit } from "react-icons/fi";
 import { Link } from "react-router";
 import { useGetUserQuery } from "../../redux/Api/AuthApi";
 import { baseUrl } from "../../baseUrl";
+import { PiSignOutBold } from "react-icons/pi";
+import { Popconfirm } from "antd";
 const Profile = () => {
   const { data: getUser } = useGetUserQuery()
 
-  console.log(getUser?.data);
+  const confirm = () => {
+    localStorage.removeItem('podlove-token');
+    window.location.href = '/login';
+  };
 
   return (
     <div
@@ -41,17 +46,31 @@ const Profile = () => {
               <CiLocationOn color="#6B4431" />
               {getUser?.data?.location?.place || "N/A"}
             </p>
+
           </div>
           <div>
             <div className="flex justify-between items-center">
               <p className="text-[#8C5940] font-poppins text-[36px] font-bold ">
                 {getUser?.data?.name}
               </p>
-              <Link to={"/edit-profile"}>
-                <div className="bg-[#FFA175] text-white p-2 rounded-md shadow-lg cursor-pointer">
-                  <FiEdit />
-                </div>
-              </Link>
+              <div className=" flex items-center justify-center gap-3">
+                <Link to={"/edit-profile"}>
+                  <div className="bg-[#FFA175] text-white p-2 rounded-md shadow-lg cursor-pointer">
+                    <FiEdit />
+                  </div>
+                </Link>
+
+                <Popconfirm
+                  title="Log Out"
+                  description="Are you sure to log out?"
+                  onConfirm={confirm}
+                  okText="Yes"
+                  cancelText="No"
+                >
+                  <button className="bg-[#FFA175] text-white p-2 rounded-md shadow-lg"><PiSignOutBold /></button>
+                </Popconfirm>
+
+              </div>
             </div>
             <p>{getUser?.data?.email}</p>
             <div className="mt-5 space-y-3 ">
@@ -79,6 +98,7 @@ const Profile = () => {
           </div>
         </div>
       </div>
+
     </div>
   );
 };

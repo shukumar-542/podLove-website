@@ -3,7 +3,7 @@ import { Button } from '../Shared/Button/Button'
 import { useNavigate } from 'react-router'
 
 const HeroSection = () => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("podlove-token");
   const nagivate = useNavigate();
   const handleClick = () => {
     if (!token) {
