@@ -1,8 +1,7 @@
-import React from "react";
 import img from "../../assets/loginBg.png";
 import { Checkbox, Divider, Form, Input } from "antd";
 import Password from "antd/es/input/Password";
-import { FcGoogle } from "react-icons/fc";
+// import { FcGoogle } from "react-icons/fc";
 import { Link, NavLink, useNavigate } from "react-router";
 import { FaApple } from "react-icons/fa";
 import AuthButton from "../../component/AuthButton/AuthButton";
@@ -13,8 +12,9 @@ import {
 import { toast } from "sonner";
 import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
+
 const Login = () => {
-  const [loginUser] = useLoginUserMutation();
+  const [loginUser, { isLoading }] = useLoginUserMutation();
   const [googleLogin] = useGoogleLoginMutation();
   const navigate = useNavigate();
   const handleUserLogin = async (values) => {
@@ -22,7 +22,7 @@ const Login = () => {
       const payload = await loginUser(values).unwrap();
 
       if (payload?.data?.accessToken) {
-        localStorage.setItem("token", payload?.data?.accessToken);
+        localStorage.setItem("podlove-token", payload?.data?.accessToken);
 
         // Force a re-render
         window.location.href = "/home";
@@ -44,12 +44,12 @@ const Login = () => {
     googleLogin(data)
       .unwrap()
       .then((payload) => {
-        localStorage.setItem("token", payload?.data?.accessToken);
+        localStorage.setItem("podlove-token", payload?.data?.accessToken);
         toast.success(payload?.message)
         console.log(payload);
-        if(payload?.data?.user?.isProfileComplete){
+        if (payload?.data?.user?.isProfileComplete) {
           navigate('/home')
-        }else{
+        } else {
           navigate('/location')
         }
       })
@@ -93,8 +93,8 @@ const Login = () => {
                   </p>
                 </Link>
               </div>
-              <AuthButton className="bg-[#F68064] text-white w-full rounded-md py-2 text-xl shadow-md">
-                Sign in
+              <AuthButton disabled={isLoading} className="bg-[#F68064] text-white w-full rounded-md py-2 text-xl shadow-md">
+                {isLoading ? "Loading..." : "Sign in"}
               </AuthButton>
             </Form>
             <Divider
@@ -119,7 +119,7 @@ const Login = () => {
               Continue with apple
             </button>
             <p className="text-[#767676] text-center mt-2">
-              Don't have an account?{" "}
+              Don&apos;t have an account?{" "}
               <NavLink to={"/sign-up"} className="text-[#F68064]">
                 Sign Up
               </NavLink>

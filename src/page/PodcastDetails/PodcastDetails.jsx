@@ -1,4 +1,3 @@
-import React from "react";
 import point from '../../assets/handPoint.png'
 const PodcastDetails = () => {
   return (

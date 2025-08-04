@@ -4,7 +4,7 @@ const baseQuery = fetchBaseQuery({
 
     baseUrl: 'http://10.10.10.59:8000',
     prepareHeaders: (headers) => {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem('podlove-token');
         if (token) {
             headers.set('Authorization', `Bearer ${token}`);
         }

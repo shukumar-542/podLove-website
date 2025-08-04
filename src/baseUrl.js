@@ -1,0 +1,1 @@
+export const baseUrl = "http://10.10.10.59:8000" // this is for images

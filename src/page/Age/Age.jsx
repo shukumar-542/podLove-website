@@ -13,7 +13,7 @@ const ageOptions = Array.from({ length: 21 }, (_, i) => i + 35);
 
 const Age = () => {
   const navigate = useNavigate();
-  const [updateAge] = useUpdateUserInfoMutation();
+  const [updateAge, { isLoading }] = useUpdateUserInfoMutation();
   const [date, setDate] = useState(null);
 
   const onChange = (date) => {
@@ -32,6 +32,8 @@ const Age = () => {
       },
       dateOfBirth: dayjs(date).format("DD/MM/YYYY"),
     };
+
+    // console.log(data);
 
     const birthDate = date;
     const today = dayjs();
@@ -89,6 +91,7 @@ const Age = () => {
                 className="w-full border-red-300"
                 format="MM/DD/YYYY"
                 onChange={onChange}
+                defaultPickerValue={dayjs('1991-01-01', 'YYYY-MM-DD')}
               />
             </Form.Item>
 
@@ -114,7 +117,7 @@ const Age = () => {
               </Form.Item>
             </div>
 
-            <AuthButton className={"py-2"}>Next</AuthButton>
+            <AuthButton disabled={isLoading} className={"py-2"}>Next</AuthButton>
           </Form>
         </div>
 

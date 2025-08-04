@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import bg from "../../assets/body-bg.png";
 import { useNavigate } from "react-router";
 import AuthButton from "../../component/AuthButton/AuthButton";
@@ -16,7 +16,7 @@ const options = [
 
 const Body = () => {
   const navigate = useNavigate();
-  const [updateBodyType] = useUpdateUserInfoMutation();
+  const [updateBodyType, { isLoading }] = useUpdateUserInfoMutation();
   const [selectedBodyType, setSelectedBodyType] = useState([]);
   const [preferredBodyType, setPreferredBodyType] = useState([]);
 
@@ -103,6 +103,7 @@ const Body = () => {
           <AuthButton
             handleOnClick={() => handleUpdateBodyType()}
             className={"py-2"}
+            disabled={isLoading}
           >
             Next
           </AuthButton>

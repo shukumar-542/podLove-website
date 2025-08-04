@@ -1,9 +1,9 @@
 import { useGetPodCastDetailsQuery } from "../../redux/Api/AuthApi";
-import { useNavigate, useParams } from "react-router";
-import img from '../../assets/chat.png'
+import { useParams } from "react-router";
+// import img from '../../assets/chat.png'
 
 const ParticipantDetails = () => {
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
   const { id } = useParams()
   const { data: getPodcastDetails } = useGetPodCastDetailsQuery();
   const participants = getPodcastDetails?.data?.podcast?.participants || [];
@@ -11,9 +11,9 @@ const ParticipantDetails = () => {
   const participant = participants.find(p => p._id === id);
 
 
-  const handleChat = () => {
-    navigate(`/chat/${id}`)
-  }
+  // const handleChat = () => {
+  //   navigate(`/chat/${id}`)
+  // }
 
 
   return (
@@ -36,12 +36,12 @@ const ParticipantDetails = () => {
             })
           }
         </div>
-        <div className="  flex justify-center mt-8">
+        {/* <div className="  flex justify-center mt-8">
           <div onClick={() => handleChat()} className="bg-[#FFA175] p-4 cursor-pointer rounded-full">
 
             <img src={img} className="size-16" alt="" />
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

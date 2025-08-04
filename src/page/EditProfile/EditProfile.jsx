@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+/* eslint-disable no-unused-vars */
+import { useEffect, useState } from "react";
 import { Form, Input, Upload, Avatar, message, Select } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import AuthButton from "../../component/AuthButton/AuthButton";
@@ -9,6 +10,7 @@ import {
 } from "../../redux/Api/AuthApi";
 import { toast } from "sonner";
 import LocationSearch from "../../component/LocationSearch/LocationSearch";
+import { useNavigate } from "react-router";
 const { Option } = Select;
 const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/dvjbfwhxe/image/upload";
 const UPLOAD_PRESET = "podlove_upload";
@@ -21,6 +23,7 @@ const EditProfile = () => {
   const [imageUrl, setImageUrl] = useState(null);
   const { data: getUser } = useGetUserQuery();
   const [selectedLocation, setSelectedLocation] = useState(null);
+  const navigate = useNavigate();
 
 
   console.log(selectedLocation);
@@ -88,6 +91,7 @@ const EditProfile = () => {
         ...(uploadedImageUrl && { avatar: uploadedImageUrl }),
       };
       const result = await editProfile(updateData);
+      navigate("/profile");
       console.log(result);
     } catch (error) {
       console.error("Upload failed:", error);
@@ -140,7 +144,7 @@ const EditProfile = () => {
             </Form.Item>
           </div>
           <div className="md:flex   gap-5">
-           
+
 
             <Form.Item label={"Gender"} name={"gender"} className="w-full">
               <Select placeholder="Select your gender" allowClear>
@@ -153,7 +157,7 @@ const EditProfile = () => {
             </Form.Item>
           </div>
           <Form.Item label="Address" name="address">
-            <LocationSearch onSelectLocation={setSelectedLocation}  defaultAddress={getUser?.data?.location?.place || ""} />
+            <LocationSearch onSelectLocation={setSelectedLocation} defaultAddress={getUser?.data?.location?.place || ""} />
           </Form.Item>
           <Form.Item label="Bio" name="bio">
             <TextArea

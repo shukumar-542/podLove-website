@@ -1,7 +1,8 @@
+/* eslint-disable no-unused-vars */
 import img from "../../assets/ForgotPassword.png";
 import { Form, Input } from "antd";
 import AuthButton from "../../component/AuthButton/AuthButton";
-import { Link, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { toast } from "sonner";
 import { useForgetPasswordMutation } from "../../redux/Api/AuthApi";
 const ForgetPassword = () => {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import bg from "../../assets/upload-bg.png";
 import AuthButton from "../../component/AuthButton/AuthButton";
 import { Upload, message } from "antd";
@@ -12,7 +12,7 @@ const UPLOAD_PRESET = "podlove_upload";
 
 const UploadPhoto = () => {
   const navigate = useNavigate()
-  const [updatePhoto] = useUpdateUserInfoMutation()
+  const [updatePhoto, { isLoading }] = useUpdateUserInfoMutation()
   const [file, setFile] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -20,7 +20,7 @@ const UploadPhoto = () => {
   // Store file locally
   const handleFileSelect = ({ file }) => {
     setFile(file);
-    setImageUrl(URL.createObjectURL(file)); 
+    setImageUrl(URL.createObjectURL(file));
   };
 
 
@@ -84,7 +84,7 @@ const UploadPhoto = () => {
               showUploadList={false}
               beforeUpload={(file) => {
                 handleFileSelect({ file });
-                return false; 
+                return false;
               }}
               className="w-full"
             >
@@ -106,7 +106,7 @@ const UploadPhoto = () => {
             </Upload>
           </div>
 
-          <AuthButton handleOnClick={handleNextClick} className="py-2">
+          <AuthButton disabled={isLoading} handleOnClick={handleNextClick} className="py-2">
             {loading ? "Image Uploading..." : "Next"}
           </AuthButton>
         </div>

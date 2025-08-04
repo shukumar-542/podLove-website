@@ -1,15 +1,14 @@
-import React from "react";
-import { Form, Input, Radio, Button } from "antd";
+import { Form, Input, Radio, } from "antd";
 import AuthButton from "../../component/AuthButton/AuthButton";
 import { useCreateSurveyMutation } from "../../redux/Api/SubscriptionPlan";
 import { toast } from "sonner";
 import { useNavigate } from "react-router";
+
 const FeedbackThird = () => {
   const [createSurvey] = useCreateSurveyMutation();
-  
+  const navigate = useNavigate();
 
   const handleFeedback = (values) => {
-    const navigate = useNavigate()
     const formattedData = JSON.parse(localStorage.getItem("Feedback"));
 
     const data = {
@@ -18,12 +17,13 @@ const FeedbackThird = () => {
     };
     createSurvey(data)
       .unwrap()
-      .then((payload) =>{
+      .then((payload) => {
         toast.success(payload?.message)
         navigate('/home')
       })
       .catch((error) => toast.error(error?.data?.message));
   };
+
   return (
     <div className="flex justify-center bg-[#FFECE2] p-8 min-h-screen">
       <div className="w-full max-w-3xl bg-[#FFECE2] p-6 rounded-md">

@@ -13,7 +13,7 @@ const interest = [
 
 const Interest = () => {
   const navigate = useNavigate()
-    const [updateInterest] = useUpdateUserInfoMutation();
+    const [updateInterest, { isLoading }] = useUpdateUserInfoMutation();
     const [selected, setSelected] = useState([]);
     // Select item
     const toggleSelect =(field)=>{
@@ -70,7 +70,7 @@ const Interest = () => {
             }
         </div>
         {/* <Link to={"/connection-progress"}> */}
-          <AuthButton handleOnClick={()=> handleInterest()} className={"py-2"}>Next</AuthButton>
+          <AuthButton disabled={isLoading} handleOnClick={()=> handleInterest()} className={"py-2"}>Next</AuthButton>
         {/* </Link> */}
       </div>
 

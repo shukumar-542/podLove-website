@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import bg from "../../assets/otpBg.png";
 import AuthButton from "../../component/AuthButton/AuthButton";
 import OTPInput from "otp-input-react";
@@ -20,7 +20,7 @@ const Otp = () => {
       .then((payload) => {
         toast.success(payload?.message)
         if(payload?.data){
-          localStorage.setItem("token",payload?.data?.accessToken)
+          localStorage.setItem("podlove-token",payload?.data?.accessToken)
           navigate('/location')
         }
       })
@@ -38,8 +38,7 @@ const Otp = () => {
             Verification Code
           </p>
           <p className="mt-4 max-w-96 font-thin text-center">
-            Please enter the six-digit code we sent you to your number 878 7764
-            2922
+            Please enter the six-digit code we sent you to your email
           </p>
 
           <div className="my-10">

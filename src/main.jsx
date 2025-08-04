@@ -56,11 +56,13 @@ import TermsOfUse from "./page/TermsOfUse/TermsOfUse.jsx";
 import RelationShipReadinessOne from "./page/RelationShipReadinessOne/RelationShipReadinessOne.jsx";
 import RelationShipReadinessTwo from "./page/RelationShipReadinessTwo/RelationShipReadinessTwo.jsx";
 import AttentionError from "./page/AttentionError/AttentionError.jsx";
+import ScrollToTop from "./helpers/ScrollToTop.js";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Provider store={store}>
       <GoogleOAuthProvider clientId="428822266422-tmspu533cnr7q6pgs3cljo01pmfjvrdq.apps.googleusercontent.com">
         <BrowserRouter>
+          <ScrollToTop />
           <Routes>
             <Route path="/" element={<App />}>
               <Route index element={<Home />} />
@@ -71,21 +73,33 @@ createRoot(document.getElementById("root")).render(
               <Route path="/contact-us" element={<ContactUs />} />
               <Route path="/after-podcast" element={<AfterPodcast />} />
               <Route path="/subscription-plan" element={<SubscriptionPlan />} />
-              <Route path="/chat/:id" element={<ChatPage />} />
+              <Route element={<PrivateRoute />}>
+                <Route path="/chat/:id" element={<ChatPage />} />
+              </Route>
               <Route path="/feedback-first-step" element={<FeedbackOne />} />
               <Route path="/feedback-second-step" element={<FeedbackSecond />} />
               <Route path="/feedback-third-step" element={<FeedbackThird />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/edit-profile" element={<EditProfile />} />
-              <Route path="/change-password" element={<ChangePassword />} />
+              <Route element={<PrivateRoute />}>
+                <Route path="/profile" element={<Profile />} />
+              </Route>
+              <Route element={<PrivateRoute />}>
+                <Route path="/edit-profile" element={<EditProfile />} />
+              </Route>
+              <Route element={<PrivateRoute />}>
+                <Route path="/change-password" element={<ChangePassword />} />
+              </Route>
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/terms-condition" element={<TermsAndCondition />} />
-              <Route path="/notification" element={<Notification />} />,
+              <Route element={<PrivateRoute />}>
+                <Route path="/notification" element={<Notification />} />
+              </Route>
               <Route path="/consumer-policy" element={<ConsumerPolicy />} />,
               <Route path="/media-policy" element={<MediaPlicy />} />
               <Route path="/podcast-details/:id" element={<ParticipantDetails />} />
               <Route path="/opy-in-policy" element={<OptInPolicy />} />
-              <Route path="/room/:roomId" element={<RoomPage />} />
+              <Route element={<PrivateRoute />}>
+                <Route path="/room/:roomId" element={<RoomPage />} />
+              </Route>
             </Route>
             <Route path="/login" element={<Login />} />
             <Route path="/sign-up" element={<SignUp />} />
@@ -116,10 +130,10 @@ createRoot(document.getElementById("root")).render(
             <Route path="/verify-forget-otp" element={<VerifyEmail />} />
             <Route path="/set-new-password" element={<SetNewPassword />} />
             <Route path="/our-approch" element={<OurApproach />} />
-            <Route path="/terms-of-use" element={<TermsOfUse/>} />
-            <Route path="/relationship-first" element={<RelationShipReadinessOne/>} />
-            <Route path="/relationship-second" element={<RelationShipReadinessTwo/>} />
-            <Route path="/attention-error" element={<AttentionError/>} />
+            <Route path="/terms-of-use" element={<TermsOfUse />} />
+            <Route path="/relationship-first" element={<RelationShipReadinessOne />} />
+            <Route path="/relationship-second" element={<RelationShipReadinessTwo />} />
+            <Route path="/attention-error" element={<AttentionError />} />
 
           </Routes>
         </BrowserRouter>

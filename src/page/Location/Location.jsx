@@ -9,7 +9,7 @@ import { toast } from "sonner";
 import { useNavigate } from "react-router";
 const Location = () => {
   const navigate = useNavigate()
-  const [updateUserInfo] = useUpdateUserInfoMutation();
+  const [updateUserInfo, { isLoading }] = useUpdateUserInfoMutation();
 
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [disabled, setDisabled] = useState(false);
@@ -82,9 +82,10 @@ const Location = () => {
           />
           <AuthButton
             handleOnClick={() => handleUpdateLocation()}
+            disabled={isLoading}
             className={"py-2"}
           >
-            Next
+            {isLoading ? "Loading..." : "Next"}
           </AuthButton>
         </div>
       </div>

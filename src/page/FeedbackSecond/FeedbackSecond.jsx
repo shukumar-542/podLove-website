@@ -1,7 +1,6 @@
-import React from "react";
-import { Form, Input, Radio, Button } from "antd";
+import { Form, Input, Radio } from "antd";
 import AuthButton from "../../component/AuthButton/AuthButton";
-import { Link, useNavigate } from "react-router";
+import {  useNavigate } from "react-router";
 const FeedbackSecond = () => {
   const [form] = Form.useForm();
   const navigate = useNavigate()
