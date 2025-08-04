@@ -1,15 +1,15 @@
-import React from "react";
+// import React from "react";
 import bg from "../../assets/bio-bg.png";
-import { Link, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import AuthButton from "../../component/AuthButton/AuthButton";
-import { Form, Input } from "antd";
+import { Form } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { useUpdateUserBioMutation, useUpdateUserInfoMutation } from "../../redux/Api/AuthApi";
 import { toast } from "sonner";
-import { UserOutlined } from '@ant-design/icons';
+// import { UserOutlined } from '@ant-design/icons';
 const Bio = () => {
   const navigate = useNavigate();
-  const [updateBio] = useUpdateUserInfoMutation();
+  const [updateBio, { isLoading }] = useUpdateUserInfoMutation();
   const [updateUserBio] = useUpdateUserBioMutation()
   const handleAddBio = (value) => {
     if(!value.bio){
@@ -69,7 +69,7 @@ const Bio = () => {
             >
               <TextArea rows={10} />
             </Form.Item>
-            <AuthButton className={"py-2"}>Next</AuthButton>
+            <AuthButton disabled={isLoading} className={"py-2"}>Next</AuthButton>
           </Form>
           {/* <Link to={"/upload-photo"}> */}
           {/* </Link> */}

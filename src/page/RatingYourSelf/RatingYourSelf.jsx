@@ -15,7 +15,7 @@ const color = [
 ];
 const RatingYourSelf = () => {
   const navigate = useNavigate()
-  const [updateRating] = useUpdateUserInfoMutation();
+  const [updateRating, { isLoading }] = useUpdateUserInfoMutation();
 
   const [selectedRating, setSelectedRating] = useState(1);
   const [selectedHomeBody, setSelectHomeBody] = useState(3);
@@ -42,14 +42,14 @@ const RatingYourSelf = () => {
     };
 
     updateRating(data)
-    .unwrap()
-    .then((payload) => {
-      toast.success(payload?.message)
-      navigate('/interest')
-    })
-    .catch((error) => {
-      toast.error(error?.data?.message)
-    });
+      .unwrap()
+      .then((payload) => {
+        toast.success(payload?.message)
+        navigate('/interest')
+      })
+      .catch((error) => {
+        toast.error(error?.data?.message)
+      });
   };
 
   return (
@@ -144,6 +144,7 @@ const RatingYourSelf = () => {
           <AuthButton
             handleOnClick={() => handleUpdateRating()}
             className={"py-2"}
+            disabled={isLoading}
           >
             Next
           </AuthButton>

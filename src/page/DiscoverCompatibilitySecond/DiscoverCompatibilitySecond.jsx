@@ -10,7 +10,7 @@ const DiscoverCompatibilitySecond = () => {
   const [kids, setKids] = useState("No");
   const navigate = useNavigate();
   const [answers, setAnswers] = useState([]);
-  const [updateCompatibility] = useUpdateUserInfoMutation();
+  const [updateCompatibility, { isLoading }] = useUpdateUserInfoMutation();
   const previousAnswers = JSON.parse(localStorage.getItem("compatibility")) || [];
 
   const handleChange = (index, value) => {
@@ -328,6 +328,7 @@ const DiscoverCompatibilitySecond = () => {
           <AuthButton
             handleOnClick={() => handleUpdateCompatibility()}
             className={"max-w-80 py-2"}
+            disabled={isLoading}
           >
             Submit
           </AuthButton>

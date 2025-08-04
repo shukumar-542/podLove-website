@@ -38,8 +38,7 @@ const Otp = () => {
             Verification Code
           </p>
           <p className="mt-4 max-w-96 font-thin text-center">
-            Please enter the six-digit code we sent you to your number 878 7764
-            2922
+            Please enter the six-digit code we sent you to your email
           </p>
 
           <div className="my-10">

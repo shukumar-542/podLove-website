@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { useState } from "react";
+import { useNavigate } from "react-router";
 import AuthButton from "../../component/AuthButton/AuthButton";
 import { Checkbox } from "antd";
 import bg from "../../assets/ethnicity.png";
@@ -30,7 +30,7 @@ const option = [
 
 const Ethnicity = () => {
   const navigate = useNavigate();
-  const [updateEthnicity] = useUpdateUserInfoMutation();
+  const [updateEthnicity, { isLoading }] = useUpdateUserInfoMutation();
   const [selectedBodyType, setSelectedBodyType] = useState([]);
   const [preferredBodyType, setPreferredBodyType] = useState([]);
 
@@ -120,6 +120,7 @@ const Ethnicity = () => {
           <AuthButton
             handleOnClick={() => handleEthnicity()}
             className={"py-2"}
+            disabled={isLoading}
           >
             Next
           </AuthButton>

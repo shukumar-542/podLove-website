@@ -7,7 +7,7 @@ import { toast } from "sonner";
 
 const Gender = () => {
   const navigate = useNavigate();
-  const [updateGender] = useUpdateUserInfoMutation();
+  const [updateGender, { isLoading }] = useUpdateUserInfoMutation();
 
   const handleGender = (values) => {
     const data = {
@@ -85,7 +85,7 @@ const Gender = () => {
                 <Option value={"all"}>Open to All</Option>
               </Select>
             </Form.Item>
-            <AuthButton className={"py-2"}>Next</AuthButton>
+            <AuthButton disabled={isLoading} className={"py-2"}>Next</AuthButton>
           </Form>
           {/* <Link to={"/body"}> */}
           {/* </Link> */}
