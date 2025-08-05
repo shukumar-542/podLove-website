@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router'
+import { useState } from 'react'
+import { useNavigate } from 'react-router'
 import AuthButton from '../component/AuthButton/AuthButton'
 import bg from "../assets/interest.png";
 import { useUpdateUserInfoMutation } from '../redux/Api/AuthApi';

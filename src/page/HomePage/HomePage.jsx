@@ -10,11 +10,12 @@ import {
 import { toast } from "sonner";
 import { useGetAllPlanQuery } from "../../redux/Api/SubscriptionPlan";
 import { useSendPodcastRequestMutation } from "../../redux/Api/PodcastApi";
+import { Spin } from "antd";
 
 const HomePage = () => {
   const navigate = useNavigate();
   const [createPodCast] = usePodcastCreateMutation();
-  const [sendPodcastRequest] = useSendPodcastRequestMutation();
+  const [sendPodcastRequest, { isLoading: requestPodcastLoading }] = useSendPodcastRequestMutation();
   const { data: getPodcastDetails, isLoading } = useGetPodCastDetailsQuery();
   console.log('home page', getPodcastDetails);
   const { data: getAllPlans } = useGetAllPlanQuery();
@@ -46,6 +47,7 @@ const HomePage = () => {
       .then((payload) => {
         console.log('payload', payload)
         // toast.success(payload?.message))
+        window.location.reload();
       })
       .catch((error) =>
         toast.error(error?.data?.message || "Failed to request podcast.")
@@ -64,6 +66,7 @@ const HomePage = () => {
       case "NotScheduled":
         return "Request a Podcast";
       case "ReqScheduled":
+        return "Requested For Podcast";
       default:
         return "Not Available";
     }
@@ -151,9 +154,10 @@ const HomePage = () => {
             {status === "NotScheduled" ? (
               <button
                 onClick={handleRequestPodcast}
+                disabled={requestPodcastLoading}
                 className="w-full mt-2 py-2 rounded-md bg-[#FFA175] text-white hover:bg-[#e68b5a] transition duration-300"
               >
-                {getButtonLabel()}
+                {getButtonLabel()} {requestPodcastLoading && <Spin></Spin>}
               </button>
             ) : (
               <div>
