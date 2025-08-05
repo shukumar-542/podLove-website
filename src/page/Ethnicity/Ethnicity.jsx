@@ -43,8 +43,8 @@ const Ethnicity = () => {
   };
 
   const handleEthnicity = () => {
-    if(preferredBodyType?.length === 0 || selectedBodyType.length === 0){
-      return  toast.error("Please select both your preferred body type and selected body type.")
+    if (preferredBodyType?.length === 0 || selectedBodyType.length === 0) {
+      return toast.error("Please select both your preferred body type and selected body type.")
     }
     const data = {
       preferences: {
@@ -62,7 +62,7 @@ const Ethnicity = () => {
       .catch((error) => toast.error(error?.data?.message));
   };
   return (
-  <div
+    <div
       style={{
         backgroundImage: `url(${bg})`,
         backgroundSize: "cover",
@@ -82,12 +82,12 @@ const Ethnicity = () => {
           <h1 className="text-center font-poppins font-semibold text-4xl">
             Ethnicity
           </h1>
-          <p className="text-center font-poppins text-[14px] ">
+          <p className=" mt-5 font-poppins text-[14px] ">
             Cultural expression and identity are deeply tied to the customs,
             history, language, and religion of people from different geographic
             regions.
           </p>
-          <p className="text-center font-poppins text-[14px] mt-2">
+          <p className=" mb-5 font-poppins text-[14px] mt-2">
             At PodLove, we believe love can flourish across all backgrounds. Are
             there any cultural or ethnic preferences that are important for you
             in a partner?

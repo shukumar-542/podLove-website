@@ -76,7 +76,7 @@ const Gender = () => {
               }
               rules={[{ required: true, message: "Please select your preferred gender" }]}
             >
-              <Select placeholder="Select your preferred gender">
+              <Select placeholder="Select your preferred gender" mode="multiple">
                 <Option value={"female"}>Female</Option>
                 <Option value={"male"}>Male</Option>
                 <Option value={"non-binary"}>Non-binary</Option>

@@ -4,31 +4,42 @@ import { useNavigate } from "react-router";
 import AuthButton from "../../component/AuthButton/AuthButton";
 import { Form } from "antd";
 import TextArea from "antd/es/input/TextArea";
-import { useUpdateUserBioMutation, useUpdateUserInfoMutation } from "../../redux/Api/AuthApi";
+import { useUpdateUserInfoMutation } from "../../redux/Api/AuthApi";
 import { toast } from "sonner";
 // import { UserOutlined } from '@ant-design/icons';
 const Bio = () => {
   const navigate = useNavigate();
   const [updateBio, { isLoading }] = useUpdateUserInfoMutation();
-  const [updateUserBio] = useUpdateUserBioMutation()
+  // const [updateUserBio] = useUpdateUserBioMutation()
+  // const [UpdateUserBioNew] = useUpdateUserBioNewMutation();
+
   const handleAddBio = (value) => {
-    if(!value.bio){
+    if (!value.bio) {
       return toast.error("Please add your bio")
     }
     const data = {
       text: value?.bio,
     };
+    // UpdateUserBioNew(data).unwrap()
+    //   .then((data) => {
+    //     console.log(data);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+
     updateBio(data)
       .unwrap()
-      .then((payload) =>{
+      .then((payload) => {
         toast.success(payload?.message)
         navigate('/upload-photo')
       })
-      .catch((error) =>{
+      .catch((error) => {
         console.log(error);
-         toast.error(error?.data?.message)
+        toast.error(error?.data?.message)
       });
   };
+
   return (
     <div
       style={{
@@ -78,7 +89,7 @@ const Bio = () => {
         {/* Space after content */}
         <div className="md:col-span-6"></div>
 
-       
+
       </div>
     </div>
   );

@@ -115,6 +115,15 @@ const authApi = baseApi.injectEndpoints({
         };
       },
     }),
+    UpdateUserBioNew: builder.mutation({
+      query: (data) => {
+        return {
+          url: "/user/validate-bio",
+          method: "POST",
+          body: data,
+        };
+      },
+    }),
     forgetPassword: builder.mutation({
       query: (data) => {
         return {
@@ -178,6 +187,7 @@ export const {
   useGetPrivacyQuery,
   useGetConsumerPolicyQuery,
   useUpdateUserBioMutation,
+  useUpdateUserBioNewMutation,
   useForgetPasswordMutation,
   useVerifyEmailMutation,
   useResetPasswordMutation,
