@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState } from "react";
 import bg from "../../assets/upload-bg.png";
 import AuthButton from "../../component/AuthButton/AuthButton";
@@ -76,7 +77,7 @@ const UploadPhoto = () => {
             Upload Photo
           </h1>
           <p className="text-center font-poppins text-[#242424] my-5">
-            We'd love to see you. Upload a photo for your dating journey.
+            We&apos;d love to see you. Upload a photo for your dating journey.
           </p>
 
           <div className="flex justify-center items-center">

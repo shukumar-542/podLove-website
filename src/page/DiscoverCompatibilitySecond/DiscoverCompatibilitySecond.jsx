@@ -330,7 +330,7 @@ const DiscoverCompatibilitySecond = () => {
             className={"max-w-80 py-2"}
             disabled={isLoading}
           >
-            Submit
+            {isLoading ? "Loading..." : "Submit"}
           </AuthButton>
           {/* </Link> */}
         </div>

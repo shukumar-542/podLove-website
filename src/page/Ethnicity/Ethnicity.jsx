@@ -122,7 +122,7 @@ const Ethnicity = () => {
             className={"py-2"}
             disabled={isLoading}
           >
-            Next
+            {isLoading ? "Loading..." : "Next"}
           </AuthButton>
           {/* </Link> */}
         </div>

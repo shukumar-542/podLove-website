@@ -19,8 +19,6 @@ const Location = () => {
     setValue(val);
   };
 
-
-
   const handleUpdateLocation = () => {
     const data = {
       location: {
@@ -40,6 +38,7 @@ const Location = () => {
       })
       .catch((error) => toast.error(error?.data?.message));
   };
+  
   return (
     <div
       style={{

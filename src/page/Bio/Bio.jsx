@@ -80,7 +80,7 @@ const Bio = () => {
             >
               <TextArea rows={10} />
             </Form.Item>
-            <AuthButton disabled={isLoading} className={"py-2"}>Next</AuthButton>
+            <AuthButton disabled={isLoading} className={"py-2"}>{isLoading? "Loading...": "Next"}</AuthButton>
           </Form>
           {/* <Link to={"/upload-photo"}> */}
           {/* </Link> */}

@@ -29,7 +29,7 @@ const Body = () => {
   };
 
   const handleUpdateBodyType = () => {
-     if(preferredBodyType.length === 0 || !selectedBodyType){
+    if (preferredBodyType.length === 0 || !selectedBodyType) {
       return toast.error("Please select both your body type and preferred body type.")
     }
     const data = {
@@ -39,7 +39,7 @@ const Body = () => {
       bodyType: selectedBodyType,
     };
 
-   
+
     updateBodyType(data)
       .unwrap()
       .then((payload) => {
@@ -105,7 +105,7 @@ const Body = () => {
             className={"py-2"}
             disabled={isLoading}
           >
-            Next
+            {isLoading ? "Loading..." : "Next"}
           </AuthButton>
           {/* </Link> */}
         </div>
