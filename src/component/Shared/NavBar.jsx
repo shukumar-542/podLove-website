@@ -1,5 +1,5 @@
 import { useState } from "react";
-import img from "../../assets/footLove.png";
+import img from "../../assets/Footlove.png";
 import img1 from "../../assets/podLogo.png";
 import { Link, NavLink } from "react-router";
 import { IoMdNotifications } from "react-icons/io";
