@@ -60,11 +60,11 @@ const Gender = () => {
               rules={[{ required: true, message: "Please select your gender" }]}
             >
               <Select placeholder="Select your gender">
-                <Option value={"female"}>Female</Option>
-                <Option value={"male"}>Male</Option>
-                <Option value={"non-binary"}>Non-binary</Option>
-                <Option value={"transgender"}>Transgender</Option>
-                <Option value={"gender-fluid"}>Gender Fluid</Option>
+                <Select.Option value={"female"}>Female</Select.Option>
+                <Select.Option value={"male"}>Male</Select.Option>
+                <Select.Option value={"non-binary"}>Non-binary</Select.Option>
+                <Select.Option value={"transgender"}>Transgender</Select.Option>
+                <Select.Option value={"gender-fluid"}>Gender Fluid</Select.Option>
               </Select>
             </Form.Item>
             <Form.Item
@@ -76,16 +76,16 @@ const Gender = () => {
               }
               rules={[{ required: true, message: "Please select your preferred gender" }]}
             >
-              <Select placeholder="Select your preferred gender">
-                <Option value={"female"}>Female</Option>
-                <Option value={"male"}>Male</Option>
-                <Option value={"non-binary"}>Non-binary</Option>
-                <Option value={"transgender"}>Transgender</Option>
-                <Option value={"gender-fluid"}>Gender Fluid</Option>
-                <Option value={"all"}>Open to All</Option>
+              <Select placeholder="Select your preferred gender" mode="multiple">
+                <Select.Option value={"female"}>Female</Select.Option>
+                <Select.Option value={"male"}>Male</Select.Option>
+                <Select.Option value={"non-binary"}>Non-binary</Select.Option>
+                <Select.Option value={"transgender"}>Transgender</Select.Option>
+                <Select.Option value={"gender-fluid"}>Gender Fluid</Select.Option>
+                <Select.Option value={"all"}>Open to All</Select.Option>
               </Select>
             </Form.Item>
-            <AuthButton disabled={isLoading} className={"py-2"}>Next</AuthButton>
+            <AuthButton disabled={isLoading} className={"py-2"}>{isLoading ? "Loading..." : "Next"}</AuthButton>
           </Form>
           {/* <Link to={"/body"}> */}
           {/* </Link> */}

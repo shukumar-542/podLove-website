@@ -1,39 +1,41 @@
 import { ZegoUIKitPrebuilt } from '@zegocloud/zego-uikit-prebuilt';
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useParams } from 'react-router';
 import { useGetUserQuery } from '../../redux/Api/AuthApi';
 
 const RoomPage = () => {
-    const {data :  getProfile} =  useGetUserQuery();
+    const { data: getProfile } = useGetUserQuery();
+    console.log('sdfasfsafasdfasdf', getProfile?.data?._id);
     const { roomId } = useParams();
     const videoContainerRef = useRef(null);
-    const zpRef = useRef(null); 
+    const zpRef = useRef(null);
 
 
     const myMeeting = async () => {
-        const appID = 1059905830;
-        const serverSecret = "291a32510dfc5e6f9a53db9f9b140090";
+        const appID = 369424760;
+        const serverSecret = "57aa479aa7d1a0b236d8f38385df1631";
+        const devices = await navigator.mediaDevices.enumerateDevices();
+        console.log(devices);
+        // const hasCamera = devices.some(device => device.kind === 'videoinput');
+        // const hasMic = devices.some(device => device.kind === 'audioinput');
 
+        // if (!hasCamera) {
+        //     alert('No camera detected. Video may not work.');
+        // }
+        // if (!hasMic) {
+        //     alert('No microphone detected. Audio may not work.');
+        // }
         if (!roomId) {
             console.error("Invalid Room ID");
             return;
         }
 
         try {
-            // Check if media devices are available before joining
-            // const devices = await navigator.mediaDevices.enumerateDevices();
-            // const hasCamera = devices.some(device => device.kind === "videoinput");
-            // const hasMic = devices.some(device => device.kind === "audioinput");
-
-            // if (!hasCamera) alert("No camera detected. Video may not work.");
-            // if (!hasMic) alert("No microphone detected. Audio may not work.");
-
-            // Generate the kit token
             const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(
                 appID,
                 serverSecret,
                 roomId,
-                Date.now().toString(), 
+                getProfile?.data?._id,
                 `${getProfile?.data?.name}`
             );
 
@@ -53,8 +55,29 @@ const RoomPage = () => {
                         url: window.location.href,
                     },
                 ],
+                // scenario: {
+                //     mode: ZegoUIKitPrebuilt.OneONoneCall,
+                // },
+                turnOnMicrophoneWhenJoining: true,
+                // turnOnCameraWhenJoining: true,
+                // showMyCameraToggleButton: true,
+                showMyMicrophoneToggleButton: true,
+                // showAudioVideoSettingsButton: true,
+                // showScreenSharingButton: true,
+                turnOnCameraWhenJoining: false,
+                showMyCameraToggleButton: false,
+                showScreenSharingButton: false,
+                showAudioVideoSettingsButton: false, // Optional: hide if only audio matters
+                showTextChat: true,
+                showUserList: true,
+                maxUsers: 2,
+                layout: "Auto",
+                showLayoutButton: false,
                 scenario: {
                     mode: ZegoUIKitPrebuilt.OneONoneCall,
+                    // config: {
+                    //     role: "Host",
+                    // },
                 },
             });
 
@@ -73,7 +96,7 @@ const RoomPage = () => {
                 zpRef.current = null;
             }
         };
-    }, [roomId]); 
+    }, [roomId]);
 
     return <div ref={videoContainerRef} style={{ width: '100%', height: '100vh' }}></div>;
 };

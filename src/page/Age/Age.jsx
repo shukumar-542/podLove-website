@@ -117,7 +117,7 @@ const Age = () => {
               </Form.Item>
             </div>
 
-            <AuthButton disabled={isLoading} className={"py-2"}>Next</AuthButton>
+            <AuthButton disabled={isLoading} className={"py-2"}>{isLoading ? "Loading..." : "Next"}</AuthButton>
           </Form>
         </div>
 

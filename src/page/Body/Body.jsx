@@ -29,7 +29,7 @@ const Body = () => {
   };
 
   const handleUpdateBodyType = () => {
-     if(preferredBodyType.length === 0 || !selectedBodyType){
+    if (preferredBodyType.length === 0 || !selectedBodyType) {
       return toast.error("Please select both your body type and preferred body type.")
     }
     const data = {
@@ -39,7 +39,7 @@ const Body = () => {
       bodyType: selectedBodyType,
     };
 
-   
+
     updateBodyType(data)
       .unwrap()
       .then((payload) => {
@@ -79,7 +79,7 @@ const Body = () => {
           {/* <p className='text-md text-center'>Please select one</p> */}
           <div className="mb-4">
             <p className="font-semibold">What your body type?</p>
-            <p className="text-sm text-gray-500">Please select one</p>
+            {/* <p className="text-sm text-gray-500">Please select one</p> */}
             <Checkbox.Group
               options={options}
               value={selectedBodyType ? [selectedBodyType] : []}
@@ -90,7 +90,7 @@ const Body = () => {
             {/* Preferred Body Type Selection */}
             <div className="my-10">
               <p className="font-semibold">Preferred Body Type</p>
-              <p className="text-sm text-gray-500">Please select one</p>
+              {/* <p className="text-sm text-gray-500">Please select one</p> */}
               <Checkbox.Group
                 options={options}
                 value={preferredBodyType}
@@ -105,7 +105,7 @@ const Body = () => {
             className={"py-2"}
             disabled={isLoading}
           >
-            Next
+            {isLoading ? "Loading..." : "Next"}
           </AuthButton>
           {/* </Link> */}
         </div>

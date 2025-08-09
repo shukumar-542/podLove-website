@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import bg from "../../assets/personality.png";
-import { Link, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import AuthButton from "../../component/AuthButton/AuthButton";
 import { useUpdateUserInfoMutation } from "../../redux/Api/AuthApi";
 import { toast } from "sonner";
@@ -146,7 +146,7 @@ const RatingYourSelf = () => {
             className={"py-2"}
             disabled={isLoading}
           >
-            Next
+            {isLoading ? "Loading..." : "Next"}
           </AuthButton>
           {/* </Link> */}
         </div>
