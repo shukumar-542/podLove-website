@@ -1,4 +1,4 @@
-import video from '../../assets/videoPlayback.mp4'
+import video from '../../assets/videoplayback.mp4'
 import { Button } from '../Shared/Button/Button'
 import { useNavigate } from 'react-router'
 
