@@ -1,4 +1,3 @@
-import React from "react";
 import about from "../../assets/about3.png";
 import bg from "../../assets/about-bg.png";
 const AboutUs = () => {
