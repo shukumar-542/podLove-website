@@ -8,4 +8,9 @@ export default defineConfig({
     host: '0.0.0.0', // This binds Vite to all network interfaces
     port: 3000, // Optional, you can change the port if needed
   },
+  preview: {
+    host: '0.0.0.0',
+    port: 3000,
+    strictPort: true,
+  }
 })

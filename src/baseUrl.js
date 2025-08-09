@@ -1,1 +1,1 @@
-export const baseUrl = "http://10.10.10.59:8000" // this is for images
+export const baseUrl = "http://13.51.233.34:8000" // this is for images
