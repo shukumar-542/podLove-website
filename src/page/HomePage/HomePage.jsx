@@ -56,10 +56,10 @@ const HomePage = () => {
 
   const getButtonLabel = () => {
     switch (status) {
-      case "Scheduled":
+      case "Scheduled": // only show date and time
+        return "Scheduled";
+      case "Playing": // when playing when show button to (Join Now)
         return "Join Now";
-      case "Playing":
-        return "Already Playing";
       case "Done":
       case "Finished":
         return "Session Completed";
@@ -72,7 +72,7 @@ const HomePage = () => {
     }
   };
 
-  const isJoinEnabled = status === "Scheduled";
+  const isJoinEnabled = status === "Playing";
 
   return (
     <div className="bg-[#F7E8E1]">
