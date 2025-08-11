@@ -14,8 +14,8 @@ const RoomPage = () => {
     const myMeeting = async () => {
         const appID = 369424760;
         const serverSecret = "57aa479aa7d1a0b236d8f38385df1631";
-        const devices = await navigator.mediaDevices.enumerateDevices();
-        console.log(devices);
+        // const devices = await navigator.mediaDevices.enumerateDevices();
+        // console.log(devices);
         // const hasCamera = devices.some(device => device.kind === 'videoinput');
         // const hasMic = devices.some(device => device.kind === 'audioinput');
 
@@ -55,30 +55,30 @@ const RoomPage = () => {
                         url: window.location.href,
                     },
                 ],
-                // scenario: {
-                //     mode: ZegoUIKitPrebuilt.OneONoneCall,
-                // },
+                scenario: {
+                    mode: ZegoUIKitPrebuilt.OneONoneCall,
+                },
                 turnOnMicrophoneWhenJoining: true,
-                // turnOnCameraWhenJoining: true,
-                // showMyCameraToggleButton: true,
+                turnOnCameraWhenJoining: true,
+                showMyCameraToggleButton: true,
                 showMyMicrophoneToggleButton: true,
-                // showAudioVideoSettingsButton: true,
-                // showScreenSharingButton: true,
-                turnOnCameraWhenJoining: false,
-                showMyCameraToggleButton: false,
-                showScreenSharingButton: false,
-                showAudioVideoSettingsButton: false, // Optional: hide if only audio matters
+                showAudioVideoSettingsButton: true,
+                showScreenSharingButton: true,
+                // turnOnCameraWhenJoining: false,
+                // showMyCameraToggleButton: false,
+                // showScreenSharingButton: false,
+                // showAudioVideoSettingsButton: false, // Optional: hide if only audio matters
                 showTextChat: true,
                 showUserList: true,
                 maxUsers: 2,
                 layout: "Auto",
                 showLayoutButton: false,
-                scenario: {
-                    mode: ZegoUIKitPrebuilt.OneONoneCall,
-                    // config: {
-                    //     role: "Host",
-                    // },
-                },
+                // scenario: {
+                //     mode: ZegoUIKitPrebuilt.OneONoneCall,
+                //     // config: {
+                //     //     role: "Host",
+                //     // },
+                // },
             });
 
         } catch (error) {
