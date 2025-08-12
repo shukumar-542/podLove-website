@@ -56,7 +56,7 @@ const RoomPage = () => {
                     },
                 ],
                 scenario: {
-                    mode: ZegoUIKitPrebuilt.OneONoneCall,
+                    mode: ZegoUIKitPrebuilt.GroupCall,
                 },
                 turnOnMicrophoneWhenJoining: true,
                 turnOnCameraWhenJoining: true,
@@ -70,7 +70,7 @@ const RoomPage = () => {
                 // showAudioVideoSettingsButton: false, // Optional: hide if only audio matters
                 showTextChat: true,
                 showUserList: true,
-                maxUsers: 2,
+                maxUsers: 5,
                 layout: "Auto",
                 showLayoutButton: false,
                 // scenario: {
