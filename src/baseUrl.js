@@ -1,1 +1,1 @@
-export const baseUrl = "http://13.51.233.34:8000" // this is for images
+export const baseUrl = "https://backend.podlove.co" // this is for images
