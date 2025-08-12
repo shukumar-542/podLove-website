@@ -9,7 +9,8 @@ export default defineConfig({
     port: 3000, // Optional, you can change the port if needed
   },
   preview: {
-    host: ['podlove.co', '0.0.0.0', 'www.podlove.co'],
+    host: '0.0.0.0',
+    allowedHosts: ['podlove.co', 'www.podlove.co'],
     port: 3000,
     strictPort: true,
   }
