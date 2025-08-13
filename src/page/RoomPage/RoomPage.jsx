@@ -48,37 +48,23 @@ const RoomPage = () => {
             // Create and store the Zego instance
             zpRef.current = ZegoUIKitPrebuilt.create(kitToken);
             zpRef.current.joinRoom({
-                container: videoContainerRef.current,
-                sharedLinks: [
-                    {
-                        name: "Video Call Link",
-                        url: window.location.href,
-                    },
-                ],
-                scenario: {
-                    mode: ZegoUIKitPrebuilt.GroupCall,
-                },
                 turnOnMicrophoneWhenJoining: true,
                 turnOnCameraWhenJoining: true,
                 showMyCameraToggleButton: true,
                 showMyMicrophoneToggleButton: true,
                 showAudioVideoSettingsButton: true,
                 showScreenSharingButton: true,
-                // turnOnCameraWhenJoining: false,
-                // showMyCameraToggleButton: false,
-                // showScreenSharingButton: false,
-                // showAudioVideoSettingsButton: false, // Optional: hide if only audio matters
                 showTextChat: true,
                 showUserList: true,
-                maxUsers: 5,
+                maxUsers: 50,
                 layout: "Auto",
-                showLayoutButton: false,
-                // scenario: {
-                //     mode: ZegoUIKitPrebuilt.OneONoneCall,
-                //     // config: {
-                //     //     role: "Host",
-                //     // },
-                // },
+                showLayoutButton: true,
+                scenario: {
+                    mode: "GroupCall",
+                    config: {
+                        role: "Host",
+                    },
+                },
             });
 
         } catch (error) {
