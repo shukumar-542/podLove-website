@@ -8,52 +8,33 @@ import { useUpdateUserInfoMutation } from "../../redux/Api/AuthApi";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
 
-const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/dvjbfwhxe/image/upload";
-const UPLOAD_PRESET = "podlove_upload";
-
 const UploadPhoto = () => {
   const navigate = useNavigate()
   const [updatePhoto, { isLoading }] = useUpdateUserInfoMutation()
   const [file, setFile] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
-  const [loading, setLoading] = useState(false);
 
   // Store file locally
   const handleFileSelect = ({ file }) => {
     setFile(file);
     setImageUrl(URL.createObjectURL(file));
   };
-
-
   // Upload image on Next button click
-  const handleNextClick = async () => {
+  const handleNextClick = () => {
     if (!file) {
       message.error("Please select an image first.");
       return;
     }
-
-    setLoading(true);
     const formData = new FormData();
-    formData.append("file", file);
-    formData.append("upload_preset", UPLOAD_PRESET);
-
-    try {
-      const response = await fetch(CLOUDINARY_URL, {
-        method: "POST",
-        body: formData,
-      });
-      const data = await response.json();
-      const uploadedImageUrl = data.secure_url;
-      setImageUrl(uploadedImageUrl);
-      toast.success("Image uploaded successfully!")
-      const result = await updatePhoto({ avatar: uploadedImageUrl });
-      navigate("/discover-compatibility");
-    } catch (error) {
-      console.error("Upload failed:", error);
-      message.error("Failed to upload image.");
-    } finally {
-      setLoading(false);
-    }
+    formData.append("avatar", file);
+    updatePhoto(formData)
+      .then(() => {
+        toast.success("Image uploaded successfully!")
+        navigate("/discover-compatibility");
+      })
+      .catch(() => {
+        message.error("Failed to upload image.");
+      })
   };
 
   return (
@@ -90,7 +71,7 @@ const UploadPhoto = () => {
               className="w-full"
             >
               <div className="border-2 border-dashed border-red-300 mb-10 rounded-md p-6 flex justify-center items-center md:w-[560px] h-56 cursor-pointer">
-                {loading ? (
+                {isLoading ? (
                   <p className="text-red-400">Uploading...</p>
                 ) : imageUrl ? (
                   <img
@@ -108,7 +89,7 @@ const UploadPhoto = () => {
           </div>
 
           <AuthButton disabled={isLoading} handleOnClick={handleNextClick} className="py-2">
-            {loading ? "Image Uploading..." : "Next"}
+            {isLoading ? "Image Uploading..." : "Next"}
           </AuthButton>
         </div>
 
