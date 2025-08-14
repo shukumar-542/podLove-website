@@ -4,12 +4,12 @@ import { useNavigate } from "react-router";
 import AuthButton from "../../component/AuthButton/AuthButton";
 import { Form } from "antd";
 import TextArea from "antd/es/input/TextArea";
-import { useUpdateUserInfoMutation } from "../../redux/Api/AuthApi";
+import { useBioValidationMutation } from "../../redux/Api/AuthApi";
 import { toast } from "sonner";
 // import { UserOutlined } from '@ant-design/icons';
 const Bio = () => {
   const navigate = useNavigate();
-  const [updateBio, { isLoading }] = useUpdateUserInfoMutation();
+  const [bioValidation, { isLoading }] = useBioValidationMutation();
   // const [updateUserBio] = useUpdateUserBioMutation()
   // const [UpdateUserBioNew] = useUpdateUserBioNewMutation();
 
@@ -28,7 +28,7 @@ const Bio = () => {
     //     console.log(error);
     //   });
 
-    updateBio(data)
+    bioValidation(data)
       .unwrap()
       .then((payload) => {
         toast.success(payload?.message)

@@ -39,7 +39,9 @@ const Body = () => {
       bodyType: selectedBodyType,
     };
 
-
+    localStorage.setItem('bodyType', JSON.stringify({
+      bodyType: preferredBodyType,
+    }))
     updateBodyType(data)
       .unwrap()
       .then((payload) => {

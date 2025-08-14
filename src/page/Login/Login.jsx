@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import img from "../../assets/loginBg.png";
 import { Checkbox, Divider, Form, Input } from "antd";
 import Password from "antd/es/input/Password";
@@ -11,6 +12,7 @@ import {
 } from "../../redux/Api/AuthApi";
 import { toast } from "sonner";
 import { GoogleLogin } from "@react-oauth/google";
+import AppleSignin from 'react-apple-signin-auth';
 import { jwtDecode } from "jwt-decode";
 
 const Login = () => {
@@ -55,6 +57,46 @@ const Login = () => {
       })
       .catch((error) => toast.error(error?.data?.message));
   };
+
+  // ================================ Apple ======================================
+  // =============================================================================
+
+  console.log(window.location.origin);
+
+  const handleAppleSuccess = async (response) => {
+    console.log(response);
+    // try {
+    //   const res = await fetch('/api/auth/apple', {
+    //     method: 'POST',
+    //     headers: { 'Content-Type': 'application/json' },
+    //     credentials: 'include', // if your backend sets httpOnly cookies
+    //     body: JSON.stringify({
+    //       code: response?.authorization?.code,
+    //       id_token: response?.authorization?.id_token,
+    //     }),
+    //   });
+    //   if (!res.ok) throw new Error(await res.text());
+    //   const payload = await res.json();
+
+    //   // mirror your Google handling:
+    //   localStorage.setItem('podlove-token', payload?.data?.accessToken);
+    //   toast.success(payload?.message || 'Signed in with Apple');
+
+    //   if (payload?.data?.user?.isProfileComplete) {
+    //     window.location.href = '/home';
+    //   } else {
+    //     window.location.href = '/location';
+    //   }
+    // } catch (err) {
+    //   toast.error(err?.message || 'Apple sign-in failed');
+    // }
+  };
+
+  const handleAppleError = (err) => {
+    console.error(err);
+    toast.error('Apple sign-in cancelled or failed');
+  };
+
 
   return (
     <div
@@ -108,16 +150,44 @@ const Login = () => {
               <FcGoogle size={25} />
               Continue with Google
             </button> */}
-            <GoogleLogin
-              onSuccess={handleLoginSuccess}
-              onError={() => {
-                console.log("Login Failed");
+            <div className=" flex items-center justify-center">
+              <GoogleLogin
+                onSuccess={handleLoginSuccess}
+                onError={() => {
+                  console.log("Login Failed");
+                }}
+              />
+            </div>
+
+            {/* <div className=" flex items-center justify-center">
+              <button className="border w-auto px-2 mt-5 border-[#F68064] py-2 rounded-md text-[#767676] flex items-center justify-center gap-2">
+                <FaApple size={25} />
+                Continue with apple
+              </button>
+            </div> */}
+            <AppleSignin
+              authOptions={{
+                clientId: 5541,
+                scope: 'name email',
+                redirectURI: `${window.location.origin}/auth/apple/callback`,
+                state: crypto.randomUUID(),
+                usePopup: true,
+                nonce: btoa(crypto.getRandomValues(new Uint8Array(16)).toString()),
               }}
+              onSuccess={handleAppleSuccess}
+              onError={handleAppleError}
+              /** customize the button **/
+              render={(props) => (
+                <button
+                  onClick={props.onClick}
+                  className="border w-auto px-2 mt-5 border-[#F68064] py-2 rounded-md text-[#767676] flex items-center justify-center gap-2"
+                >
+                  <FaApple size={25} />
+                  Continue with Apple
+                </button>
+              )}
             />
-            <button className="border w-full mt-5 border-[#F68064] py-2 rounded-md text-[#767676] flex items-center justify-center gap-2">
-              <FaApple size={25} />
-              Continue with apple
-            </button>
+
             <p className="text-[#767676] text-center mt-2">
               Don&apos;t have an account?{" "}
               <NavLink to={"/sign-up"} className="text-[#F68064]">

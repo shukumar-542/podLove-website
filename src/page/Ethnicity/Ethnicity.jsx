@@ -41,6 +41,10 @@ const Ethnicity = () => {
   const handlePreferredBodyTypeChange = (checkedValues) => {
     setPreferredBodyType(checkedValues);
   };
+  const age = JSON.parse(localStorage.getItem('age'))
+  const gender = JSON.parse(localStorage.getItem('gender'))
+  const bodyType = JSON.parse(localStorage.getItem('bodyType'))
+  const distance = JSON.parse(localStorage.getItem('distance'))
 
   const handleEthnicity = () => {
     if (preferredBodyType?.length === 0 || selectedBodyType.length === 0) {
@@ -48,7 +52,11 @@ const Ethnicity = () => {
     }
     const data = {
       preferences: {
+        age: age,
+        gender: gender?.gender,
+        bodyType: bodyType?.bodyType,
         ethnicity: preferredBodyType,
+        distance: distance?.distance,
       },
       ethnicity: selectedBodyType,
     };
@@ -57,6 +65,10 @@ const Ethnicity = () => {
       .unwrap()
       .then((payload) => {
         toast.success(payload?.message)
+        localStorage.removeItem('age')
+        localStorage.removeItem('gender')
+        localStorage.removeItem('bodyType')
+        localStorage.removeItem('distance')
         navigate("/bio")
       })
       .catch((error) => toast.error(error?.data?.message));
