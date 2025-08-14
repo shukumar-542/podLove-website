@@ -30,6 +30,11 @@ const Location = () => {
         distance: value,
       },
     };
+
+    localStorage.setItem('distance', JSON.stringify({
+      distance: value,
+    }))
+
     updateUserInfo(data)
       .unwrap()
       .then((payload) => {
@@ -38,7 +43,7 @@ const Location = () => {
       })
       .catch((error) => toast.error(error?.data?.message));
   };
-  
+
   return (
     <div
       style={{

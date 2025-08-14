@@ -30,6 +30,15 @@ const authApi = baseApi.injectEndpoints({
       },
       invalidatesTags: ["profile"],
     }),
+    bioValidation: builder.mutation({
+      query: (data) => {
+        return {
+          url: `/user/validate-bio`,
+          method: "POST",
+          body: data,
+        };
+      },
+    }),
     podcastCreate: builder.mutation({
       query: () => {
         return {
@@ -178,6 +187,7 @@ export const {
   useVerifySingUpOtpMutation,
   useUpdateUserInfoMutation,
   usePodcastCreateMutation,
+  useBioValidationMutation,
   useGetUserQuery,
   useLoginUserMutation,
   useGetPodCastDetailsQuery,

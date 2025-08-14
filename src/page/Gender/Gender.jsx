@@ -16,6 +16,9 @@ const Gender = () => {
       },
       gender: values?.myGender,
     };
+    localStorage.setItem('gender', JSON.stringify({
+      gender: values?.gender
+    }))
     updateGender(data)
       .unwrap()
       .then((payload) => {

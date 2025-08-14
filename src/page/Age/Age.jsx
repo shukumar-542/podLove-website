@@ -23,6 +23,11 @@ const Age = () => {
   };
 
   const handleAge = (values) => {
+    localStorage.setItem('age', JSON.stringify({
+      min: values?.min,
+      max: values?.max,
+    }))
+
     const data = {
       preferences: {
         age: {
@@ -32,6 +37,7 @@ const Age = () => {
       },
       dateOfBirth: dayjs(date).format("DD/MM/YYYY"),
     };
+
 
     // console.log(data);
 

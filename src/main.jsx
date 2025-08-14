@@ -60,7 +60,7 @@ import ScrollToTop from "./helpers/ScrollToTop.js";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Provider store={store}>
-      <GoogleOAuthProvider clientId="428822266422-tmspu533cnr7q6pgs3cljo01pmfjvrdq.apps.googleusercontent.com">
+      <GoogleOAuthProvider clientId="471587701955-i0so67cvfpje0k7akpdlrt3tt8u3dprk.apps.googleusercontent.com">
         <BrowserRouter>
           <ScrollToTop />
           <Routes>
