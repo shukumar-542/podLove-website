@@ -42,13 +42,17 @@ const MatchResult = () => {
           <h1 className="text-center font-poppins font-semibold text-4xl">
             Match
           </h1>
-          <p className="text-center max-w-80 mx-auto mt-2">
-            We have found potential matches for you!
-          </p>
+          {
+            data?.data?.users?.length &&
+            <p className="text-center max-w-80 mx-auto mt-2">
+              We have found potential matches for you!
+            </p>
+          }
+
           {
             isLoading ? (
               <p className="text-center my-16">Loading...</p>
-            ) : data?.data?.users?.length === 0 ? (
+            ) : !data?.data?.users?.length ? (
               <p className="text-center my-16">No matches found.</p>
             ) :
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-10 ">
