@@ -7,6 +7,7 @@ const RoomPage = () => {
     const { data: getProfile } = useGetUserQuery();
     console.log('sdfasfsafasdfasdf', getProfile?.data?._id);
     const { roomId } = useParams();
+    console.log(roomId);
     const videoContainerRef = useRef(null);
     const zpRef = useRef(null);
 

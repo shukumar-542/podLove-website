@@ -23,13 +23,15 @@ const ChangePassword = () => {
       )
       .catch((error) => toast.error(error?.data?.message));
   };
-
+  
   const confirmPause = () => {
-    console.log('pause');
+    localStorage.removeItem('podlove-token');
+    window.location.href = '/login';
   };
 
   const confirmDelete = () => {
-    console.log('confirm');
+    localStorage.removeItem('podlove-token');
+    window.location.href = '/login';
   };
 
 

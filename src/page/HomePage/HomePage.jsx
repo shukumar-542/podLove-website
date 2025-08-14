@@ -134,9 +134,11 @@ const HomePage = () => {
             ))}
           </div>
         )}
-
+        <h1 className="text-center font-bold text-2xl md:text-4xl my-14">
+          Podcast Schedule
+        </h1>
         {/* Video + Join / Request Button Section */}
-        <section className="my-20 relative">
+        <section className="mb-20 relative">
           <video
             autoPlay
             loop
