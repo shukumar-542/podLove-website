@@ -11,6 +11,7 @@ import { toast } from "sonner";
 import { useGetAllPlanQuery } from "../../redux/Api/SubscriptionPlan";
 import { useSendPodcastRequestMutation } from "../../redux/Api/PodcastApi";
 import { Spin } from "antd";
+import { Carousel } from 'antd';
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -28,7 +29,7 @@ const HomePage = () => {
       toast.error("Podcast not available!");
       return;
     }
-    navigate(`/room/${podcast._id}`);
+    navigate(`/room/podcast?roomId=${podcast._id}&hostId=${getPodcastDetails?.data?.podcast?.primaryUser?._id}`);
   };
 
   const handleCreatePodcast = () => {
@@ -73,6 +74,8 @@ const HomePage = () => {
   };
 
   const isJoinEnabled = status === "Playing";
+
+
 
   return (
     <div className="bg-[#F7E8E1]">
@@ -135,7 +138,7 @@ const HomePage = () => {
           </div>
         )}
         <h1 className="text-center font-bold text-2xl md:text-4xl my-14">
-          Podcast Schedule
+          My Podcast Schedule
         </h1>
         {/* Video + Join / Request Button Section */}
         <section className="mb-20 relative">
@@ -179,9 +182,70 @@ const HomePage = () => {
             )}
           </div>
         </section>
+        {/* me match of others */}
+        {
+          <>
+            <h1 className="text-center font-bold text-2xl md:text-4xl my-14">
+              You&apos;re Matched With Someone
+            </h1>
 
+            <Carousel arrows infinite={false}>
+              {
+                getPodcastDetails?.data?.hostPodcastMatches?.map((match) => (
+                  <section key={match?._id} className=" relative">
+                    <video
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      className="h-[500px] mx-auto rounded-md"
+                    >
+                      <source src={video} type="video/mp4" />
+                    </video>
+                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
+                      <img src={mic} alt="Microphone" className="w-24 h-24 mx-auto" />
+                      <h1 className="text-4xl font-poppins text-white">Date & Time:</h1>
+                      {match?.status === "Playing" ? (
+                        <div>
+                          <h2 className="text-white text-center">
+                            {match?.schedule?.date} {match?.schedule?.day} {match?.schedule?.time}
+                          </h2>
+                          <button
+                            disabled={match?.status !== "Playing"}
+                            onClick={match?.status === "Playing" ? handleVideoCall : undefined}
+                            className={`w-full mt-2 py-2 rounded-md transition duration-300 
+                           ${match?.status === "Playing"
+                                ? "bg-[#F68064] text-white hover:bg-[#e76a4f]"
+                                : "bg-gray-200 text-gray-500 cursor-not-allowed"
+                              }`}
+                          >
+                            {match?.status === "Playing" ? "Join Now" : "Join Now Not Available"}
+                          </button>
+                        </div>
+                      ) : (
+                        <div>
+                          <h2 className="text-white text-center">
+                            {match?.schedule?.date} {match?.schedule?.day} {match?.schedule?.time}
+                          </h2>
+                          <button
+                            className={`w-full mt-2 py-2 rounded-md transition duration-300 
+                           ${"bg-gray-200 text-gray-500 cursor-not-allowed"}`}
+                          >
+                            {"Join Now Not Available"}
+                          </button>
+                        </div>
+                      )}
+
+                    </div>
+                  </section>
+                ))
+              }
+            </Carousel>
+
+          </>
+        }
         {/* Subscription Plans */}
-        <h1 className="text-center font-bold text-2xl md:text-4xl">
+        <h1 className="text-center font-bold text-2xl md:text-4xl mt-16">
           Subscription Plan
         </h1>
         <Pricing subscriptions={getAllPlans?.data} />
