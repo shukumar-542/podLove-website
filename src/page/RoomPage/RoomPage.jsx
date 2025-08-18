@@ -1,15 +1,28 @@
 import { ZegoUIKitPrebuilt } from '@zegocloud/zego-uikit-prebuilt';
 import { useEffect, useRef } from 'react';
-import { useParams } from 'react-router';
 import { useGetUserQuery } from '../../redux/Api/AuthApi';
+import { toast } from 'sonner';
+import { usePodcastDoneMutation } from '../../redux/Api/PodcastApi';
+import { IoArrowBack } from 'react-icons/io5';
 
 const RoomPage = () => {
     const { data: getProfile } = useGetUserQuery();
-    console.log('sdfasfsafasdfasdf', getProfile?.data?._id);
-    const { roomId } = useParams();
+    console.log('sdfasfsafasdfasdf', getProfile?.data);
+    // const { roomId } = useParams();
+    const queryParams = new URLSearchParams(window.location.search);
+
+    // Get the values of the query parameters
+    const roomId = queryParams.get('roomId');
+    const hostId = queryParams.get('hostId');
     console.log(roomId);
     const videoContainerRef = useRef(null);
     const zpRef = useRef(null);
+    const [podcastDone] = usePodcastDoneMutation();
+
+    const handleExitPodCast = () => {
+        getProfile?.data?._id === hostId &&
+            podcastDone({ podcastId: roomId })
+    }
 
 
     const myMeeting = async () => {
@@ -66,6 +79,12 @@ const RoomPage = () => {
                         role: "Host",
                     },
                 },
+                onDispose: () => {
+                    console.log('exiting podcast');
+                    handleExitPodCast();
+                    toast.success("Call Ended");
+                    window.location.href = "/home";
+                },
             });
 
         } catch (error) {
@@ -85,7 +104,29 @@ const RoomPage = () => {
         };
     }, [roomId]);
 
-    return <div ref={videoContainerRef} style={{ width: '100%', height: '100vh' }}></div>;
+    return <div>
+        <div ref={videoContainerRef} style={{ width: '100%', height: '100vh' }} />
+        <a href={`/home`}>
+            <button
+            className='flex items-center justify-center gap-2'
+                style={{
+                    position: 'absolute',
+                    top: '20px',
+                    left: '20px',
+                    padding: '5px 10px',
+                    fontSize: '16px',
+                    backgroundColor: '#000000',
+                    color: 'white',
+                    border: 'none',
+                    borderRadius: '5px',
+                    cursor: 'pointer',
+                    zIndex: 9999,
+                }}
+            >
+                <IoArrowBack size={20} />Go Back
+            </button>
+        </a>
+    </div>;
 };
 
 export default RoomPage;

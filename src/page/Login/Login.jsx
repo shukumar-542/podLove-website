@@ -165,28 +165,39 @@ const Login = () => {
                 Continue with apple
               </button>
             </div> */}
-            <AppleSignin
-              authOptions={{
-                clientId: 5541,
-                scope: 'name email',
-                redirectURI: `${window.location.origin}/auth/apple/callback`,
-                state: crypto.randomUUID(),
-                usePopup: true,
-                nonce: btoa(crypto.getRandomValues(new Uint8Array(16)).toString()),
-              }}
-              onSuccess={handleAppleSuccess}
-              onError={handleAppleError}
-              /** customize the button **/
-              render={(props) => (
-                <button
-                  onClick={props.onClick}
-                  className="border w-auto px-2 mt-5 border-[#F68064] py-2 rounded-md text-[#767676] flex items-center justify-center gap-2"
-                >
-                  <FaApple size={25} />
-                  Continue with Apple
-                </button>
-              )}
-            />
+            <div className=" flex items-center justify-center">
+              <AppleSignin
+                // authOptions={{
+                //   clientId: 5541,
+                //   scope: 'name email',
+                //   redirectURI: `${window.location.origin}/auth/apple/callback`,
+                //   state: crypto.randomUUID(),
+                //   usePopup: true,
+                //   nonce: btoa(crypto.getRandomValues(new Uint8Array(16)).toString()),
+                // }}
+                authOptions={{
+                  clientId: 'com.example.web',
+                  scope: 'email name',
+                  // redirectURI: `${window.location.origin}/auth/apple/callback`,
+                  redirectURI: `${window.location.origin}/login`,
+                  state: '',
+                  nonce: 'nonce',
+                  usePopup: true,
+                }}
+                onSuccess={handleAppleSuccess}
+                onError={handleAppleError}
+                /** customize the button **/
+                render={(props) => (
+                  <button
+                    onClick={props.onClick}
+                    className="border w-auto px-4 mt-5 border-[#F68064] py-2 rounded-md text-[#767676] flex items-center justify-center gap-2"
+                  >
+                    <FaApple size={25} />
+                    Continue with Apple
+                  </button>
+                )}
+              />
+            </div>
 
             <p className="text-[#767676] text-center mt-2">
               Don&apos;t have an account?{" "}
