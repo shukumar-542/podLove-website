@@ -25,8 +25,6 @@ const EditProfile = () => {
   const [selectedLocation, setSelectedLocation] = useState(null);
   const navigate = useNavigate();
 
-
-  console.log(selectedLocation);
   useEffect(() => {
     if (getUser) {
       form.setFieldsValue({
@@ -82,14 +80,17 @@ const EditProfile = () => {
         name: values?.name,
         phoneNumber: values?.contact,
         gender: values?.gender,
-        location: {
-          place: selectedLocation?.address,
-          longitude: selectedLocation?.lng,
-          latitude: selectedLocation?.lat,
-        },
         bio: values?.bio,
+        ...(selectedLocation && {
+          location: {
+            place: selectedLocation?.address,
+            longitude: selectedLocation?.lng,
+            latitude: selectedLocation?.lat,
+          }
+        }),
         ...(uploadedImageUrl && { avatar: uploadedImageUrl }),
       };
+
       const result = await editProfile(updateData);
       navigate("/profile");
       console.log(result);

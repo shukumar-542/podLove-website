@@ -27,7 +27,7 @@ const Profile = () => {
       className="h-[100vh] px-2 md:px-0 relative"
     >
       <div className="absolute inset-0 bg-black bg-opacity-50 z-0"></div>
-      <div className="flex  text-red-500  z-10 cursor-pointer justify-center max-w-3xl pt-10 mx-auto">
+      <div className="flex  text-red-500  z-10 cursor-pointer justify-center pt-10 mx-auto">
         <Link to={'/change-password'} className="z-10"><IoSettingsOutline className=" bg-white p-2 rounded-full shadow-2xl" size={40} /></Link>
       </div>
       <div className=" flex justify-center items-center h-full ">
@@ -50,7 +50,7 @@ const Profile = () => {
           </div>
           <div>
             <div className="flex justify-between items-center">
-              <p className="text-[#8C5940] font-poppins text-[36px] font-bold ">
+              <p className="text-[#8C5940] font-poppins text-[36px] pr-3 md:pr-10 font-bold ">
                 {getUser?.data?.name}
               </p>
               <div className=" flex items-center justify-center gap-3">

@@ -35,6 +35,11 @@ const Location = () => {
       distance: value,
     }))
 
+    if (!selectedLocation?.address) {
+      toast.error("please select location")
+      return;
+    }
+
     updateUserInfo(data)
       .unwrap()
       .then((payload) => {
