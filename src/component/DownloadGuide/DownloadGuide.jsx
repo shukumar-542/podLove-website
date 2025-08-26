@@ -1,4 +1,3 @@
-import React from "react";
 import iPhone from "../../assets/iPhone 11 Pro.png";
 import logo from "../../assets/podLogo.png";
 import app from "../../assets/appStore.png";
@@ -11,7 +10,7 @@ const DownloadGuide = () => {
           <div className="md:flex items-center gap-10">
             <img className="max-w-[267px] max-h-[56px]" src={logo} alt="" />
             <div>
-              <p className="text-[#767676]">Get Podlove With </p>
+              <p className="text-[#767676]">Get PodLove With </p>
               <p className="text-[#FFA175]"> Our Mobile App </p>
             </div>
           </div>
@@ -19,7 +18,7 @@ const DownloadGuide = () => {
           <div></div>
           <p className="text-2xl font-bold mt-5">Download the App</p>
           <p className="text-[#767676] max-w-[380px] mt-5">
-            Download the Podlove App and Match your love Online to get the
+            Download the PodLove App and Match your love Online to get the
             fastest love.
           </p>
 

@@ -9,9 +9,9 @@ function App() {
   return (
     <div>
       <Helmet>
-        <title>PodLove - Success in Finding Your  Perfect Match</title>
-        <meta name="description" content="PodLove - Success in Finding Your  Perfect Match" />
-        <meta name="keywords" content="podLove, dating, dating website, dating app, relationships" />
+        <title>PodLove - Blind-Match Video-Podcast Dating for aged 35–55, Success in Finding Your Perfect Match</title>
+        <meta name="description" content="PodLove offers blind-match video-podcast dating for individuals aged 35-55. Discover meaningful connections based on shared interests and engaging podcasts." />
+        <meta name="keywords" content="PodLove, video podcast dating, blind-match dating, 35-55 dating, relationships, dating app, find your match" />
       </Helmet>
       <NavBar />
       <div className="min-h-[70vh]">

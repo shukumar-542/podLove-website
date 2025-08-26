@@ -1,4 +1,3 @@
-import React from "react";
 import { Button } from "../Shared/Button/Button";
 import { Carousel } from "antd";
 import img from "../../assets/quote.png";
@@ -27,8 +26,7 @@ const ClientReview = () => {
           What Our Users Are Saying
         </p>
         <p className="text-center text-[#5C5C5C] max-w-[400px] mx-auto mt-2">
-          "Buy exclusive content or sell your creativity. Everything you need in
-          one place."
+          &quot;Hear From Our Users: Real Feedback, Real Experiences&quot;
         </p>
         <div className="flex justify-center my-10">
           <Button className={"py-2"}><Link to={"/sign-up"}>Find your Match</Link></Button>

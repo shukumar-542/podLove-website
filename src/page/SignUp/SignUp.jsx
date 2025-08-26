@@ -142,16 +142,16 @@ const SignUp = () => {
                     <Checkbox className="text-xs">
                       I agree with the{" "}
                       <span className="text-[#F68064] font-semibold">
-                        <NavLink to="/terms-condition">terms and conditions</NavLink>
+                        <NavLink to="/terms-and-conditions">terms and conditions</NavLink>
                       </span>
                       ,{" "}
                       <span className="text-[#F68064] font-semibold">
-                        <NavLink to="/consumer-policy">Consumer Policy</NavLink>
+                        <NavLink to="/privacy-policy">privacy policy</NavLink>
                       </span>
-                      , and{" "}
+                      {/* , and{" "}
                       <span className="text-[#F68064] font-semibold">
                         <NavLink to="/media-policy">Media Policy</NavLink>
-                      </span>
+                      </span> */}
                     </Checkbox>
                   </Form.Item>
                 </div>

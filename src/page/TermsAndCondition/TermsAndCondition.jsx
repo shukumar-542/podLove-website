@@ -1,4 +1,3 @@
-import React from "react";
 import IsPodSafe from "../../component/IsPodSafe/IsPodSafe";
 import { useGetTermsConditionQuery } from "../../redux/Api/AuthApi";
 

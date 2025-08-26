@@ -89,14 +89,14 @@ createRoot(document.getElementById("root")).render(
                 <Route path="/change-password" element={<ChangePassword />} />
               </Route>
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-              <Route path="/terms-condition" element={<TermsAndCondition />} />
+              <Route path="/terms-and-conditions" element={<TermsAndCondition />} />
               <Route element={<PrivateRoute />}>
                 <Route path="/notification" element={<Notification />} />
               </Route>
               <Route path="/consumer-policy" element={<ConsumerPolicy />} />,
               <Route path="/media-policy" element={<MediaPlicy />} />
               <Route path="/podcast-details/:id" element={<ParticipantDetails />} />
-              <Route path="/opy-in-policy" element={<OptInPolicy />} />
+              <Route path="/opt-in-policy" element={<OptInPolicy />} />
               <Route element={<PrivateRoute />}>
                 <Route path="/room/:roomId" element={<RoomPage />} />
               </Route>
@@ -126,7 +126,7 @@ createRoot(document.getElementById("root")).render(
             <Route path="/congratulation" element={<Congratulation />} />
             <Route path="/match-result" element={<MatchResult />} />
             <Route path="/match-bio" element={<MatchBio />} />
-            <Route path="/forget-password" element={<ForgetPassword />} />
+            <Route path="/forgot-password" element={<ForgetPassword />} />
             <Route path="/verify-forget-otp" element={<VerifyEmail />} />
             <Route path="/set-new-password" element={<SetNewPassword />} />
             <Route path="/our-approch" element={<OurApproach />} />
