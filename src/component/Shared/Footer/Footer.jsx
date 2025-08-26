@@ -35,10 +35,10 @@ const Footer = () => {
               <Link to={"/privacy-policy"}>Privacy Policy</Link>
             </p>
             <p className="mb-2">
-              <Link to={"/terms-condition"}>Terms And Condition</Link>
+              <Link to={"/terms-and-conditions"}>Terms And Conditions</Link>
             </p>
             <p>
-              <Link to={"/opy-in-policy"}>SMS Consent & Opt-In-Policy</Link>
+              <Link to={"/opt-in-policy"}>SMS Consent & Opt-In-Policy</Link>
             </p>
           </div>
         </div>

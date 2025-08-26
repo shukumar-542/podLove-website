@@ -2,8 +2,8 @@ import about from "../../assets/about3.png";
 import bg from "../../assets/about-bg.png";
 const AboutUs = () => {
   return (
-    <div style={{ backgroundImage: `url(${bg})` , backgroundRepeat : 'no-repeat' , backgroundPosition : 'center' , backgroundSize  :'cover'}}>
-      <div className="container mx-auto">
+    <div style={{ backgroundImage: `url(${bg})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundSize: 'cover' }}>
+      <div className="container mx-auto pb-16">
         {/* About text */}
         <div className="bg-[#FFA175] py-10">
           <h1 className="text-3xl px-4 font-bold">Discover Who We Are &</h1>
@@ -30,41 +30,19 @@ const AboutUs = () => {
           </p>
         </div>
         {/* About description */}
+        <h1 className=" font-poppins text-2xl font-semibold mb-2 px-2 md:px-0">
+          Mission:
+        </h1>
         <p className=" font-poppins mb-5 px-2 md:px-0">
-          Could you clarify what you mean by "podlove Journey and Vision"? Are
-          you asking about a personal journey related to foot care or something
-          else like a business vision for a product or service? I'd be happy to
-          help!
+          To transform the landscape of modern dating by creating a platform where conversation, shared values, and emotional intelligence are the true foundations of connection, empowering individuals to find profound, lasting relationships.
         </p>
+        <h1 className=" font-poppins text-2xl font-semibold mb-2 px-2 md:px-0">
+          Vision:
+        </h1>
         <p className=" font-poppins mb-5 px-2 md:px-0">
-          It is a long established fact that a reader will be distracted by the
-          readable content of a page when looking at its layout. The point of
-          using Lorem Ipsum is that it has a more-or-less normal distribution of
-          letters, as opposed to using.
+          To create a global community where technology elevates human connection, transforming how adults find meaningful relationships by prioritizing authentic dialogue, shared values, and emotional intelligence over superficial interactions.
         </p>
-        <p className=" font-poppins mb-5 px-2 md:px-0">
-          It is a long established fact that a reader will be distracted by the
-          readable content of a page when looking at its layout. The point of
-          using Lorem Ipsum is that it has a more-or-less normal distribution of
-          letters, as opposed to using 'Content here, content here', making it
-          look like readable English. Many desktop publishing packages and web
-          page editors now use Lorem Ipsum as their default model text, and a
-          search for 'lorem ipsum' will uncover many web sites still in their
-          infancy. Various versions have evolved over the years, sometimes by
-          accident, sometimes on purpose (injected humour and the like).
-        </p>
-        <p className=" font-poppins mb-5 px-2 md:px-0">
-          It is a long established fact that a reader will be distracted by the
-          readable content of a page when looking at its layout. The point of
-          using Lorem Ipsum is that it has a more-or-less normal distribution of
-          letters, as opposed to using.
-        </p>
-        <p className="pb-10 font-poppins px-2 md:px-0">
-          It is a long established fact that a reader will be distracted by the
-          readable content of a page when looking at its layout. The point of
-          using Lorem Ipsum is that it has a more-or-less normal distribution of
-          letters, as opposed to using.
-        </p>
+
       </div>
     </div>
   );

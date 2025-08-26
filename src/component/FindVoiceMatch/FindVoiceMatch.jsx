@@ -11,7 +11,7 @@ const FindVoiceMatch = () => {
     {
       img: client4,
       title: "Fastest  Match",
-      des: "Get your podlove in less than an hour! That’s as fast as it can get.",
+      des: "Get your PodLove quickly! That’s as fast as it can get.",
 
     },
     {
@@ -22,7 +22,7 @@ const FindVoiceMatch = () => {
     {
       img: client6,
       title: "Best Choose In Word!",
-      des: "Get the choose and comobs at the best match anly at Podlove!",
+      des: "Get the choose and comobs at the best match anly at PodLove!",
     },
   ];
 

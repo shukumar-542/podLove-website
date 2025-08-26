@@ -129,9 +129,9 @@ const Login = () => {
                 <p>
                   <Checkbox /> Remember me
                 </p>
-                <Link to={"/forget-password"}>
+                <Link to={"/forgot-password"}>
                   <p className="text-[#F68064] cursor-pointer">
-                    Forget password
+                    Forgot password
                   </p>
                 </Link>
               </div>
