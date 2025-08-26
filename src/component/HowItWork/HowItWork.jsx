@@ -12,7 +12,7 @@ const HowItWork = () => {
     <div className="p-4 md:px-0">
       <div className="container mx-auto my-20">
         <h1 className="text-4xl text-center text-[#6B4431] font-bold">
-          How It Work
+          How It Works
         </h1>
         <p className="text-center text-xl mt-2 text-[#6B4431]">
           Your Step-by-Step Journey

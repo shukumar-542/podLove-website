@@ -56,30 +56,30 @@ const SuccessStory = () => {
                 <div className="mt-10 space-y-5 ">
                   <p className="flex gap-5 text-[#333333]">
                     <AiFillDislike color="#6B4431" size={25} />
-                    Stuck on apps with mismatched results.
+                    Stuck on apps with mismatched results
                   </p>
                   <p className="flex gap-5 text-[#333333]">
                     <AiFillDislike color="#6B4431" size={25} />
-                    Unsure where to turn for reliable help.
+                    Unsure where to turn for reliable help
                   </p>
                   <p className="flex gap-5 text-[#333333]">
                     <AiFillDislike color="#6B4431" size={25} />
-                    Feeling frustrated and out of options.
+                    Feeling frustrated and out of options
                   </p>
                 </div>
               </div>
               <div className="bg-[#EBEBEB] shadow-md rounded-md p-5 hover:bg-[#FFF6F1] transition duration-200">
                 <h1 className="text-center text-[#6B4431] font-bold text-2xl">
-                  Before Match{" "}
+                  The PodLove Difference{" "}
                 </h1>
                 <div className="mt-10 space-y-5 ">
                   <p className="flex gap-5 text-[#333333]">
                     <AiFillLike color="#2757A6" size={25} />
-                    Stuck on apps with mismatched results.
+                    Matches aligned with your values and goals
                   </p>
                   <p className="flex gap-5 text-[#333333]">
                     <AiFillLike color="#2757A6" size={25} />
-                    Unsure where to turn for reliable help.
+                    A clear, process guided by experts
                   </p>
                   <p className="flex gap-5 text-[#333333]">
                     <AiFillLike color="#2757A6" size={25} />
