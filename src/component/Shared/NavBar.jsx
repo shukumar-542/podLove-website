@@ -32,6 +32,9 @@ const NavBar = () => {
           {
             logInUser && <NavLink to="/home" className="hover:text-[#FFA175]">Home</NavLink>
           }
+          {
+            !logInUser && <NavLink to="/" className="hover:text-[#FFA175]">Home</NavLink>
+          }
 
           <NavLink to="/about-us" className="hover:text-[#FFA175]">About us</NavLink>
           <NavLink to="/contact-us" className="hover:text-[#FFA175]">Contact us</NavLink>
