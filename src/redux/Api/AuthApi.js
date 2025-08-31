@@ -160,6 +160,15 @@ const authApi = baseApi.injectEndpoints({
         };
       },
     }),
+    resetAuthPassword: builder.mutation({
+      query: (data) => {
+        return {
+          url: "/auth/reset-password",
+          method: "POST",
+          body: data,
+        };
+      },
+    }),
 
     connectBegins: builder.mutation({
       query: (id) => {
@@ -203,4 +212,5 @@ export const {
   useResetPasswordMutation,
   useConnectBeginsMutation,
   useGetMatchsQuery,
+  useResetAuthPasswordMutation
 } = authApi;

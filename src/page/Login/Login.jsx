@@ -14,6 +14,7 @@ import { toast } from "sonner";
 import { GoogleLogin } from "@react-oauth/google";
 import AppleSignin from 'react-apple-signin-auth';
 import { jwtDecode } from "jwt-decode";
+import { IoArrowBack } from "react-icons/io5";
 
 const Login = () => {
   const [loginUser, { isLoading }] = useLoginUserMutation();
@@ -110,12 +111,13 @@ const Login = () => {
     >
       {/* 🔹 Black Overlay (behind the content) */}
       <div className="absolute inset-0 bg-black bg-opacity-50 z-0"></div>
-
+      <a href={`/`}><IoArrowBack me className=" text-[#F26828]  absolute top-10 left-10 cursor-pointer z-9999" size={40} /></a>
       {/* 🔹 Content (above the overlay) */}
       <div className="flex items-center justify-start max-w-5xl mx-auto h-full p-2 md:p-0 relative z-10">
         <div className="bg-white shadow-2xl shadow-[#F26828] rounded-md p-5 md:p-10 max-w-5xl">
-          <p className="text-4xl font-bold text-[#333333]">Welcome Back!</p>
-          <p className="mt-2">Please log in to continue access</p>
+          {/* <p className="text-4xl font-bold text-[#333333]">Welcome Back!</p> */}
+          <p className="text-4xl text-center font-bold text-[#333333]">Log in</p>
+          <p className="mt-2 text-center">Please log in to continue access</p>
 
           <div className=" w-[250px] md:w-[450px] ">
             <Form onFinish={handleUserLogin} layout="vertical">

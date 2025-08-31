@@ -5,6 +5,7 @@ import { NavLink, useNavigate } from "react-router";
 import AuthButton from "../../component/AuthButton/AuthButton";
 import { useSignUpMutation } from "../../redux/Api/AuthApi";
 import { toast } from "sonner";
+import { IoArrowBack } from "react-icons/io5";
 // import { IoArrowBack } from "react-icons/io5";
 const SignUp = () => {
   const [singUp, { isLoading }] = useSignUpMutation();
@@ -37,11 +38,11 @@ const SignUp = () => {
       className="h-[100vh]"
     >
       <div className="bg-black absolute opacity-50 inset-0 z-0 "></div>
-      {/* <IoArrowBack className=" text-[#F26828]  absolute top-10 left-10 cursor-pointer z-9999" size={50} /> */}
+      <a href={`/`}><IoArrowBack className=" text-[#F26828]  absolute top-10 left-10 cursor-pointer z-9999" size={40} /></a>
       <div className="flex items-center justify-start max-w-5xl mx-auto  h-full p-2 md:p-0 z-10 relative">
         <div className="bg-white shadow-2xl shadow-[#F26828] rounded-md  p-5 md:p-10 max-w-5xl">
-          <p className="text-4xl font-bold text-[#333333]">Sign Up</p>
-          <p className="mt-2">Just a few quick things to get started</p>
+          <p className="text-4xl text-center font-bold text-[#333333]">Sign Up</p>
+          <p className="mt-2 text-center">Just a few quick things to get started</p>
 
           <div className="flex items-center justify-between gap-10">
             <div className="w-[250px] md:w-[450px] ">

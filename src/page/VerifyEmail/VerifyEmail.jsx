@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import bg from "../../assets/Verification.png";
 import OTPInput from "otp-input-react";
-import { Link } from "react-router";
 import AuthButton from "../../component/AuthButton/AuthButton";
 import { useVerifyEmailMutation } from "../../redux/Api/AuthApi";
 import { Spin } from "antd";
 import { toast } from "sonner";
+import { useNavigate } from "react-router";
 
 const VerifyEmail = () => {
   const [otp, setOTP] = useState("");
+  const navigate = useNavigate();
 
   const [verifyEmail, { isLoading }] = useVerifyEmailMutation();
 
@@ -26,7 +27,7 @@ const VerifyEmail = () => {
       .unwrap()
       .then((payload) => {
         toast.success(payload?.message);
-        navigate("/set-new-password");
+        navigate("/set-new-password?email=");
       })
       .catch((error) => {
         toast.error(error?.data?.message);
@@ -44,13 +45,12 @@ const VerifyEmail = () => {
           <p className="text-xl md:text-4xl font-bold text-[#333333] text-center">
             Verification Code
           </p>
-          <p className="mt-4 max-w-96 font-thin text-center">
-            Please enter the six-digit code we sent you to your number 878 7764
-            2922
+          <p className="mt-4 font-thin text-center">
+            Please enter the six-digit code we sent you to your email address
           </p>
 
-          <div className="my-10">
-            <p className="text-[#2E2E2E] mb-2">Enter your code here</p>
+          <div className="mb-10 mt-3">
+            <p className="text-[#2E2E2E] mb-4 text-center">Enter your code here</p>
             <OTPInput
               value={otp}
               onChange={setOTP}
@@ -62,9 +62,9 @@ const VerifyEmail = () => {
               disabled={false}
               
             />
-            <div className="flex items-end justify-end mt-3">
+            {/* <div className="flex items-end justify-end mt-3">
               <p className=" border-b">Resend OTP</p>
-            </div>
+            </div> */}
           </div>
 
             <AuthButton handleOnClick={()=>handleVerifyOtp()} className={"py-2"}>{isLoading ? <Spin/> : "Verify"}</AuthButton>
