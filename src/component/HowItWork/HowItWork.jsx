@@ -14,9 +14,9 @@ const HowItWork = () => {
         <h1 className="text-4xl text-center text-[#6B4431] font-bold">
           How It Works
         </h1>
-        <p className="text-center text-xl mt-2 text-[#6B4431]">
+        {/* <p className="text-center text-xl mt-2 text-[#6B4431]">
           Your Step-by-Step Journey
-        </p>
+        </p> */}
         <p className="text-[#5C5C5C] text-center mt-2">
           We’ve streamlined the process into four simple steps
         </p>
@@ -33,10 +33,9 @@ const HowItWork = () => {
                 01
               </p>
             </div>
-            <p className="text-[#6B4431] text-2xl font-bold  ">GET MATCHED</p>
+            <p className="text-[#6B4431] text-2xl font-bold  ">Join & set intentions</p>
             <p className="mt-5">
-              Discover quality singles who share your values, pre-vetted by our
-              team.
+              Create your account, pick your tier (Listener / Speaker / Seeker), and share preferences
             </p>
           </div>
           <div className="bg-[#FFE2D4] hover:bg-[#FFC0A3] transition-all duration-200 border border-dashed p-4 relative">
@@ -50,10 +49,9 @@ const HowItWork = () => {
                 02
               </p>
             </div>
-            <p className="text-[#6B4431] text-2xl font-bold  ">PODCAST</p>
+            <p className="text-[#6B4431] text-2xl font-bold  ">We match you</p>
             <p className="mt-5">
-              Skip the awkward texts- spark real chemistry through meaningful
-              conversation.
+              You are blindly matched on compatibility, lifestyle, and shared goals
             </p>
           </div>
           <div className="bg-[#FFE2D4] hover:bg-[#FFC0A3] transition-all duration-200 border border-dashed p-4 relative">
@@ -67,10 +65,9 @@ const HowItWork = () => {
                 03
               </p>
             </div>
-            <p className="text-[#6B4431] text-2xl font-bold  ">MEET UP</p>
+            <p className="text-[#6B4431] text-2xl font-bold  ">Meet on video</p>
             <p className="mt-5">
-              Take your connection from the podcast to real life at a public
-              spot.
+              If it clicks, continue the chat in-app and plan a first date in a public place
             </p>
           </div>
           <div className="bg-[#FFE2D4] hover:bg-[#FFC0A3] transition-all duration-200 border border-dashed p-4 relative">
@@ -84,10 +81,9 @@ const HowItWork = () => {
                 04
               </p>
             </div>
-            <p className="text-[#6B4431] text-2xl font-bold  ">SHARE SUCCESS</p>
+            <p className="text-[#6B4431] text-2xl font-bold  ">Return & Choose What’s Next</p>
             <p className="mt-5">
-              Skip the awkward texts- spark real chemistry through meaningful
-              conversation.
+              Return to tell us all about your date
             </p>
           </div>
         </section>

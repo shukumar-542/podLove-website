@@ -30,8 +30,10 @@ const HeroSection = () => {
 
       {/* Hero Content */}
       <div className=" z-10 text-white text-center space-y-5 mt-10 mb-4">
-        <h1 className="md:text-4xl md:leading-10 font-poppins font-semibold max-w-6xl ">Join a space where love is honest and meaningful.
+        <h1 className="md:text-4xl md:leading-10 font-poppins font-semibold max-w-6xl ">PodLove, Blind-Match Video-Podcast Dating for Grown Folks
         </h1>
+        {/* <h1 className="md:text-4xl md:leading-10 font-poppins font-semibold max-w-6xl ">Join a space where love is honest and meaningful.
+        </h1> */}
         <p className='text-2xl md:text-4xl md:pb-10'>Ready for love?</p>
         {/* <p className="mt-4 md:text-[32px] font-poppins mb-10 max-w-[550px] text-[#FEFEFE] mx-auto">Join a space where love is honest and meaningful. 
       Ready for love?</p> */}

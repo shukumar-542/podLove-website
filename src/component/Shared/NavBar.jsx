@@ -28,12 +28,16 @@ const NavBar = () => {
         </button>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex space-x-5">
+        <div className="hidden md:flex space-x-8">
           {
             logInUser && <NavLink to="/home" className="hover:text-[#FFA175]">Home</NavLink>
           }
+          {
+            !logInUser && <NavLink to="/" className="hover:text-[#FFA175]">Home</NavLink>
+          }
 
           <NavLink to="/about-us" className="hover:text-[#FFA175]">About us</NavLink>
+          <NavLink to="/subscription-plan" className="hover:text-[#FFA175]">Subscription</NavLink>
           <NavLink to="/contact-us" className="hover:text-[#FFA175]">Contact us</NavLink>
           <NavLink to="/feedback-first-step" className="hover:text-[#FFA175]">Feedback</NavLink>
         </div>
@@ -64,7 +68,8 @@ const NavBar = () => {
           <HiX size={28} />
         </button>
         <NavLink to="/home" onClick={() => setMenuOpen(false)} className="text-xl py-2">Home</NavLink>
-        <NavLink to="/about-us" onClick={() => setMenuOpen(false)} className="text-xl py-2">About us</NavLink>
+        <NavLink to="/about-us" onClick={() => setMenuOpen(false)} className="text-xl py-2">Subscription</NavLink>
+        <NavLink to="/subscription-plan" onClick={() => setMenuOpen(false)} className="text-xl py-2">About us</NavLink>
         <NavLink to="/contact-us" onClick={() => setMenuOpen(false)} className="text-xl py-2">Contact us</NavLink>
         <NavLink to="/feedback-first-step" onClick={() => setMenuOpen(false)} className="text-xl py-2">Feedback</NavLink>
         <NavLink to="/notification" onClick={() => setMenuOpen(false)} className="bg-[#FFA175] rounded-full p-2 mt-4">

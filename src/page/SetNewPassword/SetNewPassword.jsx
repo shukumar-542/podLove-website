@@ -1,9 +1,30 @@
-import React from 'react'
 import img from '../../assets/setPassword.png'
-import { Form, Input } from 'antd'
-import { Link } from 'react-router'
+import { Form, Input, message } from 'antd'
+import { Link, useNavigate } from 'react-router'
 import AuthButton from '../../component/AuthButton/AuthButton'
+import { useResetAuthPasswordMutation } from '../../redux/Api/AuthApi'
+
 const SetNewPassword = () => {
+  const [resetAuthPassword, { isLoading }] = useResetAuthPasswordMutation();
+  const navigate = useNavigate();
+  const email = localStorage.getItem("email")
+  const onFinish = (values) => {
+    resetAuthPassword(
+      {
+        email: email,
+        password: values.password,
+        confirmPassword: values.confirmPassword
+      }
+    ).unwrap()
+      .then(() => {
+        message.success("Password updated successfully");
+        navigate('/login')
+      })
+      .catch(() => {
+        message.error("Failed to update password");
+      })
+  }
+
   return (
     <div
       style={{
@@ -20,25 +41,25 @@ const SetNewPassword = () => {
       {/* 🔹 Content (above the overlay) */}
       <div className="flex items-center justify-start max-w-5xl mx-auto h-full p-2 md:p-0 relative z-10">
         <div className="bg-white shadow-2xl shadow-[#F26828] rounded-md p-5 md:p-10 max-w-5xl">
-          <p className="text-2xl font-bold text-[#333333] text-center ">Forgot Password</p>
-          <p className="mt-2">Enter your email and we will send a link to set a 
-          new password</p>
+          <p className="text-2xl font-bold text-[#333333] text-center ">Set New Password</p>
+          <p className="mt-2 w-[330px]"></p>
 
-          <Form layout="vertical mt-10">
-            <Form.Item label="New Password">
+          <Form onFinish={onFinish} layout="vertical mt-5">
+            <Form.Item
+              name="password"
+              label="New Password">
               <Input.Password placeholder="New password" className="border-[#FFA175]" />
             </Form.Item>
-            <Form.Item label="Confirm Password">
+            <Form.Item
+              name="confirmPassword"
+              label="Confirm Password">
               <Input.Password placeholder="Confirm Password" className="border-[#FFA175]" />
             </Form.Item>
             <Link to={'/login'}>
-              <AuthButton className={"py-2"}>Update Password</AuthButton>
+              <AuthButton disabled={isLoading} className={"py-2"}>{isLoading ? "Loading..." : "Update Password"}</AuthButton>
             </Link>
           </Form>
-
-
-
-        </div> 
+        </div>
       </div>
     </div>
   )
