@@ -32,7 +32,7 @@ const ContactUs = () => {
           We value your experience.
         </p>
       </div>
-      <div className='container mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-5 py-10'>
+      <div className='container mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-5 pt-5 md:py-10'>
         <div>
           <p className='text-center text-2xl font-poppins text-[#1C1C1C] font-semibold mb-5'>Contact Us</p>
           <Form layout='vertical' onFinish={handleContactUs} className='px-5'>
@@ -55,7 +55,7 @@ const ContactUs = () => {
             <AuthButton disabled={isLoading} className={`py-2 ${isLoading && "bg-gray-300"}`}>Send</AuthButton>
           </Form>
         </div>
-        <div>
+        <div className='px-5 md:px-0'>
           <img src={about} className='rounded-md' alt="About PodLove" />
         </div>
       </div>

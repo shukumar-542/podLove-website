@@ -14,9 +14,9 @@ const FeedbackOne = () => {
     };
   
   return (
-    <div className="p-6 bg-[#FCE7D3] min-h-screen flex justify-center">
-      <div className="max-w-2xl w-full  p-8  font-poppins">
-        <h2 className="text-xl font-semibold text-center mb-4 leading-9">
+    <div className="md:p-6 bg-[#FCE7D3] md:min-h-screen flex justify-center">
+      <div className="md:max-w-2xl p-8  font-poppins">
+        <h2 className="md:text-xl font-semibold text-center mb-4 leading-9">
           Thank you for joining our Pod Love! Your feedback is crucial in helping
           us improve the PodLove experience for you and others. Please take a
           few moments to share your thoughts.
@@ -84,7 +84,7 @@ const FeedbackOne = () => {
 
           <Form.Item>
             {/* <Link to={'/feedback-second-step'}> */}
-            <AuthButton type="primary" htmlType="submit" className="w-full py-2">
+            <AuthButton type="primary" htmlType="submit" className="w-full py-1 md:py-2">
               Next
             </AuthButton>
             {/* </Link> */}

@@ -6,10 +6,10 @@ const AboutUs = () => {
       <div className="container mx-auto pb-16">
         {/* About text */}
         <div className="bg-[#FFA175] py-10">
-          <h1 className="text-3xl px-4 font-bold">Discover Who We Are &</h1>
+          <h1 className="text-2xl md:text-4xl px-4 font-bold">Discover Who We Are &</h1>
           <div className="flex items-center  ml-4 mt-5">
             <div className="bg-[#DC4600] h-2 w-10"></div>
-            <p className="text-white font-bold text-4xl px-4">What drives us</p>
+            <p className="text-white font-bold text-2xl md:text-4xl px-4">What drives us</p>
           </div>
         </div>
 
@@ -22,10 +22,10 @@ const AboutUs = () => {
           />
         </div>
         <div className="py-10 space-y-3 px-2 md:px-0">
-          <p className="text-4xl font-bold">
+          <p className="text-2xl md:text-4xl font-bold">
             Get to Know Us: Our <span className="text-[#E8936A]"> Journey</span>
           </p>
-          <p className="text-4xl font-bold">
+          <p className="text-2xl md:text-4xl font-bold">
             And <span className="text-[#E8936A]">Vision</span>{" "}
           </p>
         </div>
