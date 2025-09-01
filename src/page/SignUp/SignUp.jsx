@@ -35,10 +35,10 @@ const SignUp = () => {
         backgroundPosition: "center",
         imageRendering: "high-quality",
       }}
-      className="h-[100vh]"
+      className="md:h-[100vh]"
     >
       <div className="bg-black absolute opacity-50 inset-0 z-0 "></div>
-      <a href={`/`}><IoArrowBack className=" text-[#F26828]  absolute top-10 left-10 cursor-pointer z-9999" size={40} /></a>
+      <a href={`/`}><IoArrowBack className=" text-[#F26828]  absolute top-10 left-10 cursor-pointer z-9999 hidden sm:block" size={40} /></a>
       <div className="flex items-center justify-start max-w-5xl mx-auto  h-full p-2 md:p-0 z-10 relative">
         <div className="bg-white shadow-2xl shadow-[#F26828] rounded-md  p-5 md:p-10 max-w-5xl">
           <p className="text-4xl text-center font-bold text-[#333333]">Sign Up</p>

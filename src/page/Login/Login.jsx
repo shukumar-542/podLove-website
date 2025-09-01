@@ -111,7 +111,7 @@ const Login = () => {
     >
       {/* 🔹 Black Overlay (behind the content) */}
       <div className="absolute inset-0 bg-black bg-opacity-50 z-0"></div>
-      <a href={`/`}><IoArrowBack me className=" text-[#F26828]  absolute top-10 left-10 cursor-pointer z-9999" size={40} /></a>
+      <a href={`/`}><IoArrowBack me className=" text-[#F26828] absolute top-10 left-10 cursor-pointer z-9999 hidden sm:block" size={40} /></a>
       {/* 🔹 Content (above the overlay) */}
       <div className="flex items-center justify-start max-w-5xl mx-auto h-full p-2 md:p-0 relative z-10">
         <div className="bg-white shadow-2xl shadow-[#F26828] rounded-md p-5 md:p-10 max-w-5xl">
