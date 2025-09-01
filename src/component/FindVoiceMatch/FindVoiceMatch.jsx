@@ -29,7 +29,7 @@ const FindVoiceMatch = () => {
   return (
     <div style={{ backgroundImage: `url(${img})` }} className="py-10">
       <div className="container mx-auto text-center">
-        <h1 className="text-[#6B4431] text-4xl font-bold">Authentic Connections Through Meaningful Conversations</h1>
+        <h1 className="text-[#6B4431] text-2xl md:text-4xl font-bold">Authentic Connections Through Meaningful Conversations</h1>
         {/* <h1 className="text-[#6B4431] text-4xl font-bold">Find Your Voice, Find Your Match.</h1> */}
         <p className="text-center text-[#333333] mt-2 font-poppins">
           Experience genuine chemistry through guided video podcast sessions designed for authentic dialogue between emotionally mature singles

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { Button } from "../Shared/Button/Button";
 import { Carousel } from "antd";
 import img from "../../assets/quote.png";
@@ -22,7 +23,7 @@ const ClientReview = () => {
   return (
     <div className="bg-[#EBEBEB]">
       <div className="container mx-auto py-10">
-        <p className="text-3xl font-bold text-center">
+        <p className="text-2xl md:text-4xl font-bold text-center">
           What Our Users Are Saying
         </p>
         <p className="text-center text-[#5C5C5C] max-w-[400px] mx-auto mt-2">

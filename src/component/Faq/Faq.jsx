@@ -12,7 +12,7 @@ const Faq = () => {
   return (
     <div style={{ backgroundImage: `url(${img})` }} className="py-10">
       <div className="text-center">
-        <h1 className="text-center text-4xl text-[#5C5C5C]">FAQ</h1>
+        <h1 className="text-center text-2xl md:text-4xl text-[#5C5C5C]">FAQ</h1>
       </div>
 
       <div className="container mx-auto mt-10">

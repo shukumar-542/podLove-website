@@ -31,13 +31,13 @@ const SuccessStory = () => {
   return (
     <div className="bg-[#EBEBEB] py-10">
       <div className="container mx-auto mt-5">
-        <h1 className="text-center text-4xl text-[#6B4431] font-poppins">
+        <h1 className="text-center text-2xl md:text-4xl text-[#6B4431] font-poppins">
           Real Conversation, Real Chemistry
         </h1>
         {/* <h1 className="text-center text-4xl text-[#6B4431] font-poppins">
           Success in Finding Your Perfect Match{" "}
         </h1> */}
-        <p className="text-center text-xl text-[#333333] mt-2 font-poppins">
+        <p className="text-center md:text-xl text-[#333333] mt-2 font-poppins">
           PodLove matches on shared values, then you meet on video. Built for emotionally mature singles 35–55
         </p>
         {/* <p className="text-center text-xl text-[#333333] mt-2 font-poppins">

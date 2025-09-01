@@ -11,7 +11,7 @@ const HowItWork = () => {
   return (
     <div className="p-4 md:px-0">
       <div className="container mx-auto my-20">
-        <h1 className="text-4xl text-center text-[#6B4431] font-bold">
+        <h1 className=" text-2xl md:text-4xl text-center text-[#6B4431] font-bold">
           How It Works
         </h1>
         {/* <p className="text-center text-xl mt-2 text-[#6B4431]">
