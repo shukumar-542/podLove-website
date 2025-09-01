@@ -25,15 +25,16 @@ const IsPodSafe = () => {
           Follow @podloveofficial to see the human side of love: vulnerability,
           courage, and genuine connection in action.
         </h1>
-
-        <div className="flex justify-center gap-6 mt-6">
+        <div className="flex justify-center gap-2 md:gap-6 mt-6">
           <Link
             to="https://www.instagram.com/podloveofficial/"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 bg-pink-600 text-white px-4 py-2 rounded-full hover:bg-pink-500 transition"
+            className="flex items-center gap-2 bg-pink-600 text-white 
+               px-3 py-1.5 text-xs rounded-full hover:bg-pink-500 transition 
+               md:px-4 md:py-2 md:text-sm"
           >
-            <FaInstagram className="w-5 h-5" />
+            <FaInstagram className="w-4 h-4 md:w-5 md:h-5" />
             Instagram
           </Link>
 
@@ -41,9 +42,11 @@ const IsPodSafe = () => {
             to="https://www.tiktok.com/@podloveofficial"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 bg-black text-white px-4 py-2 rounded-full hover:bg-gray-800 transition"
+            className="flex items-center gap-2 bg-black text-white 
+               px-3 py-1.5 text-xs rounded-full hover:bg-gray-800 transition 
+               md:px-4 md:py-2 md:text-sm"
           >
-            <FaTiktok className="w-5 h-5" />
+            <FaTiktok className="w-4 h-4 md:w-5 md:h-5" />
             TikTok
           </Link>
 
@@ -51,12 +54,16 @@ const IsPodSafe = () => {
             to="https://www.youtube.com/channel/UClAZxKDsujl4sJyyztp0j2A"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 bg-red-600 text-white px-4 py-2 rounded-full hover:bg-red-500 transition"
+            className="flex items-center gap-2 bg-red-600 text-white 
+               px-3 py-1.5 text-xs rounded-full hover:bg-red-500 transition 
+               md:px-4 md:py-2 md:text-sm"
           >
-            <FaYoutube className="w-5 h-5" />
+            <FaYoutube className="w-4 h-4 md:w-5 md:h-5" />
             YouTube
           </Link>
         </div>
+
+
       </div>
     </div>
   );

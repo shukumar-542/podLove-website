@@ -14,7 +14,7 @@ const HeroSection = () => {
   }
 
   return (
-    <section className="relative w-full h-[40vh] md:h-[80vh] flex items-center justify-center">
+    <section className="relative w-full h-[40vh] md:h-[90vh] flex items-center justify-center">
       {/* Background Video */}
       <video
         className="absolute top-0 left-0 w-full h-full  object-fill"
@@ -37,7 +37,7 @@ const HeroSection = () => {
         <p className='text-2xl md:text-4xl md:pb-10'>Ready for love?</p>
         {/* <p className="mt-4 md:text-[32px] font-poppins mb-10 max-w-[550px] text-[#FEFEFE] mx-auto">Join a space where love is honest and meaningful. 
       Ready for love?</p> */}
-        <Button handleOnClick={handleClick} className={'md:text-[30px] py-3 px-6'}>Find your Match</Button>
+        <Button handleOnClick={handleClick} className={'md:text-[30px] py-1.5 md:py-3 px-4 md:px-6'}>Find your Match</Button>
       </div>
 
       {/* Overlay (Optional for readability) */}
