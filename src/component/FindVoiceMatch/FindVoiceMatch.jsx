@@ -10,19 +10,19 @@ const FindVoiceMatch = () => {
   const data = [
     {
       img: client4,
-      title: "Intentional Matches for Serious Relationships",
-      des: "Discover attraction through personality and conversation. Profile photos stay private",
+      title: "Intentional matches for serious relationships",
+      des: "Discover attraction through personality and conversation. Profile photos stay private.",
 
     },
     {
       img: client5,
       title: "Skip the small talk",
-      des: "Connect through hosted conversations that reveal real compatibility and reduce first‑date anxiety",
+      des: "Connect through hosted conversations that reveal real compatibility and reduce first‑date anxiety.",
     },
     {
       img: client6,
       title: "Quality over quantity matching",
-      des: "Blind matching aligns values and relationship goals for adults 35–55. No endless swiping",
+      des: "Blind matching aligns values and relationship goals for adults 35–55. No endless swiping.",
     },
   ];
 

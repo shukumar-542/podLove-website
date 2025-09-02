@@ -11,6 +11,7 @@ const Pricing = ({ subscriptions }) => {
   const [upgradeSubscription, { isLoading }] = useUpgradeSubscriptionPlanMutation();
   const navigate = useNavigate();
   console.log(subscriptions);
+  const logInUser = localStorage.getItem("podlove-token")
   // Handle upgrade plan function
   const handleUpdatePlan = (plan) => {
     const data = {
@@ -33,7 +34,6 @@ const Pricing = ({ subscriptions }) => {
         })
         .catch((error) => toast.error(error?.data?.message));
     }
-
   };
 
   return (
@@ -73,7 +73,7 @@ const Pricing = ({ subscriptions }) => {
             <h1 className=" text-3xl font-bold my-5">
               {plan?.unitAmount == "0"
                 ? "Free"
-                : `${plan.unitAmount} / ${plan?.interval}`}
+                : `$${plan.unitAmount} / ${plan?.interval}`}
             </h1>
             <div className="text-center">
               {subscriptions?.user?.subscription?.fee === plan?.unitAmount ? (
@@ -82,13 +82,26 @@ const Pricing = ({ subscriptions }) => {
                 </button>
               ) : (
                 <div className=" text-center">
-                  <button
-                    onClick={() => handleUpdatePlan(plan)}
-                    disabled={isLoading}
-                    className=" bg-gradient-to-r from-[#F36E2F] to-[#FEB491]  shadow-white shadow-inner rounded-full w-full mt-5 py-2 max-w-xs  mb-5"
-                  >
-                    Choose this plan
-                  </button>
+                  {
+                    logInUser ?
+                      <button
+                        onClick={() => handleUpdatePlan(plan)}
+                        disabled={isLoading}
+                        className=" bg-gradient-to-r from-[#F36E2F] to-[#FEB491]  shadow-white shadow-inner rounded-full w-full mt-5 py-2 max-w-xs  mb-5"
+                      >
+                        Choose this plan
+                      </button>
+                      :
+                      <a href={`/login`}>
+                        <button
+                          disabled={isLoading}
+                          className=" bg-gradient-to-r from-[#F36E2F] to-[#FEB491]  shadow-white shadow-inner rounded-full w-full mt-5 py-2 max-w-xs  mb-5"
+                        >
+                          Choose this plan
+                        </button>
+                      </a>
+                  }
+
                 </div>
               )}
             </div>

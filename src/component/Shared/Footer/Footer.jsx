@@ -43,7 +43,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="my-10 md:flex  justify-between items-center">
-          <p>All Rights Reserved. Copyright © {new Date().getFullYear()} podLove </p>
+          <p>All Rights Reserved. Copyright © {new Date().getFullYear()} PodLove </p>
           <div className="flex gap-4 ">
             <img src={app} className="h-[44px] w-[150px]" alt="" />
             <img src={google} className="h-[44px] w-[150px]" alt="" />

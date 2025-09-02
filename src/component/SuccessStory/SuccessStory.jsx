@@ -38,7 +38,7 @@ const SuccessStory = () => {
           Success in Finding Your Perfect Match{" "}
         </h1> */}
         <p className="text-center md:text-xl text-[#333333] mt-2 font-poppins">
-          PodLove matches on shared values, then you meet on video. Built for emotionally mature singles 35–55
+          PodLove matches on shared values, then you meet on video. Built for emotionally mature singles 35–55.
         </p>
         {/* <p className="text-center text-xl text-[#333333] mt-2 font-poppins">
           Let’s guide you to meaningful!{" "}
@@ -62,15 +62,15 @@ const SuccessStory = () => {
                 <div className="mt-10 space-y-5 ">
                   <p className="flex gap-5 text-[#333333]">
                     <AiFillDislike color="#6B4431" size={25} />
-                    Superficial matches based only on photos
+                    Superficial matches based only on photos.
                   </p>
                   <p className="flex gap-5 text-[#333333]">
                     <AiFillDislike color="#6B4431" size={25} />
-                    Awkward small talk that goes nowhere
+                    Awkward small talk that goes nowhere.
                   </p>
                   <p className="flex gap-5 text-[#333333]">
                     <AiFillDislike color="#6B4431" size={25} />
-                    Apps designed for younger, casual dating crowds
+                    Apps designed for younger, casual dating crowds.
                   </p>
                 </div>
               </div>
@@ -81,15 +81,15 @@ const SuccessStory = () => {
                 <div className="mt-10 space-y-5 ">
                   <p className="flex gap-5 text-[#333333]">
                     <AiFillLike color="#2757A6" size={25} />
-                    Quality matches focused on compatibility, not just look
+                    Quality matches focused on compatibility, not just look.
                   </p>
                   <p className="flex gap-5 text-[#333333]">
                     <AiFillLike color="#2757A6" size={25} />
-                    Meaningful connections through structured conversations
+                    Meaningful connections through structured conversations.
                   </p>
                   <p className="flex gap-5 text-[#333333]">
                     <AiFillLike color="#2757A6" size={25} />
-                    Mature community seeking long-term relationships
+                    Mature community seeking long-term relationships.
                   </p>
                 </div>
               </div>
