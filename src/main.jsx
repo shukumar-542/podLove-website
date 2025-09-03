@@ -57,6 +57,7 @@ import RelationShipReadinessOne from "./page/RelationShipReadinessOne/RelationSh
 import RelationShipReadinessTwo from "./page/RelationShipReadinessTwo/RelationShipReadinessTwo.jsx";
 import AttentionError from "./page/AttentionError/AttentionError.jsx";
 import ScrollToTop from "./helpers/ScrollToTop.js";
+import MS from "./page/100MS/100MS.jsx";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Provider store={store}>
@@ -64,6 +65,7 @@ createRoot(document.getElementById("root")).render(
         <BrowserRouter>
           <ScrollToTop />
           <Routes>
+            <Route path="/ms" element={<MS />} />
             <Route path="/" element={<App />}>
               <Route index element={<Home />} />
               <Route element={<PrivateRoute />}>

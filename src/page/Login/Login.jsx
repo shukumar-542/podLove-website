@@ -117,7 +117,7 @@ const Login = () => {
         <div className="bg-white shadow-2xl shadow-[#F26828] rounded-md p-5 md:p-10 max-w-5xl">
           {/* <p className="text-4xl font-bold text-[#333333]">Welcome Back!</p> */}
           <p className="text-4xl text-center font-bold text-[#333333]">Log in</p>
-          <p className="mt-2 text-center">Please log in to continue access</p>
+          {/* <p className="mt-2 text-center">Please log in to continue access</p> */}
 
           <div className=" w-[250px] md:w-[450px] ">
             <Form onFinish={handleUserLogin} layout="vertical">

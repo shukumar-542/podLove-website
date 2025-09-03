@@ -35,7 +35,7 @@ const HowItWork = () => {
             </div>
             <p className="text-[#6B4431] text-2xl font-bold  ">Join & set intentions</p>
             <p className="mt-5">
-              Create your account, pick your tier (Listener / Speaker / Seeker), and share preferences
+              Create your account, pick your tier (Listener / Speaker / Seeker), and share preferences.
             </p>
           </div>
           <div className="bg-[#FFE2D4] hover:bg-[#FFC0A3] transition-all duration-200 border border-dashed p-4 relative">
@@ -51,7 +51,7 @@ const HowItWork = () => {
             </div>
             <p className="text-[#6B4431] text-2xl font-bold  ">We match you</p>
             <p className="mt-5">
-              You are blindly matched on compatibility, lifestyle, and shared goals
+              You are blindly matched on compatibility, lifestyle, and shared goals.
             </p>
           </div>
           <div className="bg-[#FFE2D4] hover:bg-[#FFC0A3] transition-all duration-200 border border-dashed p-4 relative">
@@ -67,7 +67,7 @@ const HowItWork = () => {
             </div>
             <p className="text-[#6B4431] text-2xl font-bold  ">Meet on video</p>
             <p className="mt-5">
-              If it clicks, continue the chat in-app and plan a first date in a public place
+              If it clicks, continue the chat in-app and plan a first date in a public place.
             </p>
           </div>
           <div className="bg-[#FFE2D4] hover:bg-[#FFC0A3] transition-all duration-200 border border-dashed p-4 relative">
@@ -83,7 +83,7 @@ const HowItWork = () => {
             </div>
             <p className="text-[#6B4431] text-2xl font-bold  ">Return & Choose What’s Next</p>
             <p className="mt-5">
-              Return to tell us all about your date
+              Return to tell us all about your date.
             </p>
           </div>
         </section>

@@ -52,7 +52,7 @@
 
 
 
-import about from "../../assets/about3.png";
+import about from "../../assets/PodLove-About-Us.png";
 import bg from "../../assets/about-bg.png";
 import { Link } from "react-router";
 
@@ -70,7 +70,7 @@ const AboutUs = () => {
     >
       <div className="container mx-auto pb-16">
         {/* Hero */}
-        <header className="bg-[#FFA175]/95 py-10">
+        {/* <header className="bg-[#FFA175]/95 py-10">
           <h1
             id="aboutus-title"
             className="px-4 text-2xl md:text-4xl font-extrabold tracking-tight"
@@ -83,27 +83,27 @@ const AboutUs = () => {
               What drives us
             </p>
           </div>
-        </header>
+        </header> */}
 
         {/* Feature Image */}
-        <div className="w-full">
+        <div className="w-full flex justify-center">
           <img
             src={about}
-            className="w-full h-[420px] md:h-[520px] object-cover"
+            className=""
             alt="Two people in a hosted, video-first conversation"
             loading="lazy"
           />
         </div>
 
         {/* Intro */}
-        <section className="pt-10 space-y-2 ">
+        {/* <section className="pt-10 space-y-2 ">
           <h2 className="text-2xl md:text-4xl font-bold">
             Get to Know Us: Our <span className="text-[#E8936A]">Journey</span>
           </h2>
           <h3 className="text-2xl md:text-4xl font-bold">
             And <span className="text-[#E8936A]">Vision</span>
           </h3>
-        </section>
+        </section> */}
 
         {/* Section 1: Why Conversation Comes First */}
         <section className="px-4 md:px-0 py-6">
