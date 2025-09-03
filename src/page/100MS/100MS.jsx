@@ -2,7 +2,7 @@
 import { HMSPrebuilt } from '@100mslive/roomkit-react';
 
 const MS = () => {
-    const roomCode = "68aea20e1492059622c26642";  // Replace with your actual room code
+    const roomCode = "cgu-ewnc-xyb";  // Replace with your actual room code
     //https://chatgpt.com/share/68b58be5-a028-8000-9ede-7800eb2007c0
     // clue link
     return (
