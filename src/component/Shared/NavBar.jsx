@@ -37,7 +37,7 @@ const NavBar = () => {
           }
 
           <NavLink to="/about-us" className="hover:text-[#FFA175]">About us</NavLink>
-          <NavLink to="/subscription-plan" className="hover:text-[#FFA175]">Subscription</NavLink>
+          <NavLink to="/subscription-plan" className="hover:text-[#FFA175]">Subscriptions</NavLink>
           <NavLink to="/contact-us" className="hover:text-[#FFA175]">Contact us</NavLink>
           <NavLink to="/feedback-first-step" className="hover:text-[#FFA175]">Feedback</NavLink>
         </div>
@@ -74,7 +74,7 @@ const NavBar = () => {
           !logInUser && <NavLink to="/" onClick={() => setMenuOpen(false)} className="text-xl py-2">Home</NavLink>
         }
 
-        <NavLink to="/subscription-plan" onClick={() => setMenuOpen(false)} className="text-xl py-2">Subscription</NavLink>
+        <NavLink to="/subscription-plan" onClick={() => setMenuOpen(false)} className="text-xl py-2">Subscriptions</NavLink>
         <NavLink to="/about-us" onClick={() => setMenuOpen(false)} className="text-xl py-2">About us</NavLink>
         <NavLink to="/contact-us" onClick={() => setMenuOpen(false)} className="text-xl py-2">Contact us</NavLink>
         <NavLink to="/feedback-first-step" onClick={() => setMenuOpen(false)} className="text-xl py-2">Feedback</NavLink>

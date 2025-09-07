@@ -10,10 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@100mslive/roomkit-react": "^0.3.38",
     "@react-google-maps/api": "^2.20.6",
     "@react-oauth/google": "^0.12.1",
     "@reduxjs/toolkit": "^2.6.1",
-    "@zegocloud/zego-uikit-prebuilt": "^2.15.1",
     "antd": "^5.24.0",
     "dayjs": "^1.11.13",
     "firebase": "^11.5.0",
