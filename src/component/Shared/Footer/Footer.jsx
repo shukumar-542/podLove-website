@@ -11,7 +11,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2  border-b border-gray-200 py-10 ">
           <div>
             <img src={logo} className="h-[56px] w-[267px]" alt="" />
-            <p className="mt-5 max-w-[400px] leading-7">
+            <p className="mt-5 mb-5 max-w-[400px] leading-7">
               PodLove believes your love story deserves a deeper introduction.
               We’re not just an app. We’re a platform for genuine human
               connection.
@@ -37,13 +37,22 @@ const Footer = () => {
             <p className="mb-2">
               <Link to={"/terms-and-conditions"}>Terms And Conditions</Link>
             </p>
+            <p className="mb-2">
+              <Link to={"/media-usage-consent"}>Media Usage Consent</Link>
+            </p>
+            <p className="mb-2">
+              <Link to={"/do-not-sell-or-share-my-personal-info"}>Do Not Sell or Share My Personal Information</Link>
+            </p>
+            <p className="mb-2">
+              <Link to={"/consumer-health-data-privacy-policy"}>Consumer Health Data Privacy Policy</Link>
+            </p>
             <p>
               <Link to={"/opt-in-policy"}>SMS Consent & Opt-In-Policy</Link>
             </p>
           </div>
         </div>
         <div className="my-10 md:flex  justify-between items-center">
-          <p>All Rights Reserved. Copyright © {new Date().getFullYear()} PodLove </p>
+          <p className=" mb-4 md:mb-0">All Rights Reserved. Copyright © {new Date().getFullYear()} PodLove </p>
           <div className="flex gap-4 ">
             <img src={app} className="h-[44px] w-[150px]" alt="" />
             <img src={google} className="h-[44px] w-[150px]" alt="" />

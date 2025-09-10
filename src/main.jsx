@@ -45,7 +45,7 @@ import { store } from "./redux/store.js";
 import { Toaster } from "sonner";
 import OptInPolicy from "./page/OptInPolicy/OptInPolicy.jsx";
 import SubscriptionPlan from "./page/SubscriptionPlan/SubscriptionPlan.jsx";
-import RoomPage from "./page/RoomPage/RoomPage.jsx";
+// import RoomPage from "./page/RoomPage/RoomPage.jsx";
 import ParticipantDetails from "./page/ParticipantDetails/ParticipantDetails.jsx";
 import PrivateRoute from "./component/PrivateRoute/PrivateRoute.jsx";
 import { GoogleOAuthProvider } from "@react-oauth/google";
@@ -57,7 +57,12 @@ import RelationShipReadinessOne from "./page/RelationShipReadinessOne/RelationSh
 import RelationShipReadinessTwo from "./page/RelationShipReadinessTwo/RelationShipReadinessTwo.jsx";
 import AttentionError from "./page/AttentionError/AttentionError.jsx";
 import ScrollToTop from "./helpers/ScrollToTop.js";
+import RoomPage100MS from "./page/RoomPage100MS/RoomPage100MS.jsx";
+import MediaUsageConsent from "./page/MediaUsageConsent/MediaUsageConsent.jsx";
+import DoNotSellPersonalInfo from "./page/DoNotSellPersonalInfo/DoNotSellPersonalInfo.jsx";
+import ConsumerHealthDataPrivacyPolicy from "./page/ConsumerHealthDataPrivacyPolicy/ConsumerHealthDataPrivacyPolicy.jsx";
 // import MS from "./page/100MS/100MS.jsx";
+
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Provider store={store}>
@@ -65,7 +70,7 @@ createRoot(document.getElementById("root")).render(
         <BrowserRouter>
           <ScrollToTop />
           <Routes>
-            {/* <Route path="/ms" element={<MS />} /> */}
+            <Route path="/ms" element={<RoomPage100MS />} />
             <Route path="/" element={<App />}>
               <Route index element={<Home />} />
               <Route element={<PrivateRoute />}>
@@ -91,6 +96,9 @@ createRoot(document.getElementById("root")).render(
                 <Route path="/change-password" element={<ChangePassword />} />
               </Route>
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/media-usage-consent" element={<MediaUsageConsent />} />
+              <Route path="/do-not-sell-or-share-my-personal-info" element={<DoNotSellPersonalInfo />} />
+              <Route path="/consumer-health-data-privacy-policy" element={<ConsumerHealthDataPrivacyPolicy />} />
               <Route path="/terms-and-conditions" element={<TermsAndCondition />} />
               <Route element={<PrivateRoute />}>
                 <Route path="/notification" element={<Notification />} />
@@ -99,9 +107,9 @@ createRoot(document.getElementById("root")).render(
               <Route path="/media-policy" element={<MediaPlicy />} />
               <Route path="/podcast-details/:id" element={<ParticipantDetails />} />
               <Route path="/opt-in-policy" element={<OptInPolicy />} />
-              <Route element={<PrivateRoute />}>
+              {/* <Route element={<PrivateRoute />}>
                 <Route path="/room/:roomId" element={<RoomPage />} />
-              </Route>
+              </Route> */}
             </Route>
             <Route path="/login" element={<Login />} />
             <Route path="/sign-up" element={<SignUp />} />
