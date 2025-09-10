@@ -4,7 +4,7 @@ const RoomPage100MS = () => {
 
     return (
         <div style={{ height: "100vh" }}>
-            <HMSPrebuilt roomCode="vni-iltp-pgx" />
+            <HMSPrebuilt roomCode="hko-wxcw-vkt" />
 
         </div>
     )

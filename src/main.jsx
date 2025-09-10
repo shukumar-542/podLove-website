@@ -58,6 +58,9 @@ import RelationShipReadinessTwo from "./page/RelationShipReadinessTwo/RelationSh
 import AttentionError from "./page/AttentionError/AttentionError.jsx";
 import ScrollToTop from "./helpers/ScrollToTop.js";
 import RoomPage100MS from "./page/RoomPage100MS/RoomPage100MS.jsx";
+import MediaUsageConsent from "./page/MediaUsageConsent/MediaUsageConsent.jsx";
+import DoNotSellPersonalInfo from "./page/DoNotSellPersonalInfo/DoNotSellPersonalInfo.jsx";
+import ConsumerHealthDataPrivacyPolicy from "./page/ConsumerHealthDataPrivacyPolicy/ConsumerHealthDataPrivacyPolicy.jsx";
 // import MS from "./page/100MS/100MS.jsx";
 
 createRoot(document.getElementById("root")).render(
@@ -93,6 +96,9 @@ createRoot(document.getElementById("root")).render(
                 <Route path="/change-password" element={<ChangePassword />} />
               </Route>
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/media-usage-consent" element={<MediaUsageConsent />} />
+              <Route path="/do-not-sell-or-share-my-personal-info" element={<DoNotSellPersonalInfo />} />
+              <Route path="/consumer-health-data-privacy-policy" element={<ConsumerHealthDataPrivacyPolicy />} />
               <Route path="/terms-and-conditions" element={<TermsAndCondition />} />
               <Route element={<PrivateRoute />}>
                 <Route path="/notification" element={<Notification />} />

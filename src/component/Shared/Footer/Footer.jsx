@@ -37,6 +37,15 @@ const Footer = () => {
             <p className="mb-2">
               <Link to={"/terms-and-conditions"}>Terms And Conditions</Link>
             </p>
+            <p className="mb-2">
+              <Link to={"/media-usage-consent"}>Media Usage Consent</Link>
+            </p>
+            <p className="mb-2">
+              <Link to={"/do-not-sell-or-share-my-personal-info"}>Do Not Sell or Share My Personal Information</Link>
+            </p>
+            <p className="mb-2">
+              <Link to={"/consumer-health-data-privacy-policy"}>Consumer Health Data Privacy Policy</Link>
+            </p>
             <p>
               <Link to={"/opt-in-policy"}>SMS Consent & Opt-In-Policy</Link>
             </p>

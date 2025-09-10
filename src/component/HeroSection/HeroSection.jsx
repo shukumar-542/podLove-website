@@ -17,7 +17,7 @@ const HeroSection = () => {
     <section className="relative w-full h-[40vh] md:h-[90vh] flex items-center justify-center">
       {/* Background Video */}
       <video
-        className="absolute top-0 left-0 w-full h-full  object-fill"
+        className="absolute top-0 left-0 w-full h-full  object-cover md:object-fill"
         autoPlay
         loop
         muted
