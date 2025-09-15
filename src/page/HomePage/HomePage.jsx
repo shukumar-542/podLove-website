@@ -12,9 +12,12 @@ import { useGetAllPlanQuery } from "../../redux/Api/SubscriptionPlan";
 import { useCreatePodcastMutation, useSendPodcastRequestMutation } from "../../redux/Api/PodcastApi";
 import { Spin } from "antd";
 import { Carousel } from 'antd';
+// import { useState } from "react";
 
 const HomePage = () => {
   const navigate = useNavigate();
+
+  // const [userSelectedRoomCode, setUserSelectedRoomCode] = useState();
   const [createPodCast] = usePodcastCreateMutation();
   const [sendPodcastRequest, { isLoading: requestPodcastLoading }] = useSendPodcastRequestMutation();
   const { data: getPodcastDetails, isLoading } = useGetPodCastDetailsQuery();
@@ -47,6 +50,16 @@ const HomePage = () => {
     }
     // navigate(`/room/podcast?roomId=${podcast._id}&hostId=${getPodcastDetails?.data?.podcast?.primaryUser?._id}`);
     navigate(`/ms/?roomCode=${roomCodeHost?.code}`);
+  };
+
+
+  const handleVideoCallForUser = (roomCodes) => {
+    console.log(roomCodes);
+    const code = roomCodes?.find(code => code?.role === "viewer-near-realtime");
+    console.log(code);
+    if (code) {
+      navigate(`/ms/?roomCode=${code?.code}`);
+    }
   };
 
   const handleCreatePodcast = () => {
@@ -231,8 +244,8 @@ const HomePage = () => {
                             {match?.schedule?.date} {match?.schedule?.day} {match?.schedule?.time}
                           </h2>
                           <button
-                            disabled={match?.status !== "Playing"}
-                            onClick={match?.status === "Playing" ? handleVideoCall : undefined}
+                            // disabled={match?.status !== "Playing"}
+                            onClick={match?.status === "Playing" ? () => handleVideoCallForUser(match?.roomCodes) : undefined}
                             className={`w-full mt-2 py-2 rounded-md transition duration-300 
                            ${match?.status === "Playing"
                                 ? "bg-[#F68064] text-white hover:bg-[#e76a4f]"
