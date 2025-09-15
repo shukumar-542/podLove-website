@@ -37,9 +37,9 @@ const Footer = () => {
             <p className="mb-2">
               <Link to={"/terms-and-conditions"}>Terms And Conditions</Link>
             </p>
-            <p className="mb-2">
+            {/* <p className="mb-2">
               <Link to={"/media-usage-consent"}>Media Usage Consent</Link>
-            </p>
+            </p> */}
             <p className="mb-2">
               <Link to={"/do-not-sell-or-share-my-personal-info"}>Do Not Sell or Share My Personal Information</Link>
             </p>

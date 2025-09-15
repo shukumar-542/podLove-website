@@ -9,27 +9,57 @@ import {
 } from "../../redux/Api/AuthApi";
 import { toast } from "sonner";
 import { useGetAllPlanQuery } from "../../redux/Api/SubscriptionPlan";
-import { useSendPodcastRequestMutation } from "../../redux/Api/PodcastApi";
+import { useCreatePodcastMutation, useSendPodcastRequestMutation } from "../../redux/Api/PodcastApi";
 import { Spin } from "antd";
 import { Carousel } from 'antd';
+// import { useState } from "react";
 
 const HomePage = () => {
   const navigate = useNavigate();
+
+  // const [userSelectedRoomCode, setUserSelectedRoomCode] = useState();
   const [createPodCast] = usePodcastCreateMutation();
   const [sendPodcastRequest, { isLoading: requestPodcastLoading }] = useSendPodcastRequestMutation();
   const { data: getPodcastDetails, isLoading } = useGetPodCastDetailsQuery();
   console.log('home page', getPodcastDetails);
   const { data: getAllPlans } = useGetAllPlanQuery();
+  const [createPodcast] = useCreatePodcastMutation();
 
   const podcast = getPodcastDetails?.data?.podcast;
   const status = podcast?.status;
+
+  const roomCodeHost = podcast?.roomCodes?.find(code => code?.role === "broadcaster");
+  console.log(roomCodeHost);
+
+
 
   const handleVideoCall = () => {
     if (!podcast?._id) {
       toast.error("Podcast not available!");
       return;
     }
-    navigate(`/room/podcast?roomId=${podcast._id}&hostId=${getPodcastDetails?.data?.podcast?.primaryUser?._id}`);
+    if (status === "StreamStart") {
+      console.log('clicked');
+      createPodcast(podcast?._id).unwrap()
+        .then((data) => {
+          console.log(data?.data?.data);
+          window.location.reload();
+        }).catch((error) => {
+          console.log(error);
+        })
+    }
+    // navigate(`/room/podcast?roomId=${podcast._id}&hostId=${getPodcastDetails?.data?.podcast?.primaryUser?._id}`);
+    navigate(`/ms/?roomCode=${roomCodeHost?.code}`);
+  };
+
+
+  const handleVideoCallForUser = (roomCodes) => {
+    console.log(roomCodes);
+    const code = roomCodes?.find(code => code?.role === "viewer-near-realtime");
+    console.log(code);
+    if (code) {
+      navigate(`/ms/?roomCode=${code?.code}`);
+    }
   };
 
   const handleCreatePodcast = () => {
@@ -61,6 +91,8 @@ const HomePage = () => {
         return "Scheduled";
       case "Playing": // when playing when show button to (Join Now)
         return "Join Now";
+      case "StreamStart": // when playing when show button to (Join Now)
+        return "Join Now";
       case "Done":
       case "Finished":
         return "Session Completed";
@@ -73,7 +105,8 @@ const HomePage = () => {
     }
   };
 
-  const isJoinEnabled = status === "Playing";
+  // const isJoinEnabled = status === "Playing";
+  const isJoinEnabled = status === "StreamStart" || status === "Playing";
 
 
 
@@ -103,13 +136,13 @@ const HomePage = () => {
             ))}
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-10">
+          <div className="grid grid-cols-2 md:grid-cols-2 xl:grid-cols-4 gap-10 px-4 md:px-0">
             {podcast?.participants?.map((participant, i) => (
               <div key={participant?._id}>
                 <Link to={`/podcast-details/${participant?._id}`}>
                   <div className="cursor-pointer hover:shadow-2xl rounded-br-3xl relative">
                     <img src={img1} className="w-full" alt="" />
-                    <p className="absolute bottom-10 right-[45%] text-xl font-semibold">
+                    <p className="absolute bottom-6 md:bottom-10 right-[32%] md:right-[45%] text-xl font-semibold">
                       Match-{i + 1}
                     </p>
                   </div>
@@ -141,19 +174,19 @@ const HomePage = () => {
           My Podcast Schedule
         </h1>
         {/* Video + Join / Request Button Section */}
-        <section className="mb-20 relative">
+        <section className="md:mb-20 relative">
           <video
             autoPlay
             loop
             muted
             playsInline
-            className="h-[500px] mx-auto rounded-md"
+            className="md:h-[500px] mx-auto rounded-md"
           >
             <source src={video} type="video/mp4" />
           </video>
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
-            <img src={mic} alt="Microphone" className="w-24 h-24 mx-auto" />
-            <h1 className="text-4xl font-poppins text-white">Date & Time:</h1>
+            <img src={mic} alt="Microphone" className=" w-10 md:w-24 h-10 md:h-24 mx-auto" />
+            <h1 className="md:text-4xl font-poppins text-white">Date & Time:</h1>
 
             {/* Conditional Button */}
             {status === "NotScheduled" ? (
@@ -198,21 +231,21 @@ const HomePage = () => {
                       loop
                       muted
                       playsInline
-                      className="h-[500px] mx-auto rounded-md"
+                      className="md:h-[500px] mx-auto rounded-md"
                     >
                       <source src={video} type="video/mp4" />
                     </video>
                     <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
-                      <img src={mic} alt="Microphone" className="w-24 h-24 mx-auto" />
-                      <h1 className="text-4xl font-poppins text-white">Date & Time:</h1>
+                      <img src={mic} alt="Microphone" className=" w-10 md:w-24 h-10 md:h-24 mx-auto" />
+                      <h1 className="md:text-4xl font-poppins text-white">Date & Time:</h1>
                       {match?.status === "Playing" ? (
                         <div>
                           <h2 className="text-white text-center">
                             {match?.schedule?.date} {match?.schedule?.day} {match?.schedule?.time}
                           </h2>
                           <button
-                            disabled={match?.status !== "Playing"}
-                            onClick={match?.status === "Playing" ? handleVideoCall : undefined}
+                            // disabled={match?.status !== "Playing"}
+                            onClick={match?.status === "Playing" ? () => handleVideoCallForUser(match?.roomCodes) : undefined}
                             className={`w-full mt-2 py-2 rounded-md transition duration-300 
                            ${match?.status === "Playing"
                                 ? "bg-[#F68064] text-white hover:bg-[#e76a4f]"

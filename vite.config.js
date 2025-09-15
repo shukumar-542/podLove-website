@@ -6,12 +6,12 @@ export default defineConfig({
   plugins: [react()],
   server: {
     host: '0.0.0.0', // This binds Vite to all network interfaces
-    port: 4000, // Optional, you can change the port if needed
+    port: 3000, // Optional, you can change the port if needed
   },
   preview: {
     host: '0.0.0.0',
     allowedHosts: ['podlove.co', 'www.podlove.co'],
-    port: 4000,
+    port: 3000,
     strictPort: true,
   }
 })

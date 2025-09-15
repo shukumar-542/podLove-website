@@ -30,10 +30,19 @@ const PodcastApi = baseApi.injectEndpoints({
                 }
             }
         }),
+        createPodcast: builder.mutation({
+            query: (id) => {
+                return {
+                    url: `/podcast/create_room/${id}`,
+                    method: 'POST',
+                }
+            }
+        }),
     })
 })
 
 export const {
     useSendPodcastRequestMutation,
     usePodcastDoneMutation,
+    useCreatePodcastMutation,
 } = PodcastApi;
