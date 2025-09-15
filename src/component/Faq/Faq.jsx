@@ -8,6 +8,7 @@ const { Panel } = Collapse;
 const Faq = () => {
 
   const { data: getFaq } = useGetFaqQuery(undefined)
+  console.log(getFaq);
 
   return (
     <div style={{ backgroundImage: `url(${img})` }} className="py-10">
@@ -34,7 +35,7 @@ const Faq = () => {
           )}
         >
           {
-            getFaq?.data?.faqs?.map((item, index) => (
+            getFaq?.data?.map((item, index) => (
               <Panel
                 key={item?.id || index}
                 header={<span className="text-lg font-medium">{item?.question}</span>}
