@@ -10,7 +10,7 @@ import {
 import { toast } from "sonner";
 import { useGetAllPlanQuery } from "../../redux/Api/SubscriptionPlan";
 import { useCreatePodcastMutation, useSendPodcastRequestMutation } from "../../redux/Api/PodcastApi";
-import { Spin } from "antd";
+import { message, Spin } from "antd";
 import { Carousel } from 'antd';
 // import { useState } from "react";
 
@@ -46,16 +46,19 @@ const HomePage = () => {
           window.location.reload();
         }).catch((error) => {
           console.log(error);
+          message.error(error?.data?.message)
         })
     }
-    // navigate(`/room/podcast?roomId=${podcast._id}&hostId=${getPodcastDetails?.data?.podcast?.primaryUser?._id}`);
-    navigate(`/ms/?roomCode=${roomCodeHost?.code}`);
+    if (status === "Playing") {
+      // navigate(`/room/podcast?roomId=${podcast._id}&hostId=${getPodcastDetails?.data?.podcast?.primaryUser?._id}`);
+      navigate(`/ms/?roomCode=${roomCodeHost?.code}`);
+    }
   };
 
 
   const handleVideoCallForUser = (roomCodes) => {
     console.log(roomCodes);
-    const code = roomCodes?.find(code => code?.role === "viewer-near-realtime");
+    const code = roomCodes?.find(code => code?.role === "viewer-realtime");
     console.log(code);
     if (code) {
       navigate(`/ms/?roomCode=${code?.code}`);
@@ -92,7 +95,7 @@ const HomePage = () => {
       case "Playing": // when playing when show button to (Join Now)
         return "Join Now";
       case "StreamStart": // when playing when show button to (Join Now)
-        return "Join Now";
+        return "Start Stream";
       case "Done":
       case "Finished":
         return "Session Completed";
