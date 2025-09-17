@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router";
 import Pricing from "../../component/Pricing/Pricing";
 import {
   useGetPodCastDetailsQuery,
-  usePodcastCreateMutation,
+  // usePodcastCreateMutation,
 } from "../../redux/Api/AuthApi";
 import { toast } from "sonner";
 import { useGetAllPlanQuery } from "../../redux/Api/SubscriptionPlan";
@@ -18,7 +18,7 @@ const HomePage = () => {
   const navigate = useNavigate();
 
   // const [userSelectedRoomCode, setUserSelectedRoomCode] = useState();
-  const [createPodCast] = usePodcastCreateMutation();
+  // const [createPodCast] = usePodcastCreateMutation();
   const [sendPodcastRequest, { isLoading: requestPodcastLoading }] = useSendPodcastRequestMutation();
   const { data: getPodcastDetails, isLoading } = useGetPodCastDetailsQuery();
   console.log('home page', getPodcastDetails);
@@ -49,7 +49,7 @@ const HomePage = () => {
           message.error(error?.data?.message)
         })
     }
-    if (status === "Playing") {
+    if (status === "Playing" || status === "Done") {
       // navigate(`/room/podcast?roomId=${podcast._id}&hostId=${getPodcastDetails?.data?.podcast?.primaryUser?._id}`);
       navigate(`/ms/?roomCode=${roomCodeHost?.code}`);
     }
@@ -65,12 +65,12 @@ const HomePage = () => {
     }
   };
 
-  const handleCreatePodcast = () => {
-    createPodCast()
-      .unwrap()
-      .then((payload) => toast.success(payload?.message))
-      .catch((error) => toast.error(error?.data?.message));
-  };
+  // const handleCreatePodcast = () => {
+  //   createPodCast()
+  //     .unwrap()
+  //     .then((payload) => toast.success(payload?.message))
+  //     .catch((error) => toast.error(error?.data?.message));
+  // };
 
   const handleRequestPodcast = () => {
     const data = {
@@ -95,8 +95,9 @@ const HomePage = () => {
       case "Playing": // when playing when show button to (Join Now)
         return "Join Now";
       case "StreamStart": // when playing when show button to (Join Now)
-        return "Start Stream";
+        return "Join Now";
       case "Done":
+        return "Join Now";
       case "Finished":
         return "Session Completed";
       case "NotScheduled":
@@ -109,7 +110,7 @@ const HomePage = () => {
   };
 
   // const isJoinEnabled = status === "Playing";
-  const isJoinEnabled = status === "StreamStart" || status === "Playing";
+  const isJoinEnabled = status === "StreamStart" || status === "Playing" || status === "Done";
 
 
 
@@ -117,7 +118,7 @@ const HomePage = () => {
     <div className="bg-[#F7E8E1]">
       <div className="container mx-auto py-14">
         {/* Create New Match */}
-        <div className="flex justify-center">
+        {/* <div className="flex justify-center">
           {podcast?.participants?.length === 0 && (
             <button
               onClick={handleCreatePodcast}
@@ -126,7 +127,7 @@ const HomePage = () => {
               Create New Match
             </button>
           )}
-        </div>
+        </div> */}
 
         {/* Matches Section */}
         {isLoading ? (
@@ -241,21 +242,21 @@ const HomePage = () => {
                     <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
                       <img src={mic} alt="Microphone" className=" w-10 md:w-24 h-10 md:h-24 mx-auto" />
                       <h1 className="md:text-4xl font-poppins text-white">Date & Time:</h1>
-                      {match?.status === "Playing" ? (
+                      {match?.status === "Playing" || match?.status === "Done" ? (
                         <div>
                           <h2 className="text-white text-center">
                             {match?.schedule?.date} {match?.schedule?.day} {match?.schedule?.time}
                           </h2>
                           <button
                             // disabled={match?.status !== "Playing"}
-                            onClick={match?.status === "Playing" ? () => handleVideoCallForUser(match?.roomCodes) : undefined}
+                            onClick={match?.status === "Playing" || match?.status === "Done" ? () => handleVideoCallForUser(match?.roomCodes) : undefined}
                             className={`w-full mt-2 py-2 rounded-md transition duration-300 
-                           ${match?.status === "Playing"
+                           ${match?.status === "Playing" || match?.status === "Done"
                                 ? "bg-[#F68064] text-white hover:bg-[#e76a4f]"
                                 : "bg-gray-200 text-gray-500 cursor-not-allowed"
                               }`}
                           >
-                            {match?.status === "Playing" ? "Join Now" : "Join Now Not Available"}
+                            {match?.status === "Playing" || match?.status === "Done" ? "Join Now" : "Join Now Not Available"}
                           </button>
                         </div>
                       ) : (
