@@ -6,6 +6,8 @@ import { IoMdNotifications } from "react-icons/io";
 import { HiMenu, HiX } from "react-icons/hi";
 import { useGetUserQuery } from "../../redux/Api/AuthApi";
 import { baseUrl } from "../../baseUrl";
+import play_store from '../../assets/play_store.png'
+import apple_store from '../../assets/apple_store.png'
 
 const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -19,16 +21,21 @@ const NavBar = () => {
 
         {/* Logo */}
         <div>
-          <NavLink to={"/"}><img className="h-10 " src={img1} alt="Logo" /></NavLink>
+          <NavLink to={"/"}><img className="h-8 md:h-10 " src={img1} alt="Logo" /></NavLink>
         </div>
 
         {/* Mobile Menu Button */}
         <button className="lg:hidden " onClick={() => setMenuOpen(!menuOpen)}>
-          {menuOpen ? <HiX size={28} /> : <HiMenu size={28} />}
+          {menuOpen ? <HiX size={28} /> : <div className=" flex items-center gap-3">
+            <img src={apple_store} className=" w-10 cursor-pointer" alt="" />
+            <img src={play_store} className=" w-10 cursor-pointer mr-3" alt="" />
+            <HiMenu size={28}></HiMenu>
+          </div>
+          }
         </button>
 
         {/* Desktop Navigation */}
-        <div className="hidden lg:flex space-x-8">
+        <div className="hidden lg:flex space-x-3 xl:space-x-8">
           {
             logInUser && <NavLink to="/home" className="hover:text-[#FFA175]">Home</NavLink>
           }
@@ -37,13 +44,15 @@ const NavBar = () => {
           }
 
           <NavLink to="/about-us" className="hover:text-[#FFA175]">About us</NavLink>
-          <NavLink to="/subscription-plan" className="hover:text-[#FFA175]">Subscriptions</NavLink>
+          <NavLink to="/subscription-page" className="hover:text-[#FFA175]">Subscriptions</NavLink>
           <NavLink to="/contact-us" className="hover:text-[#FFA175]">Contact us</NavLink>
           <NavLink to="/feedback-first-step" className="hover:text-[#FFA175]">Feedback</NavLink>
         </div>
 
         {/* Right Section */}
-        <div className="hidden lg:flex space-x-5 items-center">
+        <div className="hidden lg:flex space-x-3 xl:space-x-5 items-center">
+          <img src={apple_store} className=" w-12 cursor-pointer" alt="" />
+          <img src={play_store} className=" w-12 cursor-pointer" alt="" />
           {
             logInUser &&
             <NavLink to="/notification" className="bg-[#FFA175] rounded-full p-2">
@@ -57,9 +66,8 @@ const NavBar = () => {
           {
             !logInUser && <Link to={"/sign-up"} className="bg-[#FFA175] text-white px-4 py-1 rounded">Sign Up Here</Link>
           }
-
-
         </div>
+
       </div>
 
       {/* Mobile Menu */}

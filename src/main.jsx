@@ -61,6 +61,7 @@ import RoomPage100MS from "./page/RoomPage100MS/RoomPage100MS.jsx";
 import MediaUsageConsent from "./page/MediaUsageConsent/MediaUsageConsent.jsx";
 import DoNotSellPersonalInfo from "./page/DoNotSellPersonalInfo/DoNotSellPersonalInfo.jsx";
 import ConsumerHealthDataPrivacyPolicy from "./page/ConsumerHealthDataPrivacyPolicy/ConsumerHealthDataPrivacyPolicy.jsx";
+import SubscriptionPage from "./page/SubscriptionPage/SubscriptionPage.jsx";
 // import MS from "./page/100MS/100MS.jsx";
 
 createRoot(document.getElementById("root")).render(
@@ -80,6 +81,7 @@ createRoot(document.getElementById("root")).render(
               <Route path="/contact-us" element={<ContactUs />} />
               <Route path="/after-podcast" element={<AfterPodcast />} />
               <Route path="/subscription-plan" element={<SubscriptionPlan />} />
+              <Route path="/subscription-page" element={<SubscriptionPage />} />
               <Route element={<PrivateRoute />}>
                 <Route path="/chat/:id" element={<ChatPage />} />
               </Route>

@@ -10,7 +10,7 @@ import { useNavigate } from "react-router";
 const Pricing = ({ subscriptions }) => {
   const [upgradeSubscription, { isLoading }] = useUpgradeSubscriptionPlanMutation();
   const navigate = useNavigate();
-  console.log(subscriptions);
+  console.log('this is from subscripition',subscriptions);
   const logInUser = localStorage.getItem("podlove-token")
   // Handle upgrade plan function
   const handleUpdatePlan = (plan) => {
@@ -76,9 +76,10 @@ const Pricing = ({ subscriptions }) => {
                 : `$${plan.unitAmount} / ${plan?.interval}`}
             </h1>
             <div className="text-center">
-              {subscriptions?.user?.subscription?.fee === plan?.unitAmount ? (
-                <button className="border text-[#FFA175]  max-w-xs rounded-full w-full mt-5 py-2 border-[#FFA175] mb-5">
-                  Current Plan
+              {plan?.unitAmount == "0" ? (
+              // {subscriptions?.user?.subscription?.fee === plan?.unitAmount ? (
+                <button disabled className="border text-[#FFA175]  max-w-xs rounded-full w-full mt-5 py-2 border-[#FFA175] mb-5">
+                  Free Plan
                 </button>
               ) : (
                 <div className=" text-center">
