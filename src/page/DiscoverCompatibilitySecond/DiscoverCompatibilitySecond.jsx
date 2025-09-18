@@ -23,7 +23,10 @@ const DiscoverCompatibilitySecond = () => {
     const data = {
       compatibility: [...previousAnswers, ...answers],
     };
-
+    if (answers.length < 16) {
+      toast.error("Please answer all the questions before proceeding!")
+      return;
+    }
     updateCompatibility(data)
       .unwrap()
       .then((payload) => {

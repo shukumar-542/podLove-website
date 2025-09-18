@@ -12,6 +12,7 @@ const DiscoverCompatibility = () => {
   const [answers, setAnswers] = useState([]);
   const [errors, setErrors] = useState([]);
 
+
   const handleChange = (index, value) => {
     const newAnswers = [...answers];
     newAnswers[index] = value;
@@ -43,15 +44,15 @@ const DiscoverCompatibility = () => {
     const newErrors = answers.map((answer) => !answer);
     setErrors(newErrors);
 
-    if (newErrors.includes(true)) {
-      toast.error("Please answer all the questions before proceeding!");
-      return;
+    if (answers.length < 6) {
+      toast.error("Please answer all the questions before proceeding!")
+      return
     }
 
     localStorage.setItem("compatibility", JSON.stringify(answers));
     navigate("/discover-compatibility-part");
   };
-
+  console.log(answers.length);
 
   return (
     <div className="bg-[#FBECE5] min-h-screen">
