@@ -50,6 +50,7 @@ import ParticipantDetails from "./page/ParticipantDetails/ParticipantDetails.jsx
 import PrivateRoute from "./component/PrivateRoute/PrivateRoute.jsx";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import ConsumerPolicy from "./page/ConsumerPolicy/ConsumerPolicy.jsx";
+import Faq from "./component/Faq/Faq.jsx";
 import MediaPlicy from "./page/MediaPlicy/MediaPlicy.jsx";
 import OurApproach from "./page/OurApproach/OurApproach.jsx";
 import TermsOfUse from "./page/TermsOfUse/TermsOfUse.jsx";
@@ -78,6 +79,7 @@ createRoot(document.getElementById("root")).render(
                 <Route path="/home" element={<HomePage />} />
               </Route>
               <Route path="/about-us" element={<AboutUs />} />
+              <Route path="/faq" element={<Faq/>} />
               <Route path="/contact-us" element={<ContactUs />} />
               <Route path="/after-podcast" element={<AfterPodcast />} />
               <Route path="/subscription-plan" element={<SubscriptionPlan />} />

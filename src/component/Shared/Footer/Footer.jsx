@@ -22,6 +22,11 @@ const Footer = () => {
           <div className=" md:mx-auto space-y-4">
             {/* <h1 className="text-2xl font-bold mb-10">Company Links</h1> */}
             <p className="mb-1">
+              <Link to={"/faq"} className="mb-2">
+                FAQ
+              </Link>
+            </p>
+            <p className="mb-1">
               <Link to={"/about-us"} className="mb-2">
                 About Us
               </Link>
