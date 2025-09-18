@@ -14,7 +14,7 @@ const options = [
   "Native American",
   "Pacific Islander",
   "Other",
-  "No preference",
+  // "No preference",
 ];
 const option = [
   "African American / Black",

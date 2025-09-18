@@ -27,8 +27,8 @@ const NavBar = () => {
         {/* Mobile Menu Button */}
         <button className="lg:hidden " onClick={() => setMenuOpen(!menuOpen)}>
           {menuOpen ? <HiX size={28} /> : <div className=" flex items-center gap-3">
-            <img src={apple_store} className=" w-10 cursor-pointer" alt="" />
-            <img src={play_store} className=" w-10 cursor-pointer mr-3" alt="" />
+            <img src={apple_store} className=" w-8 cursor-pointer" alt="" />
+            <img src={play_store} className=" w-8 cursor-pointer mr-3" alt="" />
             <HiMenu size={28}></HiMenu>
           </div>
           }
