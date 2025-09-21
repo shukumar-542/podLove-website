@@ -59,7 +59,7 @@ const DiscoverCompatibility = () => {
       <div className="container max-w-5xl mx-auto py-10">
         <div className="flex flex-col justify-center items-center ">
           <img className="w-[267px] " src={logo} alt="" />
-          <p className="text-[40px] font-medium font-poppins mt-5 text-[#242424]">
+          <p className=" text-xl md:text-[40px] font-medium font-poppins mt-5 text-[#242424] px-6">
             Discover Compatibility
           </p>
         </div>

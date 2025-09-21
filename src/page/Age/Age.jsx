@@ -70,7 +70,7 @@ const Age = () => {
         backgroundPosition: "center",
         imageRendering: "high-quality",
       }}
-      className="h-[100vh] relative"
+      className="h-[120vh] sm:h-[100vh] relative"
     >
       <div className="bg-black absolute opacity-50 inset-0 z-0"></div>
       <div className="grid grid-cols-12 items-center justify-center h-full w-full container mx-auto">

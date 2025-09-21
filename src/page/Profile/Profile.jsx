@@ -27,11 +27,11 @@ const Profile = () => {
       className="h-[100vh] px-2 md:px-0 relative"
     >
       <div className="absolute inset-0 bg-black bg-opacity-50 z-0"></div>
-      <div className="flex  text-red-500  z-10 cursor-pointer justify-center pt-10 mx-auto">
+      <div className="flex  text-red-500  z-10 cursor-pointer justify-center pt-10 mx-auto mb-4 md:mb-0">
         <Link to={'/change-password'} className="z-10"><IoSettingsOutline className=" bg-white p-2 rounded-full shadow-2xl" size={40} /></Link>
       </div>
-      <div className=" flex justify-center items-center h-full ">
-        <div className="bg-white   md:flex gap-10 p-10 rounded-tr-[90px] rounded-bl-[90px] shadow-2xl shadow-[#eb8b73] mb-20 z-10">
+      <div className=" flex justify-center items-center h-full">
+        <div className="bg-white md:flex gap-10 p-8 md:p-10 rounded-tr-[90px] rounded-bl-[90px] shadow-2xl shadow-[#eb8b73] mb-32 md:mb-20 z-10">
           <div>
             <img
               src={`${baseUrl}${getUser?.data?.avatar}`}
@@ -40,7 +40,8 @@ const Profile = () => {
             />
             <p className="mt-3 flex  items-center gap-1 text-[#6B4431]">
               <IoCalendarOutline />
-              {getUser?.data?.createdAt?.split("T")[0]?.split("-")?.reverse()?.join("-")}
+             {getUser?.data?.createdAt?.split("T")[0]?.split("-")?.slice(1).concat(getUser?.data?.createdAt?.split("T")[0]?.split("-").slice(0, 1))?.join("-")}
+
             </p>
             <p className="flex mt-1 items-center gap-1 text-[#6B4431]">
               <CiLocationOn color="#6B4431" />
@@ -50,7 +51,7 @@ const Profile = () => {
           </div>
           <div>
             <div className="flex justify-between items-center">
-              <p className="text-[#8C5940] font-poppins text-[36px] pr-3 md:pr-10 font-bold ">
+              <p className="text-[#8C5940] font-poppins text-2xl md:text-[36px] pr-3 md:pr-10 font-bold ">
                 {getUser?.data?.name}
               </p>
               <div className=" flex items-center justify-center gap-3">

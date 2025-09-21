@@ -32,7 +32,8 @@ const ConnectionProgress = () => {
 
   //   Navigate congratulation page
   useEffect(() => {
-    if (percent === 100) {
+    if (percent === 70
+    ) {
       connectBegins(userId)
         .unwrap()
         .then((payload) => {
