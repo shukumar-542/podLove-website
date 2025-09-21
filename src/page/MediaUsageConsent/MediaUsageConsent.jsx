@@ -1,11 +1,6 @@
-import { useState } from "react";
+import { Link } from "react-router";
 
 const MediaUsageConsent = () => {
-  const [isChecked, setIsChecked] = useState(false);
-
-  const handleCheckboxChange = () => {
-    setIsChecked(!isChecked);
-  };
 
   return (
     <div className="bg-[#F7E8E1]">
@@ -28,55 +23,41 @@ const MediaUsageConsent = () => {
 
           <p className="text-xl mt-6">
             Your{" "}
-            <a href="https://podlove.co/privacy" className="text-[#FFA175]">
+            <a href="https://podlove.co/privacy-policy" className="text-[#FFA175]">
               privacy
             </a>{" "}
             matters. We’ll never use your content in a way that degrades you. By continuing, you agree that PodLove owns the rights to this content for public and promotional use.
           </p>
 
-          {/* Consent Checkbox */}
+          {/* Consent Checkbox
           <div className="flex items-center mt-6">
-            <input
-              type="checkbox"
-              id="mediaConsentCheckbox"
-              className="mr-2"
-              checked={isChecked}
-              onChange={handleCheckboxChange}
-            />
-            <label htmlFor="mediaConsentCheckbox" className="text-xl">
+
+            <h2 className="text-xl">
               “I consent to PodLove using my video content for platform visibility, community highlights, and promotional purposes.”
-            </label>
+            </h2>
           </div>
 
           {/* Links Section */}
-          <div className="flex justify-between w-full mt-6">
-            <a
-              href="https://podlove.co/privacy"
+          {/* <div className="mt-6">
+            <Link
+              to="https://podlove.co/privacy-policy"
               className="text-[#FFA175] hover:underline text-sm"
             >
               Privacy Policy
-            </a>
-            <a
-              href="https://podlove.co/do-not-sell"
+            </Link>
+            <Link
+              to="https://podlove.co/do-not-sell-or-share-my-personal-info"
               className="text-[#FFA175] hover:underline text-sm"
             >
               Do Not Sell My Data
-            </a>
-            <a
-              href="https://podlove.co/health-consent"
+            </Link>
+            <Link
+              to="https://podlove.co/consumer-health-data-privacy-policy"
               className="text-[#FFA175] hover:underline text-sm"
             >
               App Health Consent
-            </a>
-          </div>
-
-          {/* CTA Button */}
-          <button
-            className="w-full py-3 mt-8 bg-[#FFA175] text-white text-xl font-bold rounded-lg"
-            disabled={!isChecked}
-          >
-            Continue
-          </button>
+            </Link>
+          </div>  */}
 
           {/* Behavior & Requirements Section */}
           <div className="mt-10">
@@ -104,14 +85,14 @@ const MediaUsageConsent = () => {
             </p>
 
             <p className="mt-4">
-              Have questions? Email us at <a href="mailto:support@podlove.co" className="text-[#FFA175]">support@podlove.co</a>.
+              Have questions? Email us at <Link to="mailto:support@podlove.co" className="text-[#FFA175]">support@podlove.co</Link>.
             </p>
 
             <div className="mt-4">
               <span className="text-xl">🔗</span>
-              <a href="https://podlove.co/privacy" className="text-[#FFA175] hover:underline ml-2">Privacy Policy</a> | 
-              <a href="https://podlove.co/do-not-sell" className="text-[#FFA175] hover:underline ml-2">Do Not Sell My Data</a> | 
-              <a href="https://podlove.co/health-consent" className="text-[#FFA175] hover:underline ml-2">App Health Consent</a>
+              <Link to="https://podlove.co/privacy-policy" className="text-[#FFA175] hover:underline ml-2">Privacy Policy</Link> | 
+              <Link to="https://podlove.co/do-not-sell-or-share-my-personal-info" className="text-[#FFA175] hover:underline ml-2">Do Not Sell My Data</Link> | 
+              <Link to="https://podlove.co/consumer-health-data-privacy-policy" className="text-[#FFA175] hover:underline ml-2">App Health Consent</Link>
             </div>
           </div>
         </div>
