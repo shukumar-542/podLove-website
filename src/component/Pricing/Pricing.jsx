@@ -6,11 +6,11 @@ import {
   useUpgradeSubscriptionPlanMutation,
 } from "../../redux/Api/SubscriptionPlan";
 import { toast } from "sonner";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 const Pricing = ({ subscriptions }) => {
   const [upgradeSubscription, { isLoading }] = useUpgradeSubscriptionPlanMutation();
   const navigate = useNavigate();
-  console.log('this is from subscripition',subscriptions);
+  console.log('this is from subscripition', subscriptions);
   const logInUser = localStorage.getItem("podlove-token")
   // Handle upgrade plan function
   const handleUpdatePlan = (plan) => {
@@ -77,10 +77,12 @@ const Pricing = ({ subscriptions }) => {
             </h1>
             <div className="text-center">
               {plan?.unitAmount == "0" ? (
-              // {subscriptions?.user?.subscription?.fee === plan?.unitAmount ? (
-                <button disabled className="border text-[#FFA175]  max-w-xs rounded-full w-full mt-5 py-2 border-[#FFA175] mb-5">
-                  Free Plan
-                </button>
+                // {subscriptions?.user?.subscription?.fee === plan?.unitAmount ? (
+                <Link to={"/connection-progress"}>
+                  <button className=" bg-gradient-to-r from-[#F36E2F] to-[#FEB491]  shadow-white shadow-inner rounded-full w-full mt-5 py-2 max-w-xs  mb-5 cursor-pointer">
+                    Free Plan
+                  </button>
+                </Link>
               ) : (
                 <div className=" text-center">
                   {

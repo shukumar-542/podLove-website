@@ -61,16 +61,16 @@ const UploadPhoto = () => {
             We&apos;d love to see you. Upload a photo for your dating journey.
           </p>
 
-          <div className="flex justify-center items-center">
+          <div className="w-[100%] flex justify-center items-center ">
             <Upload
               showUploadList={false}
               beforeUpload={(file) => {
                 handleFileSelect({ file });
                 return false;
               }}
-              className="w-full"
+              className="w-[100%] flex justify-center items-center "
             >
-              <div className="border-2 border-dashed border-red-300 mb-10 rounded-md p-6 flex justify-center items-center md:w-[560px] h-56 cursor-pointer">
+              <div className="border-2 border-dashed border-red-300 mb-10 rounded-md p-6 flex justify-center items-center w-[300px] md:w-[250px] lg:w-[360px] xl:w-[460px] 2xl:w-[560px] h-56 cursor-pointer">
                 {isLoading ? (
                   <p className="text-red-400">Uploading...</p>
                 ) : imageUrl ? (
