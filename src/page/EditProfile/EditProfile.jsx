@@ -17,7 +17,7 @@ const UPLOAD_PRESET = "podlove_upload";
 
 const EditProfile = () => {
   const [loading, setLoading] = useState(false);
-  const [editProfile] = useUpdateUserInfoMutation();
+  const [editProfile, { isLoading }] = useUpdateUserInfoMutation();
   const [file, setFile] = useState(null);
   const [form] = Form.useForm();
   const [imageUrl, setImageUrl] = useState(null);
@@ -64,7 +64,7 @@ const EditProfile = () => {
   const handleUpdateProfile = async (values) => {
     setLoading(true);
     const formData = new FormData();
-    formData.append("file", file);
+    formData.append("avatar", file);
     formData.append("upload_preset", UPLOAD_PRESET);
     try {
       const response = await fetch(CLOUDINARY_URL, {
@@ -102,6 +102,23 @@ const EditProfile = () => {
     }
   };
 
+  const handleUploadImage = () => {
+    if (!file) {
+      message.error("Please select an image first.");
+      return;
+    }
+    const formData = new FormData();
+    formData.append("avatar", file);
+    editProfile(formData)
+      .then(() => {
+        toast.success("Image uploaded successfully!")
+        navigate("/profile");
+      })
+      .catch(() => {
+        message.error("Failed to upload image.");
+      })
+  };
+
   return (
     <div className="px-2 md:px-0 bg-[#FAF2EF] flex items-center justify-center py-10">
       <div className="bg-white  shadow-md shadow-[#eb8b73] my-10 p-5 rounded-md w-full px-2 md:px-10 md:w-1/3 ">
@@ -123,6 +140,11 @@ const EditProfile = () => {
               icon={<CameraOutlined />}
             />
           </Upload>
+          {file &&
+            <div className=" flex justify-center items-center">
+              <button onClick={handleUploadImage} disabled={isLoading} className=" text-center bg-[#ffa175] text-white px-3 py-1 rounded-lg mt-3">{isLoading ? "Loading..." : "upload"}</button>
+            </div>
+          }
 
         </div>
         <Form form={form} layout="vertical" onFinish={handleUpdateProfile}>
