@@ -6,10 +6,35 @@ import AuthButton from "../../component/AuthButton/AuthButton";
 import { useSignUpMutation } from "../../redux/Api/AuthApi";
 import { toast } from "sonner";
 import { IoArrowBack } from "react-icons/io5";
+import { useState } from "react";
+import TermsConditionModal from "../../component/Modals/TermsConditionModal";
+import PrivacyPolicyModal from "../../component/Modals/PrivacyPolicyModal";
 // import { IoArrowBack } from "react-icons/io5";
 const SignUp = () => {
   const [singUp, { isLoading }] = useSignUpMutation();
   const navigate = useNavigate();
+
+  const [isTermModalOpen, setIsTermModalOpen] = useState(false);
+  const showTermModal = () => {
+    setIsTermModalOpen(true);
+  };
+  const handleTermOk = () => {
+    setIsTermModalOpen(false);
+  };
+  const handleTermCancel = () => {
+    setIsTermModalOpen(false);
+  };
+
+  const [isPrivacyModalOpen, setIsPrivacyModalOpen] = useState(false);
+  const showPrivacyModal = () => {
+    setIsPrivacyModalOpen(true);
+  };
+  const handlePrivacyOk = () => {
+    setIsPrivacyModalOpen(false);
+  };
+  const handlePrivacyCancel = () => {
+    setIsPrivacyModalOpen(false);
+  };
   // ----Handle signup function------//
   const handleSignUp = (values) => {
     if (values?.password !== values?.confirmPassword) {
@@ -142,23 +167,39 @@ const SignUp = () => {
                       },
                     ]}
                   >
-                    <Checkbox className="text-xs">
-                      I agree with the{" "}
-                      <span className="text-[#F68064] font-semibold">
-                        <NavLink to="/terms-and-conditions">terms and conditions</NavLink>
-                      </span>
-                      ,{" "}
-                      <span className="text-[#F68064] font-semibold">
-                        <NavLink to="/privacy-policy">privacy policy</NavLink>
-                      </span>
-                      {/* , and{" "}
+                    <div className=" flex items-center">
+                      <Checkbox className="text-xs">
+                        I agree with the{" "}
+                        {/* <span className="text-[#F68064] font-semibold"> */}
+                        {/* <NavLink to="/terms-and-conditions">terms and conditions</NavLink> */}
+                        {/* <span onClick={showTermModal}>terms and conditions</span> */}
+                        {/* </span> */}
+                        {" "}
+                        {/* <span className="text-[#F68064] font-semibold"> */}
+                        {/* <NavLink to="/privacy-policy">privacy policy</NavLink> */}
+                        {/* <span onClick={showPrivacyModal}>privacy policy</span> */}
+                        {/* </span> */}
+                        {/* , and{" "}
                       <span className="text-[#F68064] font-semibold">
                         <NavLink to="/media-policy">Media Policy</NavLink>
                       </span> */}
-                    </Checkbox>
+                      </Checkbox>
+                      <div>
+                        <span className="text-[#F68064] font-semibold cursor-pointer">
+                          {/* <NavLink to="/terms-and-conditions">terms and conditions</NavLink> */}
+                          <span onClick={showTermModal}>terms and conditions</span>
+                        </span>
+                        ,{" "}
+                        <span className="text-[#F68064] font-semibold cursor-pointer">
+                          {/* <NavLink to="/privacy-policy">privacy policy</NavLink> */}
+                          <span onClick={showPrivacyModal}>privacy policy</span>
+                        </span>
+                      </div>
+                    </div>
                   </Form.Item>
                 </div>
-
+                <TermsConditionModal isTermModalOpen={isTermModalOpen} handleTermOk={handleTermOk} handleTermCancel={handleTermCancel}></TermsConditionModal>
+                <PrivacyPolicyModal isPrivacyModalOpen={isPrivacyModalOpen} handlePrivacyOk={handlePrivacyOk} handlePrivacyCancel={handlePrivacyCancel}></PrivacyPolicyModal>
                 {/* Submit Button */}
                 <AuthButton
                   disabled={isLoading}
