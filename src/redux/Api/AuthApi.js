@@ -115,6 +115,14 @@ const authApi = baseApi.injectEndpoints({
         };
       },
     }),
+    getVideo: builder.query({
+      query: () => {
+        return {
+          url: "/home/get-video",
+          method: "GET",
+        };
+      },
+    }),
     getMediaPrivacy: builder.query({
       query: () => {
         return {
@@ -231,4 +239,5 @@ export const {
   useResetAuthPasswordMutation,
   useGetSmsPrivacyQuery,
   useGetMediaPrivacyQuery,
+  useGetVideoQuery,
 } = authApi;
