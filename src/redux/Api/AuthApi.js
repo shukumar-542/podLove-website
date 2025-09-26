@@ -107,6 +107,22 @@ const authApi = baseApi.injectEndpoints({
         };
       },
     }),
+    getSmsPrivacy: builder.query({
+      query: () => {
+        return {
+          url: "/home/get-sms-policy",
+          method: "GET",
+        };
+      },
+    }),
+    getMediaPrivacy: builder.query({
+      query: () => {
+        return {
+          url: "/home/get-media-policy",
+          method: "GET",
+        };
+      },
+    }),
     getConsumerPolicy: builder.query({
       query: () => {
         return {
@@ -212,5 +228,7 @@ export const {
   useResetPasswordMutation,
   useConnectBeginsMutation,
   useGetMatchsQuery,
-  useResetAuthPasswordMutation
+  useResetAuthPasswordMutation,
+  useGetSmsPrivacyQuery,
+  useGetMediaPrivacyQuery,
 } = authApi;

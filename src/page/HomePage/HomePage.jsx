@@ -12,10 +12,30 @@ import { useGetAllPlanQuery } from "../../redux/Api/SubscriptionPlan";
 import { useCreatePodcastMutation, useSendPodcastRequestMutation } from "../../redux/Api/PodcastApi";
 import { message, Spin } from "antd";
 import { Carousel } from 'antd';
+import { useEffect, useState } from "react";
+import FirstSurvey from "../../component/Modals/FirstSurvey";
+import SecondSurvey from "../../component/Modals/SecondSurvey";
 // import { useState } from "react";
 
 const HomePage = () => {
   const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
+  const [isSecondModalOpen, setIsSecondModalOpen] = useState(false);
+
+  const handleSecondOk = () => {
+    setIsSecondModalOpen(false);
+  };
+  const handleSecondCancel = () => {
+    setIsSecondModalOpen(false);
+  };
 
   // const [userSelectedRoomCode, setUserSelectedRoomCode] = useState();
   // const [createPodCast] = usePodcastCreateMutation();
@@ -26,12 +46,21 @@ const HomePage = () => {
   const [createPodcast] = useCreatePodcastMutation();
 
   const podcast = getPodcastDetails?.data?.podcast;
+
+  useEffect(() => {
+    if (podcast?.finishStatus === "1stFinish" && podcast?.questionsStatus === null) {
+      setIsModalOpen(true);
+    }
+
+    if (podcast?.finishStatus === "2ndFinish" && podcast?.questionsStatus === "1stDone") {
+      setIsSecondModalOpen(true);
+    }
+
+  }, [podcast]);
+
   const status = podcast?.status;
 
   const roomCodeHost = podcast?.roomCodes?.find(code => code?.role === "broadcaster");
-  console.log(roomCodeHost);
-
-
 
   const handleVideoCall = () => {
     if (!podcast?._id) {
@@ -89,6 +118,9 @@ const HomePage = () => {
   };
 
   const getButtonLabel = () => {
+    if (podcast?.finishStatus === "1stFinish" && podcast?.questionsStatus === "1stDone" && status === "Finished") {
+      return "Request a Podcast";
+    }
     switch (status) {
       case "Scheduled": // only show date and time
         return "Scheduled";
@@ -110,7 +142,7 @@ const HomePage = () => {
   };
 
   // const isJoinEnabled = status === "Playing";
-  const isJoinEnabled = status === "StreamStart" || status === "Playing" || status === "Done";
+  const isJoinEnabled = (podcast?.questionsStatus === "1stDone" && status === "Finished") || status === "Playing" || status === "Done";
 
 
 
@@ -193,7 +225,7 @@ const HomePage = () => {
             <h1 className="md:text-4xl font-poppins text-white">Date & Time:</h1>
 
             {/* Conditional Button */}
-            {status === "NotScheduled" ? (
+            {status === "NotScheduled" || (podcast?.questionsStatus === "1stDone" && status === "Finished") ? (
               <button
                 onClick={handleRequestPodcast}
                 disabled={requestPodcastLoading}
@@ -287,6 +319,8 @@ const HomePage = () => {
         </h1>
         <Pricing subscriptions={getAllPlans?.data} />
       </div>
+      <FirstSurvey isModalOpen={isModalOpen} handleOk={handleOk} handleCancel={handleCancel} podcastId={getPodcastDetails?.data?.podcast?._id}></FirstSurvey>
+      <SecondSurvey isSecondModalOpen={isSecondModalOpen} handleSecondOk={handleSecondOk} handleSecondCancel={handleSecondCancel} podcastId={getPodcastDetails?.data?.podcast?._id}></SecondSurvey>
     </div>
   );
 };
