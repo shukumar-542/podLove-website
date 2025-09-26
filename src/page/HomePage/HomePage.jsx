@@ -55,6 +55,7 @@ const HomePage = () => {
     if (podcast?.finishStatus === "2ndFinish" && podcast?.questionsStatus === "1stDone") {
       setIsSecondModalOpen(true);
     }
+
   }, [podcast]);
 
   const status = podcast?.status;
@@ -319,7 +320,7 @@ const HomePage = () => {
         <Pricing subscriptions={getAllPlans?.data} />
       </div>
       <FirstSurvey isModalOpen={isModalOpen} handleOk={handleOk} handleCancel={handleCancel} podcastId={getPodcastDetails?.data?.podcast?._id}></FirstSurvey>
-      <SecondSurvey isSecondModalOpen={isSecondModalOpen} handleSecondOk={handleSecondOk} handleSecondCancel={handleSecondCancel}></SecondSurvey>
+      <SecondSurvey isSecondModalOpen={isSecondModalOpen} handleSecondOk={handleSecondOk} handleSecondCancel={handleSecondCancel} podcastId={getPodcastDetails?.data?.podcast?._id}></SecondSurvey>
     </div>
   );
 };
