@@ -167,9 +167,9 @@ const SignUp = () => {
                       },
                     ]}
                   >
-                    <div className=" flex items-center">
+                    <div className=" flex items-center ">
                       <Checkbox className="text-xs">
-                        I agree with the{" "}
+                        I agree with {" "}
                         {/* <span className="text-[#F68064] font-semibold"> */}
                         {/* <NavLink to="/terms-and-conditions">terms and conditions</NavLink> */}
                         {/* <span onClick={showTermModal}>terms and conditions</span> */}
@@ -184,20 +184,68 @@ const SignUp = () => {
                         <NavLink to="/media-policy">Media Policy</NavLink>
                       </span> */}
                       </Checkbox>
-                      <div>
+                      <div >
+
+                          <span className="text-[#F68064] font-semibold cursor-pointer">
+                            {/* <NavLink to="/terms-and-conditions">terms and conditions</NavLink> */}
+                            <span className=" text-[12px]" onClick={showTermModal}>Terms and conditions, </span>
+                          </span>
+                          {" "}
+                          <span className="text-[#F68064] font-semibold cursor-pointer m">
+                            {/* <NavLink to="/privacy-policy">privacy policy</NavLink> */}
+                            <span className=" text-[12px]" onClick={showPrivacyModal}>Privacy policy, </span>
+                          </span>
+  
                         <span className="text-[#F68064] font-semibold cursor-pointer">
-                          {/* <NavLink to="/terms-and-conditions">terms and conditions</NavLink> */}
-                          <span onClick={showTermModal}>terms and conditions</span>
+                          <NavLink className=" text-[12px]" to="/media-usage-consent">Media Policy,</NavLink>
                         </span>
-                        ,{" "}
-                        <span className="text-[#F68064] font-semibold cursor-pointer">
-                          {/* <NavLink to="/privacy-policy">privacy policy</NavLink> */}
-                          <span onClick={showPrivacyModal}>privacy policy</span>
+                        <span className="text-[#F68064] font-semibold cursor-pointer ml-2">
+                          <NavLink className=" text-[12px]" to="/opt-in-policy">Sms Policy</NavLink>
                         </span>
                       </div>
+
                     </div>
                   </Form.Item>
+
+
                 </div>
+                {/* <Form.Item
+                  name="agreement"
+                  valuePropName="checked"
+                  rules={[
+                    {
+                      validator: (_, value) =>
+                        value
+                          ? Promise.resolve()
+                          : Promise.reject(
+                            new Error("You must agree to the Sms and media policy")
+                          ),
+                    },
+                  ]}
+                >
+                  <div className=" flex items-center -mt-5">
+                    <Checkbox className="text-xs">
+                      I agree with the{" "}
+                      {/* <span className="text-[#F68064] font-semibold"> */}
+                      {/* <NavLink to="/terms-and-conditions">terms and conditions</NavLink> */}
+                      {/* <span onClick={showTermModal}>terms and conditions</span> */}
+                      {/* </span> */}
+                      {" "}
+                      {/* <span className="text-[#F68064] font-semibold"> */}
+                      {/* <NavLink to="/privacy-policy">privacy policy</NavLink> */}
+                      {/* <span onClick={showPrivacyModal}>privacy policy</span> */}
+                      {/* </span> */}
+                      {/* , and{" "}
+                      <span className="text-[#F68064] font-semibold">
+                        <NavLink to="/media-policy">Media Policy</NavLink>
+                      </span> */}
+                    {/* </Checkbox>
+                    <div className="">
+
+                    </div>
+
+                  </div>
+                </Form.Item>  */}
                 <TermsConditionModal isTermModalOpen={isTermModalOpen} handleTermOk={handleTermOk} handleTermCancel={handleTermCancel}></TermsConditionModal>
                 <PrivacyPolicyModal isPrivacyModalOpen={isPrivacyModalOpen} handlePrivacyOk={handlePrivacyOk} handlePrivacyCancel={handlePrivacyCancel}></PrivacyPolicyModal>
                 {/* Submit Button */}
