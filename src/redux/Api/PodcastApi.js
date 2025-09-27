@@ -56,6 +56,15 @@ const PodcastApi = baseApi.injectEndpoints({
                 }
             }
         }),
+        submitConnectionPathway: builder.mutation({
+            query: (data) => {
+                return {
+                    url: `/ai/is-user-suitable`,
+                    method: 'POST',
+                    body: data
+                }
+            }
+        }),
     })
 })
 
@@ -65,4 +74,5 @@ export const {
     useCreatePodcastMutation,
     usePostFirstSurveyMutation,
     usePost7DaysSurveyMutation,
+    useSubmitConnectionPathwayMutation,
 } = PodcastApi;
