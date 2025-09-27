@@ -4,8 +4,8 @@ import { useGetMediaPrivacyQuery } from "../../redux/Api/AuthApi";
 const MediaUsageConsent = () => {
   const { data } = useGetMediaPrivacyQuery()
   return (
-    <div className="bg-[#F7E8E1]">
-      <div className="container mx-auto">
+    <div className="bg-[#F7E8E1] min-h-[70vh]">
+      <div className="px-3 md:container mx-auto">
 
         <h1 className="text-2xl text-center font-poppins py-10 font-semibold">
           Media Usage Consent
@@ -15,7 +15,7 @@ const MediaUsageConsent = () => {
           className="text-base text-black font-poppins"
           style={{ backgroundColor: "#FAF2EF" }}
           dangerouslySetInnerHTML={{
-            __html: data?.data || "",
+            __html: data?.data?.text || "",
           }}
         />
         {/* Header Section */}

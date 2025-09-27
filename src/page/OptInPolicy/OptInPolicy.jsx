@@ -3,20 +3,21 @@ import { useGetSmsPrivacyQuery } from "../../redux/Api/AuthApi";
 
 const OptInPolicy = () => {
   const { data } = useGetSmsPrivacyQuery()
+  console.log(data);
 
   return (
-    <div className="bg-[#F7E8E1]">
-      <div className="container mx-auto">
+    <div className="bg-[#faf2ef] min-h-[70vh]">
+      <div className="px-3 md:container mx-auto">
 
         <h1 className="text-2xl text-center font-poppins py-10 font-semibold">
           SMS Consent & Opt-In-Policy
         </h1>
 
         <div
-          className="text-base text-black font-poppins"
-          style={{ backgroundColor: "#FAF2EF" }}
+          className="text-base text-black font-poppins bg-[#faf2ef]"
+          style={{ backgroundColor: "#faf2ef" }}
           dangerouslySetInnerHTML={{
-            __html: data?.data || "",
+            __html: data?.data?.text || "",
           }}
         />
         {/* <div className="bg-[#FFA175] p-4">
