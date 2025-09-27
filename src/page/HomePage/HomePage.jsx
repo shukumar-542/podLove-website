@@ -55,7 +55,7 @@ const HomePage = () => {
   const [createPodcast] = useCreatePodcastMutation();
 
   const podcast = getPodcastDetails?.data?.podcast;
-  console.log('home adtga', getPodcastDetails?.data?.user?.auth?.shareFeedback);
+  console.log('home my app test dur', getPodcastDetails?.data?.user?.chatingtime);
 
   useEffect(() => {
     if (podcast?.finishStatus === "1stFinish" && podcast?.questionsStatus === null) {
@@ -159,7 +159,9 @@ const HomePage = () => {
   // const isJoinEnabled = status === "Playing";
   const isJoinEnabled = (podcast?.questionsStatus === "1stDone" && status === "Finished") || status === "Playing" || status === "Done";
 
-
+  const isChatAvailable =
+    getPodcastDetails?.data?.user?.chatingtime &&
+    new Date() >= new Date(getPodcastDetails.data.user.chatingtime);
 
   return (
     <div className="bg-[#F7E8E1]">
@@ -198,24 +200,36 @@ const HomePage = () => {
                     </p>
                   </div>
                 </Link>
-                {podcast?.selectedUser && (
-                  <Link to={`/chat/${participant?._id}`}>
+                {
+                  isChatAvailable ?
                     <button
-                      disabled={
-                        !podcast?.selectedUser.some(
-                          (sel) => sel?.user === participant?._id
-                        )
-                      }
-                      className={`mt-5 w-full text-white rounded-tl-lg rounded-br-lg py-2 text-xl 
-                      ${podcast?.selectedUser.some((sel) => sel?.user === participant?._id)
-                          ? "bg-[#FFA175]"
-                          : "bg-gray-400"
-                        }`}
+                      disabled={true}
+                      className={`mt-5 w-full text-white rounded-tl-lg rounded-br-lg py-2 text-xl bg-gray-400`}
                     >
                       Chat
                     </button>
-                  </Link>
-                )}
+                    :
+                    <div>
+                      {podcast?.selectedUser && (
+                        <Link to={`/chat/${participant?._id}`}>
+                          <button
+                            disabled={
+                              !podcast?.selectedUser.some(
+                                (sel) => sel?.user === participant?._id
+                              )
+                            }
+                            className={`mt-5 w-full text-white rounded-tl-lg rounded-br-lg py-2 text-xl 
+                            ${podcast?.selectedUser.some((sel) => sel?.user === participant?._id)
+                                ? "bg-[#FFA175]"
+                                : "bg-gray-400"
+                              }`}
+                          >
+                            Chat
+                          </button>
+                        </Link>
+                      )}
+                    </div>
+                }
 
               </div>
             ))}
