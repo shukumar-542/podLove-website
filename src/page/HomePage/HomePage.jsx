@@ -15,6 +15,7 @@ import { Carousel } from 'antd';
 import { useEffect, useState } from "react";
 import FirstSurvey from "../../component/Modals/FirstSurvey";
 import SecondSurvey from "../../component/Modals/SecondSurvey";
+import After7DaysSurveyModal from "../../component/Modals/After7DaysSurvey";
 // import { useState } from "react";
 
 const HomePage = () => {
@@ -26,6 +27,14 @@ const HomePage = () => {
   };
   const handleCancel = () => {
     setIsModalOpen(false);
+  };
+  const [is7DaysModalOpen, setIs7DaysModalOpen] = useState(false);
+
+  const handle7DaysOk = () => {
+    setIs7DaysModalOpen(false);
+  };
+  const handle7DaysCancel = () => {
+    setIs7DaysModalOpen(false);
   };
 
   const [isSecondModalOpen, setIsSecondModalOpen] = useState(false);
@@ -46,6 +55,7 @@ const HomePage = () => {
   const [createPodcast] = useCreatePodcastMutation();
 
   const podcast = getPodcastDetails?.data?.podcast;
+  console.log('home my app test dur', getPodcastDetails?.data?.user?.chatingtime);
 
   useEffect(() => {
     if (podcast?.finishStatus === "1stFinish" && podcast?.questionsStatus === null) {
@@ -56,7 +66,11 @@ const HomePage = () => {
       setIsSecondModalOpen(true);
     }
 
-  }, [podcast]);
+    if (getPodcastDetails?.data?.user?.auth?.shareFeedback === "7days") {
+      setIs7DaysModalOpen(true);
+    }
+
+  }, [getPodcastDetails]);
 
   const status = podcast?.status;
 
@@ -145,7 +159,9 @@ const HomePage = () => {
   // const isJoinEnabled = status === "Playing";
   const isJoinEnabled = (podcast?.questionsStatus === "1stDone" && status === "Finished") || status === "Playing" || status === "Done";
 
-
+  const isChatAvailable =
+    getPodcastDetails?.data?.user?.chatingtime &&
+    new Date() >= new Date(getPodcastDetails.data.user.chatingtime);
 
   return (
     <div className="bg-[#F7E8E1]">
@@ -184,24 +200,36 @@ const HomePage = () => {
                     </p>
                   </div>
                 </Link>
-                {podcast?.selectedUser && (
-                  <Link to={`/chat/${participant?._id}`}>
+                {
+                  isChatAvailable ?
                     <button
-                      disabled={
-                        !podcast?.selectedUser.some(
-                          (sel) => sel?.user === participant?._id
-                        )
-                      }
-                      className={`mt-5 w-full text-white rounded-tl-lg rounded-br-lg py-2 text-xl 
-                      ${podcast?.selectedUser.some((sel) => sel?.user === participant?._id)
-                          ? "bg-[#FFA175]"
-                          : "bg-gray-400"
-                        }`}
+                      disabled={true}
+                      className={`mt-5 w-full text-white rounded-tl-lg rounded-br-lg py-2 text-xl bg-gray-400`}
                     >
                       Chat
                     </button>
-                  </Link>
-                )}
+                    :
+                    <div>
+                      {podcast?.selectedUser && (
+                        <Link to={`/chat/${participant?._id}`}>
+                          <button
+                            disabled={
+                              !podcast?.selectedUser.some(
+                                (sel) => sel?.user === participant?._id
+                              )
+                            }
+                            className={`mt-5 w-full text-white rounded-tl-lg rounded-br-lg py-2 text-xl 
+                            ${podcast?.selectedUser.some((sel) => sel?.user === participant?._id)
+                                ? "bg-[#FFA175]"
+                                : "bg-gray-400"
+                              }`}
+                          >
+                            Chat
+                          </button>
+                        </Link>
+                      )}
+                    </div>
+                }
 
               </div>
             ))}
@@ -322,6 +350,7 @@ const HomePage = () => {
       </div>
       <FirstSurvey isModalOpen={isModalOpen} handleOk={handleOk} handleCancel={handleCancel} podcastId={getPodcastDetails?.data?.podcast?._id}></FirstSurvey>
       <SecondSurvey isSecondModalOpen={isSecondModalOpen} handleSecondOk={handleSecondOk} handleSecondCancel={handleSecondCancel} podcastId={getPodcastDetails?.data?.podcast?._id}></SecondSurvey>
+      <After7DaysSurveyModal is7DaysModalOpen={is7DaysModalOpen} handle7DaysOk={handle7DaysOk} handle7DaysCancel={handle7DaysCancel} podcastId={getPodcastDetails?.data?.podcast?._id}></After7DaysSurveyModal>
     </div>
   );
 };

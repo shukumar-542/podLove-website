@@ -64,7 +64,8 @@ const NavBar = () => {
             logInUser ? <Link to={"/profile"}><img src={`${baseUrl}${getUser?.data?.avatar}`} className="h-10 shadow-2xl object-cover w-10 rounded-full border border-[#FFA175] cursor-pointer" alt="" /></Link> : <NavLink to="/login" className="hover:text-[#FFA175]">Login</NavLink>
           }
           {
-            !logInUser && <Link to={"/sign-up"} className="bg-[#FFA175] text-white px-4 py-1 rounded">Sign Up Here</Link>
+            // !logInUser && <Link to={"/sign-up"} className="bg-[#FFA175] text-white px-4 py-1 rounded">Sign Up Here</Link>
+            !logInUser && <Link to={"/connection-pathway"} className="bg-[#FFA175] text-white px-4 py-1 rounded">Sign Up Here</Link>
           }
         </div>
 
@@ -93,7 +94,8 @@ const NavBar = () => {
           <IoMdNotifications size={24} color="white" />
         </NavLink>
 
-        <NavLink to={"/signup"} className="bg-[#FFA175] text-white px-6 py-2 rounded mt-4" onClick={() => setMenuOpen(false)}>Sign Up Here</NavLink>
+        {/* <NavLink to={"/signup"} className="bg-[#FFA175] text-white px-6 py-2 rounded mt-4" onClick={() => setMenuOpen(false)}>Sign Up Here</NavLink> */}
+        <NavLink to={"/connection-pathway"} className="bg-[#FFA175] text-white px-6 py-2 rounded mt-4" onClick={() => setMenuOpen(false)}>Sign Up Here</NavLink>
       </div>
     </div>
   );

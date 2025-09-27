@@ -63,6 +63,7 @@ import MediaUsageConsent from "./page/MediaUsageConsent/MediaUsageConsent.jsx";
 import DoNotSellPersonalInfo from "./page/DoNotSellPersonalInfo/DoNotSellPersonalInfo.jsx";
 import ConsumerHealthDataPrivacyPolicy from "./page/ConsumerHealthDataPrivacyPolicy/ConsumerHealthDataPrivacyPolicy.jsx";
 import SubscriptionPage from "./page/SubscriptionPage/SubscriptionPage.jsx";
+import ConnectionPathway from "./page/ConnectionPathway/ConnectionPathway.jsx";
 // import MS from "./page/100MS/100MS.jsx";
 
 createRoot(document.getElementById("root")).render(
@@ -79,7 +80,7 @@ createRoot(document.getElementById("root")).render(
                 <Route path="/home" element={<HomePage />} />
               </Route>
               <Route path="/about-us" element={<AboutUs />} />
-              <Route path="/faq" element={<Faq/>} />
+              <Route path="/faq" element={<Faq />} />
               <Route path="/contact-us" element={<ContactUs />} />
               <Route path="/after-podcast" element={<AfterPodcast />} />
               <Route path="/subscription-plan" element={<SubscriptionPlan />} />
@@ -116,6 +117,7 @@ createRoot(document.getElementById("root")).render(
               </Route> */}
             </Route>
             <Route path="/login" element={<Login />} />
+            <Route path="/connection-pathway" element={<ConnectionPathway />} />
             <Route path="/sign-up" element={<SignUp />} />
 
             <Route path="/verify-otp" element={<Otp />} />
