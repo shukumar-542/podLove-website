@@ -47,6 +47,15 @@ const PodcastApi = baseApi.injectEndpoints({
                 }
             }
         }),
+        post7DaysSurvey: builder.mutation({
+            query: (data) => {
+                return {
+                    url: `/user/send_survey_feedback`,
+                    method: 'POST',
+                    body: data
+                }
+            }
+        }),
     })
 })
 
@@ -55,4 +64,5 @@ export const {
     usePodcastDoneMutation,
     useCreatePodcastMutation,
     usePostFirstSurveyMutation,
+    usePost7DaysSurveyMutation,
 } = PodcastApi;

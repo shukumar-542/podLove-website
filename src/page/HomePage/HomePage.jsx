@@ -15,6 +15,7 @@ import { Carousel } from 'antd';
 import { useEffect, useState } from "react";
 import FirstSurvey from "../../component/Modals/FirstSurvey";
 import SecondSurvey from "../../component/Modals/SecondSurvey";
+import After7DaysSurveyModal from "../../component/Modals/After7DaysSurvey";
 // import { useState } from "react";
 
 const HomePage = () => {
@@ -26,6 +27,14 @@ const HomePage = () => {
   };
   const handleCancel = () => {
     setIsModalOpen(false);
+  };
+  const [is7DaysModalOpen, setIs7DaysModalOpen] = useState(false);
+
+  const handle7DaysOk = () => {
+    setIs7DaysModalOpen(false);
+  };
+  const handle7DaysCancel = () => {
+    setIs7DaysModalOpen(false);
   };
 
   const [isSecondModalOpen, setIsSecondModalOpen] = useState(false);
@@ -46,6 +55,7 @@ const HomePage = () => {
   const [createPodcast] = useCreatePodcastMutation();
 
   const podcast = getPodcastDetails?.data?.podcast;
+  console.log('home adtga', getPodcastDetails?.data?.user?.auth?.shareFeedback);
 
   useEffect(() => {
     if (podcast?.finishStatus === "1stFinish" && podcast?.questionsStatus === null) {
@@ -56,7 +66,11 @@ const HomePage = () => {
       setIsSecondModalOpen(true);
     }
 
-  }, [podcast]);
+    if (getPodcastDetails?.data?.user?.auth?.shareFeedback === "7days") {
+      setIs7DaysModalOpen(true);
+    }
+
+  }, [getPodcastDetails]);
 
   const status = podcast?.status;
 
@@ -322,6 +336,7 @@ const HomePage = () => {
       </div>
       <FirstSurvey isModalOpen={isModalOpen} handleOk={handleOk} handleCancel={handleCancel} podcastId={getPodcastDetails?.data?.podcast?._id}></FirstSurvey>
       <SecondSurvey isSecondModalOpen={isSecondModalOpen} handleSecondOk={handleSecondOk} handleSecondCancel={handleSecondCancel} podcastId={getPodcastDetails?.data?.podcast?._id}></SecondSurvey>
+      <After7DaysSurveyModal is7DaysModalOpen={is7DaysModalOpen} handle7DaysOk={handle7DaysOk} handle7DaysCancel={handle7DaysCancel} podcastId={getPodcastDetails?.data?.podcast?._id}></After7DaysSurveyModal>
     </div>
   );
 };
