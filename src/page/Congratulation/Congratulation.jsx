@@ -1,4 +1,4 @@
-import React from "react";
+
 import bg from "../../assets/MatchResults.png";
 import cng from "../../assets/cong.png";
 import { Link } from "react-router";

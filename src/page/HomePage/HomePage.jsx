@@ -60,7 +60,8 @@ const HomePage = () => {
 
   const status = podcast?.status;
 
-  const roomCodeHost = podcast?.roomCodes?.find(code => code?.role === "broadcaster");
+  // const roomCodeHost = podcast?.roomCodes?.find(code => code?.role === "broadcaster");
+  const roomCodeHost = podcast?.roomCodes?.find(code => code?.role === "viewer-realtime");
 
   const handleVideoCall = () => {
     if (!podcast?._id) {
