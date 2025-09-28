@@ -12,7 +12,7 @@ const TermsAndCondition = () => {
         </h1>
 
         <div
-          className="text-base text-black font-poppins"
+          className="text-base text-black font-poppins px-3 md:px-0"
           style={{ backgroundColor: "#FAF2EF" }}
           dangerouslySetInnerHTML={{
             __html: getTermsCondition?.data?.text || "",
