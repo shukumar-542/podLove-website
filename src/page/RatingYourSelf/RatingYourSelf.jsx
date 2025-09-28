@@ -35,9 +35,9 @@ const RatingYourSelf = () => {
   const handleUpdateRating = () => {
     const data = {
       personality: {
-        spectrum: selectedRating,
-        balance: selectedHomeBody,
-        focus: selectedOptimist,
+        spectrum: selectedRating + 1,
+        balance: selectedHomeBody + 1,
+        focus: selectedOptimist + 1,
       },
     };
 

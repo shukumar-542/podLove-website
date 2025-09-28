@@ -88,7 +88,7 @@ const NavBar = () => {
         <NavLink to="/contact-us" onClick={() => setMenuOpen(false)} className="text-xl py-2">Contact us</NavLink>
         <NavLink to="/feedback-first-step" onClick={() => setMenuOpen(false)} className="text-xl py-2">Feedback</NavLink>
         {
-          logInUser ? <Link to={"/profile"}><img src={`${baseUrl}${getUser?.data?.avatar}`} className="h-10 shadow-2xl object-cover w-10 rounded-full border border-[#FFA175] cursor-pointer" alt="" /></Link> : <NavLink to="/login" onClick={() => setMenuOpen(false)} className="text-xl py-2 mt-2">Login</NavLink>
+          logInUser ? <Link to={"/profile"}  onClick={() => setMenuOpen(false)}><img src={`${baseUrl}${getUser?.data?.avatar}`} className="h-10 shadow-2xl object-cover w-10 rounded-full border border-[#FFA175] cursor-pointer" alt="" /></Link> : <NavLink to="/login" onClick={() => setMenuOpen(false)} className="text-xl py-2 mt-2">Login</NavLink>
         }
         <NavLink to="/notification" onClick={() => setMenuOpen(false)} className="bg-[#FFA175] rounded-full p-2 mt-4">
           <IoMdNotifications size={24} color="white" />
