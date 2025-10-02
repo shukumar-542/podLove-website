@@ -71,7 +71,7 @@ const Location = () => {
             city only (specify)
           </p>
           <div className="py-5">
-            <p className="mb-2 font-poppins">Your Location</p>
+            <p className="mb-2 font-poppins">Please Type Your City</p>
             {/* <Input onChange={(e) => setSearchTerm(e.target.value)}  value={searchTerm}  className="border border-[#FFA175]"/> */}
             <LocationSearch onSelectLocation={setSelectedLocation} />
           </div>
