@@ -19,9 +19,9 @@ const ParticipantDetails = () => {
   return (
     <div className=" bg-[#F7E8E1]">
       <div className="container mx-auto py-20  max-w-3xl">
-        <p className="text-[#FFA175] text-center text-2xl my-10">
+        {/* <p className="text-[#FFA175] text-center text-2xl my-10">
           {participant?.name}
-        </p>
+        </p> */}
         <p className="border border-[#FFA175] max-w-3xl mx-auto p-5 rounded-md">
           {participant?.bio ? participant?.bio : "No Bio Available"}
         </p>

@@ -46,7 +46,7 @@ const NavBar = () => {
           <NavLink to="/about-us" className="hover:text-[#FFA175]">About us</NavLink>
           <NavLink to="/subscription-page" className="hover:text-[#FFA175]">Subscriptions</NavLink>
           <NavLink to="/contact-us" className="hover:text-[#FFA175]">Contact us</NavLink>
-          <NavLink to="/feedback-first-step" className="hover:text-[#FFA175]">Feedback</NavLink>
+          {/* <NavLink to="/feedback-first-step" className="hover:text-[#FFA175]">Feedback</NavLink> */}
         </div>
 
         {/* Right Section */}
@@ -86,16 +86,19 @@ const NavBar = () => {
         <NavLink to="/subscription-plan" onClick={() => setMenuOpen(false)} className="text-xl py-2">Subscriptions</NavLink>
         <NavLink to="/about-us" onClick={() => setMenuOpen(false)} className="text-xl py-2">About us</NavLink>
         <NavLink to="/contact-us" onClick={() => setMenuOpen(false)} className="text-xl py-2">Contact us</NavLink>
-        <NavLink to="/feedback-first-step" onClick={() => setMenuOpen(false)} className="text-xl py-2">Feedback</NavLink>
+        {/* <NavLink to="/feedback-first-step" onClick={() => setMenuOpen(false)} className="text-xl py-2">Feedback</NavLink> */}
         {
-          logInUser ? <Link to={"/profile"}  onClick={() => setMenuOpen(false)}><img src={`${baseUrl}${getUser?.data?.avatar}`} className="h-10 shadow-2xl object-cover w-10 rounded-full border border-[#FFA175] cursor-pointer" alt="" /></Link> : <NavLink to="/login" onClick={() => setMenuOpen(false)} className="text-xl py-2 mt-2">Login</NavLink>
+          logInUser ? <Link to={"/profile"} onClick={() => setMenuOpen(false)}><img src={`${baseUrl}${getUser?.data?.avatar}`} className="h-10 shadow-2xl object-cover w-10 rounded-full border border-[#FFA175] cursor-pointer" alt="" /></Link> : <NavLink to="/login" onClick={() => setMenuOpen(false)} className="text-xl py-2 mt-2">Login</NavLink>
         }
         <NavLink to="/notification" onClick={() => setMenuOpen(false)} className="bg-[#FFA175] rounded-full p-2 mt-4">
           <IoMdNotifications size={24} color="white" />
         </NavLink>
 
         {/* <NavLink to={"/signup"} className="bg-[#FFA175] text-white px-6 py-2 rounded mt-4" onClick={() => setMenuOpen(false)}>Sign Up Here</NavLink> */}
-        <NavLink to={"/connection-pathway"} className="bg-[#FFA175] text-white px-6 py-2 rounded mt-4" onClick={() => setMenuOpen(false)}>Sign Up Here</NavLink>
+        {
+          !logInUser &&
+            <NavLink to={"/connection-pathway"} className="bg-[#FFA175] text-white px-6 py-2 rounded mt-4" onClick={() => setMenuOpen(false)}>Sign Up Here</NavLink>
+        }
       </div>
     </div>
   );
