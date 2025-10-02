@@ -296,9 +296,13 @@ const HomePage = () => {
         {/* me match of others */}
         {
           <>
-            {/* <h1 className="text-center font-bold text-2xl md:text-4xl my-14">
-              You&apos;re Matched With Someone
-            </h1> */}
+            {
+              getPodcastDetails?.data?.hostPodcastMatches?.length &&
+              <h1 className="text-center font-bold text-2xl md:text-4xl my-14">
+                You&apos;re Matched With Someone
+              </h1>
+            }
+
 
             <Carousel arrows infinite={false}>
               {
