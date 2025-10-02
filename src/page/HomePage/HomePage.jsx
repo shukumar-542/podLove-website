@@ -55,7 +55,7 @@ const HomePage = () => {
   const [createPodcast] = useCreatePodcastMutation();
 
   const podcast = getPodcastDetails?.data?.podcast;
-  console.log('home my app test dur', getPodcastDetails?.data?.user?.chatingtime);
+  console.log('home my app test dur', getPodcastDetails?.data?.user?.subscription?.fee);
 
   useEffect(() => {
     if (podcast?.finishStatus === "1stFinish" && podcast?.questionsStatus === null) {
@@ -192,14 +192,27 @@ const HomePage = () => {
           <div className="grid grid-cols-2 md:grid-cols-2 xl:grid-cols-4 gap-10 px-4 md:px-0">
             {podcast?.participants?.map((participant, i) => (
               <div key={participant?._id}>
-                <Link to={`/podcast-details/${participant?._id}`}>
-                  <div className="cursor-pointer hover:shadow-2xl rounded-br-3xl relative">
-                    <img src={img1} className="w-full" alt="" />
-                    <p className="absolute bottom-6 md:bottom-10 right-[32%] md:right-[45%] text-xl font-semibold">
-                      Match-{i + 1}
-                    </p>
-                  </div>
-                </Link>
+
+                {
+                  getPodcastDetails?.data?.user?.subscription?.fee === 'Free' ?
+
+                    <div className="cursor-pointer hover:shadow-2xl rounded-br-3xl relative">
+                      <img src={img1} className="w-full" alt="" />
+                      <p className="absolute bottom-6 md:bottom-10 right-[32%] md:right-[45%] text-xl font-semibold">
+                        Match-{i + 1}
+                      </p>
+                    </div>
+                    :
+                    <Link to={`/podcast-details/${participant?._id}`}>
+                      <div className="cursor-pointer hover:shadow-2xl rounded-br-3xl relative">
+                        <img src={img1} className="w-full" alt="" />
+                        <p className="absolute bottom-6 md:bottom-10 right-[32%] md:right-[45%] text-xl font-semibold">
+                          Match-{i + 1}
+                        </p>
+                      </div>
+                    </Link>
+                }
+
                 {
                   isChatAvailable ?
                     <button
@@ -283,9 +296,9 @@ const HomePage = () => {
         {/* me match of others */}
         {
           <>
-            <h1 className="text-center font-bold text-2xl md:text-4xl my-14">
+            {/* <h1 className="text-center font-bold text-2xl md:text-4xl my-14">
               You&apos;re Matched With Someone
-            </h1>
+            </h1> */}
 
             <Carousel arrows infinite={false}>
               {
