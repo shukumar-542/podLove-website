@@ -26,8 +26,7 @@ const Pricing = ({ subscriptions }) => {
         .unwrap()
         .then((payload) => {
           if (payload?.data) {
-            console.log(payload);
-            // window.open(payload?.data)
+            console.log(payload); 
             const newWindow = window.open('', '_blank');
             newWindow.location.href = payload.data;
           }
@@ -76,8 +75,9 @@ const Pricing = ({ subscriptions }) => {
                 : `$${plan.unitAmount} / ${plan?.interval}`}
             </h1>
             <div className="text-center">
-              {plan?.unitAmount == "0" ? (
-                // {subscriptions?.user?.subscription?.fee === plan?.unitAmount ? (
+               {"0" == "0" ? (
+              // {plan?.unitAmount == "0" ? ( 
+                        
                 <Link to={"/connection-progress"}>
                   <button className=" bg-gradient-to-r from-[#F36E2F] to-[#FEB491]  shadow-white shadow-inner rounded-full w-full mt-5 py-2 max-w-xs  mb-5 cursor-pointer">
                     Free Plan

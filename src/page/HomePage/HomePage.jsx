@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router";
 import Pricing from "../../component/Pricing/Pricing";
 import {
   useGetPodCastDetailsQuery,
+  useGetUserQuery,
   // usePodcastCreateMutation,
 } from "../../redux/Api/AuthApi";
 import { toast } from "sonner";
@@ -21,6 +22,8 @@ import After7DaysSurveyModal from "../../component/Modals/After7DaysSurvey";
 const HomePage = () => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const { data: getUser } = useGetUserQuery()
 
   const handleOk = () => {
     setIsModalOpen(false);
@@ -50,7 +53,7 @@ const HomePage = () => {
   // const [createPodCast] = usePodcastCreateMutation();
   const [sendPodcastRequest, { isLoading: requestPodcastLoading }] = useSendPodcastRequestMutation();
   const { data: getPodcastDetails, isLoading } = useGetPodCastDetailsQuery();
-  console.log('home page', getPodcastDetails);
+  console.log('home page getPodcastDetails', getPodcastDetails);
   const { data: getAllPlans } = useGetAllPlanQuery();
   const [createPodcast] = useCreatePodcastMutation();
 
@@ -74,7 +77,6 @@ const HomePage = () => {
 
   const status = podcast?.status;
 
-  // const roomCodeHost = podcast?.roomCodes?.find(code => code?.role === "broadcaster");
   const roomCodeHost = podcast?.roomCodes?.find(code => code?.role === "viewer-realtime");
 
   const handleVideoCall = () => {
@@ -94,12 +96,13 @@ const HomePage = () => {
         })
     }
     if (status === "Playing" || status === "Done") {
-      // navigate(`/room/podcast?roomId=${podcast._id}&hostId=${getPodcastDetails?.data?.podcast?.primaryUser?._id}`);
       navigate(`/ms/?roomCode=${roomCodeHost?.code}`);
     }
   };
 
-
+  // ================================================================
+  // Handle video call for matched user
+  // ================================================================
   const handleVideoCallForUser = (roomCodes) => {
     console.log(roomCodes);
     const code = roomCodes?.find(code => code?.role === "viewer-realtime");
@@ -109,13 +112,9 @@ const HomePage = () => {
     }
   };
 
-  // const handleCreatePodcast = () => {
-  //   createPodCast()
-  //     .unwrap()
-  //     .then((payload) => toast.success(payload?.message))
-  //     .catch((error) => toast.error(error?.data?.message));
-  // };
-
+  //  ========================================================================================
+  // Handle request podcast function
+  //  ========================================================================================
   const handleRequestPodcast = () => {
     const data = {
       status: "ReqScheduled",
@@ -163,6 +162,17 @@ const HomePage = () => {
     getPodcastDetails?.data?.user?.chatingtime &&
     new Date() >= new Date(getPodcastDetails.data.user.chatingtime);
 
+
+    const userId =  getUser?.data?._id;
+
+    console.log('status', status);
+    console.log('podcast', podcast);
+    console.log('getPodcastDetails?.data', getPodcastDetails?.data);
+
+    const isRequested = podcast?.participants?.some(participant => participant?.isRequest && participant?._id === userId);
+
+    console.log('isRequested', isRequested);
+ 
   return (
     <div className="bg-[#F7E8E1]">
       <div className="container mx-auto py-14">
@@ -248,9 +258,14 @@ const HomePage = () => {
             ))}
           </div>
         )}
-        <h1 className="text-center font-bold text-2xl md:text-4xl my-14">
-          My Podcast Schedule
-        </h1>
+
+
+        {
+          podcast?.primaryUser?._id  && (
+         <> 
+          <h1 className="text-center font-bold text-2xl md:text-4xl my-14">
+           My Podcast Schedule
+         </h1>
         {/* Video + Join / Request Button Section */}
         <section className="md:mb-20 relative">
           <video
@@ -272,9 +287,22 @@ const HomePage = () => {
                 onClick={handleRequestPodcast}
                 disabled={requestPodcastLoading}
                 className="w-full mt-2 py-2 rounded-md bg-[#FFA175] text-white hover:bg-[#e68b5a] transition duration-300"
-              >
-                {getButtonLabel()} {requestPodcastLoading && <Spin></Spin>}
+              > 
+                {getButtonLabel()}  {requestPodcastLoading && <Spin></Spin>}
               </button>
+            ): status === "ReqScheduled" && isRequested !== true? ( 
+               <button
+                  disabled={isRequested === true}
+                  onClick={handleRequestPodcast}
+                  className={`w-full mt-2 py-2 rounded-md transition duration-300 
+                  ${!isRequested
+                      ? "bg-[#F68064] text-white hover:bg-[#e76a4f]"
+                      : "bg-gray-200 text-gray-500 cursor-not-allowed"
+                    }`}
+                >
+                  Request a Podcast
+                </button>
+              
             ) : (
               <div>
                 <h2 className=" text-white">{getPodcastDetails?.data?.podcast?.schedule?.date} {getPodcastDetails?.data?.podcast?.schedule?.day} {getPodcastDetails?.data?.podcast?.schedule?.time}</h2>
@@ -292,73 +320,122 @@ const HomePage = () => {
               </div>
             )}
           </div>
-        </section>
-        {/* me match of others */}
-        {
-          <>
-            {
-              getPodcastDetails?.data?.hostPodcastMatches?.length &&
-              <h1 className="text-center font-bold text-2xl md:text-4xl my-14">
-                You&apos;re Matched With Someone
-              </h1>
-            }
-
-
-            <Carousel arrows infinite={false}>
-              {
-                getPodcastDetails?.data?.hostPodcastMatches?.map((match) => (
-                  <section key={match?._id} className=" relative">
-                    <video
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      className="md:h-[500px] mx-auto rounded-md"
-                    >
-                      <source src={video} type="video/mp4" />
-                    </video>
-                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
-                      <img src={mic} alt="Microphone" className=" w-10 md:w-24 h-10 md:h-24 mx-auto" />
-                      <h1 className="md:text-4xl font-poppins text-white">Date & Time:</h1>
-                      {match?.status === "Playing" || match?.status === "Done" ? (
-                        <div>
-                          <h2 className="text-white text-center">
-                            {match?.schedule?.date} {match?.schedule?.day} {match?.schedule?.time}
-                          </h2>
-                          <button
-                            // disabled={match?.status !== "Playing"}
-                            onClick={match?.status === "Playing" || match?.status === "Done" ? () => handleVideoCallForUser(match?.roomCodes) : undefined}
-                            className={`w-full mt-2 py-2 rounded-md transition duration-300 
-                           ${match?.status === "Playing" || match?.status === "Done"
-                                ? "bg-[#F68064] text-white hover:bg-[#e76a4f]"
-                                : "bg-gray-200 text-gray-500 cursor-not-allowed"
-                              }`}
-                          >
-                            {match?.status === "Playing" || match?.status === "Done" ? "Join Now" : "Join Now Not Available"}
-                          </button>
-                        </div>
-                      ) : (
-                        <div>
-                          <h2 className="text-white text-center">
-                            {match?.schedule?.date} {match?.schedule?.day} {match?.schedule?.time}
-                          </h2>
-                          <button
-                            className={`w-full mt-2 py-2 rounded-md transition duration-300 
-                           ${"bg-gray-200 text-gray-500 cursor-not-allowed"}`}
-                          >
-                            {"Join Now Not Available"}
-                          </button>
-                        </div>
-                      )}
-
-                    </div>
-                  </section>
-                ))
-              }
-            </Carousel>
-
-          </>
+        </section> 
+            </> 
+          )
         }
+
+        {
+          podcast?.participants?.length === 0 && getPodcastDetails?.data?.podcast?.participants.length === 0 (
+          <section className="md:mb-20 relative">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="md:h-[500px] mx-auto rounded-md"
+          >
+            <source src={video} type="video/mp4" />
+          </video>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
+            <img src={mic} alt="Microphone" className=" w-10 md:w-24 h-10 md:h-24 mx-auto" />  
+              <div>
+                <h2 className=" text-white">{getPodcastDetails?.data?.podcast?.schedule?.date} {getPodcastDetails?.data?.podcast?.schedule?.day} {getPodcastDetails?.data?.podcast?.schedule?.time}</h2>
+                  <h5 className="text-gray-200 text-sm md:text-lg ">
+                      It doesn’t seem like a perfect match yet for your friend.
+                  </h5>
+              </div> 
+          </div>
+        </section>
+          )
+        }
+      
+
+
+    <>
+  {getPodcastDetails?.data?.podcast?.participants?.length > 0  && !podcast?.primaryUser?._id && (
+    <h1 className="text-center font-bold text-2xl md:text-4xl my-14">
+      You're Matched With Someone
+    </h1>
+  )}
+  {getPodcastDetails?.data?.podcast?.participants?.length > 0  && !podcast?.primaryUser?._id && (
+  <Carousel arrows infinite={false}>
+    {getPodcastDetails?.data?.podcast?.participants
+  ?.filter((participant) => participant?._id === userId)  
+  .map((match) => (
+    <section key={match?._id} className="relative">
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="md:h-[500px] mx-auto rounded-md"
+      >
+        <source src={video} type="video/mp4" />
+      </video>
+
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
+        <img
+          src={mic}
+          alt="Microphone"
+          className="w-10 md:w-24 h-10 md:h-24 mx-auto"
+        />
+        <h1 className="md:text-4xl font-poppins text-white">Date & Time:</h1>
+
+        {podcast?.status === "Playing" || podcast?.status === "Done" ? (
+          <div>
+            <h2 className="text-white text-center">
+              {podcast?.schedule?.date} {podcast?.schedule?.day} {podcast?.schedule?.time}
+            </h2>
+            <button
+              onClick={() =>
+                podcast?.status === "Playing" || podcast?.status === "Done"
+                  ? handleVideoCallForUser(podcast?.roomCodes)
+                  : undefined
+              }
+              className={`w-full mt-2 py-2 rounded-md transition duration-300 ${
+                podcast?.status === "Playing" || podcast?.status === "Done"
+                  ? "bg-[#F68064] text-white hover:bg-[#e76a4f]"
+                  : "bg-gray-200 text-gray-500 cursor-not-allowed"
+              }`}
+            >
+              {podcast?.status === "Playing" || podcast?.status === "Done"
+                ? "Join Now"
+                : "Not Available"}
+            </button>
+          </div>
+        ) : podcast?.status === "NotScheduled" || podcast?.status === "ReqScheduled" ? (
+          <button
+            onClick={handleRequestPodcast}
+            disabled={match?.isRequest}
+            className="w-full mt-2 py-2 rounded-md bg-[#FFA175] text-white hover:bg-[#e68b5a] transition duration-300"
+          >
+
+             {match?.isRequest ? (
+     "Please Waiting for Schedule"
+  ) : (
+    <>
+      {getButtonLabel()} {requestPodcastLoading && <Spin />}
+    </>
+  )}
+            
+          </button>
+        ) : (
+          <div>
+            <h2 className="text-white text-center"></h2>
+            <button className="w-full mt-2 py-2 rounded-md transition duration-300 bg-gray-200 text-gray-500 cursor-not-allowed">
+              Not Available
+            </button>
+          </div>
+        )}
+      </div>
+    </section>
+))}
+
+  </Carousel>
+)}
+</>
+
         {/* Subscription Plans */}
         <h1 className="text-center font-bold text-2xl md:text-4xl mt-16">
           Subscription Plan

@@ -3,8 +3,8 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 const baseQuery = fetchBaseQuery({
 
     // baseUrl: 'http://13.51.233.34:8000', // Live
-    baseUrl: 'https://backend.podlove.co',
-    // baseUrl: 'http://10.10.20.11:8000',
+    // baseUrl: 'https://backend.podlove.co',
+    baseUrl: 'http://10.10.20.11:8000',
     prepareHeaders: (headers) => {
         const token = localStorage.getItem('podlove-token');
         if (token) {
@@ -21,8 +21,6 @@ export const baseApi = createApi({
 
 });
 
-
-// export const imageUrl = 'http://13.51.233.34:8000' // Live
-export const imageUrl = 'https://backend.podlove.co'
-// export const imageUrl = 'http://10.10.20.11:8000'
-// export const imageUrl = 'https://api.podlove.co'
+ 
+// export const imageUrl = 'https://backend.podlove.co'
+export const imageUrl = 'http://10.10.20.11:8000' 
