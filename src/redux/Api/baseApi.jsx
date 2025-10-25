@@ -22,5 +22,5 @@ export const baseApi = createApi({
 });
 
  
-// export const imageUrl = 'https://backend.podlove.co'
-export const imageUrl = 'http://10.10.20.11:8000' 
+export const imageUrl = 'https://backend.podlove.co'
+// export const imageUrl = 'http://10.10.20.11:8000' 
