@@ -184,62 +184,60 @@ const HomePage = () => {
             ))}
           </div>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-2 xl:grid-cols-4 gap-10 px-4 md:px-0">
-            {podcast?.participants?.map((participant, i) => (
-              <div key={participant?._id}>
-                {
-                  getPodcastDetails?.data?.user?.subscription?.fee === 'Free' ?
-                    <div className="cursor-pointer hover:shadow-2xl rounded-br-3xl relative">
-                      <img src={img1} className="w-full" alt="" />
-                      <p className="absolute bottom-6 md:bottom-10 right-[32%] md:right-[45%] text-xl font-semibold">
-                        Match-{i + 1}
-                      </p>
-                    </div>
-                    :
-                    <Link to={`/podcast-details/${participant?._id}`}>
-                      <div className="cursor-pointer hover:shadow-2xl rounded-br-3xl relative">
-                        <img src={img1} className="w-full" alt="" />
-                        <p className="absolute bottom-6 md:bottom-10 right-[32%] md:right-[45%] text-xl font-semibold">
-                          Match-{i + 1}
-                        </p>
-                      </div>
-                    </Link>
-                }
-
-                {
-                  isChatAvailable ?
-                    <button
-                      disabled={true}
-                      className={`mt-5 w-full text-white rounded-tl-lg rounded-br-lg py-2 text-xl bg-gray-400`}
-                    >
-                      Chat
-                    </button>
-                    :
-                    <div>
-                      {podcast?.selectedUser && (
-                        <Link to={`/chat/${participant?._id}`}>
-                          <button
-                            disabled={
-                              !podcast?.selectedUser.some(
-                                (sel) => sel?.user === participant?._id
-                              )
-                            }
-                            className={`mt-5 w-full text-white rounded-tl-lg rounded-br-lg py-2 text-xl 
-                            ${podcast?.selectedUser.some((sel) => sel?.user === participant?._id)
-                                ? "bg-[#FFA175]"
-                                : "bg-gray-400"
-                              }`}
-                          >
-                            Chat
-                          </button>
-                        </Link>
-                      )}
-                    </div>
-                }
-
-              </div>
-            ))}
+      <div className="grid grid-cols-2 md:grid-cols-2 xl:grid-cols-4 gap-10 px-4 md:px-0">
+  {podcast?.participants
+    ?.filter((participant) => participant?._id !== userId) // <-- exclude current user
+    .map((participant, i) => (
+      <div key={participant?._id}>
+        {getPodcastDetails?.data?.user?.subscription?.fee === "Free" ? (
+          <div className="cursor-pointer hover:shadow-2xl rounded-br-3xl relative">
+            <img src={img1} className="w-full" alt="" />
+            <p className="absolute bottom-6 md:bottom-10 right-[32%] md:right-[45%] text-xl font-semibold">
+              Match-{i + 1}
+            </p>
           </div>
+        ) : (
+          <Link to={`/podcast-details/${participant?._id}`}>
+            <div className="cursor-pointer hover:shadow-2xl rounded-br-3xl relative">
+              <img src={img1} className="w-full" alt="" />
+              <p className="absolute bottom-6 md:bottom-10 right-[32%] md:right-[45%] text-xl font-semibold">
+                Match-{i + 1}
+              </p>
+            </div>
+          </Link>
+        )}
+
+        {isChatAvailable ? (
+          <button
+            disabled={true}
+            className="mt-5 w-full text-white rounded-tl-lg rounded-br-lg py-2 text-xl bg-gray-400"
+          >
+            Chat
+          </button>
+        ) : (
+          <div>
+            {podcast?.selectedUser && (
+              <Link to={`/chat/${participant?._id}`}>
+                <button
+                  disabled={
+                    !podcast?.selectedUser.some((sel) => sel?.user === participant?._id)
+                  }
+                  className={`mt-5 w-full text-white rounded-tl-lg rounded-br-lg py-2 text-xl ${
+                    podcast?.selectedUser.some((sel) => sel?.user === participant?._id)
+                      ? "bg-[#FFA175]"
+                      : "bg-gray-400"
+                  }`}
+                >
+                  Chat
+                </button>
+              </Link>
+            )}
+          </div>
+        )}
+      </div>
+    ))}
+</div>
+
         )}
 
         {podcast?.primaryUser?._id && (
