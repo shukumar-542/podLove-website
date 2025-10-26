@@ -306,28 +306,42 @@ const HomePage = () => {
 
         {
           !podcast?.primaryUser?._id && !getPodcastDetails?.data?.podcast?.participants?.length && (
-            <section className="md:mb-20 relative">
-              <video
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="md:h-[500px] mx-auto rounded-md"
-              >
-                <source src={video} type="video/mp4" />
-              </video>
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
-                <img src={mic} alt="Microphone" className=" w-10 md:w-24 h-10 md:h-24 mx-auto" />
-                <div>
-                  <h2 className=" text-white">{getPodcastDetails?.data?.podcast?.schedule?.date} {getPodcastDetails?.data?.podcast?.schedule?.day} {getPodcastDetails?.data?.podcast?.schedule?.time}</h2>
-                 <h6 className="text-gray-200 text-sm md:text-base lg:text-lg leading-relaxed text-center max-w-xl mx-auto mt-4 px-4 py-3 rounded-lg bg-white/10 backdrop-blur-md shadow-lg">
-  We’re curating your next <span className="font-semibold text-white">real connection</span> with care. Every match is chosen intentionally to feel meaningful, not random. It takes a little time to do this right. Thank you for your patience.
-</h6>
+           <section className="relative md:mb-20 flex items-center justify-center">
+  <video
+    autoPlay
+    loop
+    muted
+    playsInline
+    className="w-full h-[250px] sm:h-[350px] md:h-[500px] object-cover rounded-md"
+  >
+    <source src={video} type="video/mp4" />
+  </video>
 
+  <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 sm:px-6 md:px-10 z-10">
+    <img
+      src={mic}
+      alt="Microphone"
+      className="w-12 h-12 sm:w-16 sm:h-16 md:w-24 md:h-24 mb-4"
+    />
 
-                </div>
-              </div>
-            </section>
+    <div className="space-y-3 sm:space-y-4 max-w-2xl">
+      <h2 className="text-white text-base sm:text-lg md:text-2xl font-semibold">
+        {getPodcastDetails?.data?.podcast?.schedule?.date}{' '}
+        {getPodcastDetails?.data?.podcast?.schedule?.day}{' '}
+        {getPodcastDetails?.data?.podcast?.schedule?.time}
+      </h2>
+
+      <h6 className="text-gray-100 text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed text-center mx-auto rounded-xl bg-white/10 backdrop-blur-md shadow-xl px-4 sm:px-6 py-3 sm:py-4 border border-white/20">
+        We’re curating your next{' '}
+        <span className="font-semibold text-white">real connection</span> with
+        care. Every match is chosen intentionally to feel meaningful, not
+        random. It takes a little time to do this right. Thank you for your
+        patience.
+      </h6>
+    </div>
+  </div>
+</section>
+
           )
         }
         <>
