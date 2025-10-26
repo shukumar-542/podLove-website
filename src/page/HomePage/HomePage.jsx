@@ -248,7 +248,7 @@ const HomePage = () => {
               My Podcast Schedule
             </h1>
             {/* Video + Join / Request Button Section */}
-            <section className="md:mb-20 relative">
+            <section className="md:mb-20 relative ">
               <video
                 autoPlay
                 loop
