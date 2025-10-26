@@ -305,7 +305,7 @@ const HomePage = () => {
         }
 
         {
-          !podcast?.primaryUser?._id  && getPodcastDetails?.data?.podcast?.participants?.length === 0 &&(
+          !podcast?.primaryUser?._id  && !getPodcastDetails?.data?.podcast?.participants?.length  &&(
             <section className="md:mb-20 relative">
               <video
                 autoPlay
