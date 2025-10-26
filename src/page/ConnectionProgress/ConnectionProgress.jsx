@@ -7,7 +7,7 @@ import { toast } from "sonner";
 
 const ConnectionProgress = () => {
   const [percent, setPercent] = useState(1);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState(null);
   const [connectBegins] = useConnectBeginsMutation();
   const userId = localStorage.getItem("userId");
   const navigate = useNavigate();
