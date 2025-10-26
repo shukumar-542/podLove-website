@@ -290,8 +290,8 @@ const HomePage = () => {
                       disabled={!isJoinEnabled}
                       onClick={isJoinEnabled ? handleVideoCall : undefined}
                       className={`w-full mt-2 py-2 rounded-md transition duration-300 ${isJoinEnabled
-                          ? "bg-[#F68064] text-white hover:bg-[#e76a4f]"
-                          : "bg-gray-200 text-gray-500 cursor-not-allowed"
+                        ? "bg-[#F68064] text-white hover:bg-[#e76a4f]"
+                        : "bg-gray-200 text-gray-500 cursor-not-allowed"
                         }`}
                     >
                       {getButtonLabel()}
@@ -305,7 +305,7 @@ const HomePage = () => {
         }
 
         {
-          !podcast?.primaryUser?._id  && !getPodcastDetails?.data?.podcast?.participants?.length  &&(
+          !podcast?.primaryUser?._id && !getPodcastDetails?.data?.podcast?.participants?.length && (
             <section className="md:mb-20 relative">
               <video
                 autoPlay
@@ -320,9 +320,10 @@ const HomePage = () => {
                 <img src={mic} alt="Microphone" className=" w-10 md:w-24 h-10 md:h-24 mx-auto" />
                 <div>
                   <h2 className=" text-white">{getPodcastDetails?.data?.podcast?.schedule?.date} {getPodcastDetails?.data?.podcast?.schedule?.day} {getPodcastDetails?.data?.podcast?.schedule?.time}</h2>
-                  <h6 className="text-gray-200 font-bold">
-                    We’re curating your next real connection with care. Every match is chosen intentionally to feel meaningful, not random. It takes a little time to do this right. Thank you for your patience.
+                  <h6 className="text-gray-200 text-sm md:text-base lg:text-lg leading-relaxed text-center max-w-xl mx-auto mt-4">
+                    We’re curating your next <span className="font-semibold text-white">real connection</span> with care. Every match is chosen intentionally to feel meaningful, not random. It takes a little time to do this right. Thank you for your patience.
                   </h6>
+
                 </div>
               </div>
             </section>
