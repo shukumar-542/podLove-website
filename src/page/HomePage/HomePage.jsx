@@ -320,9 +320,9 @@ const HomePage = () => {
                 <img src={mic} alt="Microphone" className=" w-10 md:w-24 h-10 md:h-24 mx-auto" />
                 <div>
                   <h2 className=" text-white">{getPodcastDetails?.data?.podcast?.schedule?.date} {getPodcastDetails?.data?.podcast?.schedule?.day} {getPodcastDetails?.data?.podcast?.schedule?.time}</h2>
-                  <h5 className="text-gray-200 text-sm md:text-lg ">
+                  <h6 className="text-gray-200 text-sm md:text-lg font-bold">
                     We’re curating your next real connection with care. Every match is chosen intentionally to feel meaningful, not random. It takes a little time to do this right. Thank you for your patience.
-                  </h5>
+                  </h6>
                 </div>
               </div>
             </section>
