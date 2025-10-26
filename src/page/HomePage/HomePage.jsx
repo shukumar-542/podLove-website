@@ -305,7 +305,7 @@ const HomePage = () => {
         }
 
         {
-          podcast?.participants?.length === 0 && getPodcastDetails?.data?.podcast?.participants.length === 0(
+          !podcast?.primaryUser?._id  && getPodcastDetails?.data?.podcast?.participants.length === 0(
             <section className="md:mb-20 relative">
               <video
                 autoPlay
@@ -321,7 +321,7 @@ const HomePage = () => {
                 <div>
                   <h2 className=" text-white">{getPodcastDetails?.data?.podcast?.schedule?.date} {getPodcastDetails?.data?.podcast?.schedule?.day} {getPodcastDetails?.data?.podcast?.schedule?.time}</h2>
                   <h5 className="text-gray-200 text-sm md:text-lg ">
-                    It doesn’t seem like a perfect match yet for your friend.
+                    We’re curating your next real connection with care. Every match is chosen intentionally to feel meaningful, not random. It takes a little time to do this right. Thank you for your patience.
                   </h5>
                 </div>
               </div>
