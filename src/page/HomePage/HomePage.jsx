@@ -52,8 +52,7 @@ const HomePage = () => {
   // const [userSelectedRoomCode, setUserSelectedRoomCode] = useState();
   // const [createPodCast] = usePodcastCreateMutation();
   const [sendPodcastRequest, { isLoading: requestPodcastLoading }] = useSendPodcastRequestMutation();
-  const { data: getPodcastDetails, isLoading } = useGetPodCastDetailsQuery();
-  console.log('home page getPodcastDetails', getPodcastDetails);
+  const { data: getPodcastDetails, isLoading } = useGetPodCastDetailsQuery(); 
   const { data: getAllPlans } = useGetAllPlanQuery();
   const [createPodcast] = useCreatePodcastMutation();
 
@@ -104,9 +103,9 @@ const HomePage = () => {
   // Handle video call for matched user
   // ================================================================
   const handleVideoCallForUser = (roomCodes) => {
-    console.log(roomCodes);
+    // console.log(roomCodes);
     const code = roomCodes?.find(code => code?.role === "viewer-realtime");
-    console.log(code);
+    // console.log(code);
     if (code) {
       navigate(`/ms/?roomCode=${code?.code}`);
     }
@@ -184,59 +183,58 @@ const HomePage = () => {
             ))}
           </div>
         ) : (
-      <div className="grid grid-cols-2 md:grid-cols-2 xl:grid-cols-4 gap-10 px-4 md:px-0">
-  {podcast?.participants
-    ?.filter((participant) => participant?._id !== userId) // <-- exclude current user
-    .map((participant, i) => (
-      <div key={participant?._id}>
-        {getPodcastDetails?.data?.user?.subscription?.fee === "Free" ? (
-          <div className="cursor-pointer hover:shadow-2xl rounded-br-3xl relative">
-            <img src={img1} className="w-full" alt="" />
-            <p className="absolute bottom-6 md:bottom-10 right-[32%] md:right-[45%] text-xl font-semibold">
-              Match-{i + 1}
-            </p>
-          </div>
-        ) : (
-          <Link to={`/podcast-details/${participant?._id}`}>
-            <div className="cursor-pointer hover:shadow-2xl rounded-br-3xl relative">
-              <img src={img1} className="w-full" alt="" />
-              <p className="absolute bottom-6 md:bottom-10 right-[32%] md:right-[45%] text-xl font-semibold">
-                Match-{i + 1}
-              </p>
-            </div>
-          </Link>
-        )}
+          <div className="grid grid-cols-2 md:grid-cols-2 xl:grid-cols-4 gap-10 px-4 md:px-0">
+            {podcast?.participants
+              ?.filter((participant) => participant?._id !== userId) // <-- exclude current user
+              .map((participant, i) => (
+                <div key={participant?._id}>
+                  {getPodcastDetails?.data?.user?.subscription?.fee === "Free" ? (
+                    <div className="cursor-pointer hover:shadow-2xl rounded-br-3xl relative">
+                      <img src={img1} className="w-full" alt="" />
+                      <p className="absolute bottom-6 md:bottom-10 right-[32%] md:right-[45%] text-xl font-semibold">
+                        Match-{i + 1}
+                      </p>
+                    </div>
+                  ) : (
+                    <Link to={`/podcast-details/${participant?._id}`}>
+                      <div className="cursor-pointer hover:shadow-2xl rounded-br-3xl relative">
+                        <img src={img1} className="w-full" alt="" />
+                        <p className="absolute bottom-6 md:bottom-10 right-[32%] md:right-[45%] text-xl font-semibold">
+                          Match-{i + 1}
+                        </p>
+                      </div>
+                    </Link>
+                  )}
 
-        {isChatAvailable ? (
-          <button
-            disabled={true}
-            className="mt-5 w-full text-white rounded-tl-lg rounded-br-lg py-2 text-xl bg-gray-400"
-          >
-            Chat
-          </button>
-        ) : (
-          <div>
-            {podcast?.selectedUser && (
-              <Link to={`/chat/${participant?._id}`}>
-                <button
-                  disabled={
-                    !podcast?.selectedUser.some((sel) => sel?.user === participant?._id)
-                  }
-                  className={`mt-5 w-full text-white rounded-tl-lg rounded-br-lg py-2 text-xl ${
-                    podcast?.selectedUser.some((sel) => sel?.user === participant?._id)
-                      ? "bg-[#FFA175]"
-                      : "bg-gray-400"
-                  }`}
-                >
-                  Chat
-                </button>
-              </Link>
-            )}
+                  {isChatAvailable ? (
+                    <button
+                      disabled={true}
+                      className="mt-5 w-full text-white rounded-tl-lg rounded-br-lg py-2 text-xl bg-gray-400"
+                    >
+                      Chat
+                    </button>
+                  ) : (
+                    <div>
+                      {podcast?.selectedUser && (
+                        <Link to={`/chat/${participant?._id}`}>
+                          <button
+                            disabled={
+                              !podcast?.selectedUser.some((sel) => sel?.user === participant?._id)
+                            }
+                            className={`mt-5 w-full text-white rounded-tl-lg rounded-br-lg py-2 text-xl ${podcast?.selectedUser.some((sel) => sel?.user === participant?._id)
+                                ? "bg-[#FFA175]"
+                                : "bg-gray-400"
+                              }`}
+                          >
+                            Chat
+                          </button>
+                        </Link>
+                      )}
+                    </div>
+                  )}
+                </div>
+              ))}
           </div>
-        )}
-      </div>
-    ))}
-</div>
 
         )}
 
@@ -304,41 +302,41 @@ const HomePage = () => {
 
         {
           !podcast?.primaryUser?._id && !getPodcastDetails?.data?.podcast?.participants?.length && (
-           <section className="relative md:mb-20 flex items-center justify-center">
-  <video
-    autoPlay
-    loop
-    muted
-    playsInline
-    className="w-full h-[250px] sm:h-[350px] md:h-[500px] object-cover rounded-md"
-  >
-    <source src={video} type="video/mp4" />
-  </video>
+            <section className="relative md:mb-20 flex items-center justify-center">
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-[250px] sm:h-[350px] md:h-[500px] object-cover rounded-md"
+              >
+                <source src={video} type="video/mp4" />
+              </video>
 
-  <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 sm:px-6 md:px-10 z-10">
-    <img
-      src={mic}
-      alt="Microphone"
-      className="w-12 h-12 sm:w-16 sm:h-16 md:w-24 md:h-24 mb-4"
-    />
+              <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 sm:px-6 md:px-10 z-10">
+                <img
+                  src={mic}
+                  alt="Microphone"
+                  className="w-12 h-12 sm:w-16 sm:h-16 md:w-24 md:h-24 mb-4"
+                />
 
-    <div className="space-y-3 sm:space-y-4 max-w-2xl">
-      <h2 className="text-white text-base sm:text-lg md:text-2xl font-semibold">
-        {getPodcastDetails?.data?.podcast?.schedule?.date}{' '}
-        {getPodcastDetails?.data?.podcast?.schedule?.day}{' '}
-        {getPodcastDetails?.data?.podcast?.schedule?.time}
-      </h2>
+                <div className="space-y-3 sm:space-y-4 max-w-2xl">
+                  <h2 className="text-white text-base sm:text-lg md:text-2xl font-semibold">
+                    {getPodcastDetails?.data?.podcast?.schedule?.date}{' '}
+                    {getPodcastDetails?.data?.podcast?.schedule?.day}{' '}
+                    {getPodcastDetails?.data?.podcast?.schedule?.time}
+                  </h2>
 
-      <h6 className="text-gray-100 text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed text-center mx-auto rounded-xl bg-white/10 backdrop-blur-md shadow-xl px-4 sm:px-6 py-3 sm:py-4 border border-white/20">
-        We’re curating your next{' '}
-        <span className="font-semibold text-white">real connection</span> with
-        care. Every match is chosen intentionally to feel meaningful, not
-        random. It takes a little time to do this right. Thank you for your
-        patience.
-      </h6>
-    </div>
-  </div>
-</section>
+                  <h6 className="text-gray-100 text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed text-center mx-auto rounded-xl bg-white/10 backdrop-blur-md shadow-xl px-4 sm:px-6 py-3 sm:py-4 border border-white/20">
+                    We’re curating your next{' '}
+                    <span className="font-semibold text-white">real connection</span> with
+                    care. Every match is chosen intentionally to feel meaningful, not
+                    random. It takes a little time to do this right. Thank you for your
+                    patience.
+                  </h6>
+                </div>
+              </div>
+            </section>
 
           )
         }

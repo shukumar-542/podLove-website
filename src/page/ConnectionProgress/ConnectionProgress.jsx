@@ -33,11 +33,11 @@ const ConnectionProgress = () => {
         .unwrap()
         .then((payload) => {
           toast.success(payload?.message);
-          console.log("Connection started:", payload);
-          
-          //  navigate("/congratulation");
-
-          // navigate('/match-result');
+          if (payload?.success) {
+            navigate("/congratulation");
+          } else {
+            navigate('/match-result');
+          }  
         })
         .catch((error) => {
           const msg = error?.data?.message || "Something went wrong.";
