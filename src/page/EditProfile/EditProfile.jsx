@@ -12,8 +12,8 @@ import { toast } from "sonner";
 import LocationSearch from "../../component/LocationSearch/LocationSearch";
 import { useNavigate } from "react-router";
 const { Option } = Select;
-const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/dvjbfwhxe/image/upload";
-const UPLOAD_PRESET = "podlove_upload";
+// const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/dvjbfwhxe/image/upload";
+// const UPLOAD_PRESET = "podlove_upload";
 
 const EditProfile = () => {
   const [loading, setLoading] = useState(false);
@@ -51,70 +51,37 @@ const EditProfile = () => {
     }
   };
 
-  const beforeUpload = (file) => {
-    const isImage = file.type.startsWith("image/");
-    if (!isImage) {
-      message.error("You can only upload image files!");
-    }
-    return isImage;
-  };
-
   // ======= handle update profile information ===========//
-
   const handleUpdateProfile = async (values) => {
     setLoading(true);
-    const formData = new FormData();
-    formData.append("avatar", file);
-    formData.append("upload_preset", UPLOAD_PRESET);
+
     try {
-      const response = await fetch(CLOUDINARY_URL, {
-        method: "POST",
-        body: formData,
-      });
-      const data = await response.json();
-      const uploadedImageUrl = data.secure_url;
-      setImageUrl(uploadedImageUrl);
-      toast.success("Profile Update successfully!");
+      const formData = new FormData();
 
-      const updateData = {
-        name: values?.name,
-        phoneNumber: values?.contact,
-        gender: values?.gender,
-        bio: values?.bio,
-        ...(selectedLocation && {
-          location: {
-            place: selectedLocation?.address,
-            longitude: selectedLocation?.lng,
-            latitude: selectedLocation?.lat,
-          },
-        }),
-        ...(uploadedImageUrl && { avatar: uploadedImageUrl }),
-      };
+      formData.append("name", values.name);
+      formData.append("phoneNumber", values.contact);
+      formData.append("gender", values.gender);
+      formData.append("bio", values.bio);
 
-      const result = await editProfile(updateData);
+      if (selectedLocation) {
+        formData.append("place", selectedLocation.address);
+        formData.append("longitude", selectedLocation.lng);
+        formData.append("latitude", selectedLocation.lat);
+      }
+
+      if (file) {
+        formData.append("avatar", file);
+      }
+
+      await editProfile(formData).unwrap();
+
+      toast.success("Profile updated successfully!");
       navigate("/profile");
-    } catch (error) {
-      message.error("Failed to upload image.");
+    } catch (err) {
+      message.error("Profile update failed");
     } finally {
       setLoading(false);
     }
-  };
-
-  const handleUploadImage = () => {
-    if (!file) {
-      message.error("Please select an image first.");
-      return;
-    }
-    const formData = new FormData();
-    formData.append("avatar", file);
-    editProfile(formData)
-      .then(() => {
-        toast.success("Image uploaded successfully!");
-        navigate("/profile");
-      })
-      .catch(() => {
-        message.error("Failed to upload image.");
-      });
   };
 
   return (
@@ -138,17 +105,6 @@ const EditProfile = () => {
               icon={<CameraOutlined />}
             />
           </Upload>
-          {file && (
-            <div className=" flex justify-center items-center">
-              <button
-                onClick={handleUploadImage}
-                disabled={isLoading}
-                className=" text-center bg-[#ffa175] text-white px-3 py-1 rounded-lg mt-3"
-              >
-                {isLoading ? "Loading..." : "upload"}
-              </button>
-            </div>
-          )}
         </div>
         <Form form={form} layout="vertical" onFinish={handleUpdateProfile}>
           <div className="md:flex  gap-5 w-full ">
