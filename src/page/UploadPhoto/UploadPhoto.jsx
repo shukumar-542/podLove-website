@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { useState } from "react";
 import bg from "../../assets/upload-bg.png";
 import AuthButton from "../../component/AuthButton/AuthButton";

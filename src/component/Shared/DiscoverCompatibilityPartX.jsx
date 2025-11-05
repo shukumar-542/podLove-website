@@ -31,13 +31,21 @@ const DiscoverCompatibilityPart = ({
 
   // On mount / when questions change: load this part's saved answers or default
   useEffect(() => {
-    const parts = loadSavedParts(); // new per-part localStorage object
+    const parts = loadSavedParts();
     const savedForThisPart = parts[`part${partNumber}`] || [];
     const initialized = questions.map((q, i) => {
       const saved = savedForThisPart[i];
-      return typeof saved === "object" && saved !== null
-        ? { ...saved, value: saved.value ?? null }
-        : { value: null };
+      const init = { value: saved?.value ?? null };
+
+      // Initialize all conditional input keys as null if not saved
+      if (q.conditionalInput) {
+        Object.keys(q.conditionalInput).forEach((trigger) => {
+          const key = q.conditionalInput[trigger].key;
+          init[key] = saved?.[key] ?? null;
+        });
+      }
+
+      return init;
     });
     setAnswers(initialized);
   }, [questions, partNumber]);
@@ -47,15 +55,44 @@ const DiscoverCompatibilityPart = ({
     setAnswers((prev) => {
       const copy = [...prev];
       if (!copy[index] || typeof copy[index] !== "object") copy[index] = {};
-      copy[index][subKey] = value;
+
+      const q = questions[index];
+
+      if (subKey === "value") {
+        copy[index].value = value;
+
+        // Reset all conditional inputs except the one triggered by current value
+        if (q.conditionalInput) {
+          Object.keys(q.conditionalInput).forEach((trigger) => {
+            const key = q.conditionalInput[trigger].key;
+            if (trigger === value) {
+              // Maintain existing value if any
+              copy[index][key] = copy[index][key] ?? null;
+            } else {
+              copy[index][key] = null;
+            }
+          });
+        }
+      } else {
+        // Conditional input value change
+        copy[index][subKey] = value;
+      }
+
       return copy;
     });
   };
 
   const handleNext = () => {
-    // Validate required questions
+    // Validate required questions including conditional inputs
     const empty = questions.some((q, i) => {
-      if (!answers[i]?.value && !q.optional) return true;
+      const mainValue = answers[i]?.value;
+      if (!mainValue && !q.optional) return true;
+
+      if (q.conditionalInput && mainValue in q.conditionalInput) {
+        const ciKey = q.conditionalInput[mainValue].key;
+        if (!answers[i]?.[ciKey]) return true;
+      }
+
       return false;
     });
 
@@ -64,44 +101,47 @@ const DiscoverCompatibilityPart = ({
       return;
     }
 
-    // Build formattedAnswers for this part (serial within part)
+    // Build formattedAnswers for this part
     const formattedAnswers = questions.map((q, i) => {
       const ans = { value: answers[i]?.value ?? null };
       if (q.conditionalInput) {
-        const ci = q.conditionalInput;
-        const triggered = answers[i]?.value === ci.when;
-        ans[ci.key] = triggered ? answers[i]?.[ci.key] ?? null : null;
+        Object.keys(q.conditionalInput).forEach((trigger) => {
+          const key = q.conditionalInput[trigger].key;
+          ans[key] = answers[i]?.[key] ?? null;
+        });
       }
       return ans;
     });
 
+    // Save per-part
     const parts = loadSavedParts();
     parts[`part${partNumber}`] = formattedAnswers;
     localStorage.setItem(STORAGE_KEY, JSON.stringify(parts));
 
     if (isLastPart) {
+      // Merge all parts
       const finalPartsObj = loadSavedParts();
-      const orderedKeys = Object.keys(finalPartsObj)
+      const merged = [];
+      Object.keys(finalPartsObj)
         .filter((k) => /^part\d+$/.test(k))
         .sort(
           (a, b) =>
             Number(a.replace("part", "")) - Number(b.replace("part", ""))
-        );
-
-      const merged = [];
-      orderedKeys.forEach((k) => {
-        finalPartsObj[k].forEach((q) => {
-          merged.push(q.value);
-          Object.keys(q).forEach((key) => {
-            if (key !== "value") merged.push(q[key]);
+        )
+        .forEach((k) => {
+          finalPartsObj[k].forEach((q) => {
+            merged.push(q.value);
+            Object.keys(q)
+              .filter((key) => key !== "value")
+              .forEach((key) => merged.push(q[key]));
           });
         });
-      });
 
       updateCompatibility({ compatibility: merged })
         .unwrap()
         .then((res) => toast.success(res.message))
         .catch((err) => toast.error(err?.data?.message));
+      navigate(nextRoute);
     } else {
       navigate(nextRoute);
     }
