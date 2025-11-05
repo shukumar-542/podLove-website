@@ -1,11 +1,9 @@
 import { useLocation } from "react-router";
 import bg from "../../assets/b.png";
 
-
 // const interest = ["Photography", "Traveling", "Art & Craft", "Cooking"];
 const MatchBio = () => {
   const location = useLocation();
-  console.log("Location search:", location.search);
 
   const params = new URLSearchParams(location.search);
   const bio = params.get("bio") || "No bio found";
@@ -13,8 +11,6 @@ const MatchBio = () => {
     ? params.get("interests").split(",")
     : [];
 
-  console.log("bio:", bio);
-  console.log("interests:", interests);
   return (
     <div
       style={{
@@ -43,7 +39,12 @@ const MatchBio = () => {
           <p className="font-poppins mb-5">Interest : </p>
           <div className="grid grid-cols-2  justify-between gap-5">
             {interests?.map((item, index) => (
-              <p key={index} className="text-center border border-[#FFA175] rounded-full py-2 text-[#FFA175]">{item}</p>
+              <p
+                key={index}
+                className="text-center border border-[#FFA175] rounded-full py-2 text-[#FFA175]"
+              >
+                {item}
+              </p>
             ))}
           </div>
           {/* <div className="">

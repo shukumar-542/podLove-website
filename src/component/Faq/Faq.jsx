@@ -6,9 +6,7 @@ import { useGetFaqQuery } from "../../redux/Api/SubscriptionPlan";
 const { Panel } = Collapse;
 
 const Faq = () => {
-
-  const { data: getFaq } = useGetFaqQuery(undefined)
-  console.log(getFaq);
+  const { data: getFaq } = useGetFaqQuery(undefined);
 
   return (
     <div style={{ backgroundImage: `url(${img})` }} className="py-14">
@@ -28,23 +26,23 @@ const Faq = () => {
                 transition: "transform 0.3s ease",
                 color: "white",
                 fontSize: "16px",
-                backgroundColor: "#E8936A"
+                backgroundColor: "#E8936A",
               }}
               className="p-2 rounded-full"
             />
           )}
         >
-          {
-            getFaq?.data?.map((item, index) => (
-              <Panel
-                key={item?.id || index}
-                header={<span className="text-lg font-medium">{item?.question}</span>}
-              >
-                <p className="my-2 text-gray-600">{item?.answer}</p>
-              </Panel>
-            ))}
+          {getFaq?.data?.map((item, index) => (
+            <Panel
+              key={item?.id || index}
+              header={
+                <span className="text-lg font-medium">{item?.question}</span>
+              }
+            >
+              <p className="my-2 text-gray-600">{item?.answer}</p>
+            </Panel>
+          ))}
         </Collapse>
-
       </div>
     </div>
   );

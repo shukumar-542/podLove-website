@@ -86,16 +86,14 @@ const EditProfile = () => {
             place: selectedLocation?.address,
             longitude: selectedLocation?.lng,
             latitude: selectedLocation?.lat,
-          }
+          },
         }),
         ...(uploadedImageUrl && { avatar: uploadedImageUrl }),
       };
 
       const result = await editProfile(updateData);
       navigate("/profile");
-      console.log(result);
     } catch (error) {
-      console.error("Upload failed:", error);
       message.error("Failed to upload image.");
     } finally {
       setLoading(false);
@@ -111,12 +109,12 @@ const EditProfile = () => {
     formData.append("avatar", file);
     editProfile(formData)
       .then(() => {
-        toast.success("Image uploaded successfully!")
+        toast.success("Image uploaded successfully!");
         navigate("/profile");
       })
       .catch(() => {
         message.error("Failed to upload image.");
-      })
+      });
   };
 
   return (
@@ -140,12 +138,17 @@ const EditProfile = () => {
               icon={<CameraOutlined />}
             />
           </Upload>
-          {file &&
+          {file && (
             <div className=" flex justify-center items-center">
-              <button onClick={handleUploadImage} disabled={isLoading} className=" text-center bg-[#ffa175] text-white px-3 py-1 rounded-lg mt-3">{isLoading ? "Loading..." : "upload"}</button>
+              <button
+                onClick={handleUploadImage}
+                disabled={isLoading}
+                className=" text-center bg-[#ffa175] text-white px-3 py-1 rounded-lg mt-3"
+              >
+                {isLoading ? "Loading..." : "upload"}
+              </button>
             </div>
-          }
-
+          )}
         </div>
         <Form form={form} layout="vertical" onFinish={handleUpdateProfile}>
           <div className="md:flex  gap-5 w-full ">
@@ -167,8 +170,6 @@ const EditProfile = () => {
             </Form.Item>
           </div>
           <div className="md:flex   gap-5">
-
-
             <Form.Item label={"Gender"} name={"gender"} className="w-full">
               <Select placeholder="Select your gender" allowClear>
                 <Option value="female">Female</Option>
@@ -180,7 +181,10 @@ const EditProfile = () => {
             </Form.Item>
           </div>
           <Form.Item label="Address" name="address">
-            <LocationSearch onSelectLocation={setSelectedLocation} defaultAddress={getUser?.data?.location?.place || ""} />
+            <LocationSearch
+              onSelectLocation={setSelectedLocation}
+              defaultAddress={getUser?.data?.location?.place || ""}
+            />
           </Form.Item>
           <Form.Item label="Bio" name="bio">
             <TextArea

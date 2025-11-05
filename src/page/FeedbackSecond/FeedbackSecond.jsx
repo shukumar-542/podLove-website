@@ -1,23 +1,20 @@
 import { Form, Input, Radio } from "antd";
 import AuthButton from "../../component/AuthButton/AuthButton";
-import {  useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 const FeedbackSecond = () => {
   const [form] = Form.useForm();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const onFinish = (values) => {
-    console.log("Form Values:", values);
-    const data =  JSON.parse(localStorage.getItem("Feedback"))
-    if(values){
+    const data = JSON.parse(localStorage.getItem("Feedback"));
+    if (values) {
       const addData = {
-        ...data, ...values
-
-      }
+        ...data,
+        ...values,
+      };
       localStorage.setItem("Feedback", JSON.stringify(addData));
-      navigate('/feedback-third-step')
-
+      navigate("/feedback-third-step");
     }
-
   };
 
   return (
@@ -41,16 +38,12 @@ const FeedbackSecond = () => {
             </Radio.Group>
           </Form.Item>
 
-
           <Form.Item
             label="In your opinion, what factors influenced the level of chemistry you experienced?"
             name="seven"
           >
             <Input.TextArea placeholder="Write here" rows={3} />
           </Form.Item>
-
-
-
 
           <h3 className="font-semibold">3. Communication and Comfort</h3>
           <Form.Item
@@ -92,13 +85,13 @@ const FeedbackSecond = () => {
 
           <Form.Item className="flex justify-center">
             {/* <Link to={'/feedback-third-step'}> */}
-              <AuthButton
-                type="primary"
-                htmlType="submit"
-                className="bg-orange-400 px-6 py-2 rounded-md"
-              >
-                Next
-              </AuthButton>
+            <AuthButton
+              type="primary"
+              htmlType="submit"
+              className="bg-orange-400 px-6 py-2 rounded-md"
+            >
+              Next
+            </AuthButton>
             {/* </Link> */}
           </Form.Item>
         </Form>

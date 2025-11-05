@@ -7,14 +7,12 @@
 
 // const RoomPage = () => {
 //     const { data: getProfile } = useGetUserQuery();
-//     console.log('sdfasfsafasdfasdf', getProfile?.data);
 //     // const { roomId } = useParams();
 //     const queryParams = new URLSearchParams(window.location.search);
 
 //     // Get the values of the query parameters
 //     const roomId = queryParams.get('roomId');
 //     const hostId = queryParams.get('hostId');
-//     console.log(roomId);
 //     const videoContainerRef = useRef(null);
 //     const zpRef = useRef(null);
 //     const [podcastDone] = usePodcastDoneMutation();
@@ -24,12 +22,10 @@
 //             podcastDone({ podcastId: roomId })
 //     }
 
-
 //     const myMeeting = async () => {
 //         const appID = 369424760;
 //         const serverSecret = "57aa479aa7d1a0b236d8f38385df1631";
 //         // const devices = await navigator.mediaDevices.enumerateDevices();
-//         // console.log(devices);
 //         // const hasCamera = devices.some(device => device.kind === 'videoinput');
 //         // const hasMic = devices.some(device => device.kind === 'audioinput');
 
@@ -40,7 +36,6 @@
 //         //     alert('No microphone detected. Audio may not work.');
 //         // }
 //         if (!roomId) {
-//             console.error("Invalid Room ID");
 //             return;
 //         }
 
@@ -55,7 +50,6 @@
 
 //             // Prevent duplicate room joins
 //             if (zpRef.current) {
-//                 console.warn("Already in a room. Skipping duplicate join.");
 //                 return;
 //             }
 
@@ -80,7 +74,6 @@
 //                     },
 //                 },
 //                 onDispose: () => {
-//                     console.log('exiting podcast');
 //                     handleExitPodCast();
 //                     toast.success("Call Ended");
 //                     window.location.href = "/home";
@@ -88,7 +81,6 @@
 //             });
 
 //         } catch (error) {
-//             console.error("Error setting up meeting:", error);
 //             alert("Failed to start the meeting. Please check your setup.");
 //         }
 //     };

@@ -11,19 +11,21 @@ import {
   where,
 } from "firebase/firestore";
 import { useParams } from "react-router";
-import { useGetPodCastDetailsQuery, useGetUserQuery } from "../../redux/Api/AuthApi";
+import {
+  useGetPodCastDetailsQuery,
+  useGetUserQuery,
+} from "../../redux/Api/AuthApi";
 
 const ChatPage = () => {
   const [selectedMessageIndex, setSelectedMessageIndex] = useState(null);
   const { data: userId } = useGetUserQuery();
-  console.log('user info', userId);
   const { id } = useParams();
   const senderId = userId?.data?._id;
   const receiverId = id;
   const { data: getPodcastDetails } = useGetPodCastDetailsQuery();
   const participants = getPodcastDetails?.data?.podcast?.participants || [];
 
-  const participant = participants.find(p => p._id === id);
+  const participant = participants.find((p) => p._id === id);
 
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
@@ -85,14 +87,16 @@ const ChatPage = () => {
             return (
               <div
                 key={index}
-                className={`flex ${msg.senderId === senderId ? "justify-end" : "justify-start"
-                  }`}
+                className={`flex ${
+                  msg.senderId === senderId ? "justify-end" : "justify-start"
+                }`}
               >
                 <div
-                  className={`max-w-xs px-4 py-3 rounded-2xl shadow-sm text-sm break-words relative cursor-pointer ${msg.senderId === senderId
-                    ? "bg-[#FF805D] text-white rounded-tr-none"
-                    : "bg-white text-gray-800 rounded-tl-none border"
-                    }`}
+                  className={`max-w-xs px-4 py-3 rounded-2xl shadow-sm text-sm break-words relative cursor-pointer ${
+                    msg.senderId === senderId
+                      ? "bg-[#FF805D] text-white rounded-tr-none"
+                      : "bg-white text-gray-800 rounded-tl-none border"
+                  }`}
                   onClick={() =>
                     setSelectedMessageIndex(isSelected ? null : index)
                   }

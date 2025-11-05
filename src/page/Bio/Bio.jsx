@@ -15,28 +15,25 @@ const Bio = () => {
 
   const handleAddBio = (value) => {
     if (!value.bio) {
-      return toast.error("Please add your bio")
+      return toast.error("Please add your bio");
     }
     const data = {
       text: value?.bio,
     };
     // UpdateUserBioNew(data).unwrap()
     //   .then((data) => {
-    //     console.log(data);
     //   })
     //   .catch((error) => {
-    //     console.log(error);
     //   });
 
     bioValidation(data)
       .unwrap()
       .then((payload) => {
-        toast.success(payload?.message)
-        navigate('/upload-photo')
+        toast.success(payload?.message);
+        navigate("/upload-photo");
       })
       .catch((error) => {
-        console.log(error);
-        toast.error(error?.data?.message)
+        toast.error(error?.data?.message);
       });
   };
 
@@ -80,7 +77,9 @@ const Bio = () => {
             >
               <TextArea rows={10} />
             </Form.Item>
-            <AuthButton disabled={isLoading} className={"py-2"}>{isLoading? "Loading...": "Next"}</AuthButton>
+            <AuthButton disabled={isLoading} className={"py-2"}>
+              {isLoading ? "Loading..." : "Next"}
+            </AuthButton>
           </Form>
           {/* <Link to={"/upload-photo"}> */}
           {/* </Link> */}
@@ -88,8 +87,6 @@ const Bio = () => {
 
         {/* Space after content */}
         <div className="md:col-span-6"></div>
-
-
       </div>
     </div>
   );

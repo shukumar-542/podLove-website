@@ -1,4 +1,3 @@
-
 // import { Link } from "react-router";
 import Pricing from "../../component/Pricing/Pricing";
 // import { useGetPodCastDetailsQuery } from "../../redux/Api/AuthApi";
@@ -7,11 +6,11 @@ import { useGetAllPlanQuery } from "../../redux/Api/SubscriptionPlan";
 const SubscriptionPlan = () => {
   const { data: getPodcastDetails } = useGetAllPlanQuery();
 
-  // console.log("getPodcastDetails", getPodcastDetails);
-
   return (
     <div className="bg-[#F7E8E1]">
-      <p className="text-2xl md:text-4xl font-bold text-center pt-10">Subscription Plans</p>
+      <p className="text-2xl md:text-4xl font-bold text-center pt-10">
+        Subscription Plans
+      </p>
       {/* <div className="flex justify-center mt-5">
         <Link to={"/connection-progress"}>
           <button className=" bg-[#F36E2F]  shadow-white text-white shadow-inner rounded-full px-10  py-2 max-w-xs ">
@@ -23,7 +22,6 @@ const SubscriptionPlan = () => {
         <Pricing subscriptions={getPodcastDetails?.data} />
       </div>
     </div>
-
   );
 };
 

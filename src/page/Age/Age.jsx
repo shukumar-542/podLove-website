@@ -23,10 +23,13 @@ const Age = () => {
   };
 
   const handleAge = (values) => {
-    localStorage.setItem('age', JSON.stringify({
-      min: values?.min,
-      max: values?.max,
-    }))
+    localStorage.setItem(
+      "age",
+      JSON.stringify({
+        min: values?.min,
+        max: values?.max,
+      })
+    );
 
     const data = {
       preferences: {
@@ -38,18 +41,13 @@ const Age = () => {
       dateOfBirth: dayjs(date).format("DD/MM/YYYY"),
     };
 
-
-    // console.log(data);
-
     const birthDate = date;
     const today = dayjs();
     const age = today.diff(birthDate, "year");
 
-
     if (age < 35) {
-      return toast.error("You must be 35 years or older to continue")
+      return toast.error("You must be 35 years or older to continue");
     }
-    console.log("Calculated Age:", age);
 
     // update
     updateAge(data)
@@ -97,7 +95,7 @@ const Age = () => {
                 className="w-full border-red-300"
                 format="MM/DD/YYYY"
                 onChange={onChange}
-                defaultPickerValue={dayjs('1991-01-01', 'YYYY-MM-DD')}
+                defaultPickerValue={dayjs("1991-01-01", "YYYY-MM-DD")}
               />
             </Form.Item>
 
@@ -123,7 +121,9 @@ const Age = () => {
               </Form.Item>
             </div>
 
-            <AuthButton disabled={isLoading} className={"py-2"}>{isLoading ? "Loading..." : "Next"}</AuthButton>
+            <AuthButton disabled={isLoading} className={"py-2"}>
+              {isLoading ? "Loading..." : "Next"}
+            </AuthButton>
           </Form>
         </div>
 

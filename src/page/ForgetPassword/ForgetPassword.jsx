@@ -15,7 +15,6 @@ const ForgetPassword = () => {
     forgetPassword(data)
       .unwrap()
       .then((payload) => {
-        // console.log("fulfilled", payload)
         toast.success("Please check you email!");
         localStorage.setItem("email", values.email);
         navigate("/verify-forget-otp");
@@ -52,7 +51,9 @@ const ForgetPassword = () => {
                 className="border-[#FFA175]"
               />
             </Form.Item>
-            <AuthButton disabled={isLoading} className={"py-2"}>{isLoading ? "Loading..." : "Send"}</AuthButton>
+            <AuthButton disabled={isLoading} className={"py-2"}>
+              {isLoading ? "Loading..." : "Send"}
+            </AuthButton>
           </Form>
         </div>
       </div>

@@ -3,7 +3,6 @@ import { useGetTermsConditionQuery } from "../../redux/Api/AuthApi";
 
 const TermsAndCondition = () => {
   const { data: getTermsCondition } = useGetTermsConditionQuery();
-  console.log(getTermsCondition?.data?.text);
   return (
     <div className="bg-[#FAF2EF]">
       <div className="container mx-auto">

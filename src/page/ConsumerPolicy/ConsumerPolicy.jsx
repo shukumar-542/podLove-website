@@ -1,9 +1,7 @@
-import React from "react";
 import { useGetConsumerPolicyQuery } from "../../redux/Api/AuthApi";
 
 const ConsumerPolicy = () => {
-  const {data :  getConsumer} = useGetConsumerPolicyQuery()
-  // console.log(getConsumer?.data?.text);
+  const { data: getConsumer } = useGetConsumerPolicyQuery();
   return (
     <div className="bg-[#FAF2EF]">
       <div className="container mx-auto">
@@ -190,7 +188,7 @@ const ConsumerPolicy = () => {
           <p>Subject: “Health Data Privacy Inquiry”</p>
 
           <p className="py-5">Your trust matters to us. PodLove is committed to protecting your most sensitive data — with compassion, clarity, and care.</p>*/}
-      </div> 
+      </div>
     </div>
   );
 };

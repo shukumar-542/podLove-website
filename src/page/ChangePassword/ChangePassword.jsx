@@ -9,7 +9,6 @@ const ChangePassword = () => {
   const [changePassword, { isLoading }] = useChangePasswordMutation();
   const navigate = useNavigate();
   const handleChangePassword = (values) => {
-    console.log(values);
     const data = {
       ...values,
     };
@@ -17,28 +16,25 @@ const ChangePassword = () => {
     changePassword(data)
       .unwrap()
       .then((payload) => {
-        toast.success(payload?.message)
-        navigate('/profile')
-      }
-      )
+        toast.success(payload?.message);
+        navigate("/profile");
+      })
       .catch((error) => toast.error(error?.data?.message));
   };
-  
+
   const confirmPause = () => {
-    localStorage.removeItem('podlove-token');
-    window.location.href = '/login';
+    localStorage.removeItem("podlove-token");
+    window.location.href = "/login";
   };
 
   const confirmDelete = () => {
-    localStorage.removeItem('podlove-token');
-    window.location.href = '/login';
+    localStorage.removeItem("podlove-token");
+    window.location.href = "/login";
   };
-
 
   return (
     <div className="bg-[#FAF2EF]">
       <div className="max-w-5xl py-10 mx-auto">
-
         <div className="md:flex  px-20 md:px-0   items-center gap-10 ">
           <AuthButton className={"py-2"}>Change Password</AuthButton>
           <Popconfirm
@@ -89,7 +85,8 @@ const ChangePassword = () => {
             rules={[
               { required: true, message: "Please enter a new password" },
               {
-                pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/,
+                pattern:
+                  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/,
                 message:
                   "Password must be at least 8 characters, contain both letters (uppercase and lowercase), a number, and a special character.",
               },
@@ -121,7 +118,9 @@ const ChangePassword = () => {
           </Form.Item>
 
           <div className="max-w-md text-center mx-auto">
-            <AuthButton disabled={isLoading} className={"py-2"}>{isLoading ? "Loading..." : "Update"}</AuthButton>
+            <AuthButton disabled={isLoading} className={"py-2"}>
+              {isLoading ? "Loading..." : "Update"}
+            </AuthButton>
           </div>
         </Form>
       </div>

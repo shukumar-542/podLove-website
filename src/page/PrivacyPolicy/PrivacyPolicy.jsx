@@ -2,8 +2,7 @@ import IsPodSafe from "../../component/IsPodSafe/IsPodSafe";
 import { useGetPrivacyQuery } from "../../redux/Api/AuthApi";
 
 const PrivacyPolicy = () => {
-  const { data :  getPrivacy} = useGetPrivacyQuery()
-  // console.log(getPrivacy?.data?.text);
+  const { data: getPrivacy } = useGetPrivacyQuery();
   return (
     <div className="bg-[#FAF2EF]">
       <div className="container mx-auto">
@@ -128,9 +127,8 @@ const PrivacyPolicy = () => {
           purposes outlined in this Privacy Policy or as required by applicable
           law.
         </p> */}
-
       </div>
-        <IsPodSafe/>
+      <IsPodSafe />
     </div>
   );
 };

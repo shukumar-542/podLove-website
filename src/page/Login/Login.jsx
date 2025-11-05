@@ -43,13 +43,11 @@ const Login = () => {
       email: decoded?.email,
       avatar: decoded?.picture,
     };
-    // console.log(data);
     googleLogin(data)
       .unwrap()
       .then((payload) => {
         localStorage.setItem("podlove-token", payload?.data?.accessToken);
         toast.success(payload?.message);
-        console.log(payload);
         if (payload?.data?.user?.isProfileComplete) {
           navigate("/home");
         } else {
@@ -62,10 +60,7 @@ const Login = () => {
   // ================================ Apple ======================================
   // =============================================================================
 
-  console.log(window.location.origin);
-
   const handleAppleSuccess = async (response) => {
-    console.log(response);
     // try {
     //   const res = await fetch('/api/auth/apple', {
     //     method: 'POST',
@@ -78,11 +73,9 @@ const Login = () => {
     //   });
     //   if (!res.ok) throw new Error(await res.text());
     //   const payload = await res.json();
-
     //   // mirror your Google handling:
     //   localStorage.setItem('podlove-token', payload?.data?.accessToken);
     //   toast.success(payload?.message || 'Signed in with Apple');
-
     //   if (payload?.data?.user?.isProfileComplete) {
     //     window.location.href = '/home';
     //   } else {
@@ -93,8 +86,7 @@ const Login = () => {
     // }
   };
 
-  const handleAppleError = (err) => {
-    console.error(err);
+  const handleAppleError = () => {
     toast.error("Apple sign-in cancelled or failed");
   };
 
@@ -163,12 +155,7 @@ const Login = () => {
               Continue with Google
             </button> */}
             <div className=" flex items-center justify-center">
-              <GoogleLogin
-                onSuccess={handleLoginSuccess}
-                onError={() => {
-                  console.log("Login Failed");
-                }}
-              />
+              <GoogleLogin onSuccess={handleLoginSuccess} onError={() => {}} />
             </div>
 
             {/* <div className=" flex items-center justify-center">

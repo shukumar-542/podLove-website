@@ -14,8 +14,6 @@ const VerifyEmail = () => {
   const [verifyEmail, { isLoading }] = useVerifyEmailMutation();
 
   const handleVerifyOtp = () => {
-
-    console.log("click");
     if (!otp) {
       return toast.error("Please enter your otp!");
     }
@@ -50,7 +48,9 @@ const VerifyEmail = () => {
           </p>
 
           <div className="mb-10 mt-3">
-            <p className="text-[#2E2E2E] mb-4 text-center">Enter your code here</p>
+            <p className="text-[#2E2E2E] mb-4 text-center">
+              Enter your code here
+            </p>
             <OTPInput
               value={otp}
               onChange={setOTP}
@@ -60,14 +60,18 @@ const VerifyEmail = () => {
               inputClassName="w-8 h-10 md:w-10 md:h-12 text-lg md:text-xl text-center border border-[#FFC0A3] rounded-md"
               className="flex justify-center gap-2 sm:gap-3 md:gap-4"
               disabled={false}
-              
             />
             {/* <div className="flex items-end justify-end mt-3">
               <p className=" border-b">Resend OTP</p>
             </div> */}
           </div>
 
-            <AuthButton handleOnClick={()=>handleVerifyOtp()} className={"py-2"}>{isLoading ? <Spin/> : "Verify"}</AuthButton>
+          <AuthButton
+            handleOnClick={() => handleVerifyOtp()}
+            className={"py-2"}
+          >
+            {isLoading ? <Spin /> : "Verify"}
+          </AuthButton>
         </div>
       </div>
     </div>

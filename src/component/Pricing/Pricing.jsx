@@ -2,32 +2,27 @@
 import subscription from "../../assets/subscription-bg.png";
 import { IoCheckmarkOutline } from "react-icons/io5";
 import { Divider } from "antd";
-import {
-  useUpgradeSubscriptionPlanMutation,
-} from "../../redux/Api/SubscriptionPlan";
+import { useUpgradeSubscriptionPlanMutation } from "../../redux/Api/SubscriptionPlan";
 import { toast } from "sonner";
 import { Link, useNavigate } from "react-router";
-const Pricing = ({ subscriptions }) => {
-  const [upgradeSubscription, { isLoading }] = useUpgradeSubscriptionPlanMutation();
+const Pricing = ({ subscriptions, buttonDisabled }) => {
+  const [upgradeSubscription, { isLoading }] =
+    useUpgradeSubscriptionPlanMutation();
   const navigate = useNavigate();
-  console.log('this is from subscripition', subscriptions);
-  const logInUser = localStorage.getItem("podlove-token")
+  const logInUser = localStorage.getItem("podlove-token");
   // Handle upgrade plan function
   const handleUpdatePlan = (plan) => {
     const data = {
       planId: plan?._id,
     };
-    console.log("data", plan);
     if (plan?.unitAmount === "0") {
-      navigate('/connection-progress')
-    }
-    else {
+      navigate("/connection-progress");
+    } else {
       upgradeSubscription(data)
         .unwrap()
         .then((payload) => {
           if (payload?.data) {
-            console.log(payload); 
-            const newWindow = window.open('', '_blank');
+            const newWindow = window.open("", "_blank");
             newWindow.location.href = payload.data;
           }
         })
@@ -38,7 +33,6 @@ const Pricing = ({ subscriptions }) => {
   return (
     <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 my-10  mx-auto font-poppins mr-2 md:mr-0 ml-2 md:ml-0 ">
       {subscriptions?.map((plan) => {
-        // console.log(plan);
         return (
           <div
             key={plan?._id}
@@ -75,36 +69,36 @@ const Pricing = ({ subscriptions }) => {
                 : `$${plan.unitAmount} / ${plan?.interval}`}
             </h1>
             <div className="text-center">
-               {/* {"0" == "0" ? ( */}
-              {plan?.unitAmount == "0" ? ( 
-                        
+              {/* {"0" == "0" ? ( */}
+              {plan?.unitAmount == "0" ? (
                 <Link to={"/connection-progress"}>
-                  <button className=" bg-gradient-to-r from-[#F36E2F] to-[#FEB491]  shadow-white shadow-inner rounded-full w-full mt-5 py-2 max-w-xs  mb-5 cursor-pointer">
+                  <button
+                    disabled={buttonDisabled}
+                    className=" bg-gradient-to-r from-[#F36E2F] to-[#FEB491]  shadow-white shadow-inner rounded-full w-full mt-5 py-2 max-w-xs  mb-5 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
                     Free Plan
                   </button>
                 </Link>
               ) : (
                 <div className=" text-center">
-                  {
-                    logInUser ?
+                  {logInUser ? (
+                    <button
+                      onClick={() => handleUpdatePlan(plan)}
+                      disabled={isLoading}
+                      className=" bg-gradient-to-r from-[#F36E2F] to-[#FEB491]  shadow-white shadow-inner rounded-full w-full mt-5 py-2 max-w-xs  mb-5"
+                    >
+                      Choose this plan
+                    </button>
+                  ) : (
+                    <a href={`/login`}>
                       <button
-                        onClick={() => handleUpdatePlan(plan)}
                         disabled={isLoading}
                         className=" bg-gradient-to-r from-[#F36E2F] to-[#FEB491]  shadow-white shadow-inner rounded-full w-full mt-5 py-2 max-w-xs  mb-5"
                       >
                         Choose this plan
                       </button>
-                      :
-                      <a href={`/login`}>
-                        <button
-                          disabled={isLoading}
-                          className=" bg-gradient-to-r from-[#F36E2F] to-[#FEB491]  shadow-white shadow-inner rounded-full w-full mt-5 py-2 max-w-xs  mb-5"
-                        >
-                          Choose this plan
-                        </button>
-                      </a>
-                  }
-
+                    </a>
+                  )}
                 </div>
               )}
             </div>
