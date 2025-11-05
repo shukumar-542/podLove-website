@@ -9,8 +9,8 @@ import { useNavigate } from "react-router";
 import { toast } from "sonner";
 
 const UploadPhoto = () => {
-  const navigate = useNavigate()
-  const [updatePhoto, { isLoading }] = useUpdateUserInfoMutation()
+  const navigate = useNavigate();
+  const [updatePhoto, { isLoading }] = useUpdateUserInfoMutation();
   const [file, setFile] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
 
@@ -29,12 +29,12 @@ const UploadPhoto = () => {
     formData.append("avatar", file);
     updatePhoto(formData)
       .then(() => {
-        toast.success("Image uploaded successfully!")
-        navigate("/discover-compatibility");
+        toast.success("Image uploaded successfully!");
+        navigate("/discover-compatibility-part1");
       })
       .catch(() => {
         message.error("Failed to upload image.");
-      })
+      });
   };
 
   return (
@@ -88,7 +88,11 @@ const UploadPhoto = () => {
             </Upload>
           </div>
 
-          <AuthButton disabled={isLoading} handleOnClick={handleNextClick} className="py-2">
+          <AuthButton
+            disabled={isLoading}
+            handleOnClick={handleNextClick}
+            className="py-2"
+          >
             {isLoading ? "Image Uploading..." : "Next"}
           </AuthButton>
         </div>

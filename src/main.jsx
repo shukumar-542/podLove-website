@@ -17,8 +17,6 @@ import Body from "./page/Body/Body.jsx";
 import Ethnicity from "./page/Ethnicity/Ethnicity.jsx";
 import Bio from "./page/Bio/Bio.jsx";
 import UploadPhoto from "./page/UploadPhoto/UploadPhoto.jsx";
-import DiscoverCompatibility from "./page/DiscoverCompatibility/DiscoverCompatibility.jsx";
-import DiscoverCompatibilitySecond from "./page/DiscoverCompatibilitySecond/DiscoverCompatibilitySecond.jsx";
 import RatingYourSelf from "./page/RatingYourSelf/RatingYourSelf.jsx";
 import Interest from "./Interest/Interest.jsx";
 import ConnectionProgress from "./page/ConnectionProgress/ConnectionProgress.jsx";
@@ -64,7 +62,10 @@ import DoNotSellPersonalInfo from "./page/DoNotSellPersonalInfo/DoNotSellPersona
 import ConsumerHealthDataPrivacyPolicy from "./page/ConsumerHealthDataPrivacyPolicy/ConsumerHealthDataPrivacyPolicy.jsx";
 import SubscriptionPage from "./page/SubscriptionPage/SubscriptionPage.jsx";
 import ConnectionPathway from "./page/ConnectionPathway/ConnectionPathway.jsx";
-// import MS from "./page/100MS/100MS.jsx";
+import DiscoverCompatibilityPart1 from "./page/DiscoverCompatibilityPart1/DiscoverCompatibilityPart1.jsx";
+import DiscoverCompatibilityPart2 from "./page/DiscoverCompatibilityPart2/DiscoverCompatibilityPart2.jsx";
+import DiscoverCompatibilityPart3 from "./page/DiscoverCompatibilityPart3/DiscoverCompatibilityPart3.jsx";
+import DiscoverCompatibilityPart4 from "./page/DiscoverCompatibilityPart4/DiscoverCompatibilityPart4.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -147,12 +148,20 @@ createRoot(document.getElementById("root")).render(
             <Route path="/bio" element={<Bio />} />
             <Route path="/upload-photo" element={<UploadPhoto />} />
             <Route
-              path="/discover-compatibility"
-              element={<DiscoverCompatibility />}
+              path="/discover-compatibility-part1"
+              element={<DiscoverCompatibilityPart1 />}
             />
             <Route
-              path="/discover-compatibility-part"
-              element={<DiscoverCompatibilitySecond />}
+              path="/discover-compatibility-part2"
+              element={<DiscoverCompatibilityPart2 />}
+            />
+            <Route
+              path="/discover-compatibility-part3"
+              element={<DiscoverCompatibilityPart3 />}
+            />
+            <Route
+              path="/discover-compatibility-part4"
+              element={<DiscoverCompatibilityPart4 />}
             />
             <Route path="/rating-yourself" element={<RatingYourSelf />} />
             <Route path="/interest" element={<Interest />} />
