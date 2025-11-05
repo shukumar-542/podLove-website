@@ -12,7 +12,7 @@ import {
 } from "../../redux/Api/AuthApi";
 import { toast } from "sonner";
 import { GoogleLogin } from "@react-oauth/google";
-import AppleSignin from 'react-apple-signin-auth';
+import AppleSignin from "react-apple-signin-auth";
 import { jwtDecode } from "jwt-decode";
 import { IoArrowBack } from "react-icons/io5";
 
@@ -48,12 +48,12 @@ const Login = () => {
       .unwrap()
       .then((payload) => {
         localStorage.setItem("podlove-token", payload?.data?.accessToken);
-        toast.success(payload?.message)
+        toast.success(payload?.message);
         console.log(payload);
         if (payload?.data?.user?.isProfileComplete) {
-          navigate('/home')
+          navigate("/home");
         } else {
-          navigate('/location')
+          navigate("/location");
         }
       })
       .catch((error) => toast.error(error?.data?.message));
@@ -95,9 +95,8 @@ const Login = () => {
 
   const handleAppleError = (err) => {
     console.error(err);
-    toast.error('Apple sign-in cancelled or failed');
+    toast.error("Apple sign-in cancelled or failed");
   };
-
 
   return (
     <div
@@ -111,12 +110,20 @@ const Login = () => {
     >
       {/* 🔹 Black Overlay (behind the content) */}
       <div className="absolute inset-0 bg-black bg-opacity-50 z-0"></div>
-      <a href={`/`}><IoArrowBack me className=" text-[#F26828] absolute top-10 left-10 cursor-pointer z-9999 hidden sm:block" size={40} /></a>
+      <a href={`/`}>
+        <IoArrowBack
+          me
+          className=" text-[#F26828] absolute top-10 left-10 cursor-pointer z-9999 hidden sm:block"
+          size={40}
+        />
+      </a>
       {/* 🔹 Content (above the overlay) */}
       <div className="flex items-center justify-start max-w-5xl mx-auto h-full p-2 md:p-0 relative z-10">
         <div className="bg-white shadow-2xl shadow-[#F26828] rounded-md p-5 md:p-10 max-w-5xl">
           {/* <p className="text-4xl font-bold text-[#333333]">Welcome Back!</p> */}
-          <p className="text-4xl text-center font-bold text-[#333333]">Log in</p>
+          <p className="text-4xl text-center font-bold text-[#333333]">
+            Log in
+          </p>
           {/* <p className="mt-2 text-center">Please log in to continue access</p> */}
 
           <div className=" w-[250px] md:w-[450px] ">
@@ -137,7 +144,10 @@ const Login = () => {
                   </p>
                 </Link>
               </div>
-              <AuthButton disabled={isLoading} className="bg-[#F68064] text-white w-full rounded-md py-2 text-xl shadow-md">
+              <AuthButton
+                disabled={isLoading}
+                className="bg-[#F68064] text-white w-full rounded-md py-2 text-xl shadow-md"
+              >
                 {isLoading ? "Loading..." : "Sign in"}
               </AuthButton>
             </Form>
@@ -178,12 +188,14 @@ const Login = () => {
                 //   nonce: btoa(crypto.getRandomValues(new Uint8Array(16)).toString()),
                 // }}
                 authOptions={{
-                  clientId: 'com.example.web',
-                  scope: 'email name',
-                  // redirectURI: `${window.location.origin}/auth/apple/callback`,
-                  redirectURI: `${window.location.origin}/login`,
-                  state: '',
-                  nonce: 'nonce',
+                  clientId: "com.example.web",
+                  scope: "email name",
+                  redirectURI: `${window.location.origin}/auth/apple/callback`,
+                  // redirectURI: `${window.location.origin}/login`,
+                  state: crypto.randomUUID(),
+                  nonce: btoa(
+                    crypto.getRandomValues(new Uint8Array(16)).toString()
+                  ),
                   usePopup: true,
                 }}
                 onSuccess={handleAppleSuccess}

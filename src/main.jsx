@@ -89,7 +89,10 @@ createRoot(document.getElementById("root")).render(
                 <Route path="/chat/:id" element={<ChatPage />} />
               </Route>
               <Route path="/feedback-first-step" element={<FeedbackOne />} />
-              <Route path="/feedback-second-step" element={<FeedbackSecond />} />
+              <Route
+                path="/feedback-second-step"
+                element={<FeedbackSecond />}
+              />
               <Route path="/feedback-third-step" element={<FeedbackThird />} />
               <Route element={<PrivateRoute />}>
                 <Route path="/profile" element={<Profile />} />
@@ -101,16 +104,31 @@ createRoot(document.getElementById("root")).render(
                 <Route path="/change-password" element={<ChangePassword />} />
               </Route>
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-              <Route path="/media-usage-consent" element={<MediaUsageConsent />} />
-              <Route path="/do-not-sell-or-share-my-personal-info" element={<DoNotSellPersonalInfo />} />
-              <Route path="/consumer-health-data-privacy-policy" element={<ConsumerHealthDataPrivacyPolicy />} />
-              <Route path="/terms-and-conditions" element={<TermsAndCondition />} />
+              <Route
+                path="/media-usage-consent"
+                element={<MediaUsageConsent />}
+              />
+              <Route
+                path="/do-not-sell-or-share-my-personal-info"
+                element={<DoNotSellPersonalInfo />}
+              />
+              <Route
+                path="/consumer-health-data-privacy-policy"
+                element={<ConsumerHealthDataPrivacyPolicy />}
+              />
+              <Route
+                path="/terms-and-conditions"
+                element={<TermsAndCondition />}
+              />
               <Route element={<PrivateRoute />}>
                 <Route path="/notification" element={<Notification />} />
               </Route>
               <Route path="/consumer-policy" element={<ConsumerPolicy />} />,
               <Route path="/media-policy" element={<MediaPlicy />} />
-              <Route path="/podcast-details/:id" element={<ParticipantDetails />} />
+              <Route
+                path="/podcast-details/:id"
+                element={<ParticipantDetails />}
+              />
               <Route path="/opt-in-policy" element={<OptInPolicy />} />
               {/* <Route element={<PrivateRoute />}>
                 <Route path="/room/:roomId" element={<RoomPage />} />
@@ -138,7 +156,10 @@ createRoot(document.getElementById("root")).render(
             />
             <Route path="/rating-yourself" element={<RatingYourSelf />} />
             <Route path="/interest" element={<Interest />} />
-            <Route path="/connection-progress" element={<ConnectionProgress />} />
+            <Route
+              path="/connection-progress"
+              element={<ConnectionProgress />}
+            />
             <Route path="/congratulation" element={<Congratulation />} />
             <Route path="/match-result" element={<MatchResult />} />
             <Route path="/match-bio" element={<MatchBio />} />
@@ -147,10 +168,15 @@ createRoot(document.getElementById("root")).render(
             <Route path="/set-new-password" element={<SetNewPassword />} />
             <Route path="/our-approch" element={<OurApproach />} />
             <Route path="/terms-of-use" element={<TermsOfUse />} />
-            <Route path="/relationship-first" element={<RelationShipReadinessOne />} />
-            <Route path="/relationship-second" element={<RelationShipReadinessTwo />} />
+            <Route
+              path="/relationship-first"
+              element={<RelationShipReadinessOne />}
+            />
+            <Route
+              path="/relationship-second"
+              element={<RelationShipReadinessTwo />}
+            />
             <Route path="/attention-error" element={<AttentionError />} />
-
           </Routes>
         </BrowserRouter>
         <Toaster position="top-right" richColors />

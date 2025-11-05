@@ -6,36 +6,32 @@ import AuthButton from "../../component/AuthButton/AuthButton";
 import { useSignUpMutation } from "../../redux/Api/AuthApi";
 import { toast } from "sonner";
 import { IoArrowBack } from "react-icons/io5";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TermsConditionModal from "../../component/Modals/TermsConditionModal";
 import PrivacyPolicyModal from "../../component/Modals/PrivacyPolicyModal";
-// import { IoArrowBack } from "react-icons/io5";
+
 const SignUp = () => {
   const [singUp, { isLoading }] = useSignUpMutation();
   const navigate = useNavigate();
 
   const [isTermModalOpen, setIsTermModalOpen] = useState(false);
-  const showTermModal = () => {
-    setIsTermModalOpen(true);
-  };
-  const handleTermOk = () => {
-    setIsTermModalOpen(false);
-  };
-  const handleTermCancel = () => {
-    setIsTermModalOpen(false);
+  const [isPrivacyModalOpen, setIsPrivacyModalOpen] = useState(false);
+
+  const [form] = Form.useForm();
+
+  // Load saved form data
+  useEffect(() => {
+    const savedData = localStorage.getItem("signup-form");
+    if (savedData) {
+      form.setFieldsValue(JSON.parse(savedData));
+    }
+  }, [form]);
+
+  // Save form data on change
+  const handleFormChange = (_, allValues) => {
+    localStorage.setItem("signup-form", JSON.stringify(allValues));
   };
 
-  const [isPrivacyModalOpen, setIsPrivacyModalOpen] = useState(false);
-  const showPrivacyModal = () => {
-    setIsPrivacyModalOpen(true);
-  };
-  const handlePrivacyOk = () => {
-    setIsPrivacyModalOpen(false);
-  };
-  const handlePrivacyCancel = () => {
-    setIsPrivacyModalOpen(false);
-  };
-  // ----Handle signup function------//
   const handleSignUp = (values) => {
     if (values?.password !== values?.confirmPassword) {
       return toast.error("Password does not match!");
@@ -46,6 +42,7 @@ const SignUp = () => {
       .then((payload) => {
         localStorage.setItem("email", values.email);
         toast.success(payload.message);
+        localStorage.removeItem("signup-form"); // clear saved form
         navigate("/verify-otp");
       })
       .catch((error) => toast.error(error?.data?.message));
@@ -62,17 +59,31 @@ const SignUp = () => {
       }}
       className="md:h-[100vh]"
     >
-      <div className="bg-black absolute opacity-50 inset-0 z-0 "></div>
-      <a href={`/`}><IoArrowBack className=" text-[#F26828]  absolute top-10 left-10 cursor-pointer z-9999 hidden sm:block" size={40} /></a>
-      <div className="flex items-center justify-start max-w-5xl mx-auto  h-full p-2 md:p-0 z-10 relative">
-        <div className="bg-white shadow-2xl shadow-[#F26828] rounded-md  p-5 md:p-10 max-w-5xl">
-          <p className="text-4xl text-center font-bold text-[#333333]">Sign Up</p>
-          <p className="mt-2 text-center">Just a few quick things to get started</p>
+      <div className="bg-black absolute opacity-50 inset-0 z-0"></div>
+      <a href={`/`}>
+        <IoArrowBack
+          className=" text-[#F26828] absolute top-10 left-10 cursor-pointer z-9999 hidden sm:block"
+          size={40}
+        />
+      </a>
+
+      <div className="flex items-center justify-start max-w-5xl mx-auto h-full p-2 md:p-0 z-10 relative">
+        <div className="bg-white shadow-2xl shadow-[#F26828] rounded-md p-5 md:p-10 max-w-5xl">
+          <p className="text-4xl text-center font-bold text-[#333333]">
+            Sign Up
+          </p>
+          <p className="mt-2 text-center">
+            Just a few quick things to get started
+          </p>
 
           <div className="flex items-center justify-between gap-10">
-            <div className="w-[250px] md:w-[450px] ">
-              <Form layout="vertical" onFinish={handleSignUp}>
-                {/* Name */}
+            <div className="w-[250px] md:w-[450px]">
+              <Form
+                form={form}
+                layout="vertical"
+                onFinish={handleSignUp}
+                onValuesChange={handleFormChange}
+              >
                 <Form.Item
                   label="Name"
                   name="name"
@@ -83,22 +94,17 @@ const SignUp = () => {
                   <Input placeholder="Enter your name here" />
                 </Form.Item>
 
-                {/* Email */}
                 <Form.Item
                   label="Email"
                   name="email"
                   rules={[
                     { required: true, message: "Please enter your email" },
-                    {
-                      type: "email",
-                      message: "Please enter a valid email address",
-                    },
+                    { type: "email", message: "Please enter a valid email" },
                   ]}
                 >
                   <Input placeholder="Enter your email here" />
                 </Form.Item>
 
-                {/* Phone Number */}
                 <Form.Item
                   label="Phone Number"
                   name="phoneNumber"
@@ -112,7 +118,6 @@ const SignUp = () => {
                   <Input placeholder="Enter your number here" />
                 </Form.Item>
 
-                {/* Password */}
                 <Form.Item
                   label="Password"
                   name="password"
@@ -122,14 +127,13 @@ const SignUp = () => {
                       pattern:
                         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/,
                       message:
-                        "Password must be at least 8 characters, contain both letters (uppercase and lowercase), a number, and a special character.",
+                        "Must be 8+ chars, include upper & lower case letters, a number, and special character.",
                     },
                   ]}
                 >
                   <Password placeholder="******" />
                 </Form.Item>
 
-                {/* Confirm Password */}
                 <Form.Item
                   label="Confirm Password"
                   name="confirmPassword"
@@ -138,9 +142,8 @@ const SignUp = () => {
                     { required: true, message: "Please confirm your password" },
                     ({ getFieldValue }) => ({
                       validator(_, value) {
-                        if (!value || getFieldValue("password") === value) {
+                        if (!value || getFieldValue("password") === value)
                           return Promise.resolve();
-                        }
                         return Promise.reject(
                           new Error("Passwords do not match")
                         );
@@ -151,7 +154,6 @@ const SignUp = () => {
                   <Password placeholder="******" />
                 </Form.Item>
 
-                {/* Terms and Conditions */}
                 <div className="flex justify-between items-center mb-3">
                   <Form.Item
                     name="agreement"
@@ -161,94 +163,51 @@ const SignUp = () => {
                         validator: (_, value) =>
                           value
                             ? Promise.resolve()
-                            : Promise.reject(
-                              new Error("You must agree to the terms")
-                            ),
+                            : Promise.reject(new Error("You must agree")),
                       },
                     ]}
                   >
-                    <div className=" flex items-center ">
-                      <Checkbox className="text-xs">
-                        I agree with {" "}
-                        {/* <span className="text-[#F68064] font-semibold"> */}
-                        {/* <NavLink to="/terms-and-conditions">terms and conditions</NavLink> */}
-                        {/* <span onClick={showTermModal}>terms and conditions</span> */}
-                        {/* </span> */}
-                        {" "}
-                        {/* <span className="text-[#F68064] font-semibold"> */}
-                        {/* <NavLink to="/privacy-policy">privacy policy</NavLink> */}
-                        {/* <span onClick={showPrivacyModal}>privacy policy</span> */}
-                        {/* </span> */}
-                        {/* , and{" "}
-                      <span className="text-[#F68064] font-semibold">
-                        <NavLink to="/media-policy">Media Policy</NavLink>
-                      </span> */}
-                      </Checkbox>
-                      <div >
-
-                          <span className="text-[#F68064] font-semibold cursor-pointer">
-                            {/* <NavLink to="/terms-and-conditions">terms and conditions</NavLink> */}
-                            <span className=" text-[12px]" onClick={showTermModal}>Terms and conditions, </span>
-                          </span>
-                          {" "}
-                          <span className="text-[#F68064] font-semibold cursor-pointer m">
-                            {/* <NavLink to="/privacy-policy">privacy policy</NavLink> */}
-                            <span className=" text-[12px]" onClick={showPrivacyModal}>Privacy policy, </span>
-                          </span>
-  
-                        <span className="text-[#F68064] font-semibold cursor-pointer">
-                          <NavLink className=" text-[12px]" to="/media-usage-consent">Media Policy,</NavLink>
+                    <div className="flex items-center">
+                      <Checkbox className="text-xs"></Checkbox>
+                      <div>
+                        <span
+                          className="text-[#F68064] cursor-pointer text-[12px]"
+                          onClick={() => setIsTermModalOpen(true)}
+                        >
+                          Terms and conditions,{" "}
                         </span>
-                        <span className="text-[#F68064] font-semibold cursor-pointer ml-2">
-                          <NavLink className=" text-[12px]" to="/opt-in-policy">Sms Policy</NavLink>
+                        <span
+                          className="text-[#F68064] cursor-pointer text-[12px]"
+                          onClick={() => setIsPrivacyModalOpen(true)}
+                        >
+                          Privacy policy,{" "}
                         </span>
+                        <NavLink
+                          className="text-[#F68064] text-[12px]"
+                          to="/media-usage-consent"
+                        >
+                          Media Policy,{" "}
+                        </NavLink>
+                        <NavLink
+                          className="text-[#F68064] text-[12px] ml-1"
+                          to="/opt-in-policy"
+                        >
+                          Sms Policy
+                        </NavLink>
                       </div>
-
                     </div>
                   </Form.Item>
-
-
                 </div>
-                {/* <Form.Item
-                  name="agreement"
-                  valuePropName="checked"
-                  rules={[
-                    {
-                      validator: (_, value) =>
-                        value
-                          ? Promise.resolve()
-                          : Promise.reject(
-                            new Error("You must agree to the Sms and media policy")
-                          ),
-                    },
-                  ]}
-                >
-                  <div className=" flex items-center -mt-5">
-                    <Checkbox className="text-xs">
-                      I agree with the{" "}
-                      {/* <span className="text-[#F68064] font-semibold"> */}
-                      {/* <NavLink to="/terms-and-conditions">terms and conditions</NavLink> */}
-                      {/* <span onClick={showTermModal}>terms and conditions</span> */}
-                      {/* </span> */}
-                      {" "}
-                      {/* <span className="text-[#F68064] font-semibold"> */}
-                      {/* <NavLink to="/privacy-policy">privacy policy</NavLink> */}
-                      {/* <span onClick={showPrivacyModal}>privacy policy</span> */}
-                      {/* </span> */}
-                      {/* , and{" "}
-                      <span className="text-[#F68064] font-semibold">
-                        <NavLink to="/media-policy">Media Policy</NavLink>
-                      </span> */}
-                    {/* </Checkbox>
-                    <div className="">
 
-                    </div>
+                <TermsConditionModal
+                  isTermModalOpen={isTermModalOpen}
+                  handleTermCancel={() => setIsTermModalOpen(false)}
+                />
+                <PrivacyPolicyModal
+                  isPrivacyModalOpen={isPrivacyModalOpen}
+                  handlePrivacyCancel={() => setIsPrivacyModalOpen(false)}
+                />
 
-                  </div>
-                </Form.Item>  */}
-                <TermsConditionModal isTermModalOpen={isTermModalOpen} handleTermOk={handleTermOk} handleTermCancel={handleTermCancel}></TermsConditionModal>
-                <PrivacyPolicyModal isPrivacyModalOpen={isPrivacyModalOpen} handlePrivacyOk={handlePrivacyOk} handlePrivacyCancel={handlePrivacyCancel}></PrivacyPolicyModal>
-                {/* Submit Button */}
                 <AuthButton
                   disabled={isLoading}
                   className="bg-[#F68064] text-white w-full rounded-md py-2 text-xl shadow-md"
@@ -259,7 +218,7 @@ const SignUp = () => {
 
               <p className="text-[#767676] text-center mt-2">
                 Already have an account?{" "}
-                <NavLink to={"/login"} className="text-[#F68064]">
+                <NavLink to="/login" className="text-[#F68064]">
                   Sign In
                 </NavLink>
               </p>
