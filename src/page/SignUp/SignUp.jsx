@@ -9,6 +9,7 @@ import { IoArrowBack } from "react-icons/io5";
 import { useEffect, useState } from "react";
 import TermsConditionModal from "../../component/Modals/TermsConditionModal";
 import PrivacyPolicyModal from "../../component/Modals/PrivacyPolicyModal";
+import { CgClose } from "react-icons/cg";
 
 const SignUp = () => {
   const [singUp, { isLoading }] = useSignUpMutation();
@@ -16,6 +17,11 @@ const SignUp = () => {
 
   const [isTermModalOpen, setIsTermModalOpen] = useState(false);
   const [isPrivacyModalOpen, setIsPrivacyModalOpen] = useState(false);
+  const [phone, setPhone] = useState("");
+  const [showVerify, setShowVerify] = useState(false);
+  const [isOtpVisible, setIsOtpVisible] = useState(false);
+  const [isVerified, setIsVerified] = useState(false);
+  const [otp, setOtp] = useState("");
 
   const [form] = Form.useForm();
 
@@ -115,8 +121,74 @@ const SignUp = () => {
                     },
                   ]}
                 >
-                  <Input placeholder="Enter your number here" />
+                  <div className="relative">
+                    <Input
+                      placeholder="Enter your number here"
+                      value={phone}
+                      disabled={isVerified}
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        setPhone(value);
+                        setShowVerify(value.length >= 10); // show verify only after 10 digits
+                        if (isVerified) setIsVerified(false);
+                      }}
+                    />
+
+                    {showVerify && (
+                      <button
+                        type="button"
+                        className={`absolute  top-1/2 -translate-y-1/2  px-1 py-0.5 text-xs rounded transition-colors ${
+                          isVerified
+                            ? "bg-green-500 right-9 text-white border-green-500 cursor-default"
+                            : "text-white right-2 bg-blue-500 hover:bg-blue-400 "
+                        }`}
+                        disabled={isVerified}
+                        onClick={() => {
+                          if (!isVerified) setIsOtpVisible(true);
+                        }}
+                      >
+                        {isVerified ? "Verified" : "Verify"}
+                      </button>
+                    )}
+                    {isVerified && (
+                      <button
+                        onClick={() => setIsVerified(false)}
+                        className={`absolute right-2 top-1/2 -translate-y-1/2 text-black p-1 hover:text-red-500 text-sm rounded transition-colors`}
+                      >
+                        <CgClose />
+                      </button>
+                    )}
+                  </div>
                 </Form.Item>
+
+                {isOtpVisible && (
+                  <div className="flex items-center gap-3 -mt-3 mb-3">
+                    <Input
+                      placeholder="Enter OTP"
+                      maxLength={6}
+                      value={otp}
+                      onChange={(e) => setOtp(e.target.value)}
+                      className="flex-1"
+                    />
+                    <button
+                      type="button"
+                      onClick={async () => {
+                        try {
+                          // Simulate API call (replace this with real one)
+                          // await verifyOtpApi({ phone, otp });
+                          toast.success("Phone number verified successfully!");
+                          setIsVerified(true);
+                          setIsOtpVisible(false);
+                        } catch {
+                          toast.error("Invalid OTP. Please try again.");
+                        }
+                      }}
+                      className="text-white bg-blue-500  rounded-md px-4 py-1.5 text-sm hover:bg-blue-400 transition"
+                    >
+                      Send
+                    </button>
+                  </div>
+                )}
 
                 <Form.Item
                   label="Password"
