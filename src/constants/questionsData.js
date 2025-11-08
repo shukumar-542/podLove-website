@@ -92,11 +92,15 @@ export const part2Questions = [
       "Regularly - I drink frequently, such as weekly or more",
       "Prefer not to say - I'd rather not disclose this information",
     ],
-  },
-  {
-    question: 'If "Never", would you be comfortable dating someone who drinks?',
-    type: "radio",
-    options: ["Yes", "No", "Depends"],
+    conditionalInput: {
+      "Never- don't drink alcohol at all": {
+        type: "radio",
+        key: "neverDrink",
+        label:
+          'If "Never", would you be comfortable dating someone who drinks?',
+        options: ["Yes", "No", "Depends"],
+      },
+    },
   },
   {
     question: "Do you consider yourself religious or spiritual?",
@@ -109,7 +113,7 @@ export const part2Questions = [
     ],
     conditionalInput: {
       "Yes, I'm religious": {
-        type: "select",
+        type: "radio",
         key: "religion",
         label: "If religious, what is your religion?",
         options: ["Christian", "Muslim", "Hindu", "Buddhist", "Other"],
@@ -169,7 +173,7 @@ export const part2Questions = [
     options: ["Yes", "No"],
     conditionalInput: {
       Yes: {
-        type: "select",
+        type: "radio",
         key: "petType",
         label: "If yes, which pet do you have?",
         options: ["Dog", "Cat", "Bird", "Other"],

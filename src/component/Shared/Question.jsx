@@ -103,6 +103,18 @@ const Question = ({ question, index, answers, handleChange }) => {
                     </Select.Option>
                   ))}
                 </Select>
+              ) : ci.type === "radio" ? (
+                <Radio.Group
+                  onChange={(e) => handleChange(index, e.target.value, ci.key)}
+                  value={currentAnswer?.[ci.key] || null}
+                  className="flex flex-col mt-2 custom-radio"
+                >
+                  {ci.options.map((opt, i) => (
+                    <Radio key={i} value={opt.value || opt}>
+                      {opt.label || opt}
+                    </Radio>
+                  ))}
+                </Radio.Group>
               ) : ci.type === "checkbox" ? (
                 <Checkbox.Group
                   options={ci.options.map((opt) =>

@@ -211,7 +211,6 @@ const authApi = baseApi.injectEndpoints({
         };
       },
     }),
-
   }),
 });
 

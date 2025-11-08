@@ -10,7 +10,7 @@ import { useNavigate } from "react-router";
 const VerifyEmail = () => {
   const [otp, setOTP] = useState("");
   const navigate = useNavigate();
-
+  console.log(otp);
   const [verifyEmail, { isLoading }] = useVerifyEmailMutation();
 
   const handleVerifyOtp = () => {
@@ -55,7 +55,7 @@ const VerifyEmail = () => {
               value={otp}
               onChange={setOTP}
               autoFocus
-              OTPLength={5}
+              OTPLength={6}
               otpType="number"
               inputClassName="w-8 h-10 md:w-10 md:h-12 text-lg md:text-xl text-center border border-[#FFC0A3] rounded-md"
               className="flex justify-center gap-2 sm:gap-3 md:gap-4"
