@@ -1,43 +1,62 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router'
-import AuthButton from '../component/AuthButton/AuthButton'
+import { useState } from "react";
+import { useNavigate } from "react-router";
+import AuthButton from "../component/AuthButton/AuthButton";
 import bg from "../assets/interest.png";
-import { useUpdateUserInfoMutation } from '../redux/Api/AuthApi';
-import { toast } from 'sonner';
-
-
+import { useUpdateUserInfoMutation } from "../redux/Api/AuthApi";
+import { toast } from "sonner";
 
 const interest = [
-  "Reading", "Cooking", "Fitness", "Music", "Traveling", "Hiking", "Gardening", "Photography", "Board Games", "Yoga & Meditation", "Writing", "Bird Watching", "Volunteering", "DIY & Crafts", "Podcasts", "Painting/ Drawing"
+  "Reading",
+  "Cooking",
+  "Fitness",
+  "Music",
+  "Traveling",
+  "Hiking",
+  "Gardening",
+  "Photography",
+  "Board Games",
+  "Yoga & Meditation",
+  "Writing",
+  "Bird Watching",
+  "Volunteering",
+  "DIY & Crafts",
+  "Podcasts",
+  "Painting/ Drawing",
 ];
 
 const Interest = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [updateInterest, { isLoading }] = useUpdateUserInfoMutation();
   const [selected, setSelected] = useState([]);
   // Select item
   const toggleSelect = (field) => {
-    setSelected((prev) => prev.includes(field) ? prev.filter((item) => item !== field) : [...prev, field])
-  }
+    setSelected((prev) =>
+      prev.includes(field)
+        ? prev.filter((item) => item !== field)
+        : [...prev, field]
+    );
+  };
 
   const handleInterest = () => {
+    if (selected.length === 0) {
+      return toast.error("Please select at least one interest");
+    }
     const data = {
       interests: selected,
-      isProfileComplete: true
+      isProfileComplete: true,
     };
 
     updateInterest(data)
       .unwrap()
       .then((payload) => {
-        toast.success(payload?.message)
+        toast.success(payload?.message);
 
-        navigate('/subscription-plan')
+        navigate("/subscription-plan");
       })
       .catch((error) => {
-        toast.error(error?.data?.message)
+        toast.error(error?.data?.message);
       });
-  }
-
+  };
 
   return (
     <div
@@ -60,17 +79,32 @@ const Interest = () => {
           <h1 className="text-center font-poppins font-semibold text-4xl">
             Interests
           </h1>
-          <p className="text-center max-w-80 mx-auto mt-2">Tell others more about yourself to boost your profile and increase your sales</p>
+          <p className="text-center max-w-80 mx-auto mt-2">
+            Tell others more about yourself to boost your profile and increase
+            your sales
+          </p>
 
-          <div className='grid grid-cols-2  md:grid-cols-3 my-10 gap-5'>
-            {
-              interest?.map((field, index) => (
-                <button onClick={() => toggleSelect(field)} key={index} className={`border border-[#FFB491] font-poppins rounded-xl py-2 transition-all duration-300  ${selected.includes(field) ? "bg-[#FFB491] " : ""}`}>{field}</button>
-              ))
-            }
+          <div className="grid grid-cols-2  md:grid-cols-3 my-10 gap-5">
+            {interest?.map((field, index) => (
+              <button
+                onClick={() => toggleSelect(field)}
+                key={index}
+                className={`border border-[#FFB491] font-poppins rounded-xl py-2 transition-all duration-300  ${
+                  selected.includes(field) ? "bg-[#FFB491] " : ""
+                }`}
+              >
+                {field}
+              </button>
+            ))}
           </div>
           {/* <Link to={"/connection-progress"}> */}
-          <AuthButton disabled={isLoading} handleOnClick={() => handleInterest()} className={"py-2"}>{isLoading ? "Loading..." : "Next"}</AuthButton>
+          <AuthButton
+            disabled={isLoading}
+            handleOnClick={() => handleInterest()}
+            className={"py-2"}
+          >
+            {isLoading ? "Loading..." : "Next"}
+          </AuthButton>
           {/* </Link> */}
         </div>
 
@@ -78,7 +112,7 @@ const Interest = () => {
         <div className="md:col-span-6"></div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Interest
+export default Interest;
