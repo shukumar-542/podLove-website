@@ -4,7 +4,7 @@ import app from "../../assets/appStore.png";
 import google from "../../assets/googleStore.png";
 const DownloadGuide = () => {
   return (
-    <div className="container mx-auto my-10 p-4 md:p-0 ">
+    <div className="container mx-auto my-10 select-none p-4 md:p-0 ">
       <div className="grid md:grid-cols-12 items-center justify-between md:gap-2">
         <div className="md:col-span-8  mx-auto">
           <div className="md:flex items-center justify-center gap-10">
@@ -16,7 +16,9 @@ const DownloadGuide = () => {
           </div>
 
           <div></div>
-          <p className="text-2xl text-center md:mt-5">Download The PodLove App</p>
+          <p className="text-2xl text-center md:mt-5">
+            Download The PodLove App
+          </p>
           {/* <p className="text-[#767676] max-w-[380px] mt-5">
             Download the PodLove App and Match your love Online to get the
             fastest love.

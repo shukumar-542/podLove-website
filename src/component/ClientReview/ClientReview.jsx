@@ -19,6 +19,7 @@ const CustomArrow = ({ type, onClick }) => {
     </div>
   );
 };
+
 const ClientReview = () => {
   return (
     <div className="bg-[#EBEBEB]">
@@ -30,7 +31,9 @@ const ClientReview = () => {
           &quot;Hear From Our Users: Real Feedback, Real Experiences&quot;
         </p>
         <div className="flex justify-center my-10">
-          <Button className={"py-2"}><Link to={"/sign-up"}>Find your Match</Link></Button>
+          <Link to="/sign-up">
+            <Button className="py-2">Find your Match</Button>
+          </Link>
         </div>
 
         <div>
@@ -71,7 +74,6 @@ const ClientReview = () => {
                 <p className="bg-[#FFB491] p-2 rounded-sm shadow-2xl">
                   <IoStar color="white" size={25} />
                 </p>
-              
               </div>
               <h3 className="text-2xl font-bold text-[#242424] mt-3">
                 Ultimately the reliable product
@@ -87,7 +89,7 @@ const ClientReview = () => {
             </div>
             <div className="bg-white p-5 rounded-lg shadow-md">
               <img src={img} alt="" />
-              
+
               <div className="my-5 flex items-center gap-2">
                 <p className="bg-[#FFB491] p-2 rounded-sm shadow-2xl">
                   <IoStar color="#767676" size={25} />
@@ -104,7 +106,6 @@ const ClientReview = () => {
                 <p className="bg-[#FFB491] p-2 rounded-sm shadow-2xl">
                   <IoStar color="white" size={25} />
                 </p>
-              
               </div>
               <h3 className="text-2xl font-bold text-[#242424] mt-3">
                 Ultimately the reliable product
@@ -136,7 +137,6 @@ const ClientReview = () => {
                 <p className="bg-[#FFB491] p-2 rounded-sm shadow-2xl">
                   <IoStar color="white" size={25} />
                 </p>
-              
               </div>
               <h3 className="text-2xl font-bold text-[#242424] mt-3">
                 Ultimately the reliable product

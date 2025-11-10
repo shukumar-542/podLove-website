@@ -141,6 +141,7 @@ const DiscoverCompatibilityPart = ({
         .unwrap()
         .then((res) => toast.success(res.message))
         .catch((err) => toast.error(err?.data?.message));
+      localStorage.clear("compatibility_parts_v1");
       navigate(nextRoute);
     } else {
       navigate(nextRoute);

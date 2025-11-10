@@ -1,8 +1,6 @@
-/* eslint-disable react/prop-types */
 import img from "../../assets/loginBg.png";
 import { Checkbox, Divider, Form, Input } from "antd";
 import Password from "antd/es/input/Password";
-// import { FcGoogle } from "react-icons/fc";
 import { Link, NavLink, useNavigate } from "react-router";
 import { FaApple } from "react-icons/fa";
 import AuthButton from "../../component/AuthButton/AuthButton";
@@ -202,7 +200,7 @@ const Login = () => {
 
             <p className="text-[#767676] text-center mt-2">
               Don&apos;t have an account?{" "}
-              <NavLink to={"/sign-up"} className="text-[#F68064]">
+              <NavLink to="/connection-pathway" className="text-[#F68064]">
                 Sign Up
               </NavLink>
             </p>
