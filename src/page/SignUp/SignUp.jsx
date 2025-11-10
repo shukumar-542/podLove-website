@@ -239,7 +239,7 @@ const SignUp = () => {
                       },
                     ]}
                   >
-                    <div className="flex items-center">
+                    <div className="flex items-center gap-2">
                       <Checkbox className="text-xs"></Checkbox>
                       <div>
                         <span
@@ -261,7 +261,7 @@ const SignUp = () => {
                           Media Policy,{" "}
                         </NavLink>
                         <NavLink
-                          className="text-[#F68064] text-[12px] ml-1"
+                          className="text-[#F68064] text-[12px]"
                           to="/opt-in-policy"
                         >
                           Sms Policy
