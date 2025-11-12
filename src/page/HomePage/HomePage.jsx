@@ -6,7 +6,6 @@ import Pricing from "../../component/Pricing/Pricing";
 import {
   useGetPodCastDetailsQuery,
   useGetUserQuery,
-  // usePodcastCreateMutation,
 } from "../../redux/Api/AuthApi";
 import { toast } from "sonner";
 import { useGetAllPlanQuery } from "../../redux/Api/SubscriptionPlan";
@@ -20,7 +19,6 @@ import { useEffect, useState } from "react";
 import FirstSurvey from "../../component/Modals/FirstSurvey";
 import SecondSurvey from "../../component/Modals/SecondSurvey";
 import After7DaysSurveyModal from "../../component/Modals/After7DaysSurvey";
-// import { useState } from "react";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -52,8 +50,6 @@ const HomePage = () => {
     setIsSecondModalOpen(false);
   };
 
-  // const [userSelectedRoomCode, setUserSelectedRoomCode] = useState();
-  // const [createPodCast] = usePodcastCreateMutation();
   const [sendPodcastRequest, { isLoading: requestPodcastLoading }] =
     useSendPodcastRequestMutation();
   const { data: getPodcastDetails, isLoading } = useGetPodCastDetailsQuery();
@@ -127,12 +123,14 @@ const HomePage = () => {
     };
     sendPodcastRequest(data)
       .unwrap()
-      .then((payload) => {
+      .then(() => {
         // toast.success(payload?.message))
         window.location.reload();
       })
-      .catch((error) =>
-        toast.error(error?.data?.message || "Failed to request podcast.")
+      .catch(() =>
+        toast.error("Podcast request failed", {
+          description: "Something went wrong. Please try again in a moment.",
+        })
       );
   };
 
@@ -371,7 +369,7 @@ const HomePage = () => {
           {getPodcastDetails?.data?.podcast?.participants?.length > 0 &&
             !podcast?.primaryUser?._id && (
               <h1 className="text-center font-bold text-2xl md:text-4xl my-14">
-                You're Matched With Someone
+                You&apos;re Matched With Someone
               </h1>
             )}
           {getPodcastDetails?.data?.podcast?.participants?.length > 0 &&

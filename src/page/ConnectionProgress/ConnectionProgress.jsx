@@ -36,11 +36,14 @@ const ConnectionProgress = () => {
           if (payload?.success) {
             navigate("/congratulation");
           } else {
-            navigate('/match-result');
-          }  
+            navigate("/match-result");
+          }
         })
         .catch((error) => {
-          const msg = error?.data?.message || "Something went wrong.";
+          const msg = error?.data?.message?.includes("Cast to ObjectId failed")
+            ? "Invalid user reference. Please try again or contact support."
+            : error?.data?.message || "Something went wrong. Please try again.";
+
           toast.error(msg);
           setErrorMessage(msg);
         });
@@ -70,11 +73,17 @@ const ConnectionProgress = () => {
             Your Connection Begins Here
           </h1>
           <p className="max-w-80 mx-auto mt-2 text-gray-700">
-            Our smart AI connector is working hard to find the best matches for you.
+            Our smart AI connector is working hard to find the best matches for
+            you.
           </p>
 
           <div className="flex justify-center my-10">
-            <Progress type="circle" percent={percent} strokeWidth={12} size={180} />
+            <Progress
+              type="circle"
+              percent={percent}
+              strokeWidth={12}
+              size={180}
+            />
           </div>
 
           {errorMessage ? (

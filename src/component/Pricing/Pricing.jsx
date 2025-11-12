@@ -11,6 +11,7 @@ const Pricing = ({ subscriptions, buttonDisabled }) => {
   const navigate = useNavigate();
   const logInUser = localStorage.getItem("podlove-token");
   // Handle upgrade plan function
+
   const handleUpdatePlan = (plan) => {
     const data = {
       planId: plan?._id,
