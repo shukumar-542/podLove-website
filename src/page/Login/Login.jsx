@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import img from "../../assets/loginBg.png";
 import { Checkbox, Divider, Form, Input } from "antd";
 import Password from "antd/es/input/Password";
@@ -59,33 +60,39 @@ const Login = () => {
   // =============================================================================
 
   const handleAppleSuccess = async (response) => {
-    // try {
-    //   const res = await fetch('/api/auth/apple', {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     credentials: 'include', // if your backend sets httpOnly cookies
-    //     body: JSON.stringify({
-    //       code: response?.authorization?.code,
-    //       id_token: response?.authorization?.id_token,
-    //     }),
-    //   });
-    //   if (!res.ok) throw new Error(await res.text());
-    //   const payload = await res.json();
-    //   // mirror your Google handling:
-    //   localStorage.setItem('podlove-token', payload?.data?.accessToken);
-    //   toast.success(payload?.message || 'Signed in with Apple');
-    //   if (payload?.data?.user?.isProfileComplete) {
-    //     window.location.href = '/home';
-    //   } else {
-    //     window.location.href = '/location';
-    //   }
-    // } catch (err) {
-    //   toast.error(err?.message || 'Apple sign-in failed');
-    // }
-  };
+    try {
+      // Extract the Apple tokens
+      const code = response?.authorization?.code;
+      const idToken = response?.authorization?.id_token;
 
-  const handleAppleError = () => {
-    toast.error("Apple sign-in cancelled or failed");
+      if (!code || !idToken) {
+        toast.error("Apple sign-in response incomplete");
+        return;
+      }
+
+      // Send tokens to backend to verify and exchange for your JWT
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/auth/apple`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ code, id_token: idToken }),
+      });
+
+      const payload = await res.json();
+
+      if (!res.ok) throw new Error(payload?.message || "Apple login failed");
+
+      // Save token and redirect
+      localStorage.setItem("podlove-token", payload?.data?.accessToken);
+      toast.success(payload?.message || "Signed in with Apple");
+
+      if (payload?.data?.user?.isProfileComplete) {
+        window.location.href = "/home";
+      } else {
+        window.location.href = "/location";
+      }
+    } catch (err) {
+      toast.error(err?.message || "Apple sign-in failed");
+    }
   };
 
   return (
@@ -148,35 +155,17 @@ const Login = () => {
             >
               Or
             </Divider>
-            {/* <button className="border w-full mt-5 border-[#F68064] py-2 rounded-md text-[#767676] flex items-center justify-center gap-2">
-              <FcGoogle size={25} />
-              Continue with Google
-            </button> */}
+
             <div className=" flex items-center justify-center">
               <GoogleLogin onSuccess={handleLoginSuccess} onError={() => {}} />
             </div>
 
-            {/* <div className=" flex items-center justify-center">
-              <button className="border w-auto px-2 mt-5 border-[#F68064] py-2 rounded-md text-[#767676] flex items-center justify-center gap-2">
-                <FaApple size={25} />
-                Continue with apple
-              </button>
-            </div> */}
             <div className=" flex items-center justify-center">
               <AppleSignin
-                // authOptions={{
-                //   clientId: 5541,
-                //   scope: 'name email',
-                //   redirectURI: `${window.location.origin}/auth/apple/callback`,
-                //   state: crypto.randomUUID(),
-                //   usePopup: true,
-                //   nonce: btoa(crypto.getRandomValues(new Uint8Array(16)).toString()),
-                // }}
                 authOptions={{
-                  clientId: "com.example.web",
-                  scope: "email name",
-                  redirectURI: `${window.location.origin}/auth/apple/callback`,
-                  // redirectURI: `${window.location.origin}/login`,
+                  clientId: "com.yourapp.web",
+                  scope: "name email",
+                  redirectURI: `${window.location.origin}/login`,
                   state: crypto.randomUUID(),
                   nonce: btoa(
                     crypto.getRandomValues(new Uint8Array(16)).toString()
@@ -184,8 +173,7 @@ const Login = () => {
                   usePopup: true,
                 }}
                 onSuccess={handleAppleSuccess}
-                onError={handleAppleError}
-                /** customize the button **/
+                onError={() => toast.error("Apple sign-in cancelled or failed")}
                 render={(props) => (
                   <button
                     onClick={props.onClick}
