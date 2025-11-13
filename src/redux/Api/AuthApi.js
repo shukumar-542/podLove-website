@@ -91,6 +91,15 @@ const authApi = baseApi.injectEndpoints({
         };
       },
     }),
+    appleLogin: builder.mutation({
+      query: (data) => {
+        return {
+          url: "/auth/sign-in-with-apple",
+          method: "POST",
+          body: data,
+        };
+      },
+    }),
     getTermsCondition: builder.query({
       query: () => {
         return {
@@ -225,6 +234,7 @@ export const {
   useGetPodCastDetailsQuery,
   useChangePasswordMutation,
   useGoogleLoginMutation,
+  useAppleLoginMutation,
   useGetTermsConditionQuery,
   useGetPrivacyQuery,
   useGetConsumerPolicyQuery,

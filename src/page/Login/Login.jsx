@@ -6,6 +6,7 @@ import { Link, NavLink, useNavigate } from "react-router";
 import { FaApple } from "react-icons/fa";
 import AuthButton from "../../component/AuthButton/AuthButton";
 import {
+  useAppleLoginMutation,
   useGoogleLoginMutation,
   useLoginUserMutation,
 } from "../../redux/Api/AuthApi";
@@ -18,6 +19,7 @@ import { IoArrowBack } from "react-icons/io5";
 const Login = () => {
   const [loginUser, { isLoading }] = useLoginUserMutation();
   const [googleLogin] = useGoogleLoginMutation();
+  const [appleLogin] = useAppleLoginMutation();
   const navigate = useNavigate();
   const handleUserLogin = async (values) => {
     try {
@@ -34,7 +36,7 @@ const Login = () => {
     }
   };
 
-  const handleLoginSuccess = (credentialResponse) => {
+  const handleGoogleSuccess = (credentialResponse) => {
     const decoded = jwtDecode(credentialResponse.credential);
     const data = {
       googleId: decoded?.sub,
@@ -60,39 +62,33 @@ const Login = () => {
   // =============================================================================
 
   const handleAppleSuccess = async (response) => {
-    try {
-      // Extract the Apple tokens
-      const code = response?.authorization?.code;
-      const idToken = response?.authorization?.id_token;
-
-      if (!code || !idToken) {
-        toast.error("Apple sign-in response incomplete");
-        return;
-      }
-
-      // Send tokens to backend to verify and exchange for your JWT
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/auth/apple`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ code, id_token: idToken }),
-      });
-
-      const payload = await res.json();
-
-      if (!res.ok) throw new Error(payload?.message || "Apple login failed");
-
-      // Save token and redirect
-      localStorage.setItem("podlove-token", payload?.data?.accessToken);
-      toast.success(payload?.message || "Signed in with Apple");
-
-      if (payload?.data?.user?.isProfileComplete) {
-        window.location.href = "/home";
-      } else {
-        window.location.href = "/location";
-      }
-    } catch (err) {
-      toast.error(err?.message || "Apple sign-in failed");
+    console.log(response);
+    if (!response?.authorization?.code || !response?.authorization?.id_token) {
+      toast.error("Apple sign-in response incomplete");
+      return;
     }
+
+    const decoded = jwtDecode(response.authorization.id_token);
+    const payloadData = {
+      appleCode: response?.authorization?.code,
+      appleId: decoded?.sub,
+      name:
+        response?.user?.name?.firstName + " " + response?.user?.name?.lastName,
+      email: response?.user?.email,
+    };
+
+    appleLogin(payloadData)
+      .unwrap()
+      .then((payload) => {
+        localStorage.setItem("podlove-token", payload?.data?.accessToken);
+        toast.success(payload?.message);
+        if (payload?.data?.user?.isProfileComplete) {
+          navigate("/home");
+        } else {
+          navigate("/location");
+        }
+      })
+      .catch((error) => toast.error(error?.data?.message));
   };
 
   return (
@@ -157,13 +153,13 @@ const Login = () => {
             </Divider>
 
             <div className=" flex items-center justify-center">
-              <GoogleLogin onSuccess={handleLoginSuccess} onError={() => {}} />
+              <GoogleLogin onSuccess={handleGoogleSuccess} onError={() => {}} />
             </div>
 
             <div className=" flex items-center justify-center">
               <AppleSignin
                 authOptions={{
-                  clientId: "com.yourapp.web",
+                  clientId: "co.podlove.web",
                   scope: "name email",
                   redirectURI: `${window.location.origin}/login`,
                   state: crypto.randomUUID(),
