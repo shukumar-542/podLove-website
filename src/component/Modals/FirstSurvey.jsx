@@ -58,7 +58,10 @@ const FirstSurvey = ({ isModalOpen, handleOk, handleCancel, podcastId }) => {
     // Submit using your mutation
     postFirstSurvey(dataToSend)
       .unwrap()
-      .then(() => handleOk())
+      .then(() => {
+        window.location.reload();
+        handleOk();
+      })
       .catch();
   };
 
