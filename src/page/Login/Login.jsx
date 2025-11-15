@@ -24,7 +24,6 @@ const Login = () => {
   const handleUserLogin = async (values) => {
     try {
       const payload = await loginUser(values).unwrap();
-
       if (payload?.data?.accessToken) {
         localStorage.setItem("podlove-token", payload?.data?.accessToken);
 
@@ -72,9 +71,10 @@ const Login = () => {
     const payloadData = {
       appleCode: response?.authorization?.code,
       appleId: decoded?.sub,
-      name:
-        response?.user?.name?.firstName + " " + response?.user?.name?.lastName,
-      email: response?.user?.email,
+      name: response?.user?.name
+        ? response?.user?.name?.firstName + " " + response?.user?.name?.lastName
+        : null,
+      email: response?.user?.email ?? null,
     };
 
     appleLogin(payloadData)
