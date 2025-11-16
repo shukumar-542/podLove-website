@@ -61,18 +61,17 @@ const Profile = () => {
                 {getUser?.data?.name}
               </p>
               <div className=" flex items-center justify-center gap-3">
+                <Link to={"/edit-profile"}>
+                  <div className="bg-[#FFA175] text-white p-2 rounded-md shadow-lg cursor-pointer">
+                    <FiEdit />
+                  </div>
+                </Link>
                 <Link
                   to={"/change-password"}
                   className="bg-[#FFA175] text-white p-2 rounded-md shadow-lg cursor-pointer"
                 >
                   <IoSettingsOutline />
                 </Link>
-                <Link to={"/edit-profile"}>
-                  <div className="bg-[#FFA175] text-white p-2 rounded-md shadow-lg cursor-pointer">
-                    <FiEdit />
-                  </div>
-                </Link>
-
                 <Popconfirm
                   title="Log Out"
                   description="Are you sure to log out?"
