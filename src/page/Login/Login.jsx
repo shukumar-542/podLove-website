@@ -61,7 +61,6 @@ const Login = () => {
   // =============================================================================
 
   const handleAppleSuccess = async (response) => {
-    console.log(response);
     if (!response?.authorization?.code || !response?.authorization?.id_token) {
       toast.error("Apple sign-in response incomplete");
       return;

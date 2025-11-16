@@ -6,7 +6,6 @@ import { useUpgradeSubscriptionPlanMutation } from "../../redux/Api/Subscription
 import { toast } from "sonner";
 import { Link, useNavigate } from "react-router";
 const Pricing = ({ subscriptions, buttonDisabled, activePlan }) => {
-  console.log(activePlan);
   const [upgradeSubscription, { isLoading }] =
     useUpgradeSubscriptionPlanMutation();
   const navigate = useNavigate();

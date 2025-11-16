@@ -10,7 +10,6 @@ import { useNavigate } from "react-router";
 const VerifyEmail = () => {
   const [otp, setOTP] = useState("");
   const navigate = useNavigate();
-  console.log(otp);
   const [verifyEmail, { isLoading }] = useVerifyEmailMutation();
 
   const handleVerifyOtp = () => {
