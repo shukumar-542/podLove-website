@@ -108,7 +108,7 @@ const HomePage = () => {
   // Handle video call for matched user
   // ================================================================
   const handleVideoCallForUser = (roomCodes) => {
-    const code = roomCodes?.find((code) => code?.role === "viewer-realtime");
+    const code = roomCodes?.find((code) => code?.role === "waiting-room");
     if (code) {
       navigate(`/ms/?roomCode=${code?.code}`);
     }
