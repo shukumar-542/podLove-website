@@ -5,7 +5,8 @@ import { Divider } from "antd";
 import { useUpgradeSubscriptionPlanMutation } from "../../redux/Api/SubscriptionPlan";
 import { toast } from "sonner";
 import { Link, useNavigate } from "react-router";
-const Pricing = ({ subscriptions, buttonDisabled }) => {
+const Pricing = ({ subscriptions, buttonDisabled, activePlan }) => {
+  console.log(activePlan);
   const [upgradeSubscription, { isLoading }] =
     useUpgradeSubscriptionPlanMutation();
   const navigate = useNavigate();
@@ -32,7 +33,7 @@ const Pricing = ({ subscriptions, buttonDisabled }) => {
   };
 
   return (
-    <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 my-10  mx-auto font-poppins mr-2 md:mr-0 ml-2 md:ml-0 ">
+    <section className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 gap-8 my-10  mx-auto font-poppins mr-2 md:mr-0 ml-2 md:ml-0 ">
       {subscriptions?.map((plan) => {
         return (
           <div
@@ -43,13 +44,14 @@ const Pricing = ({ subscriptions, buttonDisabled }) => {
               backgroundSize: "cover",
               width: "100%",
             }}
-            className="rounded-3xl  text-white p-4 py-8 shadow-2xl shadow-black"
+            className="rounded-3xl overflow-hidden relative text-white p-4 py-8 shadow-2xl shadow-black"
           >
+            {plan.name === activePlan.plan && <p className="ribbon">Active</p>}
             <p className="text-center bg-[#231A19] text-[20px] py-2  rounded-full max-w-[120px]  mx-auto">
               {plan?.name?.split(":")[0]}
             </p>
 
-            <p className=" my-2 mt-10 ">{plan?.name}</p>
+            {/* <p className=" my-2 mt-10 ">{plan?.name}</p> */}
 
             <div className="space-y-2 pb-5 mt-5 min-auto">
               {plan?.description?.map((det) => {

@@ -25,7 +25,6 @@ const HomePage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { data: getUser } = useGetUserQuery();
-
   const handleOk = () => {
     setIsModalOpen(false);
   };
@@ -464,6 +463,7 @@ const HomePage = () => {
         <Pricing
           subscriptions={getAllPlans?.data}
           buttonDisabled={getPodcastDetails?.data?.podcast}
+          activePlan={getUser?.data?.subscription}
         />
       </div>
       <FirstSurvey

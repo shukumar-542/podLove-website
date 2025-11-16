@@ -4,152 +4,165 @@
 
 /* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap'); */
 
-
 .slick-slide {
-    padding: 0 10px; 
-  }
+  padding: 0 10px;
+}
 
-  .custom-arrow {
-    font-size: 40px; /* Default size for large screens */
-    color: #A1A1A1;
-    cursor: pointer;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 10;
+.custom-arrow {
+  font-size: 40px; /* Default size for large screens */
+  color: #a1a1a1;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
 }
 
 /* Positioning for left and right arrows */
 .left-arrow {
-    left: -50px;
+  left: -50px;
 }
 .right-arrow {
-    right: -50px;
+  right: -50px;
 }
 
 /* Responsive Design: Small devices */
 @media (max-width: 768px) {
-    .custom-arrow {
-        font-size: 24px; 
-    }
-    .left-arrow {
-        left: -30px; 
-    }
-    .right-arrow {
-        right: -30px;
-    }
+  .custom-arrow {
+    font-size: 24px;
+  }
+  .left-arrow {
+    left: -30px;
+  }
+  .right-arrow {
+    right: -30px;
+  }
 }
 
 /* Extra small devices (phones) */
 @media (max-width: 480px) {
-    .custom-arrow {
-        font-size: 18px;
-    }
-    .left-arrow {
-        left: -20px;
-    }
-    .right-arrow {
-        right: -0px;
-    }
+  .custom-arrow {
+    font-size: 18px;
+  }
+  .left-arrow {
+    left: -20px;
+  }
+  .right-arrow {
+    right: -0px;
+  }
 }
 
 .ant-collapse > .ant-collapse-item {
-    border-bottom: 1px solid #ddd;
-  }
-  .ant-collapse-header {
-    padding: 16px;
-    font-size: 16px;
-    font-weight: 500;
-  }
-  .ant-collapse-content-box {
-    padding: 12px;
-  }
+  border-bottom: 1px solid #ddd;
+}
+.ant-collapse-header {
+  padding: 16px;
+  font-size: 16px;
+  font-weight: 500;
+}
+.ant-collapse-content-box {
+  padding: 12px;
+}
 
-  :where(.css-dev-only-do-not-override-1yacf91).ant-collapse {
-    border:  none !important;
-  }
+:where(.css-dev-only-do-not-override-1yacf91).ant-collapse {
+  border: none !important;
+}
 
-  :where(.css-dev-only-do-not-override-1yacf91).ant-collapse>.ant-collapse-item >.ant-collapse-header {
-    padding: 51px 32px;
-  }
-:where(.css-dev-only-do-not-override-1yacf91).ant-slider:hover .ant-slider-track {
-    background-color: #FFA175;
+:where(.css-dev-only-do-not-override-1yacf91).ant-collapse
+  > .ant-collapse-item
+  > .ant-collapse-header {
+  padding: 51px 32px;
+}
+:where(.css-dev-only-do-not-override-1yacf91).ant-slider:hover
+  .ant-slider-track {
+  background-color: #ffa175;
 }
 :where(.css-dev-only-do-not-override-1yacf91).ant-slider .ant-slider-track {
-    background-color: #FFA175;
+  background-color: #ffa175;
 }
 
-:where(.css-dev-only-do-not-override-1yacf91).ant-slider .ant-slider-handle::after {
-    
-    background-color: #ffffff;
-    box-shadow: 0 0 0 2px #FFA175;
-    
+:where(.css-dev-only-do-not-override-1yacf91).ant-slider
+  .ant-slider-handle::after {
+  background-color: #ffffff;
+  box-shadow: 0 0 0 2px #ffa175;
 }
 :where(.css-dev-only-do-not-override-1yacf91).ant-select .ant-select-arrow {
-    color:  #FFA175;
+  color: #ffa175;
 }
 
-:where(.css-dev-only-do-not-override-1yacf91).ant-select-outlined:not(.ant-select-customize-input) .ant-select-selector {
-    border:  1px solid #FFA175;
+:where(.css-dev-only-do-not-override-1yacf91).ant-select-outlined:not(
+    .ant-select-customize-input
+  )
+  .ant-select-selector {
+  border: 1px solid #ffa175;
 }
-
 
 /* Checkbox color */
 
-
 /* Change Checkbox border color */
 .ant-checkbox-wrapper .ant-checkbox {
-    border-color: #FFA175; /* Custom border color */
-  }
-  
-  /* Change checked box background */
-  .ant-checkbox-checked .ant-checkbox-inner {
-    background-color: #FFA175 !important; /* Custom fill color */
-    border-color: #FFA175 !important;
-  }
-  
-  /* Change checkbox hover effect */
-  .ant-checkbox:hover .ant-checkbox-inner {
-    border-color: #FFA175 !important;
-  }
-  
-  /* Change tick color inside the checkbox */
-  .ant-checkbox-checked::after {
-    border-color: white !important;
-  }
+  border-color: #ffa175; /* Custom border color */
+}
 
+/* Change checked box background */
+.ant-checkbox-checked .ant-checkbox-inner {
+  background-color: #ffa175 !important; /* Custom fill color */
+  border-color: #ffa175 !important;
+}
 
+/* Change checkbox hover effect */
+.ant-checkbox:hover .ant-checkbox-inner {
+  border-color: #ffa175 !important;
+}
 
-  /* Change radio button color */
+/* Change tick color inside the checkbox */
+.ant-checkbox-checked::after {
+  border-color: white !important;
+}
+
+/* Change radio button color */
 .custom-radio .ant-radio-checked .ant-radio-inner {
-  border-color: #FFA175 !important; /* Change border color */
-  background-color: #FFA175 !important; /* Change fill color */
+  border-color: #ffa175 !important; /* Change border color */
+  background-color: #ffa175 !important; /* Change fill color */
 }
 
 .custom-radio .ant-radio-checked::after {
-  border-color: #FFA175 !important; /* Change outer glow color */
+  border-color: #ffa175 !important; /* Change outer glow color */
 }
 
 /* Optional: Change hover effect */
 .custom-radio .ant-radio:hover .ant-radio-inner {
-  border-color: #FFA175 !important;
+  border-color: #ffa175 !important;
 }
-
-
-
 
 /* Progress bar for finding match*/
-:where(.css-dev-only-do-not-override-1yacf91).ant-progress .ant-progress-inner:not(.ant-progress-circle-gradient) .ant-progress-circle-path {
-  stroke: #FFA175;
+:where(.css-dev-only-do-not-override-1yacf91).ant-progress
+  .ant-progress-inner:not(.ant-progress-circle-gradient)
+  .ant-progress-circle-path {
+  stroke: #ffa175;
 }
 
-:where(.css-dev-only-do-not-override-1yacf91).ant-progress .ant-progress-inner:not(.ant-progress-circle-gradient) .ant-progress-circle-path {
-  stroke: #FFA175 !important;
+:where(.css-dev-only-do-not-override-1yacf91).ant-progress
+  .ant-progress-inner:not(.ant-progress-circle-gradient)
+  .ant-progress-circle-path {
+  stroke: #ffa175 !important;
 }
 .anticon {
-  color: #FFA175;
+  color: #ffa175;
 }
 
+.ribbon {
+  position: absolute;
+  top: 12px;
+  left: -26px;
+  background: black;
+  color: white;
+  padding: 4px 30px;
+  font-size: 14px;
+  font-weight: 500;
+  transform: rotate(-45deg);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
+}
 /* 100MS LOGO */
 /* img.hms-ui-c-pWkBE {
     display: none;
