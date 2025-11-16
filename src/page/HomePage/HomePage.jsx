@@ -81,7 +81,7 @@ const HomePage = () => {
   const status = podcast?.status;
 
   const roomCodeHost = podcast?.roomCodes?.find(
-    (code) => code?.role === "viewer-realtime"
+    (code) => code?.role === "waiting-room"
   );
 
   const handleVideoCall = () => {
