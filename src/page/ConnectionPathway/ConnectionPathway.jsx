@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useSubmitConnectionPathwayMutation } from "../../redux/Api/PodcastApi";
 import { useState } from "react";
 import AttentionModal from "../../component/Modals/AttentionModal";
+import { Link } from "react-router-dom";
+import { IoArrowBack } from "react-icons/io5";
 
 // Likert and option sets
 const LIKERT = [
@@ -20,12 +22,8 @@ export default function ConnectionPathway() {
   const [form] = Form.useForm();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
+  const handleOk = () => setIsModalOpen(false);
+  const handleCancel = () => setIsModalOpen(false);
 
   const navigate = useNavigate();
   const [submitConnectionPathway, { isLoading }] =
@@ -46,18 +44,6 @@ export default function ConnectionPathway() {
         values.strongRelationship,
       ],
     };
-    // const userResponses = [
-    //     "Agree",
-    //     "Yes",
-    //     "Yes",
-    //     "Kindness, honesty",
-    //     "Strongly Agree",
-    //     "Yes",
-    //     "Strongly Agree",
-    //     "Yes",
-    //     "Yes",
-    //     "Agree",
-    // ];
 
     submitConnectionPathway(answers)
       .unwrap()
@@ -69,7 +55,7 @@ export default function ConnectionPathway() {
           navigate(`/sign-up`);
         }
       })
-      .catch((error) => {});
+      .catch(() => {});
   };
 
   return (
@@ -81,17 +67,25 @@ export default function ConnectionPathway() {
         },
       }}
     >
-      <div className="min-h-screen bg-[#ffa175] flex items-start justify-center py-12 px-4">
+      <div className="min-h-screen bg-[#ffa175] flex items-start justify-center py-12 px-4 relative">
+        {/* BACK ARROW FIXED */}
+        <Link
+          to="/"
+          className="absolute top-10 my-5 left-10 z-[9999] hidden sm:block"
+        >
+          <IoArrowBack size={30} className="text-[#F26828] cursor-pointer" />
+        </Link>
+
         <AttentionModal
           isModalOpen={isModalOpen}
           handleOk={handleOk}
           handleCancel={handleCancel}
-        ></AttentionModal>
+        />
+
         <Card className="w-full max-w-3xl shadow-lg rounded-2xl">
           <div className="px-0 py-6 md:px-10">
             <header className="flex items-center gap-3 mb-4">
               <div className="text-2xl md:text-3xl font-semibold flex items-center gap-2">
-                {/* <FiHelpCircle className="text-2xl text-[#ffa175]" aria-hidden /> */}
                 <span>Connection Pathway</span>
               </div>
             </header>
