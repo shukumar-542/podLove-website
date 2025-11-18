@@ -66,46 +66,42 @@ const NavBar = () => {
           <NavLink to="/contact-us" className="hover:text-[#FFA175]">
             Contact us
           </NavLink>
-          {/* <NavLink to="/feedback-first-step" className="hover:text-[#FFA175]">Feedback</NavLink> */}
         </div>
 
         {/* Right Section */}
         <div className="hidden lg:flex space-x-3 xl:space-x-5 items-center">
           <img src={apple_store} className=" w-12 cursor-pointer" alt="" />
           <img src={play_store} className=" w-12 cursor-pointer" alt="" />
-          {logInUser && (
-            <NavLink
-              to="/notification"
-              className="bg-[#FFA175] rounded-full p-2"
-            >
-              <IoMdNotifications size={25} color="white" />
-            </NavLink>
-          )}
 
           {logInUser ? (
-            <Link to={"/profile"}>
-              <img
-                src={`${baseUrl}${getUser?.data?.avatar}`}
-                className="h-10 shadow-2xl object-cover w-10 rounded-full border border-[#FFA175] cursor-pointer"
-                alt=""
-              />
-            </Link>
+            <>
+              <NavLink
+                to="/notification"
+                className="bg-[#FFA175] rounded-full p-2"
+              >
+                <IoMdNotifications size={25} color="white" />
+              </NavLink>
+              <Link to={"/profile"}>
+                <img
+                  src={`${baseUrl}${getUser?.data?.avatar}`}
+                  className="h-10 shadow-2xl object-cover w-10 rounded-full border border-[#FFA175] cursor-pointer"
+                  alt=""
+                />
+              </Link>
+            </>
           ) : (
-            <NavLink to="/login" className="hover:text-[#FFA175]">
-              Login
-            </NavLink>
-          )}
-          {
-            // !logInUser && <Link to={"/sign-up"} className="bg-[#FFA175] text-white px-4 py-1 rounded">Sign Up Here</Link>
-            !logInUser && (
+            <>
+              <NavLink to="/login" className="hover:text-[#FFA175]">
+                Login
+              </NavLink>
               <Link
                 to={"/connection-pathway"}
                 className="bg-[#FFA175] text-white px-4 py-1 rounded"
               >
                 Sign Up Here
               </Link>
-            )
-          }
+            </>
+          )}
         </div>
       </div>
 
@@ -161,41 +157,40 @@ const NavBar = () => {
         >
           Contact us
         </NavLink>
-        {/* <NavLink to="/feedback-first-step" onClick={() => setMenuOpen(false)} className="text-xl py-2">Feedback</NavLink> */}
         {logInUser ? (
-          <Link to={"/profile"} onClick={() => setMenuOpen(false)}>
-            <img
-              src={`${baseUrl}${getUser?.data?.avatar}`}
-              className="h-10 shadow-2xl object-cover w-10 rounded-full border border-[#FFA175] cursor-pointer"
-              alt=""
-            />
-          </Link>
+          <>
+            <NavLink
+              to="/notification"
+              onClick={() => setMenuOpen(false)}
+              className="bg-[#FFA175] flex items-center justify-center my-2 size-10 rounded-full"
+            >
+              <IoMdNotifications size={24} color="white" />
+            </NavLink>
+            <Link to={"/profile"} onClick={() => setMenuOpen(false)}>
+              <img
+                src={`${baseUrl}${getUser?.data?.avatar}`}
+                className="h-10 shadow-2xl object-cover w-10 my-2 rounded-full border border-[#FFA175] cursor-pointer"
+                alt=""
+              />
+            </Link>
+          </>
         ) : (
-          <NavLink
-            to="/login"
-            onClick={() => setMenuOpen(false)}
-            className="text-xl py-2 mt-2"
-          >
-            Login
-          </NavLink>
-        )}
-        <NavLink
-          to="/notification"
-          onClick={() => setMenuOpen(false)}
-          className="bg-[#FFA175] rounded-full p-2 mt-4"
-        >
-          <IoMdNotifications size={24} color="white" />
-        </NavLink>
-
-        {/* <NavLink to={"/signup"} className="bg-[#FFA175] text-white px-6 py-2 rounded mt-4" onClick={() => setMenuOpen(false)}>Sign Up Here</NavLink> */}
-        {!logInUser && (
-          <NavLink
-            to={"/connection-pathway"}
-            className="bg-[#FFA175] text-white px-6 py-2 rounded mt-4"
-            onClick={() => setMenuOpen(false)}
-          >
-            Sign Up Here
-          </NavLink>
+          <>
+            <NavLink
+              to="/login"
+              onClick={() => setMenuOpen(false)}
+              className="text-xl py-2 mt-2"
+            >
+              Login
+            </NavLink>
+            <NavLink
+              to={"/connection-pathway"}
+              className="bg-[#FFA175] text-white px-6 py-2 rounded mt-4"
+              onClick={() => setMenuOpen(false)}
+            >
+              Sign Up Here
+            </NavLink>
+          </>
         )}
       </div>
     </div>
