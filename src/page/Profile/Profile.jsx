@@ -37,7 +37,7 @@ const Profile = () => {
               alt=""
             />
             <p className="mt-3 flex  items-center gap-1 text-[#6B4431]">
-              <IoCalendarOutline />
+              <IoCalendarOutline /> Joined{" "}
               {getUser?.data?.createdAt
                 ?.split("T")[0]
                 ?.split("-")
@@ -90,6 +90,13 @@ const Profile = () => {
               <p className="flex justify-between">
                 <span>Gender</span>{" "}
                 <span className="text-[#767676]">{getUser?.data?.gender}</span>
+              </p>
+              {/* //! working */}
+              <p className="flex justify-between">
+                <span>Age</span>{" "}
+                <span className="text-[#767676]">
+                  {getUser?.data?.dateOfBirth}
+                </span>
               </p>
               <p className="flex justify-between">
                 {/* <span>Age</span> <span className="text-[#767676]">35</span> */}

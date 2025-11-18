@@ -10,36 +10,50 @@ import { useEffect, useState } from "react";
 import TermsConditionModal from "../../component/Modals/TermsConditionModal";
 import PrivacyPolicyModal from "../../component/Modals/PrivacyPolicyModal";
 import { CgClose } from "react-icons/cg";
+import { Link } from "react-router";
 
 const SignUp = () => {
   const [singUp, { isLoading }] = useSignUpMutation();
   const navigate = useNavigate();
+  const [form] = Form.useForm();
 
+  // Local UI states
   const [isTermModalOpen, setIsTermModalOpen] = useState(false);
   const [isPrivacyModalOpen, setIsPrivacyModalOpen] = useState(false);
   const [phone, setPhone] = useState("");
-  const [showVerify, setShowVerify] = useState(false);
   const [isOtpVisible, setIsOtpVisible] = useState(false);
-  const [isVerified, setIsVerified] = useState(false);
   const [otp, setOtp] = useState("");
+  const [isVerified, setIsVerified] = useState(false);
+  const [showVerify, setShowVerify] = useState(false);
 
-  const [form] = Form.useForm();
-
-  // Load saved form data
+  // Load saved form data + phone verification status
   useEffect(() => {
-    const savedData = localStorage.getItem("signup-form");
+    const savedData = JSON.parse(localStorage.getItem("signup-form"));
+    const phoneVerified = JSON.parse(localStorage.getItem("phone-verified"));
+
     if (savedData) {
-      form.setFieldsValue(JSON.parse(savedData));
+      form.setFieldsValue(savedData);
+      setPhone(savedData.phoneNumber);
+      setShowVerify(savedData.phoneNumber.length >= 10);
+    }
+
+    if (phoneVerified === "1") {
+      setIsVerified(true);
     }
   }, [form]);
 
-  // Save form data on change
+  // Persist form changes
   const handleFormChange = (_, allValues) => {
     localStorage.setItem("signup-form", JSON.stringify(allValues));
   };
 
+  // SignUp handler
   const handleSignUp = (values) => {
-    if (values?.password !== values?.confirmPassword) {
+    if (!isVerified) {
+      return toast.error("Please verify your phone number first.");
+    }
+
+    if (values.password !== values.confirmPassword) {
       return toast.error("Password does not match!");
     }
 
@@ -48,7 +62,11 @@ const SignUp = () => {
       .then((payload) => {
         localStorage.setItem("email", values.email);
         toast.success(payload.message);
-        localStorage.removeItem("signup-form"); // clear saved form
+
+        // Cleanup
+        localStorage.removeItem("signup-form");
+        localStorage.removeItem("phone-verified");
+
         navigate("/verify-otp");
       })
       .catch((error) => toast.error(error?.data?.message));
@@ -66,14 +84,15 @@ const SignUp = () => {
       className="md:h-[100vh]"
     >
       <div className="bg-black absolute opacity-50 inset-0 z-0"></div>
-      <a href={`/`}>
+
+      <Link href={`/`}>
         <IoArrowBack
-          className=" text-[#F26828] absolute top-10 left-10 cursor-pointer z-9999 hidden sm:block"
+          className="text-[#F26828] absolute top-10 left-10 cursor-pointer z-999 sm:block hidden"
           size={40}
         />
-      </a>
+      </Link>
 
-      <div className="flex items-center justify-start max-w-5xl mx-auto h-full p-2 md:p-0 z-10 relative">
+      <div className="flex items-center justify-start max-w-5xl mx-auto h-full p-2 md:p-0 relative z-10">
         <div className="bg-white shadow-2xl shadow-[#F26828] rounded-md p-5 md:p-10 max-w-5xl">
           <p className="text-4xl text-center font-bold text-[#333333]">
             Sign Up
@@ -82,7 +101,7 @@ const SignUp = () => {
             Just a few quick things to get started
           </p>
 
-          <div className="flex items-center justify-between gap-10">
+          <div className="flex gap-10">
             <div className="w-[250px] md:w-[450px]">
               <Form
                 form={form}
@@ -90,6 +109,7 @@ const SignUp = () => {
                 onFinish={handleSignUp}
                 onValuesChange={handleFormChange}
               >
+                {/* Name */}
                 <Form.Item
                   label="Name"
                   name="name"
@@ -100,6 +120,7 @@ const SignUp = () => {
                   <Input placeholder="Enter your name here" />
                 </Form.Item>
 
+                {/* Email */}
                 <Form.Item
                   label="Email"
                   name="email"
@@ -111,6 +132,7 @@ const SignUp = () => {
                   <Input placeholder="Enter your email here" />
                 </Form.Item>
 
+                {/* Phone Number */}
                 <Form.Item
                   label="Phone Number"
                   name="phoneNumber"
@@ -143,16 +165,18 @@ const SignUp = () => {
                             : "text-white right-2 bg-blue-500 hover:bg-blue-400 "
                         }`}
                         disabled={isVerified}
-                        onClick={() => {
-                          if (!isVerified) setIsOtpVisible(true);
-                        }}
+                        onClick={() => setIsOtpVisible(true)}
                       >
                         {isVerified ? "Verified" : "Verify"}
                       </button>
                     )}
+
                     {isVerified && (
                       <button
-                        onClick={() => setIsVerified(false)}
+                        onClick={() => {
+                          setIsVerified(false);
+                          localStorage.removeItem("phone-verified");
+                        }}
                         className={`absolute right-2 top-1/2 -translate-y-1/2 text-black p-1 hover:text-red-500 text-sm rounded transition-colors`}
                       >
                         <CgClose />
@@ -161,6 +185,7 @@ const SignUp = () => {
                   </div>
                 </Form.Item>
 
+                {/* OTP Input */}
                 {isOtpVisible && (
                   <div className="flex items-center gap-3 -mt-3 mb-3">
                     <Input
@@ -172,24 +197,24 @@ const SignUp = () => {
                     />
                     <button
                       type="button"
-                      onClick={async () => {
-                        try {
-                          // Simulate API call (replace this with real one)
-                          // await verifyOtpApi({ phone, otp });
+                      onClick={() => {
+                        if (otp === "123456") {
                           toast.success("Phone number verified successfully!");
                           setIsVerified(true);
                           setIsOtpVisible(false);
-                        } catch {
-                          toast.error("Invalid OTP. Please try again.");
+                          localStorage.setItem("phone-verified", "1");
+                        } else {
+                          toast.error("Invalid OTP");
                         }
                       }}
-                      className="text-white bg-blue-500  rounded-md px-4 py-1.5 text-sm hover:bg-blue-400 transition"
+                      className="bg-blue-500 text-white px-4 py-1.5 rounded-md"
                     >
                       Send
                     </button>
                   </div>
                 )}
 
+                {/* Password */}
                 <Form.Item
                   label="Password"
                   name="password"
@@ -206,6 +231,7 @@ const SignUp = () => {
                   <Password placeholder="******" />
                 </Form.Item>
 
+                {/* Confirm Password */}
                 <Form.Item
                   label="Confirm Password"
                   name="confirmPassword"
@@ -214,11 +240,9 @@ const SignUp = () => {
                     { required: true, message: "Please confirm your password" },
                     ({ getFieldValue }) => ({
                       validator(_, value) {
-                        if (!value || getFieldValue("password") === value)
-                          return Promise.resolve();
-                        return Promise.reject(
-                          new Error("Passwords do not match")
-                        );
+                        return !value || getFieldValue("password") === value
+                          ? Promise.resolve()
+                          : Promise.reject(new Error("Passwords do not match"));
                       },
                     }),
                   ]}
@@ -226,55 +250,55 @@ const SignUp = () => {
                   <Password placeholder="******" />
                 </Form.Item>
 
-                <div className="flex justify-between items-center mb-3">
-                  <Form.Item
-                    name="agreement"
-                    valuePropName="checked"
-                    rules={[
-                      {
-                        validator: (_, value) =>
-                          value
-                            ? Promise.resolve()
-                            : Promise.reject(new Error("You must agree")),
-                      },
-                    ]}
-                  >
-                    <div className="flex items-center gap-2">
-                      <Checkbox className="text-xs"></Checkbox>
-                      <div>
-                        <span
-                          className="text-[#F68064] cursor-pointer text-[12px]"
-                          onClick={() => setIsTermModalOpen(true)}
-                        >
-                          Terms and conditions,{" "}
-                        </span>
-                        <span
-                          className="text-[#F68064] cursor-pointer text-[12px]"
-                          onClick={() => setIsPrivacyModalOpen(true)}
-                        >
-                          Privacy policy,{" "}
-                        </span>
-                        <NavLink
-                          className="text-[#F68064] text-[12px]"
-                          to="/media-usage-consent"
-                        >
-                          Media Policy,{" "}
-                        </NavLink>
-                        <NavLink
-                          className="text-[#F68064] text-[12px]"
-                          to="/opt-in-policy"
-                        >
-                          Sms Policy
-                        </NavLink>
-                      </div>
-                    </div>
-                  </Form.Item>
-                </div>
+                {/* Agreement */}
+                <Form.Item
+                  name="agreement"
+                  valuePropName="checked"
+                  rules={[
+                    {
+                      validator: (_, value) =>
+                        value
+                          ? Promise.resolve()
+                          : Promise.reject("You must agree"),
+                    },
+                  ]}
+                >
+                  <Checkbox>
+                    <span
+                      className="text-[#F68064] cursor-pointer text-[12px]"
+                      onClick={() => setIsTermModalOpen(true)}
+                    >
+                      Terms and conditions
+                    </span>
+                    ,{" "}
+                    <span
+                      className="text-[#F68064] cursor-pointer text-[12px]"
+                      onClick={() => setIsPrivacyModalOpen(true)}
+                    >
+                      Privacy policy
+                    </span>
+                    ,{" "}
+                    <NavLink
+                      className="text-[#F68064] text-[12px]"
+                      to="/media-usage-consent"
+                    >
+                      Media Policy
+                    </NavLink>
+                    ,{" "}
+                    <NavLink
+                      className="text-[#F68064] text-[12px]"
+                      to="/opt-in-policy"
+                    >
+                      Sms Policy
+                    </NavLink>
+                  </Checkbox>
+                </Form.Item>
 
                 <TermsConditionModal
                   isTermModalOpen={isTermModalOpen}
                   handleTermCancel={() => setIsTermModalOpen(false)}
                 />
+
                 <PrivacyPolicyModal
                   isPrivacyModalOpen={isPrivacyModalOpen}
                   handlePrivacyCancel={() => setIsPrivacyModalOpen(false)}
