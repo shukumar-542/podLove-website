@@ -39,22 +39,52 @@ const SetNewPassword = () => {
 
       {/* 🔹 Content (above the overlay) */}
       <div className="flex items-center justify-start max-w-5xl mx-auto h-full p-2 md:p-0 relative z-10">
-        <div className="bg-white shadow-2xl shadow-[#F26828] rounded-md p-5 md:p-10 max-w-5xl">
+        <div className="bg-white shadow-2xl shadow-[#F26828] rounded-md p-5 md:p-10 max-w-sm">
           <p className="text-2xl font-bold text-[#333333] text-center ">
             Set New Password
           </p>
           <p className="mt-2 w-[330px]"></p>
 
           <Form onFinish={onFinish} layout="vertical mt-5">
-            <Form.Item name="password" label="New Password">
+            {/* New Password */}
+            <Form.Item
+              label="New Password"
+              name="password"
+              rules={[
+                { required: true, message: "Please enter a new password" },
+                {
+                  pattern:
+                    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/,
+                  message:
+                    "Password must be at least 8 characters, contain uppercase, lowercase, number, and special character.",
+                },
+              ]}
+            >
               <Input.Password
                 placeholder="New password"
                 className="border-[#FFA175]"
               />
             </Form.Item>
-            <Form.Item name="confirmPassword" label="Confirm Password">
+
+            {/* Confirm Password */}
+            <Form.Item
+              label="Confirm Password"
+              name="confirmPassword"
+              dependencies={["password"]}
+              rules={[
+                { required: true, message: "Please confirm your password" },
+                ({ getFieldValue }) => ({
+                  validator(_, value) {
+                    if (!value || getFieldValue("password") === value) {
+                      return Promise.resolve();
+                    }
+                    return Promise.reject(new Error("Passwords do not match"));
+                  },
+                }),
+              ]}
+            >
               <Input.Password
-                placeholder="Confirm Password"
+                placeholder="Confirm password"
                 className="border-[#FFA175]"
               />
             </Form.Item>
