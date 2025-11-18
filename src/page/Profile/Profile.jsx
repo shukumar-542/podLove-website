@@ -92,12 +92,12 @@ const Profile = () => {
                 <span className="text-[#767676]">{getUser?.data?.gender}</span>
               </p>
               {/* //! working */}
-              <p className="flex justify-between">
+              {/* <p className="flex justify-between">
                 <span>Age</span>{" "}
                 <span className="text-[#767676]">
                   {getUser?.data?.dateOfBirth}
                 </span>
-              </p>
+              </p> */}
               <p className="flex justify-between">
                 {/* <span>Age</span> <span className="text-[#767676]">35</span> */}
               </p>
