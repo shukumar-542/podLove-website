@@ -82,6 +82,7 @@ const ChangePassword = () => {
           <Form.Item
             label="New Password"
             name="newPassword"
+            dependencies={["password"]}
             rules={[
               { required: true, message: "Please enter a new password" },
               {
@@ -90,6 +91,18 @@ const ChangePassword = () => {
                 message:
                   "Password must be at least 8 characters, contain both letters (uppercase and lowercase), a number, and a special character.",
               },
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  if (value && value === getFieldValue("password")) {
+                    return Promise.reject(
+                      new Error(
+                        "New password cannot be the same as current password"
+                      )
+                    );
+                  }
+                  return Promise.resolve();
+                },
+              }),
             ]}
           >
             <Password placeholder="*********" className="bg-[#FAF2EF]" />

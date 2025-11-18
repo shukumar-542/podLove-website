@@ -45,7 +45,7 @@ const Pricing = ({ subscriptions, buttonDisabled, activePlan }) => {
             }}
             className="rounded-3xl overflow-hidden relative text-white p-4 py-8 shadow-2xl shadow-black"
           >
-            {plan.name === activePlan.plan && <p className="ribbon">Active</p>}
+            {plan.name === activePlan?.plan && <p className="ribbon">Active</p>}
             <p className="text-center bg-[#231A19] text-[20px] py-2  rounded-full max-w-[120px]  mx-auto">
               {plan?.name?.split(":")[0]}
             </p>
@@ -53,12 +53,9 @@ const Pricing = ({ subscriptions, buttonDisabled, activePlan }) => {
             {/* <p className=" my-2 mt-10 ">{plan?.name}</p> */}
 
             <div className="space-y-2 pb-5 mt-5 min-auto">
-              {plan?.description?.map((det) => {
+              {plan?.description?.map((det, index) => {
                 return (
-                  <p
-                    key={det?._id}
-                    className="flex items-center gap-2 font-thin"
-                  >
+                  <p key={index} className="flex items-center gap-2 font-thin">
                     <IoCheckmarkOutline size={16} color="#FFA175" />
                     {det?.key}
                   </p>
