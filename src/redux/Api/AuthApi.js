@@ -74,6 +74,14 @@ const authApi = baseApi.injectEndpoints({
         };
       },
     }),
+    deleteAccount: builder.mutation({
+      query: ({ authId }) => {
+        return {
+          url: `/user/delete_account/${authId}`,
+          method: "POST",
+        };
+      },
+    }),
     getPodCastDetails: builder.query({
       query: () => {
         return {
@@ -233,6 +241,7 @@ export const {
   useLoginUserMutation,
   useGetPodCastDetailsQuery,
   useChangePasswordMutation,
+  useDeleteAccountMutation,
   useGoogleLoginMutation,
   useAppleLoginMutation,
   useGetTermsConditionQuery,

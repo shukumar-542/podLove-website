@@ -1,12 +1,20 @@
 import AuthButton from "../../component/AuthButton/AuthButton";
 import { Form, Popconfirm } from "antd";
 import Password from "antd/es/input/Password";
-import { useChangePasswordMutation } from "../../redux/Api/AuthApi";
+import {
+  useChangePasswordMutation,
+  useDeleteAccountMutation,
+  useGetUserQuery,
+} from "../../redux/Api/AuthApi";
 import { toast } from "sonner";
 import { useNavigate } from "react-router";
 
 const ChangePassword = () => {
+  const { data: getUser } = useGetUserQuery();
+
   const [changePassword, { isLoading }] = useChangePasswordMutation();
+  const [deleteAccount, { isLoading: isDeleteLoading }] =
+    useDeleteAccountMutation();
   const navigate = useNavigate();
   const handleChangePassword = (values) => {
     const data = {
@@ -28,8 +36,14 @@ const ChangePassword = () => {
   };
 
   const confirmDelete = () => {
-    localStorage.removeItem("podlove-token");
-    window.location.href = "/login";
+    deleteAccount({ authId: getUser?.data?.auth })
+      .unwrap()
+      .then((payload) => {
+        localStorage.removeItem("podlove-token");
+        toast.success(payload?.message);
+        navigate("/login");
+      })
+      .catch((error) => toast.error(error?.data?.message));
   };
 
   return (
@@ -56,8 +70,11 @@ const ChangePassword = () => {
             okText="Yes"
             cancelText="No"
           >
-            <button className="w-full border border-[#FFA175] rounded-md bg-white py-2">
-              Delete Account
+            <button
+              disabled={isDeleteLoading}
+              className="w-full border disabled:opacity-50 disabled:cursor-not-allowed border-[#FFA175] rounded-md bg-white py-2"
+            >
+              {isDeleteLoading ? "Deleting Account..." : "Delete Account"}
             </button>
           </Popconfirm>
         </div>
