@@ -1,9 +1,9 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import { Form, Input, Modal, Radio } from "antd";
 import AuthButton from "../AuthButton/AuthButton";
 import { usePost7DaysSurveyMutation } from "../../redux/Api/PodcastApi";
 
-// eslint-disable-next-line react/prop-types
 const After7DaysSurveyModal = ({
   is7DaysModalOpen,
   handle7DaysOk,
