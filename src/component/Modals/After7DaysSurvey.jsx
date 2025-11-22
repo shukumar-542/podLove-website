@@ -54,6 +54,7 @@ const After7DaysSurveyModal = ({
       centered
       width={900}
       open={is7DaysModalOpen}
+      onCancel={handle7DaysCancel}
     >
       <div className="md:p-6 flex justify-center">
         <div className="md:max-w-3xl md:p-8 font-poppins">

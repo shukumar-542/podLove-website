@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 import {
@@ -64,7 +63,13 @@ const SecondSurvey = ({
   };
 
   return (
-    <Modal footer={false} centered width={800} open={isSecondModalOpen}>
+    <Modal
+      footer={false}
+      centered
+      width={800}
+      open={isSecondModalOpen}
+      onCancel={handleSecondCancel}
+    >
       <div className="md:px-12 py-6">
         <div className="text-center mb-8">
           <h1 className="text-2xl md:text-3xl font-semibold mb-3">

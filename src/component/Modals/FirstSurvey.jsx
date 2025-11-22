@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { useState } from "react";
 import {
   Form,
@@ -72,8 +71,7 @@ const FirstSurvey = ({ isModalOpen, handleOk, handleCancel, podcastId }) => {
       centered
       width={900}
       open={isModalOpen}
-      // destroyOnClose
-      // onCancel={handleCancel}
+      onCancel={handleCancel}
     >
       <div className="md:px-12 py-6">
         <div className="text-center mb-8 ">
