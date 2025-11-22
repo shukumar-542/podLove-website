@@ -56,7 +56,10 @@ const SecondSurvey = ({
 
     postFirstSurvey(dataToSend)
       .unwrap()
-      .then(() => handleSecondOk())
+      .then(() => {
+        window.location.reload();
+        handleSecondOk();
+      })
       .catch();
   };
 
@@ -103,8 +106,8 @@ const SecondSurvey = ({
                 },
               ]}
               label="How well did your match meet your expectations in person?"
+              valuePropName="value"
             >
-              {/* <Slider min={1} max={5} marks={{ 1: 'Not at all', 5: 'Completely' }} /> */}
               <Slider min={1} max={5} defaultValue={4} />
             </Form.Item>
 

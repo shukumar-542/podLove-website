@@ -40,7 +40,10 @@ const After7DaysSurveyModal = ({
 
     post7DaysSurvey(dataToSend)
       .unwrap()
-      .then(() => handle7DaysOk())
+      .then(() => {
+        window.location.reload();
+        handle7DaysOk();
+      })
       .catch();
   };
 

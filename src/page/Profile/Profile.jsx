@@ -1,5 +1,4 @@
 import bg from "../../assets/102.png";
-// import profile from "../../assets/profile.png";
 import { CiLocationOn } from "react-icons/ci";
 import { IoCalendarOutline, IoSettingsOutline } from "react-icons/io5";
 import { FiEdit } from "react-icons/fi";
