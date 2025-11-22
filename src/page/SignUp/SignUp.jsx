@@ -263,32 +263,26 @@ const SignUp = () => {
                     },
                   ]}
                 >
-                  <Checkbox>
+                  <Checkbox className="text-[#F68064]">
                     <span
-                      className="text-[#F68064] cursor-pointer text-[12px]"
+                      className=" cursor-pointer text-[12px]"
                       onClick={() => setIsTermModalOpen(true)}
                     >
                       Terms and conditions
                     </span>
                     ,{" "}
                     <span
-                      className="text-[#F68064] cursor-pointer text-[12px]"
+                      className="cursor-pointer text-[12px]"
                       onClick={() => setIsPrivacyModalOpen(true)}
                     >
                       Privacy policy
                     </span>
                     ,{" "}
-                    <NavLink
-                      className="text-[#F68064] text-[12px]"
-                      to="/media-usage-consent"
-                    >
+                    <NavLink className="text-[12px]" to="/media-usage-consent">
                       Media Policy
                     </NavLink>
                     ,{" "}
-                    <NavLink
-                      className="text-[#F68064] text-[12px]"
-                      to="/opt-in-policy"
-                    >
+                    <NavLink className="text-[12px]" to="/opt-in-policy">
                       Sms Policy
                     </NavLink>
                   </Checkbox>
