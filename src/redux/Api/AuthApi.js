@@ -20,6 +20,24 @@ const authApi = baseApi.injectEndpoints({
         };
       },
     }),
+    verifyPhone: builder.mutation({
+      query: (data) => {
+        return {
+          url: "/auth/phone_verify",
+          method: "POST",
+          body: data,
+        };
+      },
+    }),
+    verifyPhoneOtp: builder.mutation({
+      query: (data) => {
+        return {
+          url: "/auth/verify_phone_otp",
+          method: "POST",
+          body: data,
+        };
+      },
+    }),
     updateUserInfo: builder.mutation({
       query: (data) => {
         return {
@@ -234,6 +252,8 @@ const authApi = baseApi.injectEndpoints({
 export const {
   useSignUpMutation,
   useVerifySingUpOtpMutation,
+  useVerifyPhoneMutation,
+  useVerifyPhoneOtpMutation,
   useUpdateUserInfoMutation,
   usePodcastCreateMutation,
   useBioValidationMutation,
