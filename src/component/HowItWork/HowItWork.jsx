@@ -98,8 +98,7 @@ const HowItWork = () => {
               <Link to={"/home"}>Find your Match</Link>
             </Button>
           ) : (
-            <Link to={"/sign-up"}>
-              {" "}
+            <Link to="/connection-pathway">
               <Button className={"py-2"}>Find your Match</Button>
             </Link>
           )}

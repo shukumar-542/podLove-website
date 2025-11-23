@@ -31,7 +31,7 @@ const ClientReview = () => {
           &quot;Hear From Our Users: Real Feedback, Real Experiences&quot;
         </p>
         <div className="flex justify-center my-10">
-          <Link to="/sign-up">
+          <Link to="/connection-pathway">
             <Button className="py-2">Find your Match</Button>
           </Link>
         </div>

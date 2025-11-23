@@ -12,14 +12,14 @@ const images = [img1, img2, img3];
 const SuccessStory = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const token = localStorage.getItem("podlove-token");
-  const nagivate = useNavigate();
+  const navigate = useNavigate();
   const handleClick = () => {
     if (!token) {
-      nagivate("/sign-up");
+      navigate("/connection-pathway");
     } else {
-      nagivate("/home");
+      navigate("/home");
     }
-  }
+  };
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
@@ -38,7 +38,8 @@ const SuccessStory = () => {
           Success in Finding Your Perfect Match{" "}
         </h1> */}
         <p className="text-center md:text-xl text-[#333333] mt-2 font-poppins">
-          PodLove matches on shared values, then you meet on video. Built for emotionally mature singles 35–55.
+          PodLove matches on shared values, then you meet on video. Built for
+          emotionally mature singles 35–55.
         </p>
         {/* <p className="text-center text-xl text-[#333333] mt-2 font-poppins">
           Let’s guide you to meaningful!{" "}
@@ -95,7 +96,12 @@ const SuccessStory = () => {
               </div>
             </div>
             <div className="flex justify-center mt-10">
-              <Button handleOnClick={handleClick} className={'py-1 md:text-[20px]'}>Find your Match</Button>
+              <Button
+                handleOnClick={handleClick}
+                className={"py-1 md:text-[20px]"}
+              >
+                Find your Match
+              </Button>
             </div>
           </div>
         </div>
