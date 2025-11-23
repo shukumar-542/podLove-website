@@ -79,19 +79,19 @@ const SignUp = () => {
         backgroundPosition: "center",
         imageRendering: "high-quality",
       }}
-      className="md:h-[100vh]"
+      className="min-h-dvh"
     >
       <div className="bg-black absolute opacity-50 inset-0 z-0"></div>
 
       <Link href={`/`}>
         <IoArrowBack
-          className="text-[#F26828] absolute top-10 left-10 cursor-pointer z-999 sm:block hidden"
+          className="text-[#F26828] absolute top-10 left-10 cursor-pointer z-999 "
           size={40}
         />
       </Link>
 
-      <div className="flex items-center justify-start max-w-5xl mx-auto h-full p-2 md:p-0 relative z-10">
-        <div className="bg-white shadow-2xl shadow-[#F26828] rounded-md p-5 md:p-10 max-w-5xl">
+      <div className="flex items-center min-h-dvh justify-start max-w-5xl mx-auto p-2 md:p-0 relative z-10">
+        <div className="bg-white shadow-2xl shadow-[#F26828] rounded-md p-5 md:p-10 w-full max-w-lg">
           <p className="text-4xl text-center font-bold text-[#333333]">
             Sign Up
           </p>
@@ -99,136 +99,146 @@ const SignUp = () => {
             Just a few quick things to get started
           </p>
 
-          <div className="flex gap-10">
-            <div className="w-[250px] md:w-[450px]">
-              <Form
-                form={form}
-                layout="vertical"
-                onFinish={handleSignUp}
-                onValuesChange={handleFormChange}
+          <div className="flex flex-col gap-10">
+            <Form
+              form={form}
+              layout="vertical"
+              onFinish={handleSignUp}
+              onValuesChange={handleFormChange}
+            >
+              {/* Name */}
+              <Form.Item
+                label="Name"
+                name="name"
+                rules={[{ required: true, message: "Please enter your name" }]}
               >
-                {/* Name */}
-                <Form.Item
-                  label="Name"
-                  name="name"
-                  rules={[
-                    { required: true, message: "Please enter your name" },
-                  ]}
-                >
-                  <Input placeholder="Enter your name here" />
-                </Form.Item>
+                <Input placeholder="Enter your name here" />
+              </Form.Item>
 
-                {/* Email */}
-                <Form.Item
-                  label="Email"
-                  name="email"
-                  rules={[
-                    { required: true, message: "Please enter your email" },
-                    { type: "email", message: "Please enter a valid email" },
-                  ]}
-                >
-                  <Input placeholder="Enter your email here" />
-                </Form.Item>
+              {/* Email */}
+              <Form.Item
+                label="Email"
+                name="email"
+                rules={[
+                  { required: true, message: "Please enter your email" },
+                  { type: "email", message: "Please enter a valid email" },
+                ]}
+              >
+                <Input placeholder="Enter your email here" />
+              </Form.Item>
 
-                {/* Phone Input with Country */}
-                <PhoneInputWithCountry
-                  phone={phone}
-                  setPhone={setPhone}
-                  isVerified={isVerified}
-                  setIsVerified={setIsVerified}
-                />
+              {/* Phone Input with Country */}
+              <PhoneInputWithCountry
+                phone={phone}
+                setPhone={setPhone}
+                isVerified={isVerified}
+                setIsVerified={setIsVerified}
+              />
 
-                {/* Password */}
-                <Form.Item
-                  label="Password"
-                  name="password"
-                  rules={[
-                    { required: true, message: "Please enter a password" },
-                    {
-                      pattern:
-                        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/,
-                      message:
-                        "Must be 8+ chars, include upper & lower case letters, a number, and special character.",
+              {/* Password */}
+              <Form.Item
+                label="Password"
+                name="password"
+                rules={[
+                  { required: true, message: "Please enter a password" },
+                  {
+                    pattern:
+                      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/,
+                    message:
+                      "Must be 8+ chars, include upper & lower case letters, a number, and special character.",
+                  },
+                ]}
+              >
+                <Password placeholder="******" />
+              </Form.Item>
+
+              {/* Confirm Password */}
+              <Form.Item
+                label="Confirm Password"
+                name="confirmPassword"
+                dependencies={["password"]}
+                rules={[
+                  { required: true, message: "Please confirm your password" },
+                  ({ getFieldValue }) => ({
+                    validator(_, value) {
+                      return !value || getFieldValue("password") === value
+                        ? Promise.resolve()
+                        : Promise.reject(new Error("Passwords do not match"));
                     },
-                  ]}
-                >
-                  <Password placeholder="******" />
-                </Form.Item>
+                  }),
+                ]}
+              >
+                <Password placeholder="******" />
+              </Form.Item>
 
-                {/* Confirm Password */}
-                <Form.Item
-                  label="Confirm Password"
-                  name="confirmPassword"
-                  dependencies={["password"]}
-                  rules={[
-                    { required: true, message: "Please confirm your password" },
-                    ({ getFieldValue }) => ({
-                      validator(_, value) {
-                        return !value || getFieldValue("password") === value
-                          ? Promise.resolve()
-                          : Promise.reject(new Error("Passwords do not match"));
-                      },
-                    }),
-                  ]}
-                >
-                  <Password placeholder="******" />
-                </Form.Item>
+              {/* Agreement */}
+              <Form.Item
+                name="agreement"
+                valuePropName="checked"
+                rules={[
+                  {
+                    validator: (_, value) =>
+                      value
+                        ? Promise.resolve()
+                        : Promise.reject("You must agree"),
+                  },
+                ]}
+              >
+                <Checkbox>
+                  <span
+                    className="text-[#F68064] cursor-pointer text-[12px]"
+                    onClick={() => setIsTermModalOpen(true)}
+                  >
+                    Terms and conditions
+                  </span>
+                  ,{" "}
+                  <span
+                    className="text-[#F68064] cursor-pointer text-[12px]"
+                    onClick={() => setIsPrivacyModalOpen(true)}
+                  >
+                    Privacy policy
+                  </span>
+                  ,{" "}
+                  <NavLink
+                    className="text-[#F68064] text-[12px]"
+                    to="/media-usage-consent"
+                  >
+                    Media Policy
+                  </NavLink>
+                  ,{" "}
+                  <NavLink
+                    className="text-[#F68064] text-[12px]"
+                    to="/opt-in-policy"
+                  >
+                    Sms Policy
+                  </NavLink>
+                </Checkbox>
+              </Form.Item>
 
-                {/* Agreement */}
-                <Form.Item
-                  name="agreement"
-                  valuePropName="checked"
-                  rules={[
-                    {
-                      validator: (_, value) =>
-                        value
-                          ? Promise.resolve()
-                          : Promise.reject("You must agree"),
-                    },
-                  ]}
-                >
-                  <Checkbox className="text-[#F68064]">
-                    <span
-                      className="cursor-pointer text-[12px]"
-                      onClick={() => setIsTermModalOpen(true)}
-                    >
-                      Terms and conditions
-                    </span>
-                    ,{" "}
-                    <span
-                      className="cursor-pointer text-[12px]"
-                      onClick={() => setIsPrivacyModalOpen(true)}
-                    >
-                      Privacy policy
-                    </span>
-                  </Checkbox>
-                </Form.Item>
+              <TermsConditionModal
+                isTermModalOpen={isTermModalOpen}
+                handleTermCancel={() => setIsTermModalOpen(false)}
+              />
 
-                <TermsConditionModal
-                  isTermModalOpen={isTermModalOpen}
-                  handleTermCancel={() => setIsTermModalOpen(false)}
-                />
-                <PrivacyPolicyModal
-                  isPrivacyModalOpen={isPrivacyModalOpen}
-                  handlePrivacyCancel={() => setIsPrivacyModalOpen(false)}
-                />
+              <PrivacyPolicyModal
+                isPrivacyModalOpen={isPrivacyModalOpen}
+                handlePrivacyCancel={() => setIsPrivacyModalOpen(false)}
+              />
 
-                {/* SignUp Button */}
-                <AuthButton
-                  disabled={isLoading || !isVerified}
-                  className="bg-[#F68064] text-white w-full rounded-md py-2 text-xl shadow-md"
-                >
-                  {isLoading ? <Spin /> : "Sign Up"}
-                </AuthButton>
-              </Form>
+              <AuthButton
+                disabled={isLoading}
+                className="bg-[#F68064] text-white w-full rounded-md py-2 text-xl shadow-md"
+              >
+                {isLoading ? <Spin /> : "Sign Up"}
+              </AuthButton>
+            </Form>
 
-              <p className="text-[#767676] text-center mt-2">
-                Already have an account?{" "}
-                <NavLink to="/login" className="text-[#F68064]">
-                  Sign In
-                </NavLink>
-              </p>
-            </div>
+            <p className="text-[#767676] text-center mt-2">
+              Already have an account?{" "}
+              <NavLink to="/login" className="text-[#F68064]">
+                Sign In
+              </NavLink>
+            </p>
           </div>
         </div>
       </div>

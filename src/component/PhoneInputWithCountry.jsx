@@ -40,7 +40,7 @@ const PhoneInputWithCountry = ({
       return toast.error("Enter a valid phone number");
 
     try {
-      await verifyPhone({ phone: selectedCountry.dial_code + phone }).unwrap();
+      await verifyPhone({ phone: selectedCountry?.dial_code + phone }).unwrap();
       toast.success("OTP sent!");
       setIsOtpVisible(true);
     } catch (err) {
@@ -53,7 +53,7 @@ const PhoneInputWithCountry = ({
 
     try {
       await verifyOtp({
-        phone: selectedCountry.dial_code + phone,
+        phone: selectedCountry?.dial_code + phone,
         otp,
       }).unwrap();
       toast.success("Phone verified!");
@@ -85,10 +85,9 @@ const PhoneInputWithCountry = ({
         <div className="flex items-center gap-2">
           <Select
             disabled={isVerified}
-            value={selectedCountry.code}
+            value={selectedCountry?.code}
             style={{
-              width: 120,
-              borderColor: "#bfbfbf",
+              width: 110,
             }}
             onChange={(value) => {
               const countryObj = country.find((c) => c.code === value);
@@ -129,7 +128,7 @@ const PhoneInputWithCountry = ({
             />
 
             {/* Verify Button */}
-            {!isVerified && phone.length >= 6 && !isOtpVisible && (
+            {!isVerified && phone?.length >= 6 && !isOtpVisible && (
               <Button
                 type="primary"
                 size="small"
