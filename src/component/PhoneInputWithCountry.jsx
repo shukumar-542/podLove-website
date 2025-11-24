@@ -36,15 +36,22 @@ const PhoneInputWithCountry = ({
   };
 
   const handleSendVerify = async () => {
-    if (!phone || phone.length < 6)
+    if (!phone || phone.length < 6) {
       return toast.error("Enter a valid phone number");
+    }
 
     try {
-      await verifyPhone({ phone }).unwrap();
-      toast.success("OTP sent!");
+      const payload = await verifyPhone({ phone }).unwrap();
+
+      // Handle invalid flag from backend
+      if (payload?.data?.invalid) {
+        return toast.error(payload.data.message || "Invalid phone number");
+      }
+
+      toast.success("OTP sent to your phone");
       setIsOtpVisible(true);
-    } catch (err) {
-      toast.error(err?.data?.message || "Failed to send OTP");
+    } catch (error) {
+      toast.error(error?.data?.message || "Failed to send OTP");
     }
   };
 
@@ -52,7 +59,13 @@ const PhoneInputWithCountry = ({
     if (!otp || otp.length !== 6) return toast.error("OTP must be 6 digits");
 
     try {
-      await verifyOtp({ phone, otp }).unwrap();
+      const payload = await verifyOtp({ phone, otp }).unwrap();
+
+      // Handle invalid flag from backend
+      if (payload?.invalid) {
+        return toast.error(payload.message || "Invalid OTP");
+      }
+
       toast.success("Phone verified!");
       setIsVerified(true);
       setIsOtpVisible(false);
