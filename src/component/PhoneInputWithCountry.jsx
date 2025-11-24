@@ -29,10 +29,46 @@ const PhoneInputWithCountry = ({
   const [verifyOtp, { isLoading: isVerifyOtpLoading }] =
     useVerifyPhoneOtpMutation();
 
+  const detectCountryByPhone = (inputPhone, countryList) => {
+    if (!inputPhone) return null;
+
+    const clean = inputPhone.replace(/\D/g, ""); // remove spaces, -, etc.
+
+    // check matching dial codes
+    let matched = null;
+    for (const c of countryList) {
+      const dial = c.dial_code.replace(/\D/g, ""); // "+880" -> "880"
+
+      if (clean.startsWith(dial)) {
+        if (!matched || dial.length > matched.dial_code.length) {
+          matched = c; // choose longest match (important!)
+        }
+      }
+    }
+    return matched;
+  };
+
   const handlePhoneChange = (e) => {
     const value = e.target.value;
     setPhone(value);
+
     if (isVerified) setIsVerified(false);
+
+    // Force +1 to always use USA
+    const clean = value.replace(/\D/g, "");
+    if (clean.startsWith("1")) {
+      const usa = country.find((c) => c.code === "US");
+      if (usa && usa.code !== selectedCountry.code) {
+        setSelectedCountry(usa);
+      }
+      return;
+    }
+
+    // Normal auto detection for unique dial codes
+    const detected = detectCountryByPhone(value, country);
+    if (detected && detected.code !== selectedCountry.code) {
+      setSelectedCountry(detected);
+    }
   };
 
   const handleSendVerify = async () => {
