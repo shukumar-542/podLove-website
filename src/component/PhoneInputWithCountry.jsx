@@ -3,7 +3,7 @@ import { Form, Input, Select, Button } from "antd";
 import { useState } from "react";
 import { CgClose } from "react-icons/cg";
 import { toast } from "sonner";
-import country from "../../public/CountryCodes.json";
+import country from "../assets/CountryCodes.json";
 import "flag-icons/css/flag-icons.min.css";
 import {
   useVerifyPhoneMutation,
@@ -87,11 +87,12 @@ const PhoneInputWithCountry = ({
             disabled={isVerified}
             value={selectedCountry?.code}
             style={{
-              width: 110,
+              width: 70,
             }}
             onChange={(value) => {
               const countryObj = country.find((c) => c.code === value);
               setSelectedCountry(countryObj);
+              setPhone(countryObj.dial_code);
             }}
             popupMatchSelectWidth={false}
             dropdownStyle={{ width: 250 }}
@@ -102,12 +103,7 @@ const PhoneInputWithCountry = ({
                 key={c.code}
                 value={c.code}
                 label={
-                  <div>
-                    <span
-                      className={`fi fi-${c.code.toLowerCase()} mr-2`}
-                    ></span>
-                    {c.dial_code}
-                  </div>
+                  <span className={`fi fi-${c.code.toLowerCase()} mr-2`}></span>
                 }
               >
                 <div className="flex items-center justify-between gap-2">

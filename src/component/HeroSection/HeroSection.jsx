@@ -1,17 +1,17 @@
-import video from '../../assets/videoplayback.mp4'
-import { Button } from '../Shared/Button/Button'
-import { useNavigate } from 'react-router'
+import video from "../../assets/videoplayback.mp4";
+import { Button } from "../Shared/Button/Button";
+import { useNavigate } from "react-router";
 
 const HeroSection = () => {
   const token = localStorage.getItem("podlove-token");
-  const nagivate = useNavigate();
+  const navigate = useNavigate();
   const handleClick = () => {
     if (!token) {
-      nagivate("/sign-up");
+      navigate("/connection-pathway");
     } else {
-      nagivate("/home");
+      navigate("/home");
     }
-  }
+  };
 
   return (
     <section className="relative w-full h-[40vh] md:h-[90vh] flex items-center justify-center">
@@ -30,20 +30,26 @@ const HeroSection = () => {
 
       {/* Hero Content */}
       <div className=" z-10 text-white text-center space-y-5 mt-10 mb-4">
-        <h1 className="md:text-4xl md:leading-10 font-poppins font-semibold max-w-6xl ">PodLove, Blind-Match Video-Podcast Dating for Grown Folks
+        <h1 className="md:text-4xl md:leading-10 font-poppins font-semibold max-w-6xl ">
+          PodLove, Blind-Match Video-Podcast Dating for Grown Folks
         </h1>
         {/* <h1 className="md:text-4xl md:leading-10 font-poppins font-semibold max-w-6xl ">Join a space where love is honest and meaningful.
         </h1> */}
-        <p className='text-2xl md:text-4xl md:pb-10'>Ready for love?</p>
+        <p className="text-2xl md:text-4xl md:pb-10">Ready for love?</p>
         {/* <p className="mt-4 md:text-[32px] font-poppins mb-10 max-w-[550px] text-[#FEFEFE] mx-auto">Join a space where love is honest and meaningful. 
       Ready for love?</p> */}
-        <Button handleOnClick={handleClick} className={'md:text-[30px] py-1.5 md:py-3 px-4 md:px-6'}>Find your Match</Button>
+        <Button
+          handleOnClick={handleClick}
+          className={"md:text-[30px] py-1.5 md:py-3 px-4 md:px-6"}
+        >
+          Find your Match
+        </Button>
       </div>
 
       {/* Overlay (Optional for readability) */}
       <div className="absolute top-0 left-0 w-full h-full bg-black/40"></div>
     </section>
-  )
-}
+  );
+};
 
-export default HeroSection
+export default HeroSection;

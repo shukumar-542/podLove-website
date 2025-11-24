@@ -102,7 +102,7 @@ const Login = () => {
     >
       {/* 🔹 Black Overlay (behind the content) */}
       <div className="absolute inset-0 bg-black bg-opacity-50 z-0"></div>
-      <Link href="/">
+      <Link to="/">
         <IoArrowBack
           me
           className=" text-[#F26828] absolute top-10 left-10 cursor-pointer z-9999 hidden sm:block"

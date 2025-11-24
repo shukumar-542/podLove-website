@@ -83,9 +83,9 @@ const SignUp = () => {
     >
       <div className="bg-black absolute opacity-50 inset-0 z-0"></div>
 
-      <Link href={`/`}>
+      <Link to="/">
         <IoArrowBack
-          className="text-[#F26828] absolute top-10 left-10 cursor-pointer z-999 "
+          className="text-[#F26828] absolute top-10 left-10 cursor-pointer z-999"
           size={40}
         />
       </Link>
