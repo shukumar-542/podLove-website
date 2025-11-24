@@ -70,7 +70,7 @@ const Pricing = ({ subscriptions, buttonDisabled, activePlan }) => {
               <Link to={"/connection-progress"}>
                 <button
                   disabled={buttonDisabled}
-                  className=" bg-gradient-to-r from-[#F36E2F] to-[#FEB491]  shadow-white shadow-inner rounded-full w-full mt-5 py-2 max-w-xs  mb-5 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                  className=" bg-gradient-to-r from-[#F36E2F] to-[#FEB491]  shadow-white shadow-inner rounded-full w-full mt-5 py-2 max-w-xs  mb-5 cursor-pointer disabled:opacity-50 disabled:cursor-default"
                 >
                   Free Plan
                 </button>
@@ -80,16 +80,16 @@ const Pricing = ({ subscriptions, buttonDisabled, activePlan }) => {
                 {logInUser ? (
                   <button
                     onClick={() => handleUpdatePlan(plan)}
-                    disabled={isLoading}
-                    className=" bg-gradient-to-r from-[#F36E2F] to-[#FEB491]  shadow-white shadow-inner rounded-full w-full mt-5 py-2 max-w-xs  mb-5"
+                    disabled={isLoading || plan.name === activePlan?.plan}
+                    className=" bg-gradient-to-r from-[#F36E2F] to-[#FEB491] disabled:opacity-50 disabled:cursor-default  shadow-white shadow-inner rounded-full w-full mt-5 py-2 max-w-xs  mb-5"
                   >
                     Choose this plan
                   </button>
                 ) : (
                   <a href={`/login`}>
                     <button
-                      disabled={isLoading}
-                      className=" bg-gradient-to-r from-[#F36E2F] to-[#FEB491]  shadow-white shadow-inner rounded-full w-full mt-5 py-2 max-w-xs  mb-5"
+                      disabled={isLoading || plan.name === activePlan?.plan}
+                      className=" bg-gradient-to-r from-[#F36E2F] to-[#FEB491] disabled:opacity-50 disabled:cursor-default  shadow-white shadow-inner rounded-full w-full mt-5 py-2 max-w-xs  mb-5"
                     >
                       Choose this plan
                     </button>
@@ -107,13 +107,13 @@ const Pricing = ({ subscriptions, buttonDisabled, activePlan }) => {
           </Divider>
 
           <div className="space-y-3 ">
-            {plan?.description?.map((details) => {
+            {plan?.description?.map((details, index) => {
               return (
                 <p
-                  key={details?._id}
+                  key={details?._id + index}
                   className="flex items-center gap-2 font-poppins text-[13px]"
                 >
-                  <IoCheckmarkOutline size={20} color="" />
+                  <IoCheckmarkOutline size={20} color="" className="min-w-5" />
                   {details?.details}
                 </p>
               );
