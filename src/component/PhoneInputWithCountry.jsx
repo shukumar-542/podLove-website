@@ -168,6 +168,13 @@ const PhoneInputWithCountry = ({
             >
               Send
             </Button>
+            <button
+              disabled={isVerifyOtpLoading}
+              onClick={handleReset}
+              className="bg-red-500 hover:bg-red-400 rounded-md px-2 text-white"
+            >
+              Cancel
+            </button>
           </div>
         </Form.Item>
       )}
