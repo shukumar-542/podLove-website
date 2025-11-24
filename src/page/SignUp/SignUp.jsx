@@ -21,7 +21,7 @@ const SignUp = () => {
   // Local UI states
   const [isTermModalOpen, setIsTermModalOpen] = useState(false);
   const [isPrivacyModalOpen, setIsPrivacyModalOpen] = useState(false);
-  const [phone, setPhone] = useState("");
+  const [phone, setPhone] = useState("+1");
   const [isVerified, setIsVerified] = useState(false);
 
   // Load saved form data + phone verification status
@@ -31,7 +31,7 @@ const SignUp = () => {
 
     if (savedData) {
       form.setFieldsValue(savedData);
-      setPhone(savedData.phoneNumber);
+      setPhone(savedData.phoneNumber ?? "+1");
     }
 
     if (phoneVerified === "1") {
@@ -53,12 +53,7 @@ const SignUp = () => {
       return toast.error("Password does not match!");
     }
 
-    // Send phone with country code
-    const fullPhone = values.phoneNumber.startsWith("+")
-      ? values.phoneNumber
-      : phone;
-
-    singUp({ ...values, phoneNumber: fullPhone })
+    singUp({ ...values, phoneNumber: phone })
       .unwrap()
       .then((payload) => {
         toast.success(payload.message);

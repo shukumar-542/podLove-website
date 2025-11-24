@@ -40,7 +40,7 @@ const PhoneInputWithCountry = ({
       return toast.error("Enter a valid phone number");
 
     try {
-      await verifyPhone({ phone: selectedCountry?.dial_code + phone }).unwrap();
+      await verifyPhone({ phone }).unwrap();
       toast.success("OTP sent!");
       setIsOtpVisible(true);
     } catch (err) {
@@ -52,10 +52,7 @@ const PhoneInputWithCountry = ({
     if (!otp || otp.length !== 6) return toast.error("OTP must be 6 digits");
 
     try {
-      await verifyOtp({
-        phone: selectedCountry?.dial_code + phone,
-        otp,
-      }).unwrap();
+      await verifyOtp({ phone, otp }).unwrap();
       toast.success("Phone verified!");
       setIsVerified(true);
       setIsOtpVisible(false);
@@ -67,7 +64,7 @@ const PhoneInputWithCountry = ({
 
   const handleReset = () => {
     setIsVerified(false);
-    setPhone("");
+    setPhone("+1");
     setOtp("");
     setIsOtpVisible(false);
     setSelectedCountry({

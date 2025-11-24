@@ -33,96 +33,94 @@ const Pricing = ({ subscriptions, buttonDisabled, activePlan }) => {
 
   return (
     <section className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 gap-8 my-10  mx-auto font-poppins mr-2 md:mr-0 ml-2 md:ml-0 ">
-      {subscriptions?.map((plan, index) => {
-        return (
-          <div
-            key={index}
-            style={{
-              backgroundImage: `url(${subscription})`,
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "cover",
-              width: "100%",
-            }}
-            className="rounded-3xl overflow-hidden relative text-white p-4 py-8 shadow-2xl shadow-black"
-          >
-            {plan.name === activePlan?.plan && <p className="ribbon">Active</p>}
-            <p className="text-center bg-[#231A19] text-[20px] py-2  rounded-full max-w-[120px]  mx-auto">
-              {plan?.name?.split(":")[0]}
-            </p>
+      {subscriptions?.map((plan, index) => (
+        <div
+          key={plan?._id + index}
+          style={{
+            backgroundImage: `url(${subscription})`,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
+            width: "100%",
+          }}
+          className="rounded-3xl overflow-hidden relative text-white p-4 py-8 shadow-2xl shadow-black"
+        >
+          {plan.name === activePlan?.plan && <p className="ribbon">Active</p>}
+          <p className="text-center bg-[#231A19] text-[20px] py-2  rounded-full max-w-[120px]  mx-auto">
+            {plan?.name?.split(":")[0]}
+          </p>
 
-            <div className="space-y-2 pb-5 mt-5 min-auto">
-              {plan?.description?.map((det, index) => {
-                return (
-                  <p key={index} className="flex items-center gap-2 font-thin">
-                    <IoCheckmarkOutline size={16} color="#FFA175" />
-                    {det?.key}
-                  </p>
-                );
-              })}
-            </div>
-            <h1 className=" text-3xl font-bold my-5">
-              {plan?.unitAmount == "0"
-                ? "Free"
-                : `$${plan.unitAmount} / ${plan?.interval}`}
-            </h1>
-            <div className="text-center">
-              {/* {"0" == "0" ? ( */}
-              {plan?.unitAmount == "0" ? (
-                <Link to={"/connection-progress"}>
+          <div className="space-y-2 pb-5 mt-5 min-auto">
+            {plan?.description?.map((det, index) => {
+              return (
+                <p key={index} className="flex items-center gap-2 font-thin">
+                  <IoCheckmarkOutline size={16} color="#FFA175" />
+                  {det?.key}
+                </p>
+              );
+            })}
+          </div>
+          <h1 className=" text-3xl font-bold my-5">
+            {plan?.unitAmount == "0"
+              ? "Free"
+              : `$${plan.unitAmount} / ${plan?.interval}`}
+          </h1>
+          <div className="text-center">
+            {/* {"0" == "0" ? ( */}
+            {plan?.unitAmount == "0" ? (
+              <Link to={"/connection-progress"}>
+                <button
+                  disabled={buttonDisabled}
+                  className=" bg-gradient-to-r from-[#F36E2F] to-[#FEB491]  shadow-white shadow-inner rounded-full w-full mt-5 py-2 max-w-xs  mb-5 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  Free Plan
+                </button>
+              </Link>
+            ) : (
+              <div className=" text-center">
+                {logInUser ? (
                   <button
-                    disabled={buttonDisabled}
-                    className=" bg-gradient-to-r from-[#F36E2F] to-[#FEB491]  shadow-white shadow-inner rounded-full w-full mt-5 py-2 max-w-xs  mb-5 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                    onClick={() => handleUpdatePlan(plan)}
+                    disabled={isLoading}
+                    className=" bg-gradient-to-r from-[#F36E2F] to-[#FEB491]  shadow-white shadow-inner rounded-full w-full mt-5 py-2 max-w-xs  mb-5"
                   >
-                    Free Plan
+                    Choose this plan
                   </button>
-                </Link>
-              ) : (
-                <div className=" text-center">
-                  {logInUser ? (
+                ) : (
+                  <a href={`/login`}>
                     <button
-                      onClick={() => handleUpdatePlan(plan)}
                       disabled={isLoading}
                       className=" bg-gradient-to-r from-[#F36E2F] to-[#FEB491]  shadow-white shadow-inner rounded-full w-full mt-5 py-2 max-w-xs  mb-5"
                     >
                       Choose this plan
                     </button>
-                  ) : (
-                    <a href={`/login`}>
-                      <button
-                        disabled={isLoading}
-                        className=" bg-gradient-to-r from-[#F36E2F] to-[#FEB491]  shadow-white shadow-inner rounded-full w-full mt-5 py-2 max-w-xs  mb-5"
-                      >
-                        Choose this plan
-                      </button>
-                    </a>
-                  )}
-                </div>
-              )}
-            </div>
-            <Divider
-              style={{
-                borderColor: "#2D2D30",
-              }}
-            >
-              <p className=" text-[#d1d1d1]">Details</p>
-            </Divider>
-
-            <div className="space-y-3 ">
-              {plan?.description?.map((details) => {
-                return (
-                  <p
-                    key={details?._id}
-                    className="flex items-center gap-2 font-poppins text-[13px]"
-                  >
-                    <IoCheckmarkOutline size={20} color="" />
-                    {details?.details}
-                  </p>
-                );
-              })}
-            </div>
+                  </a>
+                )}
+              </div>
+            )}
           </div>
-        );
-      })}
+          <Divider
+            style={{
+              borderColor: "#2D2D30",
+            }}
+          >
+            <p className=" text-[#d1d1d1]">Details</p>
+          </Divider>
+
+          <div className="space-y-3 ">
+            {plan?.description?.map((details) => {
+              return (
+                <p
+                  key={details?._id}
+                  className="flex items-center gap-2 font-poppins text-[13px]"
+                >
+                  <IoCheckmarkOutline size={20} color="" />
+                  {details?.details}
+                </p>
+              );
+            })}
+          </div>
+        </div>
+      ))}
     </section>
   );
 };
