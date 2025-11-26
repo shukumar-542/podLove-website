@@ -1,7 +1,7 @@
 import img1 from "../../assets/tes.png";
 import video from "../../assets/schedule.mp4";
 import mic from "../../assets/mic.png";
-import { Link, useNavigate } from "react-router";
+import { Link } from "react-router";
 import Pricing from "../../component/Pricing/Pricing";
 import {
   useGetPodCastDetailsQuery,
@@ -21,7 +21,6 @@ import SecondSurvey from "../../component/Modals/SecondSurvey";
 import After7DaysSurveyModal from "../../component/Modals/After7DaysSurvey";
 
 const HomePage = () => {
-  const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { data: getUser } = useGetUserQuery();
@@ -99,7 +98,11 @@ const HomePage = () => {
         });
     }
     if (status === "Playing" || status === "Done") {
-      navigate(`/ms/?roomCode=${roomCodeHost?.code}`);
+      window.open(
+        `/ms/?roomCode=${roomCodeHost?.code}`,
+        "_blank",
+        "noopener,noreferrer"
+      );
     }
   };
 
@@ -109,7 +112,11 @@ const HomePage = () => {
   const handleVideoCallForUser = (roomCodes) => {
     const code = roomCodes?.find((code) => code?.role === "waiting-room");
     if (code) {
-      navigate(`/ms/?roomCode=${code?.code}`);
+      window.open(
+        `/ms/?roomCode=${code?.code}`,
+        "_blank",
+        "noopener,noreferrer"
+      );
     }
   };
 
