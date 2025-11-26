@@ -1,101 +1,126 @@
+import { useEffect, useState } from "react";
+import { Link } from "react-router";
+import { message, Spin, Carousel } from "antd";
+import { toast } from "sonner";
+
 import img1 from "../../assets/tes.png";
 import video from "../../assets/schedule.mp4";
 import mic from "../../assets/mic.png";
-import { Link } from "react-router";
+
 import Pricing from "../../component/Pricing/Pricing";
+import FirstSurvey from "../../component/Modals/FirstSurvey";
+import SecondSurvey from "../../component/Modals/SecondSurvey";
+import After7DaysSurveyModal from "../../component/Modals/After7DaysSurvey";
+
 import {
   useGetPodCastDetailsQuery,
   useGetUserQuery,
 } from "../../redux/Api/AuthApi";
-import { toast } from "sonner";
 import { useGetAllPlanQuery } from "../../redux/Api/SubscriptionPlan";
 import {
   useCreatePodcastMutation,
   useSendPodcastRequestMutation,
 } from "../../redux/Api/PodcastApi";
-import { message, Spin } from "antd";
-import { Carousel } from "antd";
-import { useEffect, useState } from "react";
-import FirstSurvey from "../../component/Modals/FirstSurvey";
-import SecondSurvey from "../../component/Modals/SecondSurvey";
-import After7DaysSurveyModal from "../../component/Modals/After7DaysSurvey";
 
 const HomePage = () => {
+  // ===============================
+  // STATE
+  // ===============================
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const { data: getUser } = useGetUserQuery();
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
+  const [isSecondModalOpen, setIsSecondModalOpen] = useState(false);
   const [is7DaysModalOpen, setIs7DaysModalOpen] = useState(false);
 
-  const handle7DaysOk = () => {
-    setIs7DaysModalOpen(false);
-  };
-  const handle7DaysCancel = () => {
-    setIs7DaysModalOpen(false);
-  };
-
-  const [isSecondModalOpen, setIsSecondModalOpen] = useState(false);
-
-  const handleSecondOk = () => {
-    setIsSecondModalOpen(false);
-  };
-  const handleSecondCancel = () => {
-    setIsSecondModalOpen(false);
-  };
-
-  const [sendPodcastRequest, { isLoading: requestPodcastLoading }] =
-    useSendPodcastRequestMutation();
+  // ===============================
+  // API QUERIES / MUTATIONS
+  // ===============================
+  const { data: getUser } = useGetUserQuery();
   const { data: getPodcastDetails, isLoading } = useGetPodCastDetailsQuery();
   const { data: getAllPlans } = useGetAllPlanQuery();
   const [createPodcast] = useCreatePodcastMutation();
+  const [sendPodcastRequest, { isLoading: requestPodcastLoading }] =
+    useSendPodcastRequestMutation();
 
+  // ===============================
+  // DERIVED VARIABLES
+  // ===============================
   const podcast = getPodcastDetails?.data?.podcast;
+  const userId = getUser?.data?._id;
 
-  useEffect(() => {
-    if (
-      podcast?.finishStatus === "1stFinish" &&
-      podcast?.questionsStatus === null
-    ) {
-      setIsModalOpen(true);
-    }
-
-    if (
-      podcast?.finishStatus === "2ndFinish" &&
-      podcast?.questionsStatus === "1stDone"
-    ) {
-      setIsSecondModalOpen(true);
-    }
-
-    if (getPodcastDetails?.data?.user?.auth?.shareFeedback === "7days") {
-      setIs7DaysModalOpen(true);
-    }
-  }, [getPodcastDetails]);
+  const isRequested = podcast?.participants?.some(
+    (p) => p?.isRequest && p?._id === userId
+  );
 
   const status = podcast?.status;
-
   const roomCodeHost = podcast?.roomCodes?.find(
     (code) => code?.role === "waiting-room"
   );
 
+  const isJoinEnabled =
+    (podcast?.questionsStatus === "1stDone" && status === "Finished") ||
+    status === "Playing" ||
+    status === "Done";
+
+  const isChatAvailable =
+    getPodcastDetails?.data?.user?.chatingtime &&
+    new Date() >= new Date(getPodcastDetails.data.user.chatingtime);
+
+  // ===============================
+  // MODAL HANDLERS
+  // ===============================
+  const handleOk = () => setIsModalOpen(false);
+  const handleCancel = () => setIsModalOpen(false);
+
+  const handleSecondOk = () => setIsSecondModalOpen(false);
+  const handleSecondCancel = () => setIsSecondModalOpen(false);
+
+  const handle7DaysOk = () => setIs7DaysModalOpen(false);
+  const handle7DaysCancel = () => setIs7DaysModalOpen(false);
+
+  // ===============================
+  // EFFECT: MODALS LOGIC
+  // ===============================
+  useEffect(() => {
+    if (!podcast || !userId) return;
+
+    const myParticipant = podcast.participants?.find((p) => p?._id === userId);
+
+    // First Survey Logic
+    if (
+      podcast?.finishStatus === "1stFinish" &&
+      myParticipant?.isQuestionAnswer !== "1stDone"
+    ) {
+      setIsModalOpen(true);
+      setIsSecondModalOpen(false);
+    }
+
+    // Second Survey Logic
+    if (
+      podcast?.finishStatus === "2ndFinish" &&
+      myParticipant?.isQuestionAnswer !== "2ndDone"
+    ) {
+      setIsModalOpen(false);
+      setIsSecondModalOpen(true);
+    }
+
+    // 7 Days Feedback
+    if (getPodcastDetails?.data?.user?.auth?.shareFeedback === "7days") {
+      setIs7DaysModalOpen(true);
+    }
+  }, [podcast, userId, getPodcastDetails]);
+
+  // ===============================
+  // HANDLERS
+  // ===============================
   const handleVideoCall = () => {
     if (!podcast?._id) {
       toast.error("Podcast not available!");
       return;
     }
     if (status === "StreamStart") {
-      createPodcast(podcast?._id)
+      createPodcast(podcast._id)
         .unwrap()
-        .then(() => {
-          window.location.reload();
-        })
-        .catch((error) => {
-          message.error(error?.data?.message);
-        });
+        .then(() => window.location.reload())
+        .catch((err) => message.error(err?.data?.message));
     }
     if (status === "Playing" || status === "Done") {
       window.open(
@@ -106,11 +131,8 @@ const HomePage = () => {
     }
   };
 
-  // ================================================================
-  // Handle video call for matched user
-  // ================================================================
   const handleVideoCallForUser = (roomCodes) => {
-    const code = roomCodes?.find((code) => code?.role === "waiting-room");
+    const code = roomCodes?.find((c) => c?.role === "waiting-room");
     if (code) {
       window.open(
         `/ms/?roomCode=${code?.code}`,
@@ -120,22 +142,14 @@ const HomePage = () => {
     }
   };
 
-  //  ========================================================================================
-  // Handle request podcast function
-  //  ========================================================================================
   const handleRequestPodcast = () => {
-    const data = {
-      status: "ReqScheduled",
-    };
+    const data = { status: "ReqScheduled" };
     sendPodcastRequest(data)
       .unwrap()
-      .then(() => {
-        // toast.success(payload?.message))
-        window.location.reload();
-      })
+      .then(() => window.location.reload())
       .catch(() =>
         toast.error("Podcast request failed", {
-          description: "Something went wrong. Please try again in a moment.",
+          description: "Something went wrong. Please try again later.",
         })
       );
   };
@@ -152,9 +166,7 @@ const HomePage = () => {
       case "Scheduled":
         return "Scheduled";
       case "Playing":
-        return "Join Now";
       case "StreamStart":
-        return "Join Now";
       case "Done":
         return "Join Now";
       case "Finished":
@@ -167,22 +179,6 @@ const HomePage = () => {
         return "Not Available";
     }
   };
-
-  // const isJoinEnabled = status === "Playing";
-  const isJoinEnabled =
-    (podcast?.questionsStatus === "1stDone" && status === "Finished") ||
-    status === "Playing" ||
-    status === "Done";
-
-  const isChatAvailable =
-    getPodcastDetails?.data?.user?.chatingtime &&
-    new Date() >= new Date(getPodcastDetails.data.user.chatingtime);
-
-  const userId = getUser?.data?._id;
-
-  const isRequested = podcast?.participants?.some(
-    (participant) => participant?.isRequest && participant?._id === userId
-  );
 
   return (
     <div className="bg-[#F7E8E1]">
