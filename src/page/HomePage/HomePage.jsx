@@ -195,7 +195,11 @@ const HomePage = () => {
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-2 xl:grid-cols-4 gap-10 px-4 md:px-0">
             {podcast?.participants
-              ?.filter((participant) => participant?._id !== userId) // <-- exclude current user
+              ?.filter((participant) => participant?._id !== userId) // exclude current user
+              ?.filter(
+                (participant, index, self) =>
+                  index === self.findIndex((p) => p?._id === participant?._id)
+              ) // remove duplicates based on _id
               .map((participant, i) => (
                 <div key={participant?._id}>
                   {getPodcastDetails?.data?.user?.subscription?.fee ===
