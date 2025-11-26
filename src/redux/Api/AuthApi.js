@@ -93,10 +93,10 @@ const authApi = baseApi.injectEndpoints({
       },
     }),
     deleteAccount: builder.mutation({
-      query: ({ authId }) => {
+      query: () => {
         return {
-          url: `/user/delete_account/${authId}`,
-          method: "POST",
+          url: "/auth/delete",
+          method: "DELETE",
         };
       },
     }),

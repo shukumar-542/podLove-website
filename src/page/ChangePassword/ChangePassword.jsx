@@ -4,14 +4,11 @@ import Password from "antd/es/input/Password";
 import {
   useChangePasswordMutation,
   useDeleteAccountMutation,
-  useGetUserQuery,
 } from "../../redux/Api/AuthApi";
 import { toast } from "sonner";
 import { useNavigate } from "react-router";
 
 const ChangePassword = () => {
-  const { data: getUser } = useGetUserQuery();
-
   const [changePassword, { isLoading }] = useChangePasswordMutation();
   const [deleteAccount, { isLoading: isDeleteLoading }] =
     useDeleteAccountMutation();
@@ -36,7 +33,7 @@ const ChangePassword = () => {
   };
 
   const confirmDelete = () => {
-    deleteAccount({ authId: getUser?.data?.auth })
+    deleteAccount()
       .unwrap()
       .then((payload) => {
         localStorage.removeItem("podlove-token");
