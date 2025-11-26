@@ -74,7 +74,7 @@ const SignUp = () => {
         backgroundPosition: "center",
         imageRendering: "high-quality",
       }}
-      className="min-h-dvh"
+      className="min-h-dvh relative"
     >
       <div className="bg-black absolute opacity-50 inset-0 z-0"></div>
 

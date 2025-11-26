@@ -69,10 +69,7 @@ export default function ConnectionPathway() {
     >
       <div className="min-h-screen bg-[#ffa175] flex items-start justify-center py-12 px-4 relative">
         {/* BACK ARROW FIXED */}
-        <Link
-          to="/"
-          className="absolute top-10 my-5 left-10 z-[9999] hidden sm:block"
-        >
+        <Link to="/" className="absolute top-10 my-5 left-10 z-[9999]">
           <IoArrowBack size={30} className="text-[#F26828] cursor-pointer" />
         </Link>
 

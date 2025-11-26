@@ -98,27 +98,27 @@ const Login = () => {
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
       }}
-      className="h-[100vh] relative"
+      className="min-h-dvh relative"
     >
-      {/* 🔹 Black Overlay (behind the content) */}
       <div className="absolute inset-0 bg-black bg-opacity-50 z-0"></div>
+
       <Link to="/">
         <IoArrowBack
           me
-          className=" text-[#F26828] absolute top-10 left-10 cursor-pointer z-9999 hidden sm:block"
+          className=" text-[#F26828] absolute top-10 left-10 cursor-pointer z-9999"
           size={40}
         />
       </Link>
-      {/* 🔹 Content (above the overlay) */}
-      <div className="flex items-center justify-start max-w-5xl mx-auto h-full p-2 md:p-0 relative z-10">
-        <div className="bg-white shadow-2xl shadow-[#F26828] rounded-md p-5 md:p-10 max-w-5xl">
+
+      <div className="flex items-center min-h-dvh justify-start max-w-5xl mx-auto p-2 md:p-0 relative z-10">
+        <div className="bg-white shadow-2xl shadow-[#F26828] rounded-md p-5 md:p-10 w-full max-w-lg">
           {/* <p className="text-4xl font-bold text-[#333333]">Welcome Back!</p> */}
           <p className="text-4xl text-center font-bold text-[#333333]">
             Log in
           </p>
           {/* <p className="mt-2 text-center">Please log in to continue access</p> */}
 
-          <div className=" w-[250px] md:w-[450px] ">
+          <div className="">
             <Form onFinish={handleUserLogin} layout="vertical">
               <Form.Item label="Email" name={"email"}>
                 <Input placeholder="Enter your email here" />
