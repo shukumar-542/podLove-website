@@ -113,7 +113,7 @@ const SecondSurvey = ({
               label="How well did your match meet your expectations in person?"
               valuePropName="value"
             >
-              <Slider min={1} max={5} defaultValue={4} />
+              <Slider min={1} max={5} defaultValue={0} />
             </Form.Item>
 
             {/* Second Question */}
