@@ -2,19 +2,21 @@ import bg from "../../assets/102.png";
 import { CiLocationOn } from "react-icons/ci";
 import { IoCalendarOutline, IoSettingsOutline } from "react-icons/io5";
 import { FiEdit } from "react-icons/fi";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useGetUserQuery } from "../../redux/Api/AuthApi";
 import { baseUrl } from "../../baseUrl";
 import { PiSignOutBold } from "react-icons/pi";
 import { Popconfirm } from "antd";
+import { formatDate } from "../../helpers/formatDate";
 const Profile = () => {
   const { data: getUser } = useGetUserQuery();
-
+  const navigate = useNavigate();
   const confirm = () => {
     localStorage.removeItem("podlove-token");
-    window.location.href = "/login";
+    navigate("/login");
   };
 
+  console.log({ a: getUser?.data?.dateOfBirth });
   return (
     <div
       style={{
@@ -88,18 +90,18 @@ const Profile = () => {
             <div className="mt-5 space-y-3 ">
               <p className="flex justify-between">
                 <span>Gender</span>{" "}
-                <span className="text-[#767676]">{getUser?.data?.gender}</span>
+                <span className="text-[#767676] capitalize">
+                  {getUser?.data?.gender}
+                </span>
               </p>
-              {/* //! working */}
-              {/* <p className="flex justify-between">
+
+              <p className="flex justify-between">
                 <span>Age</span>{" "}
                 <span className="text-[#767676]">
-                  {getUser?.data?.dateOfBirth}
+                  {formatDate(getUser?.data?.dateOfBirth)}
                 </span>
-              </p> */}
-              <p className="flex justify-between">
-                {/* <span>Age</span> <span className="text-[#767676]">35</span> */}
               </p>
+
               <p className="flex justify-between gap-20">
                 <span>Phone</span>{" "}
                 <span className="text-[#767676]">

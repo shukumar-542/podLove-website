@@ -9,11 +9,11 @@ import { IoArrowBack } from "react-icons/io5";
 
 // Likert and option sets
 const LIKERT = [
-  "Strongly Disagree",
-  "Disagree",
-  "Neutral",
-  "Agree",
   "Strongly Agree",
+  "Agree",
+  "Neutral",
+  "Disagree",
+  "Strongly Disagree",
 ];
 const YES_NO = ["Yes", "No"];
 const YES_NO_NOT_SURE = ["Yes", "No", "Not sure yet"];
