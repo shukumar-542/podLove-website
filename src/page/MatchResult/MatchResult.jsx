@@ -1,10 +1,8 @@
-// import { Link } from "react-router";
 import { Link } from "react-router";
 import bg from "../../assets/m.png";
 import match1 from "../../assets/match.png";
 import { useGetMatchsQuery } from "../../redux/Api/AuthApi";
 import { useState } from "react";
-// import { toast } from "sonner";
 
 const MatchResult = () => {
   const [selected, setSelected] = useState(null);

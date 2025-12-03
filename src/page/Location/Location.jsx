@@ -8,7 +8,7 @@ import { useUpdateUserInfoMutation } from "../../redux/Api/AuthApi";
 import { toast } from "sonner";
 import { useNavigate } from "react-router";
 const Location = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [updateUserInfo, { isLoading }] = useUpdateUserInfoMutation();
 
   const [selectedLocation, setSelectedLocation] = useState(null);
@@ -31,20 +31,23 @@ const Location = () => {
       },
     };
 
-    localStorage.setItem('distance', JSON.stringify({
-      distance: value,
-    }))
+    localStorage.setItem(
+      "distance",
+      JSON.stringify({
+        distance: value,
+      })
+    );
 
     if (!selectedLocation?.address) {
-      toast.error("please select location")
+      toast.error("please select location");
       return;
     }
 
     updateUserInfo(data)
       .unwrap()
       .then((payload) => {
-        toast.success(payload?.message)
-        navigate('/age')
+        toast.success(payload?.message);
+        navigate("/age");
       })
       .catch((error) => toast.error(error?.data?.message));
   };
@@ -72,7 +75,6 @@ const Location = () => {
           </p>
           <div className="py-5">
             <p className="mb-2 font-poppins">Please Type Your City</p>
-            {/* <Input onChange={(e) => setSearchTerm(e.target.value)}  value={searchTerm}  className="border border-[#FFA175]"/> */}
             <LocationSearch onSelectLocation={setSelectedLocation} />
           </div>
           <div>
