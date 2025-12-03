@@ -16,7 +16,6 @@ const Profile = () => {
     navigate("/login");
   };
 
-  console.log({ a: getUser?.data?.dateOfBirth });
   return (
     <div
       style={{
