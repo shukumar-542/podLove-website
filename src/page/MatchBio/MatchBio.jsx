@@ -1,9 +1,14 @@
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import bg from "../../assets/b.png";
+import { useGetUserQuery } from "../../redux/Api/AuthApi";
 
 // const interest = ["Photography", "Traveling", "Art & Craft", "Cooking"];
 const MatchBio = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+  const { data: getUser } = useGetUserQuery();
+
+  const isPaidUser = getUser?.data?.subscription?.status === "PAID";
 
   const params = new URLSearchParams(location.search);
   const bio = params.get("bio") || "No bio found";
@@ -11,6 +16,9 @@ const MatchBio = () => {
     ? params.get("interests").split(",")
     : [];
 
+  if (!isPaidUser) {
+    return navigate("/home");
+  }
   return (
     <div
       style={{

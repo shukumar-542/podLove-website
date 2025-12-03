@@ -8,18 +8,8 @@ const MatchResult = () => {
   const [selected, setSelected] = useState(null);
   const { data, isLoading } = useGetMatchsQuery();
   const { data: getUser } = useGetUserQuery();
-  console.log(getUser);
+
   const plan = getUser?.data?.subscription?.status;
-
-  // const navigate = useNavigate();
-
-  // const navigateToDetails = () => {
-  //   if (!selected) {
-  //     toast.error("Please select a match to proceed!");
-  //     return
-  //   }
-  //   navigate('/home')
-  // }
 
   return (
     <div
