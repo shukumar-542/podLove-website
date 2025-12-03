@@ -9,8 +9,8 @@ const MatchResult = () => {
   const { data, isLoading } = useGetMatchsQuery();
   const { data: getUser } = useGetUserQuery();
 
+  const userId = getUser?.data?._id;
   const plan = getUser?.data?.subscription?.status;
-
   return (
     <div
       style={{
@@ -44,35 +44,39 @@ const MatchResult = () => {
             <p className="text-center my-16">No matches found.</p>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-10">
-              {data?.data?.users?.map((user, index) => {
-                const isPaidUser = plan === "PAID";
+              {data?.data?.users
+                ?.filter((participant) => participant?._id !== userId) // exclude current user
+                ?.map((user, index) => {
+                  const isPaidUser = plan === "PAID";
 
-                const Card = (
-                  <div
-                    onClick={() => setSelected(user)}
-                    className={`cursor-pointer ${
-                      selected?._id === user?._id
-                        ? "border-2 border-[#F26828]"
-                        : "border-2 border-white"
-                    } rounded-tl-xl rounded-br-xl`}
-                  >
-                    <img src={match1} alt="" />
-                  </div>
-                );
+                  const Card = (
+                    <div
+                      onClick={() => setSelected(user)}
+                      className={`cursor-pointer ${
+                        selected?._id === user?._id
+                          ? "border-2 border-[#F26828]"
+                          : "border-2 border-white"
+                      } rounded-tl-xl rounded-br-xl`}
+                    >
+                      <img src={match1} alt="" />
+                    </div>
+                  );
 
-                return isPaidUser ? (
-                  <Link
-                    key={index}
-                    to={`/match-bio?bio=${encodeURIComponent(
-                      user?.bio || ""
-                    )}&interests=${encodeURIComponent(user?.interests || "")}`}
-                  >
-                    {Card}
-                  </Link>
-                ) : (
-                  <div key={index}>{Card}</div>
-                );
-              })}
+                  return isPaidUser ? (
+                    <Link
+                      key={index}
+                      to={`/match-bio?bio=${encodeURIComponent(
+                        user?.bio || ""
+                      )}&interests=${encodeURIComponent(
+                        user?.interests || ""
+                      )}`}
+                    >
+                      {Card}
+                    </Link>
+                  ) : (
+                    <div key={index}>{Card}</div>
+                  );
+                })}
             </div>
           )}
           <p className="text-center max-w-96 mx-auto mb-10">
