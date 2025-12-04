@@ -103,7 +103,7 @@ const ChatPage = () => {
                 >
                   {msg.message}
                   {isSelected && msg.timestamp?.toDate && (
-                    <div className="text-[10px] mt-1 text-white/80 text-right">
+                    <div className="text-[10px] mt-1  text-right">
                       {msg.timestamp.toDate().toLocaleTimeString("en-US", {
                         hour: "numeric",
                         minute: "2-digit",

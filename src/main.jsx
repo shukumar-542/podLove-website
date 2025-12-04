@@ -50,11 +50,11 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import ConsumerPolicy from "./page/ConsumerPolicy/ConsumerPolicy.jsx";
 import Faq from "./component/Faq/Faq.jsx";
 import MediaPlicy from "./page/MediaPlicy/MediaPlicy.jsx";
-import OurApproach from "./page/OurApproach/OurApproach.jsx";
-import TermsOfUse from "./page/TermsOfUse/TermsOfUse.jsx";
-import RelationShipReadinessOne from "./page/RelationShipReadinessOne/RelationShipReadinessOne.jsx";
-import RelationShipReadinessTwo from "./page/RelationShipReadinessTwo/RelationShipReadinessTwo.jsx";
-import AttentionError from "./page/AttentionError/AttentionError.jsx";
+// import OurApproach from "./page/OurApproach/OurApproach.jsx";
+// import TermsOfUse from "./page/TermsOfUse/TermsOfUse.jsx";
+// import RelationShipReadinessOne from "./page/RelationShipReadinessOne/RelationShipReadinessOne.jsx";
+// import RelationShipReadinessTwo from "./page/RelationShipReadinessTwo/RelationShipReadinessTwo.jsx";
+// import AttentionError from "./page/AttentionError/AttentionError.jsx";
 import ScrollToTop from "./helpers/ScrollToTop.js";
 import RoomPage100MS from "./page/RoomPage100MS/RoomPage100MS.jsx";
 import MediaUsageConsent from "./page/MediaUsageConsent/MediaUsageConsent.jsx";
@@ -175,17 +175,17 @@ createRoot(document.getElementById("root")).render(
             <Route path="/forgot-password" element={<ForgetPassword />} />
             <Route path="/verify-forget-otp" element={<VerifyEmail />} />
             <Route path="/set-new-password" element={<SetNewPassword />} />
-            <Route path="/our-approch" element={<OurApproach />} />
-            <Route path="/terms-of-use" element={<TermsOfUse />} />
-            <Route
+            {/* <Route path="/our-approch" element={<OurApproach />} /> */}
+            {/* <Route path="/terms-of-use" element={<TermsOfUse />} /> */}
+            {/* <Route
               path="/relationship-first"
               element={<RelationShipReadinessOne />}
-            />
-            <Route
+            /> */}
+            {/* <Route
               path="/relationship-second"
               element={<RelationShipReadinessTwo />}
-            />
-            <Route path="/attention-error" element={<AttentionError />} />
+            /> */}
+            {/* <Route path="/attention-error" element={<AttentionError />} /> */}
           </Routes>
         </BrowserRouter>
         <Toaster position="top-right" richColors />
