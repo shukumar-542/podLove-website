@@ -18,6 +18,8 @@ const MatchResult = () => {
     const token = localStorage.getItem("podlove-token");
     if (!token) {
       navigate("/login", { replace: true });
+    } else {
+      navigate("/home", { replace: true });
     }
   }, [navigate]);
 

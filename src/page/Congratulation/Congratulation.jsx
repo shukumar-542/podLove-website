@@ -1,10 +1,21 @@
-
 import bg from "../../assets/MatchResults.png";
 import cng from "../../assets/cong.png";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import AuthButton from "../../component/AuthButton/AuthButton";
+import { useEffect } from "react";
 
 const Congratulation = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("podlove-token");
+    if (!token) {
+      navigate("/login", { replace: true });
+    } else {
+      navigate("/home", { replace: true });
+    }
+  }, [navigate]);
+
   return (
     <div
       style={{
@@ -44,7 +55,7 @@ const Congratulation = () => {
           </p>
 
           <div className="mx-16">
-            <Link to={'/match-result'}>
+            <Link to={"/match-result"}>
               <AuthButton className={"py-2  mt-5 "}>Next</AuthButton>
             </Link>
           </div>

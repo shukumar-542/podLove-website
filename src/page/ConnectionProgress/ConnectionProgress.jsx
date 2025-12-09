@@ -12,6 +12,15 @@ const ConnectionProgress = () => {
   const userId = localStorage.getItem("userId");
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const token = localStorage.getItem("podlove-token");
+    if (!token) {
+      navigate("/login", { replace: true });
+    } else {
+      navigate("/home", { replace: true });
+    }
+  }, [navigate]);
+
   // Progress timer
   useEffect(() => {
     const interval = setInterval(() => {
