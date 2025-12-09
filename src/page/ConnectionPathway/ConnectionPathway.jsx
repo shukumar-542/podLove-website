@@ -2,13 +2,12 @@ import { Form, Radio, Input, Button, ConfigProvider, Card } from "antd";
 import { FiSend } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import { useSubmitConnectionPathwayMutation } from "../../redux/Api/PodcastApi";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AttentionModal from "../../component/Modals/AttentionModal";
 import { Link } from "react-router-dom";
 import { IoArrowBack } from "react-icons/io5";
 
-// Likert and option sets
-const LIKERT = [
+const RESPONSEOPTIONS = [
   "Strongly Agree",
   "Agree",
   "Neutral",
@@ -19,13 +18,21 @@ const YES_NO = ["Yes", "No"];
 const YES_NO_NOT_SURE = ["Yes", "No", "Not sure yet"];
 
 export default function ConnectionPathway() {
+  const navigate = useNavigate();
   const [form] = Form.useForm();
+
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("podlove-token");
+    if (token) {
+      navigate("/home", { replace: true });
+    }
+  }, [navigate]);
 
   const handleOk = () => setIsModalOpen(false);
   const handleCancel = () => setIsModalOpen(false);
 
-  const navigate = useNavigate();
   const [submitConnectionPathway, { isLoading }] =
     useSubmitConnectionPathwayMutation();
 
@@ -114,7 +121,7 @@ export default function ConnectionPathway() {
               >
                 <Radio.Group>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-2">
-                    {LIKERT.map((label) => (
+                    {RESPONSEOPTIONS.map((label) => (
                       <Radio key={label} value={label} className="py-2">
                         {label}
                       </Radio>
@@ -178,7 +185,7 @@ export default function ConnectionPathway() {
               >
                 <Radio.Group>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-2">
-                    {LIKERT.map((label) => (
+                    {RESPONSEOPTIONS.map((label) => (
                       <Radio key={label} value={label} className="py-2">
                         {label}
                       </Radio>
@@ -212,7 +219,7 @@ export default function ConnectionPathway() {
               >
                 <Radio.Group>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-2">
-                    {LIKERT.map((label) => (
+                    {RESPONSEOPTIONS.map((label) => (
                       <Radio key={label} value={label} className="py-2">
                         {label}
                       </Radio>
@@ -263,7 +270,7 @@ export default function ConnectionPathway() {
               >
                 <Radio.Group>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-2">
-                    {LIKERT.map((label) => (
+                    {RESPONSEOPTIONS.map((label) => (
                       <Radio key={label} value={label} className="py-2">
                         {label}
                       </Radio>

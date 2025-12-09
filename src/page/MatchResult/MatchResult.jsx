@@ -1,12 +1,12 @@
 import { Link } from "react-router";
 import bg from "../../assets/m.png";
 import match1 from "../../assets/match.png";
-import { useGetMatchsQuery, useGetUserQuery } from "../../redux/Api/AuthApi";
+import { useGetMatchesQuery, useGetUserQuery } from "../../redux/Api/AuthApi";
 import { useState } from "react";
 
 const MatchResult = () => {
   const [selected, setSelected] = useState(null);
-  const { data, isLoading } = useGetMatchsQuery();
+  const { data, isLoading } = useGetMatchesQuery();
   const { data: getUser } = useGetUserQuery();
 
   const userId = getUser?.data?._id;
@@ -63,14 +63,7 @@ const MatchResult = () => {
                   );
 
                   return isPaidUser ? (
-                    <Link
-                      key={index}
-                      to={`/match-bio?bio=${encodeURIComponent(
-                        user?.bio || ""
-                      )}&interests=${encodeURIComponent(
-                        user?.interests || ""
-                      )}`}
-                    >
+                    <Link key={index} to={`/podcast-details/${user._id}`}>
                       {Card}
                     </Link>
                   ) : (

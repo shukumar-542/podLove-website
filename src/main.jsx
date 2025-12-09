@@ -23,8 +23,6 @@ import ConnectionProgress from "./page/ConnectionProgress/ConnectionProgress.jsx
 import Congratulation from "./page/Congratulation/Congratulation.jsx";
 import MatchResult from "./page/MatchResult/MatchResult.jsx";
 import MatchBio from "./page/MatchBio/MatchBio.jsx";
-// import PodcastDetails from "./page/PodcastDetails/PodcastDetails.jsx";
-import AfterPodcast from "./page/AfterPodcast/AfterPodcast.jsx";
 import ChatPage from "./page/ChatPage/ChatPage.jsx";
 import FeedbackOne from "./page/FeedbackOne/FeedbackOne.jsx";
 import FeedbackSecond from "./page/FeedbackSecond/FeedbackSecond.jsx";
@@ -43,18 +41,12 @@ import { store } from "./redux/store.js";
 import { Toaster } from "sonner";
 import OptInPolicy from "./page/OptInPolicy/OptInPolicy.jsx";
 import SubscriptionPlan from "./page/SubscriptionPlan/SubscriptionPlan.jsx";
-// import RoomPage from "./page/RoomPage/RoomPage.jsx";
 import ParticipantDetails from "./page/ParticipantDetails/ParticipantDetails.jsx";
 import PrivateRoute from "./component/PrivateRoute/PrivateRoute.jsx";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import ConsumerPolicy from "./page/ConsumerPolicy/ConsumerPolicy.jsx";
 import Faq from "./component/Faq/Faq.jsx";
-import MediaPlicy from "./page/MediaPlicy/MediaPlicy.jsx";
-// import OurApproach from "./page/OurApproach/OurApproach.jsx";
-// import TermsOfUse from "./page/TermsOfUse/TermsOfUse.jsx";
-// import RelationShipReadinessOne from "./page/RelationShipReadinessOne/RelationShipReadinessOne.jsx";
-// import RelationShipReadinessTwo from "./page/RelationShipReadinessTwo/RelationShipReadinessTwo.jsx";
-// import AttentionError from "./page/AttentionError/AttentionError.jsx";
+import MediaPolicy from "./page/MediaPolicy/MediaPolicy.jsx";
 import ScrollToTop from "./helpers/ScrollToTop.js";
 import RoomPage100MS from "./page/RoomPage100MS/RoomPage100MS.jsx";
 import MediaUsageConsent from "./page/MediaUsageConsent/MediaUsageConsent.jsx";
@@ -83,7 +75,6 @@ createRoot(document.getElementById("root")).render(
               <Route path="/about-us" element={<AboutUs />} />
               <Route path="/faq" element={<Faq />} />
               <Route path="/contact-us" element={<ContactUs />} />
-              <Route path="/after-podcast" element={<AfterPodcast />} />
               <Route path="/subscription-plan" element={<SubscriptionPlan />} />
               <Route path="/subscription-page" element={<SubscriptionPage />} />
               <Route element={<PrivateRoute />}>
@@ -125,7 +116,7 @@ createRoot(document.getElementById("root")).render(
                 <Route path="/notification" element={<Notification />} />
               </Route>
               <Route path="/consumer-policy" element={<ConsumerPolicy />} />,
-              <Route path="/media-policy" element={<MediaPlicy />} />
+              <Route path="/media-policy" element={<MediaPolicy />} />
               <Route
                 path="/podcast-details/:id"
                 element={<ParticipantDetails />}
@@ -175,17 +166,6 @@ createRoot(document.getElementById("root")).render(
             <Route path="/forgot-password" element={<ForgetPassword />} />
             <Route path="/verify-forget-otp" element={<VerifyEmail />} />
             <Route path="/set-new-password" element={<SetNewPassword />} />
-            {/* <Route path="/our-approch" element={<OurApproach />} /> */}
-            {/* <Route path="/terms-of-use" element={<TermsOfUse />} /> */}
-            {/* <Route
-              path="/relationship-first"
-              element={<RelationShipReadinessOne />}
-            /> */}
-            {/* <Route
-              path="/relationship-second"
-              element={<RelationShipReadinessTwo />}
-            /> */}
-            {/* <Route path="/attention-error" element={<AttentionError />} /> */}
           </Routes>
         </BrowserRouter>
         <Toaster position="top-right" richColors />

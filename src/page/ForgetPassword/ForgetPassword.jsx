@@ -5,9 +5,18 @@ import AuthButton from "../../component/AuthButton/AuthButton";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
 import { useForgetPasswordMutation } from "../../redux/Api/AuthApi";
+import { useEffect } from "react";
 const ForgetPassword = () => {
   const navigate = useNavigate();
   const [forgetPassword, { isLoading }] = useForgetPasswordMutation();
+
+  useEffect(() => {
+    const token = localStorage.getItem("podlove-token");
+    if (token) {
+      navigate("/home", { replace: true });
+    }
+  }, [navigate]);
+
   const onFinish = (values) => {
     const data = {
       email: values?.email,
@@ -21,6 +30,7 @@ const ForgetPassword = () => {
       })
       .catch((error) => toast.error(error?.data?.message));
   };
+
   return (
     <div
       style={{

@@ -15,12 +15,21 @@ import { GoogleLogin } from "@react-oauth/google";
 import AppleSignin from "react-apple-signin-auth";
 import { jwtDecode } from "jwt-decode";
 import { IoArrowBack } from "react-icons/io5";
+import { useEffect } from "react";
 
 const Login = () => {
   const [loginUser, { isLoading }] = useLoginUserMutation();
   const [googleLogin] = useGoogleLoginMutation();
   const [appleLogin] = useAppleLoginMutation();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("podlove-token");
+    if (token) {
+      navigate("/home", { replace: true });
+    }
+  }, [navigate]);
+
   const handleUserLogin = async (values) => {
     try {
       const payload = await loginUser(values).unwrap();
@@ -56,9 +65,6 @@ const Login = () => {
       })
       .catch((error) => toast.error(error?.data?.message));
   };
-
-  // ================================ Apple ======================================
-  // =============================================================================
 
   const handleAppleSuccess = async (response) => {
     if (!response?.authorization?.code || !response?.authorization?.id_token) {

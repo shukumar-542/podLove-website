@@ -3,11 +3,20 @@ import { Form, Input, message } from "antd";
 import { useNavigate } from "react-router";
 import AuthButton from "../../component/AuthButton/AuthButton";
 import { useResetAuthPasswordMutation } from "../../redux/Api/AuthApi";
+import { useEffect } from "react";
 
 const SetNewPassword = () => {
   const [resetAuthPassword, { isLoading }] = useResetAuthPasswordMutation();
   const navigate = useNavigate();
   const email = localStorage.getItem("email");
+
+  useEffect(() => {
+    const token = localStorage.getItem("podlove-token");
+    if (token) {
+      navigate("/home", { replace: true });
+    }
+  }, [navigate]);
+
   const onFinish = (values) => {
     resetAuthPassword({
       email: email,

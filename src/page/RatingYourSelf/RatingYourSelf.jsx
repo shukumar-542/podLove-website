@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import bg from "../../assets/personality.png";
 import { useNavigate } from "react-router";
 import AuthButton from "../../component/AuthButton/AuthButton";
@@ -14,12 +14,20 @@ const color = [
   "#B57253",
 ];
 const RatingYourSelf = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [updateRating, { isLoading }] = useUpdateUserInfoMutation();
 
   const [selectedRating, setSelectedRating] = useState(1);
   const [selectedHomeBody, setSelectHomeBody] = useState(3);
   const [selectedOptimist, setSelectOptimist] = useState(2);
+
+  useEffect(() => {
+    const token = localStorage.getItem("podlove-token");
+    if (token) {
+      navigate("/home", { replace: true });
+    }
+  }, [navigate]);
+
   const handleSelectRating = (rating) => {
     setSelectedRating(rating);
   };
@@ -44,11 +52,11 @@ const RatingYourSelf = () => {
     updateRating(data)
       .unwrap()
       .then((payload) => {
-        toast.success(payload?.message)
-        navigate('/interest')
+        toast.success(payload?.message);
+        navigate("/interest");
       })
       .catch((error) => {
-        toast.error(error?.data?.message)
+        toast.error(error?.data?.message);
       });
   };
 

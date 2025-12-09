@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import AuthButton from "../../component/AuthButton/AuthButton";
 import { Checkbox } from "antd";
@@ -34,6 +34,13 @@ const Ethnicity = () => {
   const [selectedBodyType, setSelectedBodyType] = useState([]);
   const [preferredBodyType, setPreferredBodyType] = useState([]);
 
+  useEffect(() => {
+    const token = localStorage.getItem("podlove-token");
+    if (token) {
+      navigate("/home", { replace: true });
+    }
+  }, [navigate]);
+
   const handleBodyTypeChange = (checkedValues) => {
     setSelectedBodyType(checkedValues);
   };
@@ -41,14 +48,16 @@ const Ethnicity = () => {
   const handlePreferredBodyTypeChange = (checkedValues) => {
     setPreferredBodyType(checkedValues);
   };
-  const age = JSON.parse(localStorage.getItem('age'))
-  const gender = JSON.parse(localStorage.getItem('gender'))
-  const bodyType = JSON.parse(localStorage.getItem('bodyType'))
-  const distance = JSON.parse(localStorage.getItem('distance'))
+  const age = JSON.parse(localStorage.getItem("age"));
+  const gender = JSON.parse(localStorage.getItem("gender"));
+  const bodyType = JSON.parse(localStorage.getItem("bodyType"));
+  const distance = JSON.parse(localStorage.getItem("distance"));
 
   const handleEthnicity = () => {
     if (preferredBodyType?.length === 0 || selectedBodyType.length === 0) {
-      return toast.error("Please select both your preferred body type and selected body type.")
+      return toast.error(
+        "Please select both your preferred body type and selected body type."
+      );
     }
     const data = {
       preferences: {
@@ -64,12 +73,12 @@ const Ethnicity = () => {
     updateEthnicity(data)
       .unwrap()
       .then((payload) => {
-        toast.success(payload?.message)
-        localStorage.removeItem('age')
-        localStorage.removeItem('gender')
-        localStorage.removeItem('bodyType')
-        localStorage.removeItem('distance')
-        navigate("/bio")
+        toast.success(payload?.message);
+        localStorage.removeItem("age");
+        localStorage.removeItem("gender");
+        localStorage.removeItem("bodyType");
+        localStorage.removeItem("distance");
+        navigate("/bio");
       })
       .catch((error) => toast.error(error?.data?.message));
   };

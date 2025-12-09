@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-vars */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import bg from "../../assets/location-bg.png";
 import AuthButton from "../../component/AuthButton/AuthButton";
 import { Slider } from "antd";
@@ -12,8 +11,14 @@ const Location = () => {
   const [updateUserInfo, { isLoading }] = useUpdateUserInfoMutation();
 
   const [selectedLocation, setSelectedLocation] = useState(null);
-  const [disabled, setDisabled] = useState(false);
   const [value, setValue] = useState(30);
+
+  useEffect(() => {
+    const token = localStorage.getItem("podlove-token");
+    if (token) {
+      navigate("/home", { replace: true });
+    }
+  }, [navigate]);
 
   const onChangeSlider = (val) => {
     setValue(val);
@@ -87,7 +92,6 @@ const Location = () => {
           </div>
           <Slider
             defaultValue={30}
-            disabled={disabled}
             onChange={onChangeSlider}
             className="mb-10"
           />

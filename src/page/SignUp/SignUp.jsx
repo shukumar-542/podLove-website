@@ -14,15 +14,22 @@ import "flag-icons/css/flag-icons.min.css";
 import PhoneInputWithCountry from "../../component/PhoneInputWithCountry";
 
 const SignUp = () => {
-  const [singUp, { isLoading }] = useSignUpMutation();
   const navigate = useNavigate();
   const [form] = Form.useForm();
+  const [singUp, { isLoading }] = useSignUpMutation();
 
   // Local UI states
   const [isTermModalOpen, setIsTermModalOpen] = useState(false);
   const [isPrivacyModalOpen, setIsPrivacyModalOpen] = useState(false);
   const [phone, setPhone] = useState("+1");
   const [isVerified, setIsVerified] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("podlove-token");
+    if (token) {
+      navigate("/home", { replace: true });
+    }
+  }, [navigate]);
 
   // Load saved form data + phone verification status
   useEffect(() => {

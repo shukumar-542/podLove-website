@@ -4,10 +4,18 @@ import { useNavigate } from "react-router";
 import AuthButton from "../../component/AuthButton/AuthButton";
 import { useUpdateUserInfoMutation } from "../../redux/Api/AuthApi";
 import { toast } from "sonner";
+import { useEffect } from "react";
 
 const Gender = () => {
   const navigate = useNavigate();
   const [updateGender, { isLoading }] = useUpdateUserInfoMutation();
+
+  useEffect(() => {
+    const token = localStorage.getItem("podlove-token");
+    if (token) {
+      navigate("/home", { replace: true });
+    }
+  }, [navigate]);
 
   const handleGender = (values) => {
     const data = {
@@ -16,15 +24,18 @@ const Gender = () => {
       },
       gender: values?.myGender,
     };
-    localStorage.setItem('gender', JSON.stringify({
-      gender: values?.gender
-    }))
+    localStorage.setItem(
+      "gender",
+      JSON.stringify({
+        gender: values?.gender,
+      })
+    );
     updateGender(data)
       .unwrap()
       .then((payload) => {
         localStorage.setItem("userId", payload?.data?._id);
-        toast.success(payload?.message)
-        navigate('/body')
+        toast.success(payload?.message);
+        navigate("/body");
       })
       .catch((error) => toast.error(error?.data?.message));
   };
@@ -67,7 +78,9 @@ const Gender = () => {
                 <Select.Option value={"male"}>Male</Select.Option>
                 <Select.Option value={"non-binary"}>Non-binary</Select.Option>
                 <Select.Option value={"transgender"}>Transgender</Select.Option>
-                <Select.Option value={"gender-fluid"}>Gender Fluid</Select.Option>
+                <Select.Option value={"gender-fluid"}>
+                  Gender Fluid
+                </Select.Option>
               </Select>
             </Form.Item>
             <Form.Item
@@ -77,18 +90,30 @@ const Gender = () => {
                   Select your preferred gender
                 </p>
               }
-              rules={[{ required: true, message: "Please select your preferred gender" }]}
+              rules={[
+                {
+                  required: true,
+                  message: "Please select your preferred gender",
+                },
+              ]}
             >
-              <Select placeholder="Select your preferred gender" mode="multiple">
+              <Select
+                placeholder="Select your preferred gender"
+                mode="multiple"
+              >
                 <Select.Option value={"female"}>Female</Select.Option>
                 <Select.Option value={"male"}>Male</Select.Option>
                 <Select.Option value={"non-binary"}>Non-binary</Select.Option>
                 <Select.Option value={"transgender"}>Transgender</Select.Option>
-                <Select.Option value={"gender-fluid"}>Gender Fluid</Select.Option>
+                <Select.Option value={"gender-fluid"}>
+                  Gender Fluid
+                </Select.Option>
                 <Select.Option value={"all"}>Open to All</Select.Option>
               </Select>
             </Form.Item>
-            <AuthButton disabled={isLoading} className={"py-2"}>{isLoading ? "Loading..." : "Next"}</AuthButton>
+            <AuthButton disabled={isLoading} className={"py-2"}>
+              {isLoading ? "Loading..." : "Next"}
+            </AuthButton>
           </Form>
           {/* <Link to={"/body"}> */}
           {/* </Link> */}

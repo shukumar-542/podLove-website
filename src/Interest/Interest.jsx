@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import AuthButton from "../component/AuthButton/AuthButton";
 import bg from "../assets/interest.png";
@@ -28,6 +28,14 @@ const Interest = () => {
   const navigate = useNavigate();
   const [updateInterest, { isLoading }] = useUpdateUserInfoMutation();
   const [selected, setSelected] = useState([]);
+
+  useEffect(() => {
+    const token = localStorage.getItem("podlove-token");
+    if (token) {
+      navigate("/home", { replace: true });
+    }
+  }, [navigate]);
+
   // Select item
   const toggleSelect = (field) => {
     setSelected((prev) =>

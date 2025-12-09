@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import bg from "../../assets/body-bg.png";
 import { useNavigate } from "react-router";
 import AuthButton from "../../component/AuthButton/AuthButton";
@@ -20,6 +20,13 @@ const Body = () => {
   const [updateBodyType, { isLoading }] = useUpdateUserInfoMutation();
   const [selectedBodyType, setSelectedBodyType] = useState("");
   const [preferredBodyType, setPreferredBodyType] = useState([]);
+
+  useEffect(() => {
+    const token = localStorage.getItem("podlove-token");
+    if (token) {
+      navigate("/home", { replace: true });
+    }
+  }, [navigate]);
 
   const handleUpdateBodyType = () => {
     if (!selectedBodyType || preferredBodyType.length === 0) {

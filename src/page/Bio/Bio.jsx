@@ -1,4 +1,3 @@
-// import React from "react";
 import bg from "../../assets/bio-bg.png";
 import { useNavigate } from "react-router";
 import AuthButton from "../../component/AuthButton/AuthButton";
@@ -6,12 +5,17 @@ import { Form } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { useBioValidationMutation } from "../../redux/Api/AuthApi";
 import { toast } from "sonner";
-// import { UserOutlined } from '@ant-design/icons';
+import { useEffect } from "react";
 const Bio = () => {
   const navigate = useNavigate();
   const [bioValidation, { isLoading }] = useBioValidationMutation();
-  // const [updateUserBio] = useUpdateUserBioMutation()
-  // const [UpdateUserBioNew] = useUpdateUserBioNewMutation();
+
+  useEffect(() => {
+    const token = localStorage.getItem("podlove-token");
+    if (token) {
+      navigate("/home", { replace: true });
+    }
+  }, [navigate]);
 
   const handleAddBio = (value) => {
     if (!value.bio) {
@@ -20,11 +24,6 @@ const Bio = () => {
     const data = {
       text: value?.bio,
     };
-    // UpdateUserBioNew(data).unwrap()
-    //   .then((data) => {
-    //   })
-    //   .catch((error) => {
-    //   });
 
     bioValidation(data)
       .unwrap()
@@ -81,8 +80,6 @@ const Bio = () => {
               {isLoading ? "Loading..." : "Next"}
             </AuthButton>
           </Form>
-          {/* <Link to={"/upload-photo"}> */}
-          {/* </Link> */}
         </div>
 
         {/* Space after content */}

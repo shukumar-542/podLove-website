@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import bg from "../../assets/Verification.png";
 import OTPInput from "otp-input-react";
 import AuthButton from "../../component/AuthButton/AuthButton";
@@ -12,6 +12,13 @@ const VerifyEmail = () => {
   const navigate = useNavigate();
   const [verifyEmail, { isLoading }] = useVerifyEmailMutation();
 
+  useEffect(() => {
+    const token = localStorage.getItem("podlove-token");
+    if (token) {
+      navigate("/home", { replace: true });
+    }
+  }, [navigate]);
+
   const handleVerifyOtp = () => {
     if (!otp) {
       return toast.error("Please enter your otp!");
@@ -24,7 +31,7 @@ const VerifyEmail = () => {
       .unwrap()
       .then((payload) => {
         toast.success(payload?.message);
-        navigate("/set-new-password?email=");
+        navigate("/set-new-password");
       })
       .catch((error) => {
         toast.error(error?.data?.message);
