@@ -1,16 +1,26 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import bg from "../../assets/m.png";
 import match1 from "../../assets/match.png";
 import { useGetMatchesQuery, useGetUserQuery } from "../../redux/Api/AuthApi";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const MatchResult = () => {
+  const navigate = useNavigate();
+
   const [selected, setSelected] = useState(null);
   const { data, isLoading } = useGetMatchesQuery();
   const { data: getUser } = useGetUserQuery();
 
   const userId = getUser?.data?._id;
   const plan = getUser?.data?.subscription?.status;
+
+  useEffect(() => {
+    const token = localStorage.getItem("podlove-token");
+    if (!token) {
+      navigate("/login", { replace: true });
+    }
+  }, [navigate]);
+
   return (
     <div
       style={{

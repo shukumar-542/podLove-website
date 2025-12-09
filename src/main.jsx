@@ -24,9 +24,6 @@ import Congratulation from "./page/Congratulation/Congratulation.jsx";
 import MatchResult from "./page/MatchResult/MatchResult.jsx";
 import MatchBio from "./page/MatchBio/MatchBio.jsx";
 import ChatPage from "./page/ChatPage/ChatPage.jsx";
-import FeedbackOne from "./page/FeedbackOne/FeedbackOne.jsx";
-import FeedbackSecond from "./page/FeedbackSecond/FeedbackSecond.jsx";
-import FeedbackThird from "./page/FeedbackThird/FeedbackThird.jsx";
 import Profile from "./page/Profile/Profile.jsx";
 import EditProfile from "./page/EditProfile/EditProfile.jsx";
 import ChangePassword from "./page/ChangePassword/ChangePassword.jsx";
@@ -69,32 +66,11 @@ createRoot(document.getElementById("root")).render(
             <Route path="/ms" element={<RoomPage100MS />} />
             <Route path="/" element={<App />}>
               <Route index element={<Home />} />
-              <Route element={<PrivateRoute />}>
-                <Route path="/home" element={<HomePage />} />
-              </Route>
               <Route path="/about-us" element={<AboutUs />} />
               <Route path="/faq" element={<Faq />} />
               <Route path="/contact-us" element={<ContactUs />} />
               <Route path="/subscription-plan" element={<SubscriptionPlan />} />
               <Route path="/subscription-page" element={<SubscriptionPage />} />
-              <Route element={<PrivateRoute />}>
-                <Route path="/chat/:id" element={<ChatPage />} />
-              </Route>
-              <Route path="/feedback-first-step" element={<FeedbackOne />} />
-              <Route
-                path="/feedback-second-step"
-                element={<FeedbackSecond />}
-              />
-              <Route path="/feedback-third-step" element={<FeedbackThird />} />
-              <Route element={<PrivateRoute />}>
-                <Route path="/profile" element={<Profile />} />
-              </Route>
-              <Route element={<PrivateRoute />}>
-                <Route path="/edit-profile" element={<EditProfile />} />
-              </Route>
-              <Route element={<PrivateRoute />}>
-                <Route path="/change-password" element={<ChangePassword />} />
-              </Route>
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route
                 path="/media-usage-consent"
@@ -112,24 +88,13 @@ createRoot(document.getElementById("root")).render(
                 path="/terms-and-conditions"
                 element={<TermsAndCondition />}
               />
-              <Route element={<PrivateRoute />}>
-                <Route path="/notification" element={<Notification />} />
-              </Route>
               <Route path="/consumer-policy" element={<ConsumerPolicy />} />,
               <Route path="/media-policy" element={<MediaPolicy />} />
-              <Route
-                path="/podcast-details/:id"
-                element={<ParticipantDetails />}
-              />
               <Route path="/opt-in-policy" element={<OptInPolicy />} />
-              {/* <Route element={<PrivateRoute />}>
-                <Route path="/room/:roomId" element={<RoomPage />} />
-              </Route> */}
             </Route>
             <Route path="/login" element={<Login />} />
             <Route path="/connection-pathway" element={<ConnectionPathway />} />
             <Route path="/sign-up" element={<SignUp />} />
-
             <Route path="/verify-otp" element={<Otp />} />
             <Route path="/location" element={<Location />} />
             <Route path="/age" element={<Age />} />
@@ -156,16 +121,30 @@ createRoot(document.getElementById("root")).render(
             />
             <Route path="/rating-yourself" element={<RatingYourSelf />} />
             <Route path="/interest" element={<Interest />} />
-            <Route
-              path="/connection-progress"
-              element={<ConnectionProgress />}
-            />
-            <Route path="/congratulation" element={<Congratulation />} />
-            <Route path="/match-result" element={<MatchResult />} />
-            <Route path="/match-bio" element={<MatchBio />} />
             <Route path="/forgot-password" element={<ForgetPassword />} />
             <Route path="/verify-forget-otp" element={<VerifyEmail />} />
             <Route path="/set-new-password" element={<SetNewPassword />} />
+
+            {/* private */}
+            <Route element={<PrivateRoute />}>
+              <Route path="/home" element={<HomePage />} />
+              <Route path="/congratulation" element={<Congratulation />} />
+              <Route path="/match-result" element={<MatchResult />} />
+              <Route path="/match-bio" element={<MatchBio />} />
+              <Route
+                path="/connection-progress"
+                element={<ConnectionProgress />}
+              />
+              <Route path="/profile" element={<Profile />} />{" "}
+              <Route path="/edit-profile" element={<EditProfile />} />
+              <Route path="/change-password" element={<ChangePassword />} />
+              <Route
+                path="/podcast-details/:id"
+                element={<ParticipantDetails />}
+              />
+              <Route path="/chat/:id" element={<ChatPage />} />
+              <Route path="/notification" element={<Notification />} />
+            </Route>
           </Routes>
         </BrowserRouter>
         <Toaster position="top-right" richColors />
