@@ -22,7 +22,6 @@ import Interest from "./Interest/Interest.jsx";
 import ConnectionProgress from "./page/ConnectionProgress/ConnectionProgress.jsx";
 import Congratulation from "./page/Congratulation/Congratulation.jsx";
 import MatchResult from "./page/MatchResult/MatchResult.jsx";
-import MatchBio from "./page/MatchBio/MatchBio.jsx";
 import ChatPage from "./page/ChatPage/ChatPage.jsx";
 import Profile from "./page/Profile/Profile.jsx";
 import EditProfile from "./page/EditProfile/EditProfile.jsx";
@@ -91,6 +90,18 @@ createRoot(document.getElementById("root")).render(
               <Route path="/consumer-policy" element={<ConsumerPolicy />} />,
               <Route path="/media-policy" element={<MediaPolicy />} />
               <Route path="/opt-in-policy" element={<OptInPolicy />} />
+              <Route element={<PrivateRoute />}>
+                <Route path="/home" element={<HomePage />} />
+                <Route path="/profile" element={<Profile />} />{" "}
+                <Route path="/edit-profile" element={<EditProfile />} />
+                <Route path="/change-password" element={<ChangePassword />} />
+                <Route
+                  path="/podcast-details/:id"
+                  element={<ParticipantDetails />}
+                />
+                <Route path="/chat/:id" element={<ChatPage />} />
+                <Route path="/notification" element={<Notification />} />
+              </Route>
             </Route>
             <Route path="/login" element={<Login />} />
             <Route path="/connection-pathway" element={<ConnectionPathway />} />
@@ -127,23 +138,12 @@ createRoot(document.getElementById("root")).render(
 
             {/* private */}
             <Route element={<PrivateRoute />}>
-              <Route path="/home" element={<HomePage />} />
               <Route path="/congratulation" element={<Congratulation />} />
               <Route path="/match-result" element={<MatchResult />} />
-              <Route path="/match-bio" element={<MatchBio />} />
               <Route
                 path="/connection-progress"
                 element={<ConnectionProgress />}
               />
-              <Route path="/profile" element={<Profile />} />{" "}
-              <Route path="/edit-profile" element={<EditProfile />} />
-              <Route path="/change-password" element={<ChangePassword />} />
-              <Route
-                path="/podcast-details/:id"
-                element={<ParticipantDetails />}
-              />
-              <Route path="/chat/:id" element={<ChatPage />} />
-              <Route path="/notification" element={<Notification />} />
             </Route>
           </Routes>
         </BrowserRouter>
