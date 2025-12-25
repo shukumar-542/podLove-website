@@ -82,6 +82,11 @@ export const part2Questions = [
     options: ["Yes", "No"],
   },
   {
+    question: "Will you date a smoker?",
+    type: "radio",
+    options: ["Yes", "No"],
+  },
+  {
     question: "How would you describe your drinking habits?",
     type: "radio",
     options: [
@@ -115,13 +120,14 @@ export const part2Questions = [
       "Yes, I'm religious": {
         type: "radio",
         key: "religion",
-        label: "If religious, what is your religion?",
+        label: "If 'Religious', what is your religion or denomination?",
         options: ["Christian", "Muslim", "Hindu", "Buddhist", "Other"],
       },
       "Yes, I'm spiritual but not religious": {
         type: "text",
         key: "spiritualBeliefs",
-        label: "If spiritual, describe your spiritual beliefs",
+        label:
+          "If 'Spiritual', would you like to describe your spiritual beliefs?",
         placeholder: "Describe your beliefs here",
       },
     },
@@ -168,7 +174,7 @@ export const part2Questions = [
     ],
   },
   {
-    question: "Do you have a pet?",
+    question: "Do you have pets?",
     type: "radio",
     options: ["Yes", "No"],
     conditionalInput: {
