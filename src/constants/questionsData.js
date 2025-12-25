@@ -84,7 +84,7 @@ export const part2Questions = [
   {
     question: "Will you date a smoker?",
     type: "radio",
-    options: ["Yes", "No"],
+    options: ["Yes", "Maybe", "No"],
   },
   {
     question: "How would you describe your drinking habits?",
