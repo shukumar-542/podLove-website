@@ -4,18 +4,10 @@ import { useNavigate } from "react-router";
 import AuthButton from "../../component/AuthButton/AuthButton";
 import { useUpdateUserInfoMutation } from "../../redux/Api/AuthApi";
 import { toast } from "sonner";
-import { useEffect } from "react";
 
 const Gender = () => {
   const navigate = useNavigate();
   const [updateGender, { isLoading }] = useUpdateUserInfoMutation();
-
-  useEffect(() => {
-    const token = localStorage.getItem("podlove-token");
-    if (token) {
-      navigate("/home", { replace: true });
-    }
-  }, [navigate]);
 
   const handleGender = (values) => {
     const data = {

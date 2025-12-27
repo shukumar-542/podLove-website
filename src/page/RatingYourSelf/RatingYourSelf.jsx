@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import bg from "../../assets/personality.png";
 import { useNavigate } from "react-router";
 import AuthButton from "../../component/AuthButton/AuthButton";
@@ -20,13 +20,6 @@ const RatingYourSelf = () => {
   const [selectedRating, setSelectedRating] = useState(1);
   const [selectedHomeBody, setSelectHomeBody] = useState(3);
   const [selectedOptimist, setSelectOptimist] = useState(2);
-
-  useEffect(() => {
-    const token = localStorage.getItem("podlove-token");
-    if (token) {
-      navigate("/home", { replace: true });
-    }
-  }, [navigate]);
 
   const handleSelectRating = (rating) => {
     setSelectedRating(rating);

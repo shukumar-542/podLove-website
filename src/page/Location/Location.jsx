@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import bg from "../../assets/location-bg.png";
 import AuthButton from "../../component/AuthButton/AuthButton";
 import { Slider } from "antd";
@@ -12,13 +12,6 @@ const Location = () => {
 
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [value, setValue] = useState(30);
-
-  useEffect(() => {
-    const token = localStorage.getItem("podlove-token");
-    if (token) {
-      navigate("/home", { replace: true });
-    }
-  }, [navigate]);
 
   const onChangeSlider = (val) => {
     setValue(val);

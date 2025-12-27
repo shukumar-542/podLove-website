@@ -5,17 +5,9 @@ import { Form } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { useBioValidationMutation } from "../../redux/Api/AuthApi";
 import { toast } from "sonner";
-import { useEffect } from "react";
 const Bio = () => {
   const navigate = useNavigate();
   const [bioValidation, { isLoading }] = useBioValidationMutation();
-
-  useEffect(() => {
-    const token = localStorage.getItem("podlove-token");
-    if (token) {
-      navigate("/home", { replace: true });
-    }
-  }, [navigate]);
 
   const handleAddBio = (value) => {
     if (!value.bio) {

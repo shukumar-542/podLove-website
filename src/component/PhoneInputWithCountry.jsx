@@ -91,12 +91,17 @@ const PhoneInputWithUS = ({ phone, setPhone, isVerified, setIsVerified }) => {
 
   return (
     <div>
-      {/* US Flag + Phone input */}
       <Form.Item
         label="Phone Number"
         required
-        validateStatus={localPhone.length !== 10 ? "error" : ""}
-        help={localPhone.length !== 10 ? "Phone number must be 10 digits" : ""}
+        validateStatus={
+          localPhone.length > 0 && localPhone.length !== 10 ? "error" : ""
+        }
+        help={
+          localPhone.length > 0 && localPhone.length !== 10
+            ? "Phone number must be 10 digits"
+            : ""
+        }
       >
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-1 px-2 py-1 border border-gray-300 rounded">
@@ -140,7 +145,6 @@ const PhoneInputWithUS = ({ phone, setPhone, isVerified, setIsVerified }) => {
           </div>
         </div>
       </Form.Item>
-
       {/* OTP input */}
       {isOtpVisible && (
         <Form.Item label="Enter OTP" required>

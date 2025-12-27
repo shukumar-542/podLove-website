@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import bg from "../../assets/upload-bg.png";
 import AuthButton from "../../component/AuthButton/AuthButton";
 import { Upload, message } from "antd";
@@ -12,13 +12,6 @@ const UploadPhoto = () => {
   const [updatePhoto, { isLoading }] = useUpdateUserInfoMutation();
   const [file, setFile] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
-
-  useEffect(() => {
-    const token = localStorage.getItem("podlove-token");
-    if (token) {
-      navigate("/home", { replace: true });
-    }
-  }, [navigate]);
 
   // Store file locally
   const handleFileSelect = ({ file }) => {

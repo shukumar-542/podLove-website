@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router";
 import AuthButton from "../../component/AuthButton/AuthButton";
 import { Checkbox } from "antd";
@@ -33,13 +33,6 @@ const Ethnicity = () => {
   const [updateEthnicity, { isLoading }] = useUpdateUserInfoMutation();
   const [selectedBodyType, setSelectedBodyType] = useState([]);
   const [preferredBodyType, setPreferredBodyType] = useState([]);
-
-  useEffect(() => {
-    const token = localStorage.getItem("podlove-token");
-    if (token) {
-      navigate("/home", { replace: true });
-    }
-  }, [navigate]);
 
   const handleBodyTypeChange = (checkedValues) => {
     setSelectedBodyType(checkedValues);

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import bg from "../../assets/age-bg.png";
 import AuthButton from "../../component/AuthButton/AuthButton";
 import { useNavigate } from "react-router";
@@ -15,13 +15,6 @@ const Age = () => {
   const navigate = useNavigate();
   const [updateAge, { isLoading }] = useUpdateUserInfoMutation();
   const [date, setDate] = useState(null);
-
-  useEffect(() => {
-    const token = localStorage.getItem("podlove-token");
-    if (token) {
-      navigate("/home", { replace: true });
-    }
-  }, [navigate]);
 
   const onChange = (date) => {
     if (date) {
