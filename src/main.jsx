@@ -103,6 +103,13 @@ createRoot(document.getElementById("root")).render(
                 />
                 <Route path="/chat/:id" element={<ChatPage />} />
                 <Route path="/notification" element={<Notification />} />
+                <Route path="/congratulation" element={<Congratulation />} />
+                <Route path="/match-result" element={<MatchResult />} />
+                <Route path="/match/findMatch" element={<FindMatch />} />
+                <Route
+                  path="/connection-progress"
+                  element={<ConnectionProgress />}
+                />
               </Route>
             </Route>
             <Route path="/login" element={<Login />} />
@@ -138,16 +145,6 @@ createRoot(document.getElementById("root")).render(
             <Route path="/verify-forget-otp" element={<VerifyEmail />} />
             <Route path="/set-new-password" element={<SetNewPassword />} />
 
-            {/* private */}
-            <Route element={<PrivateRoute />}>
-              <Route path="/congratulation" element={<Congratulation />} />
-              <Route path="/match-result" element={<MatchResult />} />
-              <Route path="/match/findMatch" element={<FindMatch />} />
-              <Route
-                path="/connection-progress"
-                element={<ConnectionProgress />}
-              />
-            </Route>
           </Routes>
         </BrowserRouter>
         <Toaster position="top-right" richColors />
