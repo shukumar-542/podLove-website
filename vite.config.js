@@ -5,12 +5,11 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [react()],
   server: {
-    host: "0.0.0.0", // This binds Vite to all network interfaces
-    port: 3000, // Optional, you can change the port if needed
+    host: "localhost",
+    port: 3000,
   },
   preview: {
-    host: "0.0.0.0",
-    allowedHosts: ["podlove.co", "www.podlove.co"],
+    host: "localhost",
     port: 3000,
     strictPort: true,
   },

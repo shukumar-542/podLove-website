@@ -16,8 +16,6 @@ const ConnectionProgress = () => {
     const token = localStorage.getItem("podlove-token");
     if (!token) {
       navigate("/login", { replace: true });
-    } else {
-      navigate("/home", { replace: true });
     }
   }, [navigate]);
 
@@ -38,24 +36,9 @@ const ConnectionProgress = () => {
   // API trigger at 70%
   useEffect(() => {
     if (percent === 70) {
-      connectBegins(userId)
-        .unwrap()
-        .then((payload) => {
-          toast.success(payload?.message);
-          if (payload?.success) {
-            navigate("/congratulation");
-          } else {
-            navigate("/match-result");
-          }
-        })
-        .catch((error) => {
-          const msg = error?.data?.message?.includes("Cast to ObjectId failed")
-            ? "Invalid user reference. Please try again or contact support."
-            : error?.data?.message || "Something went wrong. Please try again.";
-
-          toast.error(msg);
-          setErrorMessage(msg);
-        });
+      setTimeout(() => {
+        navigate("/match/findMatch");
+      }, 1000);
     }
   }, [percent, navigate]);
 

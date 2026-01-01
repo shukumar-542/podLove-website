@@ -246,6 +246,14 @@ const authApi = baseApi.injectEndpoints({
         };
       },
     }),
+    findMatch: builder.mutation({
+      query: () => {
+        return {
+          url: "/user/match/findMatch",
+          method: "GET",
+        };
+      },
+    }),
   }),
 });
 
@@ -274,6 +282,7 @@ export const {
   useResetPasswordMutation,
   useConnectBeginsMutation,
   useGetMatchesQuery,
+  useFindMatchMutation,
   useResetAuthPasswordMutation,
   useGetSmsPrivacyQuery,
   useGetMediaPrivacyQuery,

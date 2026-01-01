@@ -11,8 +11,6 @@ const Congratulation = () => {
     const token = localStorage.getItem("podlove-token");
     if (!token) {
       navigate("/login", { replace: true });
-    } else {
-      navigate("/home", { replace: true });
     }
   }, [navigate]);
 
@@ -55,7 +53,7 @@ const Congratulation = () => {
           </p>
 
           <div className="mx-16">
-            <Link to={"/match-result"}>
+            <Link to={"/match/findMatch"}>
               <AuthButton className={"py-2  mt-5 "}>Next</AuthButton>
             </Link>
           </div>

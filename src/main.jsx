@@ -55,6 +55,8 @@ import DiscoverCompatibilityPart2 from "./page/DiscoverCompatibilityPart2/Discov
 import DiscoverCompatibilityPart3 from "./page/DiscoverCompatibilityPart3/DiscoverCompatibilityPart3.jsx";
 import DiscoverCompatibilityPart4 from "./page/DiscoverCompatibilityPart4/DiscoverCompatibilityPart4.jsx";
 
+import FindMatch from "./page/FindMatch/FindMatch.jsx";
+
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Provider store={store}>
@@ -140,6 +142,7 @@ createRoot(document.getElementById("root")).render(
             <Route element={<PrivateRoute />}>
               <Route path="/congratulation" element={<Congratulation />} />
               <Route path="/match-result" element={<MatchResult />} />
+              <Route path="/match/findMatch" element={<FindMatch />} />
               <Route
                 path="/connection-progress"
                 element={<ConnectionProgress />}

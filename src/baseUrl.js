@@ -1,1 +1,1 @@
-export const baseUrl = "https://backend.podlove.co";
+export const baseUrl = "http://localhost:8000";
