@@ -28,7 +28,7 @@ const ChangePassword = () => {
   };
 
   const confirmPause = () => {
-    localStorage.removeItem("podlove-token");
+    localStorage.clear();
     window.location.href = "/login";
   };
 
@@ -36,7 +36,7 @@ const ChangePassword = () => {
     deleteAccount()
       .unwrap()
       .then((payload) => {
-        localStorage.removeItem("podlove-token");
+        localStorage.clear();
         toast.success(payload?.message);
         navigate("/login");
       })

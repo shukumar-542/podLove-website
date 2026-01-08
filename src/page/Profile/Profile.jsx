@@ -12,7 +12,7 @@ const Profile = () => {
   const { data: getUser } = useGetUserQuery();
   const navigate = useNavigate();
   const confirm = () => {
-    localStorage.removeItem("podlove-token");
+    localStorage.clear();
     navigate("/login");
   };
 

@@ -21,7 +21,7 @@ const HomePage = () => {
   const [is7DaysModalOpen, setIs7DaysModalOpen] = useState(false);
 
   // RTK Queries
-  const { data: userData } = useGetUserQuery();
+  const { data: userData, isLoading: isUserLoading } = useGetUserQuery();
   const { data: podcastData, isLoading: isPodcastLoading } =
     useGetPodCastDetailsQuery();
   const { data: planData } = useGetAllPlanQuery();
@@ -86,13 +86,14 @@ const HomePage = () => {
           isPrimaryUser={isPrimaryUser}
           isBioAvailable={isBioAvailable}
           isChatAvailable={isChatAvailable}
-          isLoading={isPodcastLoading}
+          isLoading={isPodcastLoading || isUserLoading}
         />
         <PodcastAction
           podcast={podcast}
           isPrimaryUser={isPrimaryUser}
           myParticipant={currentParticipant}
           isTwoRoundsComplete={isTwoRoundsComplete}
+          isLoading={isPodcastLoading || isUserLoading}
         />
         <PodcastHistory />
         <div className="mt-20">
