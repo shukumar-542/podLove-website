@@ -9,6 +9,7 @@ import mic from "../../assets/mic.png";
 import videoSrc from "../../assets/schedule.mp4";
 import {
   useCreatePodcastMutation,
+  useDecisionMakingMutation,
   useSendPodcastRequestMutation,
 } from "../../redux/Api/PodcastApi";
 
@@ -22,6 +23,8 @@ const PodcastAction = ({
   const [createPodcast, { isLoading: isCreating }] = useCreatePodcastMutation();
   const [sendPodcastRequest, { isLoading: isRequesting }] =
     useSendPodcastRequestMutation();
+  const [decisionMaking, { isLoading: isDecisionMaking }] =
+    useDecisionMakingMutation();
 
   const isLive =
     podcast?.status === "StreamStart" || podcast?.status === "Playing";
@@ -59,6 +62,19 @@ const PodcastAction = ({
         }).unwrap();
         toast.success("Request sent successfully!");
       }
+    } catch (err) {
+      message.error(err?.data?.message || "Something went wrong.");
+    }
+  };
+
+  const handleDecision = async (decision) => {
+    try {
+      const payload = {
+        ...decision,
+        podcastId: podcast?._id,
+      };
+      const res = await decisionMaking(payload).unwrap();
+      toast.success(res?.message || "Decision submitted successfully!");
     } catch (err) {
       message.error(err?.data?.message || "Something went wrong.");
     }
@@ -140,20 +156,13 @@ const PodcastAction = ({
                 You&apos;ve finished 2 podcast sessions. Would you like to
                 continue with this person?
               </p>
-              <div className="flex flex-col sm:flex-row-reverse gap-4 w-full">
-                <button
-                  onClick={() => message.success("Continuing journey...")}
-                  className="flex-1 py-5 bg-white text-black rounded-2xl border-2 border-white font-black text-xl hover:border-green-400 hover:bg-green-600 hover:text-white transition-all flex items-center justify-center gap-2"
-                >
-                  <CheckCircleOutlined /> CONTINUE
-                </button>
-                <button
-                  onClick={() => message.info("Journey ended.")}
-                  className="flex-1 py-5 bg-transparent border-2 border-white/20 hover:border-red-400 text-white rounded-2xl font-black text-xl hover:bg-red-600 transition-all flex items-center justify-center gap-2"
-                >
-                  <CloseCircleOutlined /> END
-                </button>
-              </div>
+              <button
+                disabled={isDecisionMaking}
+                onClick={() => handleDecision({ status: "refresh" })}
+                className="flex-1 mx-auto px-20 py-4 border-2 border-red-400 hover:border-red-500 text-white rounded-2xl font-black text-xl hover:bg-red-700 bg-red-600  transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+              >
+                {isDecisionMaking ? <Spin size="small" /> : "REFRESH"}
+              </button>
             </div>
           ) : (
             <>

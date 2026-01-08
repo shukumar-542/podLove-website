@@ -19,7 +19,6 @@ import Bio from "./page/Bio/Bio.jsx";
 import UploadPhoto from "./page/UploadPhoto/UploadPhoto.jsx";
 import RatingYourSelf from "./page/RatingYourSelf/RatingYourSelf.jsx";
 import Interest from "./Interest/Interest.jsx";
-import ConnectionProgress from "./page/ConnectionProgress/ConnectionProgress.jsx";
 import Congratulation from "./page/Congratulation/Congratulation.jsx";
 import MatchResult from "./page/MatchResult/MatchResult.jsx";
 import ChatPage from "./page/ChatPage/ChatPage.jsx";
@@ -140,10 +139,6 @@ createRoot(document.getElementById("root")).render(
             <Route element={<PrivateRoute />}>
               <Route path="/congratulation" element={<Congratulation />} />
               <Route path="/match-result" element={<MatchResult />} />
-              <Route
-                path="/connection-progress"
-                element={<ConnectionProgress />}
-              />
             </Route>
           </Routes>
         </BrowserRouter>

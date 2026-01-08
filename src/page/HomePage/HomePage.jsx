@@ -6,13 +6,11 @@ import After7DaysSurveyModal from "../../component/Modals/After7DaysSurvey";
 import MatchCards from "./MatchCards";
 import PodcastAction from "./PodcastAction";
 import PodcastHistory from "./PodcastHistory";
-
 import {
   useGetPodCastDetailsQuery,
   useGetSubscriptionsQuery,
   useGetUserQuery,
 } from "../../redux/Api/AuthApi";
-import { useGetAllPlanQuery } from "../../redux/Api/SubscriptionPlan";
 
 const HomePage = () => {
   // local states
@@ -24,7 +22,6 @@ const HomePage = () => {
   const { data: userData, isLoading: isUserLoading } = useGetUserQuery();
   const { data: podcastData, isLoading: isPodcastLoading } =
     useGetPodCastDetailsQuery();
-  const { data: planData } = useGetAllPlanQuery();
   const { data: currentPlan } = useGetSubscriptionsQuery();
 
   const podcast = podcastData?.data?.podcast;
@@ -97,10 +94,7 @@ const HomePage = () => {
         />
         <PodcastHistory userId={userId} />
         <div className="mt-20">
-          <Pricing
-            subscriptions={planData?.data}
-            activePlan={userData?.data?.subscription?.plan}
-          />
+          <Pricing />
         </div>
       </div>
 
