@@ -6,7 +6,7 @@ const MatchCards = ({
   podcast,
   userId,
   isPrimaryUser,
-  isBioAvailable,
+  isBioAvailable = false,
   isChatAvailable,
 }) => {
   const navigate = useNavigate();
@@ -22,9 +22,9 @@ const MatchCards = ({
     navigate(`/chat/${id}`);
   };
 
-  const handleProfileClick = (id) => {
+  const handleProfileClick = (id, label) => {
     if (!isBioAvailable) {
-      return toast.info(`Upgrade to Scout plan to view full bio.`);
+      return toast.info(`Upgrade to Scout plan to view ${label}'s full bio.`);
     }
     navigate(`/podcast-details/${id}`);
   };
@@ -37,14 +37,25 @@ const MatchCards = ({
         return (
           <div key={person?._id || i} className="flex flex-col">
             <div
-              onClick={() => handleProfileClick(person?._id)}
+              onClick={() => handleProfileClick(person?._id, cardLabel)}
               className="relative overflow-hidden rounded-br-3xl shadow-lg cursor-pointer "
             >
-              <img src={img1} className="w-full  object-cover" alt="profile" />
+              {/* IMAGE WITH GRAYSCALE LOGIC */}
+              <img
+                src={img1}
+                className={`w-full object-cover transition-all duration-300 ${
+                  !isBioAvailable ? "grayscale opacity-80" : "grayscale-0"
+                }`}
+                alt="profile"
+              />
 
               {/* OVERLAY TEXT - CENTERED */}
               <div className="absolute left-1/2 whitespace-nowrap -translate-x-1/2 bottom-5 flex flex-col items-center justify-center">
-                <p className="text-gray-800 text-xl font-bold tracking-wide">
+                <p
+                  className={`text-xl font-bold tracking-wide ${
+                    !isBioAvailable ? "text-gray-500" : "text-gray-800"
+                  }`}
+                >
                   {cardLabel}
                 </p>
 
