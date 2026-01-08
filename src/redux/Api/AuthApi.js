@@ -66,14 +66,29 @@ const authApi = baseApi.injectEndpoints({
       },
     }),
     getUser: builder.query({
-      query: () => {
-        return {
-          url: "/user",
-          method: "GET",
-        };
-      },
+      query: () => ({
+        url: "/user",
+        method: "GET",
+      }),
       providesTags: ["profile"],
+
+      async onQueryStarted(arg, { _, queryFulfilled }) {
+        try {
+          await queryFulfilled;
+        } catch (error) {
+          const status = error?.error?.status;
+          const message = error?.error?.data?.message;
+
+          const shouldLogout =
+            status === 401 || status === 404 || message === "Account Not Found";
+
+          if (shouldLogout) {
+            localStorage.removeItem("podlove-token");
+          }
+        }
+      },
     }),
+
     loginUser: builder.mutation({
       query: (data) => {
         return {
@@ -100,10 +115,26 @@ const authApi = baseApi.injectEndpoints({
         };
       },
     }),
+    getSubscriptions: builder.query({
+      query: () => {
+        return {
+          url: "/user/get-user-subscriptions",
+          method: "GET",
+        };
+      },
+    }),
     getPodCastDetails: builder.query({
       query: () => {
         return {
           url: "/home",
+          method: "GET",
+        };
+      },
+    }),
+    getPodCastHistoryDetails: builder.query({
+      query: () => {
+        return {
+          url: "/home/completed-podcast",
           method: "GET",
         };
       },
@@ -278,4 +309,6 @@ export const {
   useGetSmsPrivacyQuery,
   useGetMediaPrivacyQuery,
   useGetVideoQuery,
+  useGetSubscriptionsQuery,
+  useGetPodCastHistoryDetailsQuery,
 } = authApi;

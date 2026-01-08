@@ -1,15 +1,8 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
 import { Form, Input, Modal, Radio } from "antd";
 import AuthButton from "../AuthButton/AuthButton";
 import { usePost7DaysSurveyMutation } from "../../redux/Api/PodcastApi";
 
-const After7DaysSurveyModal = ({
-  is7DaysModalOpen,
-  handle7DaysOk,
-  handle7DaysCancel,
-  podcastId,
-}) => {
+const After7DaysSurveyModal = ({ is7DaysModalOpen, handle7DaysOk }) => {
   const [form] = Form.useForm();
   const [post7DaysSurvey, { isLoading }] = usePost7DaysSurveyMutation();
 
@@ -54,7 +47,7 @@ const After7DaysSurveyModal = ({
       centered
       width={900}
       open={is7DaysModalOpen}
-      onCancel={handle7DaysCancel}
+      onCancel={handle7DaysOk}
     >
       <div className="md:p-6 flex justify-center">
         <div className="md:max-w-3xl md:p-8 font-poppins">

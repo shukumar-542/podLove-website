@@ -6,16 +6,16 @@ import SuccessStory from "../../component/SuccessStory/SuccessStory";
 import HowItWork from "../../component/HowItWork/HowItWork";
 import FindVoiceMatch from "../../component/FindVoiceMatch/FindVoiceMatch";
 // import Faq from "../../component/Faq/Faq";
-import ListenAudio from "../../component/ListenAudio/ListenAudio";
+// import ListenAudio from "../../component/ListenAudio/ListenAudio";
 
 const Home = () => {
   return (
     <div className="">
       <HeroSection />
       <SuccessStory />
-      <HowItWork/> 
-      <FindVoiceMatch/>
-      <ListenAudio/>
+      <HowItWork />
+      <FindVoiceMatch />
+      {/* <ListenAudio /> */}
       {/* <Faq/> */}
       <ClientReview />
       <DownloadGuide />

@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { useState } from "react";
 import {
   Form,
@@ -11,19 +10,15 @@ import {
 } from "antd";
 import { usePostFirstSurveyMutation } from "../../redux/Api/PodcastApi";
 
-const SecondSurvey = ({
-  isSecondModalOpen,
-  handleSecondOk,
-  handleSecondCancel,
-  podcastId,
-}) => {
+const SecondSurvey = ({ isSecondModalOpen, handleSecondOk, podcastId }) => {
   const [form] = Form.useForm();
   const [seeAgain, setSeeAgain] = useState(null);
 
   const onSeeAgainChange = (e) => {
     setSeeAgain(e.target.value);
   };
-  const [postFirstSurvey, { isLoading }] = usePostFirstSurveyMutation(); // the api is same do not confuse about the name 1st and 2nd same api (SORRY)
+  const [postFirstSurvey, { isLoading }] = usePostFirstSurveyMutation();
+
   const onFinish = (values) => {
     const dataToSend = {
       podcastId,
@@ -68,7 +63,7 @@ const SecondSurvey = ({
       centered
       width={800}
       open={isSecondModalOpen}
-      onCancel={handleSecondCancel}
+      onCancel={handleSecondOk}
     >
       <div className="md:px-12 py-6">
         <div className="text-center mb-8">

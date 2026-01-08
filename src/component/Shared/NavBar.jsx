@@ -11,8 +11,11 @@ import apple_store from "../../assets/apple_store.png";
 
 const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const { data: getUser } = useGetUserQuery();
+
   const logInUser = localStorage.getItem("podlove-token");
+  const { data: getUser } = useGetUserQuery(undefined, {
+    skip: !logInUser,
+  });
 
   return (
     <div

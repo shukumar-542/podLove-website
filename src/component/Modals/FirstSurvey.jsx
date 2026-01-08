@@ -10,8 +10,7 @@ import {
 } from "antd";
 import { usePostFirstSurveyMutation } from "../../redux/Api/PodcastApi";
 
-// eslint-disable-next-line react/prop-types
-const FirstSurvey = ({ isModalOpen, handleOk, handleCancel, podcastId }) => {
+const FirstSurvey = ({ isModalOpen, handleOk, podcastId }) => {
   const [selectedValues, setSelectedValues] = useState([]);
   const [form] = Form.useForm();
 
@@ -71,7 +70,7 @@ const FirstSurvey = ({ isModalOpen, handleOk, handleCancel, podcastId }) => {
       centered
       width={900}
       open={isModalOpen}
-      onCancel={handleCancel}
+      onCancel={handleOk}
     >
       <div className="md:px-12 py-6">
         <div className="text-center mb-8 ">
