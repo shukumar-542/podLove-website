@@ -95,7 +95,7 @@ const HomePage = () => {
           isTwoRoundsComplete={isTwoRoundsComplete}
           isLoading={isPodcastLoading || isUserLoading}
         />
-        <PodcastHistory />
+        <PodcastHistory userId={userId} />
         <div className="mt-20">
           <Pricing
             subscriptions={planData?.data}

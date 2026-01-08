@@ -13,9 +13,11 @@ const MatchCards = ({
   const navigate = useNavigate();
 
   const displayCards = isPrimaryUser
-    ? podcast?.participants?.filter((p) => p._id !== userId)
-    : [podcast?.primaryUser];
-
+    ? podcast?.participants?.filter((p) => p._id !== userId) || []
+    : podcast?.primaryUser
+    ? [podcast.primaryUser]
+    : [];
+  console.log(displayCards);
   const handleChat = (id) => {
     if (!isChatAvailable) {
       return toast.error("Upgrade your plan to unlock chat features.");
