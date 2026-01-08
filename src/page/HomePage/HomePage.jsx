@@ -22,7 +22,8 @@ const HomePage = () => {
 
   // RTK Queries
   const { data: userData } = useGetUserQuery();
-  const { data: podcastData } = useGetPodCastDetailsQuery();
+  const { data: podcastData, isLoading: isPodcastLoading } =
+    useGetPodCastDetailsQuery();
   const { data: planData } = useGetAllPlanQuery();
   const { data: currentPlan } = useGetSubscriptionsQuery();
 
@@ -85,6 +86,7 @@ const HomePage = () => {
           isPrimaryUser={isPrimaryUser}
           isBioAvailable={isBioAvailable}
           isChatAvailable={isChatAvailable}
+          isLoading={isPodcastLoading}
         />
         <PodcastAction
           podcast={podcast}
