@@ -18,8 +18,6 @@ const MatchResult = () => {
     const token = localStorage.getItem("podlove-token");
     if (!token) {
       navigate("/login", { replace: true });
-    } else {
-      navigate("/home", { replace: true });
     }
   }, [navigate]);
 
@@ -55,33 +53,64 @@ const MatchResult = () => {
           ) : !data?.data?.users?.length ? (
             <p className="text-center my-16">No matches found.</p>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-10">
-              {data?.data?.users
-                ?.filter((participant) => participant?._id !== userId) // exclude current user
-                ?.map((user, index) => {
-                  const isPaidUser = plan === "PAID";
+            <div className="">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 my-10">
+                {data?.data?.users
+                  ?.filter((participant) => participant?._id !== userId) // exclude current user
+                  ?.map((user, index) => {
+                    const isPaidUser = plan === "PAID";
 
-                  const Card = (
-                    <div
-                      onClick={() => setSelected(user)}
-                      className={`cursor-pointer ${
-                        selected?._id === user?._id
-                          ? "border-2 border-[#F26828]"
-                          : "border-2 border-white"
-                      } rounded-tl-xl rounded-br-xl`}
-                    >
-                      <img src={match1} alt="" />
+                    const Card = (
+                      <div
+                        onClick={() => setSelected(user)}
+                        className={`cursor-pointer group relative ${selected?._id === user?._id
+                          ? "border-2 border-[#F26828] scale-105"
+                          : "border-2 border-white hover:border-[#FFB491]"
+                          } rounded-tl-xl rounded-br-xl transition-all duration-300 shadow-sm`}
+                      >
+                        <img src={user?.avatar || match1} alt="" className="w-full h-full object-cover rounded-tl-[10px] rounded-br-[10px]" />
+                        {user.score && (
+                          <div className="absolute top-1 right-1 bg-[#F26828] text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full shadow-md">
+                            {user.score}%
+                          </div>
+                        )}
+                      </div>
+                    );
+
+                    return isPaidUser ? (
+                      <div key={index}>
+                        {Card}
+                      </div>
+                    ) : (
+                      <div key={index}>{Card}</div>
+                    );
+                  })}
+              </div>
+
+              {selected && (
+                <div className="bg-orange-50/50 border border-[#FFB491] rounded-2xl p-5 mb-8 animate-in fade-in slide-in-from-bottom-2 duration-500">
+                  <div className="flex justify-between items-start mb-3">
+                    <h3 className="font-bold text-xl text-[#242424]">{selected.name}</h3>
+                    <div className="flex gap-2">
+                      <span className="text-[10px] bg-white border border-[#FFB491] text-[#F26828] px-2 py-0.5 rounded-full font-bold">
+                        MATCHING SCORE: {selected.score}%
+                      </span>
                     </div>
-                  );
-
-                  return isPaidUser ? (
-                    <Link key={index} to={`/podcast-details/${user._id}`}>
-                      {Card}
-                    </Link>
+                  </div>
+                  {selected.reasoning ? (
+                    <p className="text-sm text-gray-600 italic leading-relaxed">
+                      "{selected.reasoning}"
+                    </p>
                   ) : (
-                    <div key={index}>{Card}</div>
-                  );
-                })}
+                    <p className="text-sm text-gray-400 italic">No detailed analysis available for this match.</p>
+                  )}
+                  <Link to={`/podcast-details/${selected._id}`} className="block mt-4">
+                    <button className="text-[#F26828] font-bold text-sm hover:underline flex items-center gap-1">
+                      View full profile →
+                    </button>
+                  </Link>
+                </div>
+              )}
             </div>
           )}
           <p className="text-center max-w-96 mx-auto mb-10">

@@ -1,7 +1,8 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "https://backend.podlove.co",
+  baseUrl: "http://localhost:8000",
+  //baseUrl: "https://backend.podlove.co",
   prepareHeaders: (headers) => {
     const token = localStorage.getItem("podlove-token");
     if (token) {
@@ -17,4 +18,5 @@ export const baseApi = createApi({
   endpoints: () => ({}),
 });
 
-export const imageUrl = "https://backend.podlove.co";
+//export const imageUrl = "htps://backend.podlove.co";
+export const imageUrl = "http://localhost:8000";
