@@ -23,9 +23,19 @@ const ChatPage = () => {
   const senderId = userId?.data?._id;
   const receiverId = id;
   const { data: getPodcastDetails } = useGetPodCastDetailsQuery();
-  const participants = getPodcastDetails?.data?.podcast?.participants || [];
 
-  const participant = participants.find((p) => p._id === id);
+  // Podcast data extract kora hocche
+  const podcastData = getPodcastDetails?.data?.podcast;
+
+  // Participant khujhar logic (ParticipantDetails er moto)
+  let participant = null;
+  if (podcastData) {
+    if (podcastData.primaryUser?._id === id) {
+      participant = podcastData.primaryUser;
+    } else {
+      participant = podcastData.participants?.find((p) => p._id === id);
+    }
+  }
 
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
@@ -67,9 +77,9 @@ const ChatPage = () => {
 
   return (
     <div className="bg-[#fef7f5] min-h-[80vh] flex flex-col">
-      {/* Header */}
+      {/* Header - Akhon primary user holeo tar nam dekhabe */}
       <div className="bg-[#FF805D] text-white p-4 text-lg font-semibold shadow-md text-center">
-        Chat With {participant?.name}
+        Chat With {participant?.name || "User"}
       </div>
 
       {/* Date Separator */}

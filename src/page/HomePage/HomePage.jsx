@@ -49,8 +49,7 @@ const HomePage = () => {
   const shouldShowSecondSurvey =
     podcast?.finishStatus === "2ndFinish" && currentUserStatus !== "2ndDone";
 
-  const isTwoRoundsComplete =
-    podcast?.finishStatus === "2ndFinish" && currentUserStatus === "2ndDone";
+  const isTwoRoundsComplete = podcast?.finishStatus === "2ndFinish";
 
   useEffect(() => {
     if (!podcast || !userId) return;
