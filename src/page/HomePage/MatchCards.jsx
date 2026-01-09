@@ -17,9 +17,9 @@ const MatchCards = ({
     : podcast?.primaryUser
     ? [podcast.primaryUser]
     : [];
-  console.log(displayCards);
+
   const handleChat = (id) => {
-    if (!isChatAvailable) {
+    if (isChatAvailable) {
       return toast.error("Upgrade your plan to unlock chat features.");
     }
     navigate(`/chat/${id}`);

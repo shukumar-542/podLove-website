@@ -9,6 +9,8 @@ import {
   query,
   orderBy,
   where,
+  or,
+  and,
 } from "firebase/firestore";
 import { useParams } from "react-router";
 import {
@@ -24,10 +26,8 @@ const ChatPage = () => {
   const receiverId = id;
   const { data: getPodcastDetails } = useGetPodCastDetailsQuery();
 
-  // Podcast data extract kora hocche
   const podcastData = getPodcastDetails?.data?.podcast;
 
-  // Participant khujhar logic (ParticipantDetails er moto)
   let participant = null;
   if (podcastData) {
     if (podcastData.primaryUser?._id === id) {
@@ -43,20 +43,29 @@ const ChatPage = () => {
   useEffect(() => {
     if (!senderId || !receiverId) return;
 
+    // Image-er 1st index (receiverId, senderId, timestamp) optimize korar query
+    // Ekhane 'or' logic use kora hoyeche jate sender ebong receiver er moddhe sob message ashe
     const q = query(
       collection(db, "messages"),
-      where("participants", "array-contains", senderId),
+      or(
+        and(
+          where("senderId", "==", senderId),
+          where("receiverId", "==", receiverId)
+        ),
+        and(
+          where("senderId", "==", receiverId),
+          where("receiverId", "==", senderId)
+        )
+      ),
       orderBy("timestamp", "asc")
     );
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
-      const allMessages = snapshot.docs.map((doc) => doc.data());
-      const filtered = allMessages.filter(
-        (m) =>
-          (m.senderId === senderId && m.receiverId === receiverId) ||
-          (m.senderId === receiverId && m.receiverId === senderId)
-      );
-      setMessages(filtered);
+      const allMessages = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setMessages(allMessages);
     });
 
     return () => unsubscribe();
@@ -64,20 +73,25 @@ const ChatPage = () => {
 
   const sendMessage = async () => {
     if (input.trim()) {
-      await addDoc(collection(db, "messages"), {
-        message: input,
-        senderId,
-        receiverId,
-        participants: [senderId, receiverId],
-        timestamp: serverTimestamp(),
-      });
-      setInput("");
+      try {
+        await addDoc(collection(db, "messages"), {
+          message: input,
+          senderId,
+          receiverId,
+          // participants array-ti thakleo somossya nei, tobe ekhon query senderId/receiverId diye hobe
+          participants: [senderId, receiverId],
+          timestamp: serverTimestamp(),
+        });
+        setInput("");
+      } catch (error) {
+        console.error("Error sending message: ", error);
+      }
     }
   };
 
   return (
     <div className="bg-[#fef7f5] min-h-[80vh] flex flex-col">
-      {/* Header - Akhon primary user holeo tar nam dekhabe */}
+      {/* Header */}
       <div className="bg-[#FF805D] text-white p-4 text-lg font-semibold shadow-md text-center">
         Chat With {participant?.name || "User"}
       </div>
@@ -94,16 +108,16 @@ const ChatPage = () => {
         <div className="container mx-auto px-4 space-y-4">
           {messages.map((msg, index) => {
             const isSelected = selectedMessageIndex === index;
+            const isMe = msg.senderId === senderId;
+
             return (
               <div
-                key={index}
-                className={`flex ${
-                  msg.senderId === senderId ? "justify-end" : "justify-start"
-                }`}
+                key={msg.id || index}
+                className={`flex ${isMe ? "justify-end" : "justify-start"}`}
               >
                 <div
                   className={`max-w-xs px-4 py-3 rounded-2xl shadow-sm text-sm break-words relative cursor-pointer ${
-                    msg.senderId === senderId
+                    isMe
                       ? "bg-[#FF805D] text-white rounded-tr-none"
                       : "bg-white text-gray-800 rounded-tl-none border"
                   }`}
@@ -113,7 +127,11 @@ const ChatPage = () => {
                 >
                   {msg.message}
                   {isSelected && msg.timestamp?.toDate && (
-                    <div className="text-[10px] mt-1  text-right">
+                    <div
+                      className={`text-[10px] mt-1 ${
+                        isMe ? "text-orange-100" : "text-gray-400"
+                      } text-right`}
+                    >
                       {msg.timestamp.toDate().toLocaleTimeString("en-US", {
                         hour: "numeric",
                         minute: "2-digit",
