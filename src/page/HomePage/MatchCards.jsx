@@ -20,7 +20,7 @@ const MatchCards = ({
 
   const handleChat = (id) => {
     if (!isChatAvailable) {
-      return toast.error("Upgrade your plan to unlock chat features.");
+      return toast.error("Chat is not available");
     }
     navigate(`/chat/${id}`);
   };

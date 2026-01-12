@@ -50,8 +50,6 @@
 
 // export default AboutUs;
 
-
-
 import about from "../../assets/PodLove-About-Us.png";
 import bg from "../../assets/about-bg.png";
 import { Link } from "react-router";
@@ -111,10 +109,10 @@ const AboutUs = () => {
             Why Conversation Comes First
           </h2>
           <p className="font-poppins leading-relaxed">
-            PodLove is for emotionally mature adults who value real connection over
-            endless swiping. We match you first, then you meet on video. When two
-            people talk without the pressure of public photos or crafted profiles,
-            real compatibility can show up.
+            PodLove is for emotionally mature adults who value real connection
+            over endless swiping. We match you first, then you meet on video.
+            When two people talk without the pressure of public photos or
+            crafted profiles, real compatibility can show up.
           </p>
         </section>
 
@@ -124,9 +122,9 @@ const AboutUs = () => {
             The Problem We’re Solving
           </h2>
           <p className="font-poppins leading-relaxed mb-4">
-            Endless swiping trains people to judge quickly and connect slowly. It
-            leads to ghosting, mismatches, and performative profiles. People who
-            want meaningful relationships deserve better.
+            Endless swiping trains people to judge quickly and connect slowly.
+            It leads to ghosting, mismatches, and performative profiles. People
+            who want meaningful relationships deserve better.
           </p>
 
           <h3 className="font-poppins text-xl md:text-2xl font-semibold mb-2">
@@ -135,11 +133,12 @@ const AboutUs = () => {
           <ul className="list-disc pl-6 space-y-2 font-poppins">
             <li>
               <strong>No public profile photos.</strong> You are blindly matched
-              based on shared values, goals, and lifestyle. You meet on live video.
+              based on shared values, goals, and lifestyle. You meet on live
+              video.
             </li>
             <li>
-              <strong>Hosted, video-first conversations</strong> with a clear flow
-              that replaces awkward texting.
+              <strong>Hosted, video-first conversations</strong> with a clear
+              flow that replaces awkward texting.
             </li>
             <li>
               <strong>Designed for adults 35–55</strong> with emotionally
@@ -156,21 +155,25 @@ const AboutUs = () => {
 
           <div className="grid md:grid-cols-2 gap-6">
             <div className="rounded-2xl border border-slate-200 p-5 bg-white/80 shadow-sm">
-              <h3 className="text-xl font-semibold mb-2">Two-Episode Journey</h3>
+              <h3 className="text-xl font-semibold mb-2">
+                Two-Episode Journey
+              </h3>
               <ol className="list-decimal pl-6 space-y-2">
                 <li>
                   <strong>Episode 1:</strong> Initial conversation and mutual
                   interest check
                 </li>
                 <li>
-                  <strong>Episode 2:</strong> Identity reveal and deeper reflection
-                  on compatibility
+                  <strong>Episode 2:</strong> Identity reveal and deeper
+                  reflection on compatibility
                 </li>
               </ol>
             </div>
 
             <div className="rounded-2xl border border-slate-200 p-5 bg-white/80 shadow-sm">
-              <h3 className="text-xl font-semibold mb-2">Safety &amp; Respect Built In</h3>
+              <h3 className="text-xl font-semibold mb-2">
+                Safety &amp; Respect Built In
+              </h3>
               <p className="leading-relaxed">
                 Professional hosting creates a comfortable environment. Clear
                 consent processes protect everyone involved.
@@ -178,23 +181,26 @@ const AboutUs = () => {
             </div>
 
             <div className="rounded-2xl border border-slate-200 p-5 bg-white/80 shadow-sm">
-              <h3 className="text-xl font-semibold mb-2">Relationship Readiness</h3>
+              <h3 className="text-xl font-semibold mb-2">
+                Relationship Readiness
+              </h3>
               <p className="leading-relaxed">
-                We serve people who want long-term relationships and are ready to
-                show up as healthy partners. Designed for adults 35 to 55 who have
-                done the work to be in a healthy relationship.
+                We serve people who want long-term relationships and are ready
+                to show up as healthy partners. Designed for adults 35 to 55 who
+                have done the work to be in a healthy relationship.
               </p>
             </div>
 
             <div className="rounded-2xl border border-slate-200 p-5 bg-white/80 shadow-sm">
               <h3 className="text-xl font-semibold mb-2">Boutique by Design</h3>
               <p className="leading-relaxed">
-                Limited spots per city support personal attention and white-glove
-                coordination.
+                Limited spots per city support personal attention and
+                white-glove coordination.
               </p>
               <p className="leading-relaxed mt-2">
-                <strong>Personalized and more accurate matching.</strong> AI narrows
-                options. A human host reviews and finalizes matches for fit.
+                <strong>Personalized and more accurate matching.</strong> AI
+                narrows options. A human host reviews and finalizes matches for
+                fit.
               </p>
             </div>
           </div>
@@ -245,7 +251,8 @@ const AboutUs = () => {
             Privacy and safety
           </h2>
           <p className="font-poppins leading-relaxed">
-            We do not sell your data. We use safeguards to protect information. Read our{" "}
+            We do not sell your data. We use safeguards to protect information.
+            Read our{" "}
             <Link
               to="/privacy-policy"
               className="text-[#DC4600] underline underline-offset-4 hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#DC4600]"
@@ -268,4 +275,3 @@ const AboutUs = () => {
 };
 
 export default AboutUs;
-

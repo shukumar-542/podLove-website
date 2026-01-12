@@ -37,7 +37,7 @@ const HowItWork = () => {
               Join & set intentions
             </p>
             <p className="mt-5">
-              Create your account, pick your tier (Listener / Speaker / Seeker),
+              Create your account, pick your tier (Sampler / Seeker / Scout),
               and share preferences.
             </p>
           </div>

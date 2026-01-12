@@ -78,7 +78,7 @@ const Pricing = () => {
               </div>
             )}
 
-            <p className="text-center bg-[#231A19] text-[18px] py-2 rounded-full max-w-[140px] mx-auto uppercase font-medium tracking-wide">
+            <p className="text-center bg-[#231A19] text-[18px] py-2 rounded-full max-w-[140px] mx-auto capitalize font-medium tracking-wide">
               {plan?.name}
             </p>
 

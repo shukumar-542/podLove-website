@@ -82,11 +82,11 @@ const SuccessStory = () => {
                 <div className="mt-10 space-y-5 ">
                   <p className="flex gap-5 text-[#333333]">
                     <AiFillLike color="#2757A6" size={25} />
-                    Quality matches focused on compatibility, not just look.
+                    Quality matches focused on compatibility, not just looks.
                   </p>
                   <p className="flex gap-5 text-[#333333]">
                     <AiFillLike color="#2757A6" size={25} />
-                    Meaningful connections through structured conversations.
+                    Meaningful connections through conversations.
                   </p>
                   <p className="flex gap-5 text-[#333333]">
                     <AiFillLike color="#2757A6" size={25} />
