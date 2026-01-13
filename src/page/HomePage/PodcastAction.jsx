@@ -31,7 +31,7 @@ const PodcastAction = ({
     ? podcast?.isRequest
     : myParticipant?.isRequest;
 
-  const sessionNo = podcast?.scheduleStatus === "2nd" ? 2 : 1;
+  const sessionNo = podcast?.finishStatus === "1stFinish" ? 2 : 1;
 
   const isScheduled = podcast?.schedule?.date && !isLive;
 
@@ -188,7 +188,12 @@ const PodcastAction = ({
                     <p className="text-[#F68064] font-mono text-xl font-bold">
                       {hasRequested
                         ? podcast?.schedule?.date || "Date to be announced"
-                        : "Ready to start your first podcast session?"}
+                        : `Ready to start your ${
+                            podcast?.finishStatus === "1stFinish" ||
+                            podcast?.finishStatus === "2ndFinish"
+                              ? "second"
+                              : "first"
+                          } podcast session?`}
                     </p>
                     {hasRequested && isScheduled && (
                       <p className="text-sm text-gray-400 uppercase tracking-widest mt-2">
@@ -229,9 +234,19 @@ const PodcastAction = ({
                     "JOIN AS SPARK"
                   )
                 ) : hasRequested ? (
-                  "REQUESTED FOR PODCAST"
+                  `REQUESTED FOR ${
+                    podcast?.finishStatus === "1stFinish" ||
+                    podcast?.finishStatus === "2ndFinish"
+                      ? "SECOND"
+                      : "FIRST"
+                  } PODCAST`
                 ) : (
-                  "REQUEST FOR PODCAST"
+                  `REQUEST FOR ${
+                    podcast?.finishStatus === "1stFinish" ||
+                    podcast?.finishStatus === "2ndFinish"
+                      ? "SECOND"
+                      : "FIRST"
+                  } PODCAST`
                 )}
               </button>
             </>
