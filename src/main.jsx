@@ -60,7 +60,7 @@ import TermsOfUse from "./page/TermsOfUse/TermsOfUse.jsx";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Provider store={store}>
-      <GoogleOAuthProvider clientId="471587701955-i0so67cvfpje0k7akpdlrt3tt8u3dprk.apps.googleusercontent.com">
+      <GoogleOAuthProvider clientId="114291454850-j5ka6eofvaqjvtl29gt5of0s9o855fdg.apps.googleusercontent.com">
         <BrowserRouter>
           <ScrollToTop />
           <Routes>
