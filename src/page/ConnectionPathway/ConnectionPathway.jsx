@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { useSubmitConnectionPathwayMutation } from "../../redux/Api/PodcastApi";
 import { useEffect, useState } from "react";
 import AttentionModal from "../../component/Modals/AttentionModal";
-import { Link } from "react-router-dom";
 import { IoArrowBack } from "react-icons/io5";
 
 const RESPONSEOPTIONS = [
@@ -75,10 +74,12 @@ export default function ConnectionPathway() {
       }}
     >
       <div className="min-h-screen bg-[#ffa175] flex items-start justify-center py-12 px-4 relative">
-        {/* BACK ARROW FIXED */}
-        <Link to="/" className="absolute top-10 my-5 left-10 z-[9999]">
-          <IoArrowBack size={30} className="text-[#F26828] cursor-pointer" />
-        </Link>
+        <button
+          onClick={() => navigate(-1)}
+          className="absolute top-10 left-10 z-[9999]"
+        >
+          <IoArrowBack size={30} className="text-white cursor-pointer" />
+        </button>
 
         <AttentionModal
           isModalOpen={isModalOpen}

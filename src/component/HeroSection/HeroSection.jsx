@@ -7,7 +7,7 @@ const HeroSection = () => {
   const navigate = useNavigate();
   const handleClick = () => {
     if (!token) {
-      navigate("/connection-pathway");
+      navigate("/our-approach");
     } else {
       navigate("/home");
     }

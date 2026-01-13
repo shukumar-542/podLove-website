@@ -5,8 +5,6 @@ import HeroSection from "../../component/HeroSection/HeroSection";
 import SuccessStory from "../../component/SuccessStory/SuccessStory";
 import HowItWork from "../../component/HowItWork/HowItWork";
 import FindVoiceMatch from "../../component/FindVoiceMatch/FindVoiceMatch";
-// import Faq from "../../component/Faq/Faq";
-// import ListenAudio from "../../component/ListenAudio/ListenAudio";
 
 const Home = () => {
   return (

@@ -94,15 +94,14 @@ const HowItWork = () => {
         </section>
         <div className="mt-10 flex justify-center">
           {token ? (
-            <Button className={"py-2"}>
+            <Button className="py-2">
               <Link to={"/home"}>Find your Match</Link>
             </Button>
           ) : (
-            <Link to="/connection-pathway">
-              <Button className={"py-2"}>Find your Match</Button>
+            <Link to="/our-approach">
+              <Button className="py-2">Find your Match</Button>
             </Link>
           )}
-          {/* <Button className={'py-2'}><Link to={"/sign-up"}>Find your Match</Link></Button> */}
         </div>
       </div>
     </div>

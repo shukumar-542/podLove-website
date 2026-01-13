@@ -53,6 +53,9 @@ import DiscoverCompatibilityPart1 from "./page/DiscoverCompatibilityPart1/Discov
 import DiscoverCompatibilityPart2 from "./page/DiscoverCompatibilityPart2/DiscoverCompatibilityPart2.jsx";
 import DiscoverCompatibilityPart3 from "./page/DiscoverCompatibilityPart3/DiscoverCompatibilityPart3.jsx";
 import DiscoverCompatibilityPart4 from "./page/DiscoverCompatibilityPart4/DiscoverCompatibilityPart4.jsx";
+import OurApproach from "./page/OurApproach/OurApproach.jsx";
+import WhatToExpect from "./page/WhatToExpect/WhatToExpect.jsx";
+import TermsOfUse from "./page/TermsOfUse/TermsOfUse.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -103,6 +106,9 @@ createRoot(document.getElementById("root")).render(
               </Route>
             </Route>
             <Route path="/login" element={<Login />} />
+            <Route path="/our-approach" element={<OurApproach />} />
+            <Route path="/what-to-expect" element={<WhatToExpect />} />
+            <Route path="/terms-of-use" element={<TermsOfUse />} />
             <Route path="/connection-pathway" element={<ConnectionPathway />} />
             <Route path="/sign-up" element={<SignUp />} />
             <Route path="/verify-otp" element={<Otp />} />

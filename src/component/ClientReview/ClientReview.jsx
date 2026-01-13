@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { Button } from "../Shared/Button/Button";
 import { Carousel } from "antd";
 import img from "../../assets/quote.png";
@@ -31,7 +30,7 @@ const ClientReview = () => {
           &quot;Hear From Our Users: Real Feedback, Real Experiences&quot;
         </p>
         <div className="flex justify-center my-10">
-          <Link to="/connection-pathway">
+          <Link to="/our-approach">
             <Button className="py-2">Find your Match</Button>
           </Link>
         </div>
