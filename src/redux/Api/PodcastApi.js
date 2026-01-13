@@ -25,6 +25,7 @@ const PodcastApi = baseApi.injectEndpoints({
         url: `/podcast/create_room/${id}`,
         method: "POST",
       }),
+      invalidatesTags: ["Podcast"],
     }),
 
     postFirstSurvey: builder.mutation({
@@ -33,6 +34,7 @@ const PodcastApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["Podcast"],
     }),
 
     post7DaysSurvey: builder.mutation({
@@ -41,6 +43,7 @@ const PodcastApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["User"],
     }),
 
     submitConnectionPathway: builder.mutation({
@@ -49,6 +52,7 @@ const PodcastApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["User", "Podcast"],
     }),
 
     decisionMaking: builder.mutation({
@@ -57,6 +61,7 @@ const PodcastApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["Podcast"],
     }),
   }),
 });

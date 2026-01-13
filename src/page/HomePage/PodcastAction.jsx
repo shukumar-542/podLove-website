@@ -1,10 +1,7 @@
-import { Spin, message } from "antd";
-import {
-  LoadingOutlined,
-  CheckCircleOutlined,
-  CloseCircleOutlined,
-} from "@ant-design/icons";
+import { Spin, message, Modal } from "antd";
+import { LoadingOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
 import { toast } from "sonner";
+import { useState } from "react";
 import mic from "../../assets/mic.png";
 import videoSrc from "../../assets/schedule.mp4";
 import {
@@ -20,6 +17,8 @@ const PodcastAction = ({
   isTwoRoundsComplete,
   isLoading,
 }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const [createPodcast, { isLoading: isCreating }] = useCreatePodcastMutation();
   const [sendPodcastRequest, { isLoading: isRequesting }] =
     useSendPodcastRequestMutation();
@@ -75,6 +74,7 @@ const PodcastAction = ({
       };
       const res = await decisionMaking(payload).unwrap();
       toast.success(res?.message || "Decision submitted successfully!");
+      setIsModalOpen(false);
     } catch (err) {
       message.error(err?.data?.message || "Something went wrong.");
     }
@@ -158,10 +158,10 @@ const PodcastAction = ({
               </p>
               <button
                 disabled={isDecisionMaking}
-                onClick={() => handleDecision({ status: "refresh" })}
-                className="flex-1 mx-auto px-20 py-4 border-2 border-red-400 hover:border-red-500 text-white rounded-2xl font-black text-xl hover:bg-red-700 bg-red-600  transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+                onClick={() => setIsModalOpen(true)}
+                className="flex-1 mx-auto px-20 py-4 uppercase border-2 border-red-400 hover:border-red-500 text-white rounded-2xl font-black text-lg hover:bg-red-700 bg-red-600 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
               >
-                {isDecisionMaking ? <Spin size="small" /> : "REFRESH"}
+                End Match & Refresh
               </button>
             </div>
           ) : (
@@ -238,6 +238,45 @@ const PodcastAction = ({
           )}
         </div>
       </div>
+
+      {/* --- Refresh Confirmation Modal --- */}
+      <Modal
+        title={null}
+        open={isModalOpen}
+        onCancel={() => setIsModalOpen(false)}
+        footer={null}
+        centered
+        closable={false}
+        width={500}
+      >
+        <div className="text-center p-3">
+          <ExclamationCircleOutlined className="text-5xl text-red-500 mb-4" />
+          <h2 className="text-2xl font-bold text-gray-800 mb-2">
+            End This Match & Refresh?
+          </h2>
+          <p className="text-gray-500 mb-8">
+            You&apos;ve completed Episode 2. If you refresh now, this connection
+            will end and you&apos;ll return to the dating pool. If your
+            subscription allows, our AI may match you again in a new podcast as
+            a Spotlight or a Spark.
+          </p>
+          <div className="flex gap-4">
+            <button
+              onClick={() => setIsModalOpen(false)}
+              className="flex-1 py-3 bg-gray-100 text-gray-700 rounded-xl font-bold hover:bg-gray-200 transition-all"
+            >
+              Continue Dating
+            </button>
+            <button
+              onClick={() => handleDecision({ status: "refresh" })}
+              disabled={isDecisionMaking}
+              className="flex-1 py-3 bg-red-600 text-white rounded-xl font-bold hover:bg-red-700 transition-all"
+            >
+              {isDecisionMaking ? <Spin size="small" /> : "Yes, Refresh"}
+            </button>
+          </div>
+        </div>
+      </Modal>
     </section>
   );
 };
