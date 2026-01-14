@@ -211,6 +211,7 @@ const ClientReview = () => {
           </Carousel>
         </div>
       </div>
+      
     </div>
   );
 };
