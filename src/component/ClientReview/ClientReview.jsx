@@ -55,7 +55,7 @@ const ClientReview = () => {
             prevArrow={<CustomArrow type="prev" />}
             nextArrow={<CustomArrow type="next" />}
           >
-            <div className="bg-white p-5 rounded-lg shadow-md ">
+             <div className="bg-white p-5 rounded-lg shadow-md ">
               <img src={img} alt="" />
               <div className="my-5 flex items-center gap-2">
                 <p className="bg-[#FFB491] p-2 rounded-sm shadow-2xl">
@@ -71,17 +71,16 @@ const ClientReview = () => {
                   <IoStar color="#767676" size={25} />
                 </p>
                 <p className="bg-[#FFB491] p-2 rounded-sm shadow-2xl">
-                  <IoStar color="white" size={25} />
+                <IoStar color="#767676" size={25} />
                 </p>
               </div>
               <h3 className="text-2xl font-bold text-[#242424] mt-3">
-                Ultimately the reliable product
+              Where podcasts meet real connection
               </h3>
               <p className="mt-5">
-                “Super lovely product. I love this product because the software
-                is brilliantly helpful. Can’t get enough! ...”
+                “Podlove turns meaningful podcast conversations into genuine romantic matches. It feels natural and surprisingly accurate.”
               </p>
-              <p className="text-xl font-bold mt-5">John Doe</p>
+              <p className="text-xl font-bold mt-5">— Alex Morgan</p>
               <div className="flex justify-end">
                 <img src={img1} alt="" />
               </div>
@@ -103,17 +102,47 @@ const ClientReview = () => {
                   <IoStar color="#767676" size={25} />
                 </p>
                 <p className="bg-[#FFB491] p-2 rounded-sm shadow-2xl">
-                  <IoStar color="white" size={25} />
+                  <IoStar color="#767676" size={25} />
                 </p>
               </div>
               <h3 className="text-2xl font-bold text-[#242424] mt-3">
-                Ultimately the reliable product
+              Meaningful matches not swipes
               </h3>
               <p className="mt-5">
-                “Super lovely product. I love this product because the software
-                is brilliantly helpful. Can’t get enough! ...”
+              “Listening together and then being matched was such a unique experience. Podlove feels deeper than dating apps.”
               </p>
-              <p className="text-xl font-bold mt-5">John Doe</p>
+              <p className="text-xl font-bold mt-5">— Michael Thompson</p>
+              <div className="flex justify-end">
+                <img src={img1} alt="" />
+              </div>
+            </div>
+            <div className="bg-white p-5 rounded-lg shadow-md">
+              <img src={img} alt="" />
+
+              <div className="my-5 flex items-center gap-2">
+                <p className="bg-[#FFB491] p-2 rounded-sm shadow-2xl">
+                  <IoStar color="#767676" size={25} />
+                </p>
+                <p className="bg-[#FFB491] p-2 rounded-sm shadow-2xl">
+                  <IoStar color="#767676" size={25} />
+                </p>
+                <p className="bg-[#FFB491] p-2 rounded-sm shadow-2xl">
+                  <IoStar color="#767676" size={25} />
+                </p>
+                <p className="bg-[#FFB491] p-2 rounded-sm shadow-2xl">
+                  <IoStar color="#767676" size={25} />
+                </p>
+                <p className="bg-[#FFB491] p-2 rounded-sm shadow-2xl">
+                  <IoStar color="#767676" size={25} />
+                </p>
+              </div>
+              <h3 className="text-2xl font-bold text-[#242424] mt-3">
+              A refreshing way to meet people
+              </h3>
+              <p className="mt-5">
+              “I loved how Podlove matched me with someone who actually shared my interests after the podcast. It felt intentional.”
+              </p>
+              <p className="text-xl font-bold mt-5">— Sarah Williams</p>
               <div className="flex justify-end">
                 <img src={img1} alt="" />
               </div>
@@ -138,13 +167,43 @@ const ClientReview = () => {
                 </p>
               </div>
               <h3 className="text-2xl font-bold text-[#242424] mt-3">
-                Ultimately the reliable product
+              AI that connects beyond listening
               </h3>
               <p className="mt-5">
-                “Super lovely product. I love this product because the software
-                is brilliantly helpful. Can’t get enough! ...”
+              “The AI matching after each session is thoughtful and personal. Podlove makes connections feel real, not random.”
               </p>
-              <p className="text-xl font-bold mt-5">John Doe</p>
+              <p className="text-xl font-bold mt-5">— Daniel Brooks</p>
+              <div className="flex justify-end">
+                <img src={img1} alt="" />
+              </div>
+            </div>
+            <div className="bg-white p-5 rounded-lg shadow-md">
+              <img src={img} alt="" />
+
+              <div className="my-5 flex items-center gap-2">
+                <p className="bg-[#FFB491] p-2 rounded-sm shadow-2xl">
+                  <IoStar color="#767676" size={25} />
+                </p>
+                <p className="bg-[#FFB491] p-2 rounded-sm shadow-2xl">
+                  <IoStar color="#767676" size={25} />
+                </p>
+                <p className="bg-[#FFB491] p-2 rounded-sm shadow-2xl">
+                  <IoStar color="#767676" size={25} />
+                </p>
+                <p className="bg-[#FFB491] p-2 rounded-sm shadow-2xl">
+                  <IoStar color="#767676" size={25} />
+                </p>
+                <p className="bg-[#FFB491] p-2 rounded-sm shadow-2xl">
+                  <IoStar color="#767676" size={25} />
+                </p>
+              </div>
+              <h3 className="text-2xl font-bold text-[#242424] mt-3">
+              More than just a podcast app
+              </h3>
+              <p className="mt-5">
+              “Podlove helped me connect romantically with someone who truly resonated with the same podcast moments.”
+              </p>
+              <p className="text-xl font-bold mt-5">— Sarah Williams</p>
               <div className="flex justify-end">
                 <img src={img1} alt="" />
               </div>
