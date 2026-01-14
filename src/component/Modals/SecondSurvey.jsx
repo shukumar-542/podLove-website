@@ -68,7 +68,7 @@ const SecondSurvey = ({ isSecondModalOpen, handleSecondOk, podcastId }) => {
       <div className="md:px-12 py-6">
         <div className="text-center mb-8">
           <h1 className="text-2xl md:text-3xl font-semibold mb-3">
-            Let us know about your second date
+            Tell us about your date
           </h1>
           <p className="text-lg">
             We&apos;d love to hear about your experience with your second date!
