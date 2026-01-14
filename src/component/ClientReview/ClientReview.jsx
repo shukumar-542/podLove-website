@@ -106,7 +106,7 @@ const ClientReview = () => {
                 </p>
               </div>
               <h3 className="text-2xl font-bold text-[#242424] mt-3">
-              Meaningful matches, not swipes
+              Meaningful matches not swipes
               </h3>
               <p className="mt-5">
               “Listening together and then being matched was such a unique experience. Podlove feels deeper than dating apps.”
@@ -210,8 +210,9 @@ const ClientReview = () => {
             </div>
           </Carousel>
         </div>
+
       </div>
-      
+
     </div>
   );
 };
