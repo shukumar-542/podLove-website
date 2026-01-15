@@ -127,18 +127,13 @@ const Pricing = () => {
 
             {/* Bottom Detailed Features */}
             <div className="space-y-3">
-              {plan?.description?.map((details, idx) => (
-                <p
-                  key={idx}
-                  className="flex items-start gap-2 text-[13px] text-gray-300"
-                >
-                  <IoCheckmarkOutline
+              <p className="flex items-start gap-2 text-[13px] text-gray-300">
+                {/* <IoCheckmarkOutline
                     size={18}
                     className="text-[#FFA175] mt-0.5 flex-shrink-0"
-                  />
-                  {details?.details}
-                </p>
-              ))}
+                  /> */}
+                {plan?.description[0]?.details}
+              </p>
             </div>
           </div>
         );
