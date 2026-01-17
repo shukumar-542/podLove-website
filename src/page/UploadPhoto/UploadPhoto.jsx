@@ -13,8 +13,24 @@ const UploadPhoto = () => {
   const [file, setFile] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
 
-  // Store file locally
+  const ACCEPTED_FORMATS = [
+    "image/jpeg",
+    "image/png",
+    "image/gif",
+    "image/webp",
+  ];
+  const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+
+  // Store file locally with validation
   const handleFileSelect = ({ file }) => {
+    if (!ACCEPTED_FORMATS.includes(file.type)) {
+      toast.error("Only JPG, PNG, GIF, and WebP formats are accepted.");
+      return;
+    }
+    if (file.size > MAX_FILE_SIZE) {
+      toast.error("File size must be less than 5MB.");
+      return;
+    }
     setFile(file);
     setImageUrl(URL.createObjectURL(file));
   };
@@ -86,6 +102,10 @@ const UploadPhoto = () => {
               </div>
             </Upload>
           </div>
+
+          <p className="text-center text-sm text-gray-600 mb-6">
+            Accepted formats: JPG, PNG, GIF, WebP • Max size: 5MB
+          </p>
 
           <AuthButton
             disabled={isLoading}
