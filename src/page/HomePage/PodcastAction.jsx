@@ -1,7 +1,7 @@
 import { Spin, message, Modal } from "antd";
 import { LoadingOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
 import { toast } from "sonner";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import mic from "../../assets/mic.png";
 import videoSrc from "../../assets/schedule.mp4";
 import {
@@ -35,7 +35,16 @@ const PodcastAction = ({
   const sessionNo = podcast?.finishStatus === "1stFinish" ? 2 : 1;
 
   const isScheduled = podcast?.schedule?.date && !isLive;
-
+  const formattedSchedule = useMemo(
+    () =>
+      formatScheduleToLocal({
+        date: "2026-01-28",
+        day: "Wednesday",
+        time: "00:00",
+      }),
+    [podcast?.schedule],
+  );
+  console.log(formattedSchedule);
   const handleJoinLogic = () => {
     if (!podcast?._id || !podcast?.roomCodes) return;
     const waitingCode = podcast.roomCodes.find(
@@ -188,7 +197,9 @@ const PodcastAction = ({
                     </h2>
                     <p className="text-[#F68064] font-mono text-xl font-bold">
                       {hasRequested
-                        ? podcast?.schedule?.date || "Date to be announced"
+                        ? (formatScheduleToLocal &&
+                            formatScheduleToLocal(podcast?.schedule)?.full) ||
+                          "Date to be announced"
                         : `Ready to start your ${
                             podcast?.finishStatus === "1stFinish" ||
                             podcast?.finishStatus === "2ndFinish"
@@ -196,11 +207,6 @@ const PodcastAction = ({
                               : "first"
                           } podcast session?`}
                     </p>
-                    {hasRequested && isScheduled && (
-                      <p className="text-sm text-gray-400 uppercase tracking-widest mt-2">
-                        Time: {formatScheduleToLocal(podcast?.schedule)?.full}
-                      </p>
-                    )}
                   </div>
                 )}
               </div>
