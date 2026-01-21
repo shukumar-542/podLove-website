@@ -9,6 +9,7 @@ import {
   useDecisionMakingMutation,
   useSendPodcastRequestMutation,
 } from "../../redux/Api/PodcastApi";
+import { formatScheduleToLocal } from "../../helpers/formatScheduleToLocal";
 
 const PodcastAction = ({
   podcast,
@@ -38,7 +39,7 @@ const PodcastAction = ({
   const handleJoinLogic = () => {
     if (!podcast?._id || !podcast?.roomCodes) return;
     const waitingCode = podcast.roomCodes.find(
-      (c) => c.role === "waiting-room"
+      (c) => c.role === "waiting-room",
     )?.code;
     if (waitingCode) {
       window.open(`/ms/?roomCode=${waitingCode}`, "_blank");
@@ -197,7 +198,7 @@ const PodcastAction = ({
                     </p>
                     {hasRequested && isScheduled && (
                       <p className="text-sm text-gray-400 uppercase tracking-widest mt-2">
-                        Time: {podcast?.schedule?.time}
+                        Time: {formatScheduleToLocal(podcast?.schedule)?.full}
                       </p>
                     )}
                   </div>
@@ -214,8 +215,8 @@ const PodcastAction = ({
                     isLive
                       ? "bg-[#F68064] hover:bg-[#f36b4b] hover:shadow-[#F68064]/40"
                       : hasRequested
-                      ? "bg-gray-800 text-gray-500 cursor-not-allowed border border-white/10"
-                      : "bg-[#F68064] hover:bg-[#e07258]"
+                        ? "bg-gray-800 text-gray-500 cursor-not-allowed border border-white/10"
+                        : "bg-[#F68064] hover:bg-[#e07258]"
                   }`}
               >
                 {isCreating || isRequesting ? (
@@ -253,7 +254,6 @@ const PodcastAction = ({
           )}
         </div>
       </div>
-
       {/* --- Refresh Confirmation Modal --- */}
       <Modal
         title={null}

@@ -43,21 +43,19 @@ const ChatPage = () => {
   useEffect(() => {
     if (!senderId || !receiverId) return;
 
-    // Image-er 1st index (receiverId, senderId, timestamp) optimize korar query
-    // Ekhane 'or' logic use kora hoyeche jate sender ebong receiver er moddhe sob message ashe
     const q = query(
       collection(db, "messages"),
       or(
         and(
           where("senderId", "==", senderId),
-          where("receiverId", "==", receiverId)
+          where("receiverId", "==", receiverId),
         ),
         and(
           where("senderId", "==", receiverId),
-          where("receiverId", "==", senderId)
-        )
+          where("receiverId", "==", senderId),
+        ),
       ),
-      orderBy("timestamp", "asc")
+      orderBy("timestamp", "asc"),
     );
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
@@ -78,13 +76,12 @@ const ChatPage = () => {
           message: input,
           senderId,
           receiverId,
-          // participants array-ti thakleo somossya nei, tobe ekhon query senderId/receiverId diye hobe
           participants: [senderId, receiverId],
           timestamp: serverTimestamp(),
         });
         setInput("");
       } catch (error) {
-        console.error("Error sending message: ", error);
+        console.error("sending message");
       }
     }
   };
