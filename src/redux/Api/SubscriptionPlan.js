@@ -20,6 +20,15 @@ const subscriptionPlan = baseApi.injectEndpoints({
       invalidatesTags: ["Subscription", "Plan"],
     }),
 
+    updateUserSubscription: builder.mutation({
+      query: ({ userId, subscriptionPlanId }) => ({
+        url: `/user/update_user_subscription/${userId}`,
+        method: "PATCH",
+        body: { subscriptionPlanId },
+      }),
+      invalidatesTags: ["Subscription", "Plan"],
+    }),
+
     createSurvey: builder.mutation({
       query: (data) => ({
         url: "/survey/create",
@@ -62,4 +71,5 @@ export const {
   useGetNotificationQuery,
   useCreateContactUsMutation,
   useGetFaqQuery,
+  useUpdateUserSubscriptionMutation,
 } = subscriptionPlan;

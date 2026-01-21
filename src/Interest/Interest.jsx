@@ -34,7 +34,7 @@ const Interest = () => {
     setSelected((prev) =>
       prev.includes(field)
         ? prev.filter((item) => item !== field)
-        : [...prev, field]
+        : [...prev, field],
     );
   };
 
@@ -52,7 +52,7 @@ const Interest = () => {
       .then((payload) => {
         toast.success(payload?.message);
 
-        navigate("/subscription-plan");
+        navigate("/subscription");
       })
       .catch((error) => {
         toast.error(error?.data?.message);

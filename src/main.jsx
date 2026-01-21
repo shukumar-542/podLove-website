@@ -56,6 +56,7 @@ import DiscoverCompatibilityPart4 from "./page/DiscoverCompatibilityPart4/Discov
 import OurApproach from "./page/OurApproach/OurApproach.jsx";
 import WhatToExpect from "./page/WhatToExpect/WhatToExpect.jsx";
 import TermsOfUse from "./page/TermsOfUse/TermsOfUse.jsx";
+import Subscription from "./page/Subscription/Subscription.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -137,6 +138,7 @@ createRoot(document.getElementById("root")).render(
             />
             <Route path="/rating-yourself" element={<RatingYourSelf />} />
             <Route path="/interest" element={<Interest />} />
+            <Route path="/subscription" element={<Subscription />} />
             <Route path="/forgot-password" element={<ForgetPassword />} />
             <Route path="/verify-forget-otp" element={<VerifyEmail />} />
             <Route path="/set-new-password" element={<SetNewPassword />} />
@@ -151,5 +153,5 @@ createRoot(document.getElementById("root")).render(
         <Toaster position="top-right" richColors />
       </GoogleOAuthProvider>
     </Provider>
-  </StrictMode>
+  </StrictMode>,
 );
