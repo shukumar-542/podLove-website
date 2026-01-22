@@ -45,7 +45,7 @@ const authApi = baseApi.injectEndpoints({
         const patch = dispatch(
           baseApi.util.updateQueryData("getUser", undefined, (draft) => {
             Object.assign(draft, arg);
-          })
+          }),
         );
         try {
           await queryFulfilled;
@@ -61,6 +61,7 @@ const authApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["profile"],
     }),
 
     podcastCreate: builder.mutation({
@@ -68,6 +69,7 @@ const authApi = baseApi.injectEndpoints({
         url: "/podcast/create",
         method: "POST",
       }),
+      invalidatesTags: ["Podcast", "profile"],
     }),
 
     getUser: builder.query({
@@ -76,7 +78,8 @@ const authApi = baseApi.injectEndpoints({
         method: "GET",
       }),
       providesTags: ["profile"],
-      keepUnusedDataFor: 60,
+      keepUnusedDataFor: 300,
+      refetchOnMountOrArgChange: 60,
 
       async onQueryStarted(arg, { queryFulfilled }) {
         try {
@@ -102,6 +105,7 @@ const authApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["profile", "Podcast", "Subscription"],
     }),
 
     changePassword: builder.mutation({
@@ -125,6 +129,8 @@ const authApi = baseApi.injectEndpoints({
         method: "GET",
       }),
       providesTags: ["Subscription"],
+      keepUnusedDataFor: 300,
+      refetchOnMountOrArgChange: 60,
     }),
 
     getPodCastDetails: builder.query({
@@ -133,6 +139,8 @@ const authApi = baseApi.injectEndpoints({
         method: "GET",
       }),
       providesTags: ["Podcast"],
+      keepUnusedDataFor: 180,
+      refetchOnMountOrArgChange: 30,
     }),
 
     getPodCastHistoryDetails: builder.query({
@@ -141,6 +149,7 @@ const authApi = baseApi.injectEndpoints({
         method: "GET",
       }),
       providesTags: ["Podcast"],
+      keepUnusedDataFor: 300,
     }),
 
     googleLogin: builder.mutation({
@@ -223,6 +232,7 @@ const authApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["profile"],
     }),
 
     forgetPassword: builder.mutation({
@@ -271,6 +281,8 @@ const authApi = baseApi.injectEndpoints({
         method: "GET",
       }),
       providesTags: ["Match"],
+      keepUnusedDataFor: 180,
+      refetchOnMountOrArgChange: 30,
     }),
   }),
 });

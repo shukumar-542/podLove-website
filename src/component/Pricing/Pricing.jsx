@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import subscription from "../../assets/subscription-bg.png";
 import { IoCheckmarkOutline } from "react-icons/io5";
 import { Divider } from "antd";
@@ -11,11 +12,11 @@ import {
 import { useGetUserQuery } from "../../redux/Api/AuthApi";
 import { toast } from "sonner";
 import { useNavigate } from "react-router";
-import { Skeleton } from "antd";
 
 const Pricing = () => {
   const navigate = useNavigate();
   const logInUser = localStorage.getItem("podlove-token");
+  const [loadingPlanId, setLoadingPlanId] = useState(null);
 
   // ---------------- QUERIES ----------------
   const {
@@ -43,7 +44,9 @@ const Pricing = () => {
   const subscriptions = allPlansResponse?.data || [];
   const userSubscription = userData?.data?.subscription;
   const activePlanName = userSubscription?.plan;
-  const isSubscriptionActive = userSubscription?.status === "ACTIVE";
+  const isSubscriptionActive =
+    userSubscription?.status === "ACTIVE" ||
+    userSubscription?.status === "PAID";
   const userId = userData?.data?._id;
 
   // ---------------- HANDLER ----------------
@@ -54,6 +57,7 @@ const Pricing = () => {
     }
 
     const isFree = plan?.unitAmount === "0" || plan?.unitAmount === 0;
+    setLoadingPlanId(plan?._id);
 
     if (!isSubscriptionActive && isFree) {
       updateUserSubscription({ userId, subscriptionPlanId: plan?._id })
@@ -61,10 +65,12 @@ const Pricing = () => {
         .then(() => {
           navigate("/home");
           toast.success("Free plan activated successfully");
+          setLoadingPlanId(null);
         })
-        .catch((error) =>
-          toast.error(error?.data?.message || "Something went wrong"),
-        );
+        .catch((error) => {
+          toast.error(error?.data?.message || "Something went wrong");
+          setLoadingPlanId(null);
+        });
       return;
     }
 
@@ -76,10 +82,12 @@ const Pricing = () => {
         if (payload?.data) {
           window.location.href = payload.data;
         }
+        setLoadingPlanId(null);
       })
-      .catch((error) =>
-        toast.error(error?.data?.message || "Something went wrong"),
-      );
+      .catch((error) => {
+        toast.error(error?.data?.message || "Something went wrong");
+        setLoadingPlanId(null);
+      });
   };
 
   // ---------------- UI ----------------
@@ -91,20 +99,60 @@ const Pricing = () => {
             .map((_, idx) => (
               <div
                 key={idx}
-                className="rounded-3xl overflow-hidden relative text-white p-4 py-8 shadow-2xl shadow-black border-2 animate-pulse"
-                style={{ background: "#2D2D30", height: "400px" }}
+                style={{
+                  backgroundImage: `url(${subscription})`,
+                  backgroundRepeat: "no-repeat",
+                  backgroundSize: "cover",
+                  width: "100%",
+                }}
+                className="rounded-3xl overflow-hidden relative text-white p-4 py-8 shadow-2xl shadow-black border-2 border-transparent"
               >
-                <Skeleton.Input className="w-32 mb-4" active size="small" />
-                <Skeleton.Input className="w-20 mb-6" active size="small" />
-                <Skeleton paragraph={{ rows: 4 }} active />
-                <Skeleton.Button className="w-full mt-6" active />
+                {/* Plan Name Badge */}
+                <div className="flex justify-center mb-8">
+                  <div className="bg-[#231A19] bg-opacity-50 h-10 w-32 rounded-full animate-pulse"></div>
+                </div>
+
+                {/* Features List */}
+                <div className="space-y-2 pb-5 min-h-[130px]">
+                  {[1, 2, 3, 4].map((item) => (
+                    <div key={item} className="flex items-center gap-2">
+                      <div className="w-4 h-4 bg-[#FFA175] bg-opacity-30 rounded-full animate-pulse"></div>
+                      <div className="h-3 bg-white bg-opacity-20 rounded animate-pulse flex-1"></div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Price */}
+                <div className="my-5">
+                  <div className="h-9 w-40 bg-white bg-opacity-30 rounded animate-pulse"></div>
+                </div>
+
+                {/* Button */}
+                <div className="text-center mb-5">
+                  <div className="w-full max-w-xs mx-auto h-12 bg-gradient-to-r from-[#F36E2F] to-[#FEB491] opacity-50 rounded-full animate-pulse"></div>
+                </div>
+
+                {/* Divider */}
+                <div className="my-5">
+                  <div className="h-px bg-[#2D2D30] mb-2"></div>
+                  <div className="h-3 w-20 bg-white bg-opacity-20 rounded animate-pulse mx-auto"></div>
+                  <div className="h-px bg-[#2D2D30] mt-2"></div>
+                </div>
+
+                {/* Bottom Details */}
+                <div className="space-y-2">
+                  <div className="h-3 bg-white bg-opacity-20 rounded animate-pulse"></div>
+                  <div className="h-3 bg-white bg-opacity-20 rounded animate-pulse w-3/4"></div>
+                </div>
               </div>
             ))
         : subscriptions.map((plan, index) => {
             const isFree = plan?.unitAmount === "0" || plan?.unitAmount === 0;
             const isActive =
               isSubscriptionActive && plan?.name === activePlanName;
-            const isBtnDisabled = isActive || isAnyMutationLoading;
+            const isLoadingThisPlan = loadingPlanId === plan?._id;
+            const isBtnDisabled =
+              isActive || isLoadingThisPlan || (isFree && isSubscriptionActive);
 
             return (
               <div
@@ -161,7 +209,7 @@ const Pricing = () => {
                       } 
                       disabled:opacity-80`}
                   >
-                    {isAnyMutationLoading
+                    {isLoadingThisPlan
                       ? "Processing..."
                       : isActive
                         ? "Your Current Plan"

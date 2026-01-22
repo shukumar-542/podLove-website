@@ -44,7 +44,6 @@ const PodcastAction = ({
       }),
     [podcast?.schedule],
   );
-  console.log(formattedSchedule);
   const handleJoinLogic = () => {
     if (!podcast?._id || !podcast?.roomCodes) return;
     const waitingCode = podcast.roomCodes.find(

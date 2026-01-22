@@ -17,7 +17,7 @@ const subscriptionPlan = baseApi.injectEndpoints({
         method: "POST",
         body: planId,
       }),
-      invalidatesTags: ["Subscription", "Plan"],
+      invalidatesTags: ["Subscription", "Plan", "profile"],
     }),
 
     updateUserSubscription: builder.mutation({
@@ -26,7 +26,7 @@ const subscriptionPlan = baseApi.injectEndpoints({
         method: "PATCH",
         body: { subscriptionPlanId },
       }),
-      invalidatesTags: ["Subscription", "Plan"],
+      invalidatesTags: ["Subscription", "Plan", "profile"],
     }),
 
     createSurvey: builder.mutation({
@@ -43,6 +43,8 @@ const subscriptionPlan = baseApi.injectEndpoints({
         method: "GET",
       }),
       providesTags: ["Notification"],
+      keepUnusedDataFor: 60,
+      refetchOnMountOrArgChange: 30,
     }),
 
     createContactUs: builder.mutation({

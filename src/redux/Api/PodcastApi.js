@@ -43,7 +43,7 @@ const PodcastApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["User"],
+      invalidatesTags: ["profile"],
     }),
 
     submitConnectionPathway: builder.mutation({
@@ -52,7 +52,7 @@ const PodcastApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["User", "Podcast"],
+      invalidatesTags: ["profile", "Podcast"],
     }),
 
     decisionMaking: builder.mutation({
