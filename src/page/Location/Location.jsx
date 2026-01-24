@@ -5,9 +5,18 @@ import { Slider } from "antd";
 import LocationSearch from "../../component/LocationSearch/LocationSearch";
 import { useUpdateUserInfoMutation } from "../../redux/Api/AuthApi";
 import { toast } from "sonner";
-import { useNavigate } from "react-router";
+import { useNavigate, useSearchParams } from "react-router";
+import { IoArrowBack } from "react-icons/io5";
+
 const Location = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const from = searchParams?.get?.("from");
+
+  const handleBackToHome = () => {
+    localStorage.removeItem("podlove-token");
+    navigate("/");
+  };
   const [updateUserInfo, { isLoading }] = useUpdateUserInfoMutation();
 
   const [selectedLocation, setSelectedLocation] = useState(null);
@@ -33,7 +42,7 @@ const Location = () => {
       "distance",
       JSON.stringify({
         distance: value,
-      })
+      }),
     );
 
     if (!selectedLocation?.address) {
@@ -62,6 +71,18 @@ const Location = () => {
       className="h-[100vh]  relative"
     >
       <div className="bg-black absolute opacity-50 inset-0 z-0 "></div>
+
+      {/* --- Fixed Back Arrow Section --- */}
+      {from === "home" && (
+        <button
+          onClick={handleBackToHome}
+          className="fixed top-6 left-6 md:top-10 md:left-10 z-[9999] bg-black/20 md:bg-transparent p-2 rounded-full backdrop-blur-sm md:backdrop-blur-none"
+          title="Back to Home"
+        >
+          <IoArrowBack className="text-[#F26828] cursor-pointer" size={35} />
+        </button>
+      )}
+
       <div className="flex items-center justify-start max-w-5xl mx-auto  h-full p-2 md:p-0 z-10 relative">
         <div className="bg-white shadow-2xl shadow-[#F26828] rounded-md  p-5 md:p-10 max-w-5xl">
           <p className=" text-xl md:text-4xl font-bold text-[#333333] text-center">

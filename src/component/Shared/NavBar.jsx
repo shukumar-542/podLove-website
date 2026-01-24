@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import img from "../../assets/Footlove.png";
 import img1 from "../../assets/podLogo.png";
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useNavigate } from "react-router";
 import { IoMdNotifications } from "react-icons/io";
 import { HiMenu, HiX } from "react-icons/hi";
 import { useGetUserQuery } from "../../redux/Api/AuthApi";
@@ -11,11 +11,18 @@ import apple_store from "../../assets/apple_store.png";
 
 const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   const logInUser = localStorage.getItem("podlove-token");
-  const { data: getUser } = useGetUserQuery(undefined, {
+  const { data: getUser, isSuccess } = useGetUserQuery(undefined, {
     skip: !logInUser,
   });
+
+  useEffect(() => {
+    if (logInUser && isSuccess && getUser?.data?.isProfileComplete === false) {
+      navigate("/location?from=home");
+    }
+  }, [getUser?.data?.isProfileComplete, isSuccess, logInUser, navigate]);
 
   return (
     <div

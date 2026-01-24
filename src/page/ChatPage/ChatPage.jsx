@@ -80,9 +80,7 @@ const ChatPage = () => {
           timestamp: serverTimestamp(),
         });
         setInput("");
-      } catch (error) {
-        console.error("sending message");
-      }
+      } catch {}
     }
   };
 
