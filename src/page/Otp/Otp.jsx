@@ -5,23 +5,23 @@ import OTPInput from "otp-input-react";
 import { useNavigate } from "react-router";
 import { useVerifySingUpOtpMutation } from "../../redux/Api/AuthApi";
 import { toast } from "sonner";
-import { Spin } from 'antd';
+import { Spin } from "antd";
 const Otp = () => {
-  const [verifyOtp, {isLoading}]  = useVerifySingUpOtpMutation();
+  const [verifyOtp, { isLoading }] = useVerifySingUpOtpMutation();
   const [OTP, setOTP] = useState("");
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const handleOtp = () => {
     const data = {
-      email : localStorage.getItem('email'),
-      otp : OTP
-    }
+      email: localStorage.getItem("email"),
+      otp: OTP,
+    };
     verifyOtp(data)
       .unwrap()
       .then((payload) => {
-        toast.success(payload?.message)
-        if(payload?.data){
-          localStorage.setItem("podlove-token",payload?.data?.accessToken)
-          navigate('/location')
+        toast.success(payload?.message);
+        if (payload?.data) {
+          localStorage.setItem("podlove-token", payload?.data?.accessToken);
+          navigate("/location");
         }
       })
       .catch((error) => toast.error(error?.data?.message));
@@ -49,16 +49,21 @@ const Otp = () => {
               autoFocus
               OTPLength={6}
               otpType="number"
-              inputClassName="w-8 h-10 md:w-10 md:h-12 text-lg md:text-xl text-center border border-[#FFC0A3] rounded-md"
-              className="flex justify-center gap-1 sm:gap-1 md:gap-1"
+              inputClassName="w-6 h-8 sm:w-8 sm:h-10 md:w-10 md:h-12 text-base sm:text-lg md:text-xl text-center border-2 border-[#FFC0A3] rounded-md focus:border-[#F26828] focus:outline-none"
+              className="flex justify-center gap-1 sm:gap-1.5 md:gap-2"
               disabled={false}
               secure
+              inputMode="numeric"
             />
           </div>
 
           {/* <Link to={"/location"}> */}
-          <AuthButton disabled={isLoading} handleOnClick={() => handleOtp()} className={"py-1"}>
-            {isLoading ? <Spin  /> : "Verify"}
+          <AuthButton
+            disabled={isLoading}
+            handleOnClick={() => handleOtp()}
+            className={"py-1"}
+          >
+            {isLoading ? <Spin /> : "Verify"}
           </AuthButton>
           {/* </Link> */}
         </div>

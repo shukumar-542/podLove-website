@@ -96,6 +96,7 @@ const Age = () => {
                 format="MM/DD/YYYY"
                 onChange={onChange}
                 defaultPickerValue={dayjs("1991-01-01", "YYYY-MM-DD")}
+                placement="bottomLeft"
               />
             </Form.Item>
 
