@@ -20,19 +20,30 @@ const SubscribeSuccess = () => {
     };
   }, [location.search]);
 
-  const deepLink = useMemo(() => {
-    const link = new URL("podlove://open");
-    if (returnTo) {
-      link.searchParams.set("screen", returnTo);
-    }
+  const { returnPath, returnQuery, isExternalReturn } = useMemo(() => {
+    const rawPath = returnTo || "home";
+    const isExternal = /^https?:\/\//i.test(rawPath);
+    const safePath = rawPath.startsWith("/") ? rawPath : `/${rawPath}`;
+    const search = new URLSearchParams();
+
     if (returnUserId) {
-      link.searchParams.set("user_id", returnUserId);
+      search.set("user_id", returnUserId);
     }
-    return link.toString();
+
+    return {
+      returnPath: isExternal ? rawPath : safePath,
+      returnQuery: search.toString(),
+      isExternalReturn: isExternal,
+    };
   }, [returnTo, returnUserId]);
 
   const handleContinue = () => {
-    window.location.href = deepLink;
+    if (isExternalReturn) {
+      window.location.href = returnPath;
+      return;
+    }
+
+    navigate(`${returnPath}${returnQuery ? `?${returnQuery}` : ""}`);
   };
 
   const handleChoosePlan = () => {
@@ -50,10 +61,11 @@ const SubscribeSuccess = () => {
     <div className="bg-[#F7E8E1] min-h-dvh flex items-center">
       <div className="max-w-2xl mx-auto px-4 text-center">
         <div className="text-4xl md:text-5xl font-bold">
-          You&apos;re all set!
+          Subscription Successful!
         </div>
         <p className="mt-4 text-sm md:text-base text-[#4A3F3F]">
-          Premium features are ready for you.
+          Thank you for subscribing! You now have access to all the great
+          features. You can continue or view our subscription plans.
         </p>
         <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
           <button
