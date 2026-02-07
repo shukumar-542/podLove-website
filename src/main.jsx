@@ -35,7 +35,6 @@ import { Provider } from "react-redux";
 import { store } from "./redux/store.js";
 import { Toaster } from "sonner";
 import OptInPolicy from "./page/OptInPolicy/OptInPolicy.jsx";
-import SubscriptionPlan from "./page/SubscriptionPlan/SubscriptionPlan.jsx";
 import ParticipantDetails from "./page/ParticipantDetails/ParticipantDetails.jsx";
 import PrivateRoute from "./component/PrivateRoute/PrivateRoute.jsx";
 import { GoogleOAuthProvider } from "@react-oauth/google";
@@ -47,7 +46,6 @@ import RoomPage100MS from "./page/RoomPage100MS/RoomPage100MS.jsx";
 import MediaUsageConsent from "./page/MediaUsageConsent/MediaUsageConsent.jsx";
 import DoNotSellPersonalInfo from "./page/DoNotSellPersonalInfo/DoNotSellPersonalInfo.jsx";
 import ConsumerHealthDataPrivacyPolicy from "./page/ConsumerHealthDataPrivacyPolicy/ConsumerHealthDataPrivacyPolicy.jsx";
-import SubscriptionPage from "./page/SubscriptionPage/SubscriptionPage.jsx";
 import ConnectionPathway from "./page/ConnectionPathway/ConnectionPathway.jsx";
 import DiscoverCompatibilityPart1 from "./page/DiscoverCompatibilityPart1/DiscoverCompatibilityPart1.jsx";
 import DiscoverCompatibilityPart2 from "./page/DiscoverCompatibilityPart2/DiscoverCompatibilityPart2.jsx";
@@ -56,7 +54,9 @@ import DiscoverCompatibilityPart4 from "./page/DiscoverCompatibilityPart4/Discov
 import OurApproach from "./page/OurApproach/OurApproach.jsx";
 import WhatToExpect from "./page/WhatToExpect/WhatToExpect.jsx";
 import TermsOfUse from "./page/TermsOfUse/TermsOfUse.jsx";
-import Subscription from "./page/Subscription/Subscription.jsx";
+import Subscribe from "./page/Subscribe/Subscribe.jsx";
+import SubscribeSuccess from "./page/SubscribeSuccess/SubscribeSuccess.jsx";
+import SubscribeCancel from "./page/SubscribeCancel/SubscribeCancel.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -71,8 +71,9 @@ createRoot(document.getElementById("root")).render(
               <Route path="/about-us" element={<AboutUs />} />
               <Route path="/faq" element={<Faq />} />
               <Route path="/contact-us" element={<ContactUs />} />
-              <Route path="/subscription-plan" element={<SubscriptionPlan />} />
-              <Route path="/subscription-page" element={<SubscriptionPage />} />
+              <Route path="/subscribe" element={<Subscribe />} />
+              <Route path="/subscribe/success" element={<SubscribeSuccess />} />
+              <Route path="/subscribe/cancel" element={<SubscribeCancel />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route
                 path="/media-usage-consent"
@@ -138,7 +139,6 @@ createRoot(document.getElementById("root")).render(
             />
             <Route path="/rating-yourself" element={<RatingYourSelf />} />
             <Route path="/interest" element={<Interest />} />
-            <Route path="/subscription" element={<Subscription />} />
             <Route path="/forgot-password" element={<ForgetPassword />} />
             <Route path="/verify-forget-otp" element={<VerifyEmail />} />
             <Route path="/set-new-password" element={<SetNewPassword />} />

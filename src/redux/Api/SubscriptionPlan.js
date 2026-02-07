@@ -12,10 +12,10 @@ const subscriptionPlan = baseApi.injectEndpoints({
     }),
 
     upgradeSubscriptionPlan: builder.mutation({
-      query: (planId) => ({
+      query: (payload) => ({
         url: "/subscription/upgrade",
         method: "POST",
-        body: planId,
+        body: payload,
       }),
       invalidatesTags: ["Subscription", "Plan", "profile"],
     }),

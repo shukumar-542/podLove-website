@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import subscription from "../../assets/subscription-bg.png";
 import { IoCheckmarkOutline } from "react-icons/io5";
 import { Divider } from "antd";
@@ -11,12 +11,30 @@ import {
 } from "../../redux/Api/SubscriptionPlan";
 import { useGetUserQuery } from "../../redux/Api/AuthApi";
 import { toast } from "sonner";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 
-const Pricing = () => {
+const Pricing = ({ paidCtaLabel = "Choose this plan" }) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const logInUser = localStorage.getItem("podlove-token");
   const [loadingPlanId, setLoadingPlanId] = useState(null);
+
+  const searchParams = useMemo(
+    () => new URLSearchParams(location.search),
+    [location.search],
+  );
+
+  const returnToParam = searchParams.get("return_to");
+  const userIdParam = searchParams.get("user_id");
+
+  useEffect(() => {
+    if (returnToParam) {
+      sessionStorage.setItem("podlove-return-to", returnToParam);
+    }
+    if (userIdParam) {
+      sessionStorage.setItem("podlove-return-user", userIdParam);
+    }
+  }, [returnToParam, userIdParam]);
 
   // ---------------- QUERIES ----------------
   const {
@@ -76,11 +94,38 @@ const Pricing = () => {
 
     if (isSubscriptionActive && plan?.name === activePlanName) return;
 
-    upgradeSubscription({ planId: plan?._id })
+    const returnTo =
+      returnToParam || sessionStorage.getItem("podlove-return-to") || "";
+    const returnUserId =
+      userIdParam || sessionStorage.getItem("podlove-return-user") || "";
+    const origin = window.location.origin;
+    const successUrl = new URL("/subscribe/success", origin);
+    const cancelUrl = new URL("/subscribe/cancel", origin);
+
+    if (returnTo) {
+      successUrl.searchParams.set("return_to", returnTo);
+      cancelUrl.searchParams.set("return_to", returnTo);
+    }
+    if (returnUserId) {
+      successUrl.searchParams.set("user_id", returnUserId);
+      cancelUrl.searchParams.set("user_id", returnUserId);
+    }
+
+    upgradeSubscription({
+      planId: plan?._id,
+      returnTo,
+      successUrl: successUrl.toString(),
+      cancelUrl: cancelUrl.toString(),
+    })
       .unwrap()
       .then((payload) => {
-        if (payload?.data) {
-          window.location.href = payload.data;
+        const redirectUrl =
+          payload?.data?.url ||
+          payload?.data?.checkoutUrl ||
+          payload?.data ||
+          "";
+        if (redirectUrl) {
+          window.location.href = redirectUrl;
         }
         setLoadingPlanId(null);
       })
@@ -215,7 +260,7 @@ const Pricing = () => {
                         ? "Your Current Plan"
                         : isFree
                           ? "Activate Free Plan"
-                          : "Choose this plan"}
+                          : paidCtaLabel}
                   </button>
                 </div>
 

@@ -52,7 +52,7 @@ const Interest = () => {
       .then((payload) => {
         toast.success(payload?.message);
 
-        navigate("/subscription");
+        navigate("/subscribe");
       })
       .catch((error) => {
         toast.error(error?.data?.message);

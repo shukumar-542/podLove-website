@@ -70,7 +70,7 @@ const NavBar = () => {
           <NavLink to="/about-us" className="hover:text-[#FFA175]">
             About us
           </NavLink>
-          <NavLink to="/subscription-page" className="hover:text-[#FFA175]">
+          <NavLink to="/subscribe" className="hover:text-[#FFA175]">
             Subscriptions
           </NavLink>
           <NavLink to="/contact-us" className="hover:text-[#FFA175]">
@@ -147,7 +147,7 @@ const NavBar = () => {
         )}
 
         <NavLink
-          to="/subscription-plan"
+          to="/subscribe"
           onClick={() => setMenuOpen(false)}
           className="text-xl py-2"
         >
