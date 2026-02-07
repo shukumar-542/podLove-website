@@ -74,7 +74,17 @@ const Pricing = ({ paidCtaLabel = "Choose this plan" }) => {
       return;
     }
 
+    if (isAnyMutationLoading) {
+      return;
+    }
+
     const isFree = plan?.unitAmount === "0" || plan?.unitAmount === 0;
+    const isActive = isSubscriptionActive && plan?.name === activePlanName;
+
+    if (isActive) {
+      return;
+    }
+
     setLoadingPlanId(plan?._id);
 
     if (!isSubscriptionActive && isFree) {
@@ -92,30 +102,12 @@ const Pricing = ({ paidCtaLabel = "Choose this plan" }) => {
       return;
     }
 
-    if (isSubscriptionActive && plan?.name === activePlanName) return;
-
     const returnTo =
       returnToParam || sessionStorage.getItem("podlove-return-to") || "";
-    const returnUserId =
-      userIdParam || sessionStorage.getItem("podlove-return-user") || "";
-    const origin = window.location.origin;
-    const successUrl = new URL("/subscribe/success", origin);
-    const cancelUrl = new URL("/subscribe/cancel", origin);
-
-    if (returnTo) {
-      successUrl.searchParams.set("return_to", returnTo);
-      cancelUrl.searchParams.set("return_to", returnTo);
-    }
-    if (returnUserId) {
-      successUrl.searchParams.set("user_id", returnUserId);
-      cancelUrl.searchParams.set("user_id", returnUserId);
-    }
 
     upgradeSubscription({
       planId: plan?._id,
       returnTo,
-      successUrl: successUrl.toString(),
-      cancelUrl: cancelUrl.toString(),
     })
       .unwrap()
       .then((payload) => {
