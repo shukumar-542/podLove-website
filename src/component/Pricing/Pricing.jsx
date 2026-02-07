@@ -13,6 +13,9 @@ import { useGetUserQuery } from "../../redux/Api/AuthApi";
 import { toast } from "sonner";
 import { useLocation, useNavigate } from "react-router";
 
+const normalizeReturnTo = (value) =>
+  typeof value === "string" ? value.replace(/[\s,]+$/, "") : "";
+
 const Pricing = ({ paidCtaLabel = "Choose this plan" }) => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -24,7 +27,7 @@ const Pricing = ({ paidCtaLabel = "Choose this plan" }) => {
     [location.search],
   );
 
-  const returnToParam = searchParams.get("return_to");
+  const returnToParam = normalizeReturnTo(searchParams.get("return_to"));
   const userIdParam = searchParams.get("user_id");
 
   useEffect(() => {
@@ -102,8 +105,9 @@ const Pricing = ({ paidCtaLabel = "Choose this plan" }) => {
       return;
     }
 
-    const returnTo =
-      returnToParam || sessionStorage.getItem("podlove-return-to") || "";
+    const returnTo = normalizeReturnTo(
+      returnToParam || sessionStorage.getItem("podlove-return-to") || "",
+    );
 
     upgradeSubscription({
       planId: plan?._id,
@@ -116,6 +120,7 @@ const Pricing = ({ paidCtaLabel = "Choose this plan" }) => {
           payload?.data?.checkoutUrl ||
           payload?.data ||
           "";
+
         if (redirectUrl) {
           window.location.href = redirectUrl;
         }

@@ -1,16 +1,20 @@
 import { useMemo } from "react";
 import { useLocation, useNavigate } from "react-router";
 
+const normalizeReturnTo = (value) =>
+  typeof value === "string" ? value.replace(/[\s,]+$/, "") : "";
+
 const SubscribeSuccess = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
   const { returnTo, returnUserId } = useMemo(() => {
     const params = new URLSearchParams(location.search);
-    const returnToParam =
+    const returnToParam = normalizeReturnTo(
       params.get("return_to") ||
-      sessionStorage.getItem("podlove-return-to") ||
-      "home";
+        sessionStorage.getItem("podlove-return-to") ||
+        "home",
+    );
     const userIdParam =
       params.get("user_id") || sessionStorage.getItem("podlove-return-user");
 
