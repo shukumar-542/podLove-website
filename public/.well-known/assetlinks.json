@@ -1,14 +1,14 @@
 [
-    {
-        "relation": [
-            "delegate_permission/common.handle_all_urls"
-        ],
-        "target": {
-            "namespace": "android_app",
-            "package_name": "com.sta.podlove_app",
-            "sha256_cert_fingerprints": [
-                "D4:86:73:8F:03:9C:52:60:51:DC:52:56:3A:EB:6A:A2:36:E5:16:11:C0:08:D5:83:D7:B4:D0:BB:BE:24:EB:23"
-            ]
-        }
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.sta.podlove_app",
+      "sha256_cert_fingerprints": [
+        "D4:86:73:8F:03:9C:52:60:51:DC:52:56:3A:EB:6A:A2:36:E5:16:11:C0:08:D5:83:D7:B4:D0:BB:BE:24:EB:23"
+      ]
     }
+  }
 ]

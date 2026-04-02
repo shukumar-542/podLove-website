@@ -4,10 +4,7 @@
     "details": [
       {
         "appID": "3848W8GVM8.com.sta.podloveApp",
-        "paths": [
-          "/subscribe/success",
-          "/subscribe/cancel"
-        ]
+        "paths": ["/subscribe/success", "/subscribe/cancel"]
       }
     ]
   }
