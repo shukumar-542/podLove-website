@@ -38,17 +38,7 @@ const Profile = () => {
             />
             <p className="mt-3 flex  items-center gap-1 text-[#6B4431]">
               <IoCalendarOutline /> Joined{" "}
-              {getUser?.data?.createdAt
-                ?.split("T")[0]
-                ?.split("-")
-                ?.slice(1)
-                .concat(
-                  getUser?.data?.createdAt
-                    ?.split("T")[0]
-                    ?.split("-")
-                    .slice(0, 1)
-                )
-                ?.join("-")}
+              {formatDate(getUser?.data?.createdAt)}
             </p>
             <p className="flex mt-1 items-center gap-1 text-[#6B4431]">
               <CiLocationOn color="#6B4431" />

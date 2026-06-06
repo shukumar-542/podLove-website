@@ -1,6 +1,7 @@
 import { StarFilled, UserOutlined } from '@ant-design/icons'
 import { Empty, Spin } from 'antd'
 import micIcon from '../../assets/mic.png'
+import { formatDate } from '../../helpers/formatDate'
 import { useGetPodCastHistoryDetailsQuery } from '../../redux/Api/AuthApi'
 
 const PodcastHistory = ({ userId }) => {
@@ -58,7 +59,7 @@ const PodcastHistory = ({ userId }) => {
                     </h3>
                     <div className="flex items-center gap-3 mt-1">
                       <p className="text-xs text-gray-400">
-                        {hist.schedule?.date} • {hist.schedule?.time}
+                        {formatDate(hist.schedule?.date)} • {hist.schedule?.time}
                       </p>
                       <span className="flex items-center gap-1 text-xs text-orange-300 font-medium">
                         <UserOutlined className="text-[10px]" />

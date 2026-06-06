@@ -41,28 +41,27 @@ export function formatScheduleToLocal(schedule) {
     if (isNaN(utcDate.getTime())) return null;
 
     /* ---------- LOCAL FORMAT ---------- */
-    const locale = navigator.language || "en-US";
     const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
     return {
-      date: new Intl.DateTimeFormat(locale, {
+      date: new Intl.DateTimeFormat("en-US", {
         year: "numeric",
-        month: "long",
-        day: "numeric",
+        month: "2-digit",
+        day: "2-digit",
         timeZone,
       }).format(utcDate),
 
-      time: new Intl.DateTimeFormat(locale, {
+      time: new Intl.DateTimeFormat("en-US", {
         hour: "numeric",
         minute: "2-digit",
         hour12: true,
         timeZone,
       }).format(utcDate),
 
-      full: new Intl.DateTimeFormat(locale, {
+      full: new Intl.DateTimeFormat("en-US", {
         year: "numeric",
-        month: "long",
-        day: "numeric",
+        month: "2-digit",
+        day: "2-digit",
         hour: "numeric",
         minute: "2-digit",
         hour12: true,
