@@ -38,7 +38,7 @@ const Age = () => {
           max: values?.max,
         },
       },
-      dateOfBirth: dayjs(date).format("DD/MM/YYYY"),
+      dateOfBirth: dayjs(date).format("MM/DD/YYYY"),
     };
 
     const birthDate = date;
