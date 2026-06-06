@@ -1,36 +1,33 @@
-import { Empty, Spin } from "antd";
-import { UserOutlined, StarFilled } from "@ant-design/icons";
-import micIcon from "../../assets/mic.png";
-import { useGetPodCastHistoryDetailsQuery } from "../../redux/Api/AuthApi";
+import { StarFilled, UserOutlined } from '@ant-design/icons'
+import { Empty, Spin } from 'antd'
+import micIcon from '../../assets/mic.png'
+import { useGetPodCastHistoryDetailsQuery } from '../../redux/Api/AuthApi'
 
 const PodcastHistory = ({ userId }) => {
-  const { data: historyData, isLoading } = useGetPodCastHistoryDetailsQuery();
-  const history = historyData?.data?.podcast || [];
+  const { data: historyData, isLoading } = useGetPodCastHistoryDetailsQuery()
+  const history = historyData?.data?.podcast || []
 
   if (isLoading)
     return (
       <div className="flex justify-center items-center min-h-[300px]">
         <Spin size="large" />
       </div>
-    );
+    )
 
   return (
     <div className="mt-16 pb-10">
-      <div className="mb-8 pl-2">
+      <div className="mb-4 pl-2">
         <h1 className="text-2xl font-bold text-gray-800 tracking-tight">
           Activity History
         </h1>
-        <p className="text-sm text-gray-400 mt-1">
-          Review your past spotlights and sparks.
-        </p>
       </div>
 
       {history.length > 0 ? (
         <div className="grid gap-4">
           {history.map((hist) => {
             // Logic: Is the logged-in user the Spotlight (Primary User)?
-            const isMeSpotlight = hist.primaryUser?._id === userId;
-            const sessionNo = hist.scheduleStatus === "2nd" ? 2 : 1;
+            const isMeSpotlight = hist.primaryUser?._id === userId
+            const sessionNo = hist.scheduleStatus === '2nd' ? 2 : 1
 
             return (
               <div
@@ -56,7 +53,7 @@ const PodcastHistory = ({ userId }) => {
                       {isMeSpotlight
                         ? `Your Spotlight Session ${sessionNo}`
                         : `Sparked with ${
-                            hist.primaryUser?.name || "Spotlight"
+                            hist.primaryUser?.name || 'Spotlight'
                           }`}
                     </h3>
                     <div className="flex items-center gap-3 mt-1">
@@ -75,23 +72,23 @@ const PodcastHistory = ({ userId }) => {
                 <div className="flex items-center justify-between sm:justify-end gap-4 px-2 sm:px-0">
                   <div className="text-right">
                     <span className="bg-green-50 text-green-600 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-                      {hist.finishStatus === "2ndFinish"
-                        ? "Fully Completed"
-                        : "Finished"}
+                      {hist.finishStatus === '2ndFinish'
+                        ? 'Fully Completed'
+                        : 'Finished'}
                     </span>
                   </div>
                 </div>
               </div>
-            );
+            )
           })}
         </div>
       ) : (
-        <div className="bg-white/50 p-12 rounded-2xl border border-dashed border-gray-200 text-center">
-          <Empty description="No podcast activity found." />
+        <div className="bg-white/50 p-4 rounded-2xl border border-dashed border-gray-200">
+          You haven&apos;t completed any podcasts yet.
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default PodcastHistory;
+export default PodcastHistory
