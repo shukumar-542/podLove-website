@@ -45,7 +45,7 @@ export const part1Questions = [
     type: "radio",
     options: [
       "Building a family with a partner",
-      "raveling the world and having enriching experiences",
+      "Traveling the world and having enriching experiences",
       "Focusing on my career and personal goals",
       "Living a simple, peaceful life surrounded by loved ones",
     ],
