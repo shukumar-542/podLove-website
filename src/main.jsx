@@ -57,6 +57,7 @@ import TermsOfUse from "./page/TermsOfUse/TermsOfUse.jsx";
 import Subscribe from "./page/Subscribe/Subscribe.jsx";
 import SubscribeSuccess from "./page/SubscribeSuccess/SubscribeSuccess.jsx";
 import SubscribeCancel from "./page/SubscribeCancel/SubscribeCancel.jsx";
+import ChildSafetyStandards from "./page/ChildSafetyStandards/ChildSafetyStandards.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -94,6 +95,7 @@ createRoot(document.getElementById("root")).render(
               <Route path="/consumer-policy" element={<ConsumerPolicy />} />,
               <Route path="/media-policy" element={<MediaPolicy />} />
               <Route path="/opt-in-policy" element={<OptInPolicy />} />
+              <Route path="/child-safety-standards" element={<ChildSafetyStandards />} />
               <Route element={<PrivateRoute />}>
                 <Route path="/home" element={<HomePage />} />
                 <Route path="/profile" element={<Profile />} />{" "}
